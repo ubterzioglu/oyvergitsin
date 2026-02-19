@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 255, 255, 255;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+.party-gradient-akp { background: linear-gradient(135deg, #F7941D, #ffab40); }
+.party-gradient-chp { background: linear-gradient(135deg, #E30A17, #ff3333); }
+.party-gradient-mhp { background: linear-gradient(135deg, #F2B705, #ffcc00); }
+.party-gradient-iyy { background: linear-gradient(135deg, #0B1F3A, #1a3a6e); }
+.party-gradient-dem { background: linear-gradient(135deg, #7A3DB8, #9b59b6); }
+.party-gradient-deva { background: linear-gradient(135deg, #2EAD4A, #4cd964); }
+.party-gradient-gelep { background: linear-gradient(135deg, #1B6FB3, #3498db); }
+.party-gradient-saadet { background: linear-gradient(135deg, #6A1BB3, #8e44ad); }
+.party-gradient-tip { background: linear-gradient(135deg, #333333, #555555); }
+.party-gradient-vatan { background: linear-gradient(135deg, #D10F2F, #e74c3c); }
+.party-gradient-ysp { background: linear-gradient(135deg, #0F7A3A, #27ae60); }
+.party-gradient-zp { background: linear-gradient(135deg, #D61F26, #e74c3c); }
+.party-gradient-hdp { background: linear-gradient(135deg, #E31B23, #e74c3c); }
+.party-gradient-zafer { background: linear-gradient(135deg, #00964C, #2ecc71); }
+.party-gradient-memleket { background: linear-gradient(135deg, #FDD007, #f1c40f); }

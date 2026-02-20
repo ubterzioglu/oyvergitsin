@@ -1,7 +1,13 @@
 import { createClient } from '@supabase/supabase-js'
+import { getSupabaseConfigError } from '@/lib/supabase/config'
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || ''
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
+
+const configError = getSupabaseConfigError(supabaseUrl, supabaseAnonKey)
+if (configError && process.env.NODE_ENV !== 'production') {
+  console.warn(`[Supabase config] ${configError}`)
+}
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey)
 

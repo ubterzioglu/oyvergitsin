@@ -3,13 +3,24 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { supabase } from '@/lib/supabase/client'
+import { getSupabaseConfigError } from '@/lib/supabase/config'
 
 export default function ConsentPage() {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('')
 
   const handleAccept = async () => {
+    setErrorMessage('')
     setLoading(true)
+
+    const configError = getSupabaseConfigError()
+    if (configError) {
+      setErrorMessage(configError)
+      setLoading(false)
+      return
+    }
+
     try {
       const { data, error } = await supabase
         .from('sessions')
@@ -29,6 +40,14 @@ export default function ConsentPage() {
       router.push('/survey')
     } catch (error) {
       console.error('Error creating session:', error)
+      const message = error instanceof Error ? error.message : String(error)
+      if (message.includes('Failed to fetch') || message.includes('ERR_NAME_NOT_RESOLVED')) {
+        setErrorMessage(
+          'Supabase baglantisi kurulamadigi icin oturum olusturulamadi. .env.local dosyasindaki NEXT_PUBLIC_SUPABASE_URL degerini kontrol edin.'
+        )
+      } else {
+        setErrorMessage('Oturum olusturulurken beklenmeyen bir hata olustu. Lutfen tekrar deneyin.')
+      }
     } finally {
       setLoading(false)
     }
@@ -54,6 +73,11 @@ export default function ConsentPage() {
             Devam ederek yukarıdaki koşulları kabul etmiş sayılırsınız.
           </p>
         </div>
+        {errorMessage ? (
+          <div className="mb-4 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+            {errorMessage}
+          </div>
+        ) : null}
         <div className="flex gap-4 justify-center">
           <button
             onClick={handleAccept}

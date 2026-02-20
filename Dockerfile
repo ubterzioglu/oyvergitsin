@@ -22,7 +22,7 @@ COPY --from=deps /app/package*.json ./
 # Copy application code
 COPY . .
 
-# Build the application
+# Build application
 RUN npm run build
 
 # Production stage
@@ -30,7 +30,7 @@ FROM node:18-alpine AS runner
 
 WORKDIR /app
 
-# Copy node_modules from deps
+# Copy node_modules from deps stage
 COPY --from=deps /app/node_modules ./node_modules
 
 # Copy package files

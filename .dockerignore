@@ -15,8 +15,8 @@ out
 .git
 .gitignore
 
-# Docker
-Dockerfile
+# Docker (keeping one Dockerfile for builds)
+Dockerfile.kaniko
 .dockerignore
 docker-compose.yml
 

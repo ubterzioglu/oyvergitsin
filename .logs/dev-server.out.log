@@ -1,0 +1,14 @@
+
+> oyvergitsin@0.1.0 dev
+> next dev
+
+  ▲ Next.js 14.2.35
+  - Local:        http://localhost:3001
+  - Environments: .env.local, .env
+
+ ✓ Starting...
+ ✓ Ready in 18.2s
+ ○ Compiling / ...
+ ✓ Compiled / in 38.2s (510 modules)
+ GET / 200 in 6627ms
+ ✓ Compiled in 901ms (257 modules)

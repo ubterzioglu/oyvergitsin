@@ -24,6 +24,7 @@ ENV NODE_ENV=production
 ENV NEXT_PUBLIC_SUPABASE_URL=$NEXT_PUBLIC_SUPABASE_URL
 ENV NEXT_PUBLIC_SUPABASE_ANON_KEY=$NEXT_PUBLIC_SUPABASE_ANON_KEY
 
+RUN mkdir -p public
 RUN npm run build
 
 # Stage 3: Production runner
@@ -37,7 +38,7 @@ RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
 RUN mkdir -p public
-COPY --from=builder /app/public ./public 2>/dev/null || true
+COPY --from=builder /app/public ./public
 
 RUN mkdir .next
 RUN chown nextjs:nodejs .next

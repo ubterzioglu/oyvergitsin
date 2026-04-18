@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { supabase } from '@/lib/supabase/client'
+import { getAdminClient } from '@/lib/supabase/admin'
 
 export async function POST(request: NextRequest) {
   try {
+    const supabase = getAdminClient()
     const body = await request.json()
     const { userId, isGuest = true } = body
 
@@ -14,13 +15,17 @@ export async function POST(request: NextRequest) {
     const deviceHash = Buffer.from(userAgent).toString('base64').substring(0, 64)
 
     // Get latest consent version
-    const { data: consent } = await supabase
+    const { data: consent, error: consentError } = await supabase
       .from('consent_texts')
       .select('version')
       .eq('is_active', true)
       .order('version', { ascending: false })
       .limit(1)
       .single()
+
+    if (consentError && consentError.code !== 'PGRST116') {
+      throw consentError
+    }
 
     const consentVersion = consent?.version || 1
 
@@ -34,12 +39,12 @@ export async function POST(request: NextRequest) {
         is_guest: isGuest,
         risk_score: 0
       })
-      .select()
+      .select('id')
       .single()
 
     if (error) throw error
 
-    return NextResponse.json({ session })
+    return NextResponse.json({ sessionId: session.id })
   } catch (error) {
     console.error('Session creation error:', error)
     return NextResponse.json({ error: 'Failed to create session' }, { status: 500 })

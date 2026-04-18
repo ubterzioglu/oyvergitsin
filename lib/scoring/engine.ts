@@ -1,4 +1,4 @@
-import { supabase } from '@/lib/supabase/client'
+import { getAdminClient } from '@/lib/supabase/admin'
 
 export interface AxisScore {
   axisId: string
@@ -21,6 +21,8 @@ export interface CalculationResult {
 }
 
 export async function calculateResults(sessionId: string): Promise<CalculationResult> {
+  const supabase = getAdminClient()
+
   // 1. Fetch session answers
   const { data: answers, error: answersError } = await supabase
     .from('answers')

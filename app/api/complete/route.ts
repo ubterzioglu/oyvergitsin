@@ -1,9 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { supabase } from '@/lib/supabase/client'
+import { getAdminClient } from '@/lib/supabase/admin'
 import { calculateResults } from '@/lib/scoring/engine'
 
 export async function POST(request: NextRequest) {
   try {
+    const supabase = getAdminClient()
     const body = await request.json()
     const { sessionId } = body
 

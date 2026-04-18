@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { supabase } from '@/lib/supabase/client'
 import { getSupabaseConfigError } from '@/lib/supabase/config'
 
 export default function ConsentPage() {
@@ -22,21 +21,19 @@ export default function ConsentPage() {
     }
 
     try {
-      const { data, error } = await supabase
-        .from('sessions')
-        .insert({
-          ip_hash: Buffer.from(Date.now().toString()).toString('base64').substring(0, 64),
-          device_hash: Buffer.from(navigator.userAgent).toString('base64').substring(0, 64),
-          consent_version: 1,
-          is_guest: true,
-          risk_score: 0
-        })
-        .select()
-        .single()
+      const response = await fetch('/api/sessions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ isGuest: true })
+      })
 
-      if (error) throw error
+      const payload = await response.json()
 
-      localStorage.setItem('sessionId', data.id)
+      if (!response.ok) {
+        throw new Error(payload.error || 'Failed to create session')
+      }
+
+      localStorage.setItem('sessionId', payload.sessionId)
       router.push('/survey')
     } catch (error) {
       console.error('Error creating session:', error)

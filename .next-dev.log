@@ -8,3 +8,9 @@
 
  ✓ Starting...
  ✓ Ready in 1272ms
+ ○ Compiling /consent ...
+ ✓ Compiled /consent in 1181ms (96 modules)
+ ✓ Compiled in 3.5s (252 modules)
+ GET /consent 200 in 7079ms
+ ✓ Compiled in 1196ms (243 modules)
+ POST /api/sessions 200 in 7373ms

@@ -2,8 +2,6 @@
 
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { supabase } from '@/lib/supabase/client'
-import { PolarAngleAxis, PolarGrid, PolarRadiusAxis, Radar, RadarChart, ResponsiveContainer } from 'recharts'
 
 interface Question {
   id: string
@@ -27,6 +25,7 @@ export default function SurveyPage() {
   const [answers, setAnswers] = useState<Record<string, string>>({})
   const [loading, setLoading] = useState(true)
   const [submitting, setSubmitting] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('')
 
   useEffect(() => {
     const sessionId = localStorage.getItem('sessionId')
@@ -40,24 +39,30 @@ export default function SurveyPage() {
 
   const fetchQuestions = async () => {
     try {
-      const { data, error } = await supabase
-        .from('questions')
-        .select('*, question_options(*)')
-        .order('order_index', { ascending: true })
+      setErrorMessage('')
+      const response = await fetch('/api/questions', { cache: 'no-store' })
+      const payload = await response.json()
 
-      if (error) throw error
-      setQuestions(data || [])
+      if (!response.ok) {
+        throw new Error(payload.error || 'Sorular yuklenemedi')
+      }
+
+      setQuestions(payload.questions || [])
     } catch (error) {
       console.error('Error fetching questions:', error)
+      setErrorMessage('Anket sorulari yuklenemedi. Lutfen biraz sonra tekrar deneyin.')
     } finally {
       setLoading(false)
     }
   }
 
   const handleAnswer = (value: string) => {
+    const question = questions[currentQuestion]
+    if (!question) return
+
     setAnswers(prev => ({
       ...prev,
-      [questions[currentQuestion].id]: value
+      [question.id]: value
     }))
   }
 
@@ -113,6 +118,32 @@ export default function SurveyPage() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-gray-600">Yükleniyor...</div>
+      </div>
+    )
+  }
+
+  if (errorMessage) {
+    return (
+      <div className="min-h-screen flex items-center justify-center px-4">
+        <div className="w-full max-w-xl rounded-lg border border-red-200 bg-red-50 p-6 text-center">
+          <p className="text-sm text-red-700">{errorMessage}</p>
+          <button
+            onClick={fetchQuestions}
+            className="mt-4 rounded-lg bg-red-600 px-4 py-2 text-white hover:bg-red-700"
+          >
+            Tekrar Dene
+          </button>
+        </div>
+      </div>
+    )
+  }
+
+  if (questions.length === 0) {
+    return (
+      <div className="min-h-screen flex items-center justify-center px-4">
+        <div className="w-full max-w-xl rounded-lg border border-gray-200 bg-white p-6 text-center">
+          <p className="text-sm text-gray-700">Gosterilecek soru bulunamadi.</p>
+        </div>
       </div>
     )
   }

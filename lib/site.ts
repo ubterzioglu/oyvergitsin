@@ -7,6 +7,9 @@ export const siteConfig = {
   locale: 'tr_TR',
   language: 'tr-TR',
   countryCode: 'TR',
+  countryName: 'Turkey',
+  geoRegion: 'TR',
+  geoPlacename: 'Turkey',
   themeColor: '#2563EB',
   coordinates: {
     latitude: '39.0',

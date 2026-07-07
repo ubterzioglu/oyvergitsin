@@ -19,6 +19,7 @@ export function generateMetadata(): Metadata {
     keywords: [...siteConfig.keywords],
     category: 'politics',
     alternates: {
+      canonical: '/',
       languages: {
         'tr-TR': '/'
       }
@@ -30,6 +31,7 @@ export function generateMetadata(): Metadata {
       siteName: siteConfig.name,
       title: siteConfig.title,
       description: siteConfig.description,
+      countryName: siteConfig.countryName,
       images: [
         {
           url: '/opengraph-image',
@@ -57,10 +59,12 @@ export function generateMetadata(): Metadata {
       }
     },
     other: {
-      'geo.region': siteConfig.countryCode,
-      'geo.placename': 'Turkey',
+      'geo.region': siteConfig.geoRegion,
+      'geo.placename': siteConfig.geoPlacename,
       'geo.position': `${siteConfig.coordinates.latitude};${siteConfig.coordinates.longitude}`,
-      ICBM: `${siteConfig.coordinates.latitude}, ${siteConfig.coordinates.longitude}`
+      ICBM: `${siteConfig.coordinates.latitude}, ${siteConfig.coordinates.longitude}`,
+      'content-language': siteConfig.language,
+      language: siteConfig.language
     }
   }
 }
@@ -70,9 +74,53 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const siteUrl = getSiteUrl()
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'WebSite',
+        '@id': `${siteUrl}/#website`,
+        url: siteUrl,
+        name: siteConfig.name,
+        description: siteConfig.description,
+        inLanguage: siteConfig.language,
+        areaServed: {
+          '@type': 'Country',
+          name: siteConfig.countryName,
+          alternateName: 'Turkiye'
+        }
+      },
+      {
+        '@type': 'Organization',
+        '@id': `${siteUrl}/#organization`,
+        name: siteConfig.name,
+        url: siteUrl,
+        description: siteConfig.description,
+        location: {
+          '@type': 'Place',
+          name: siteConfig.geoPlacename,
+          geo: {
+            '@type': 'GeoCoordinates',
+            latitude: Number(siteConfig.coordinates.latitude),
+            longitude: Number(siteConfig.coordinates.longitude)
+          },
+          address: {
+            '@type': 'PostalAddress',
+            addressCountry: siteConfig.countryCode
+          }
+        }
+      }
+    ]
+  }
+
   return (
     <html lang="tr">
       <body className={inter.className}>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
         <div className="flex min-h-screen flex-col">
           <div className="flex-1">{children}</div>
           <footer className="border-t border-gray-200 bg-white">
@@ -84,12 +132,12 @@ export default function RootLayout({
                   rel="dofollow"
                   target="_blank"
                   className="font-medium text-blue-700 underline underline-offset-4 transition-colors hover:text-blue-800"
-                  title="Pendik Evden Eve Nakliyat - Ufuksoy Nakliyat A.S."
-                  aria-label="Pendik Evden Eve Nakliyat Firmasi Ufuksoy Nakliyat A.S."
+                  title="Pendik Evden Eve Nakliyat - Ufuksoy Nakliyat A.Ş."
+                  aria-label="Pendik Evden Eve Nakliyat Firması Ufuksoy Nakliyat A.Ş."
                 >
                   Pendik Evden Eve Nakliyat
                 </a>{' '}
-                Firmasi Ufuksoy Nakliyat A.S.
+                Firması Ufuksoy Nakliyat A.Ş.
               </p>
             </div>
           </footer>

@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getAdminClient } from '@/lib/supabase/admin'
+import { getRouteClient } from '@/lib/supabase/route'
 import { calculateResults } from '@/lib/scoring/engine'
 
 export async function POST(request: NextRequest) {
   try {
-    const supabase = getAdminClient()
+    const supabase = getRouteClient()
     const body = await request.json()
     const { sessionId } = body
 
@@ -37,6 +37,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(results)
   } catch (error) {
     console.error('Complete session error:', error)
-    return NextResponse.json({ error: 'Failed to complete session' }, { status: 500 })
+    const message = error instanceof Error ? error.message : 'Failed to complete session'
+    return NextResponse.json({ error: message }, { status: 500 })
   }
 }

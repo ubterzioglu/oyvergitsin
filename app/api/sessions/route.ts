@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getAdminClient } from '@/lib/supabase/admin'
+import { getPublicServerClient } from '@/lib/supabase/route'
 
 export async function POST(request: NextRequest) {
   try {
-    const supabase = getAdminClient()
+    const supabase = getPublicServerClient()
     const body = await request.json()
     const { userId, isGuest = true } = body
 
@@ -47,6 +47,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ sessionId: session.id })
   } catch (error) {
     console.error('Session creation error:', error)
-    return NextResponse.json({ error: 'Failed to create session' }, { status: 500 })
+    const message = error instanceof Error ? error.message : 'Failed to create session'
+    return NextResponse.json({ error: message }, { status: 500 })
   }
 }

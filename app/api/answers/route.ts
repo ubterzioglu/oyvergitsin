@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getAdminClient } from '@/lib/supabase/admin'
+import { getPublicServerClient } from '@/lib/supabase/route'
 
 export async function POST(request: NextRequest) {
   try {
-    const supabase = getAdminClient()
+    const supabase = getPublicServerClient()
     const body = await request.json()
     const { sessionId, answers } = body
 
@@ -28,6 +28,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ success: true, count: data.length })
   } catch (error) {
     console.error('Answers submission error:', error)
-    return NextResponse.json({ error: 'Failed to submit answers' }, { status: 500 })
+    const message = error instanceof Error ? error.message : 'Failed to submit answers'
+    return NextResponse.json({ error: message }, { status: 500 })
   }
 }

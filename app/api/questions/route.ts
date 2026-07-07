@@ -1,9 +1,9 @@
 import { NextResponse } from 'next/server'
-import { getAdminClient } from '@/lib/supabase/admin'
+import { getPublicServerClient } from '@/lib/supabase/route'
 
 export async function GET() {
   try {
-    const supabase = getAdminClient()
+    const supabase = getPublicServerClient()
     const { data: questions, error } = await supabase
       .from('questions')
       .select(`
@@ -24,6 +24,7 @@ export async function GET() {
     })
   } catch (error) {
     console.error('Questions fetch error:', error)
-    return NextResponse.json({ error: 'Failed to fetch questions' }, { status: 500 })
+    const message = error instanceof Error ? error.message : 'Failed to fetch questions'
+    return NextResponse.json({ error: message }, { status: 500 })
   }
 }

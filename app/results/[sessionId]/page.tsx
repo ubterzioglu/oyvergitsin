@@ -26,22 +26,27 @@ export default function ResultsPage() {
   const router = useRouter()
   const [result, setResult] = useState<Result | null>(null)
   const [loading, setLoading] = useState(true)
+  const sessionId = String(params.sessionId ?? '')
 
   useEffect(() => {
-    fetchResults()
-  }, [params.sessionId])
-
-  const fetchResults = async () => {
-    try {
-      const response = await fetch(`/api/results/${params.sessionId}`)
-      const data = await response.json()
-      setResult(data)
-    } catch (error) {
-      console.error('Error fetching results:', error)
-    } finally {
-      setLoading(false)
+    const fetchResults = async () => {
+      try {
+        const response = await fetch(`/api/results/${sessionId}`)
+        const data = await response.json()
+        setResult(data)
+      } catch (error) {
+        console.error('Error fetching results:', error)
+      } finally {
+        setLoading(false)
+      }
     }
-  }
+
+    if (sessionId) {
+      fetchResults()
+    } else {
+      router.push('/consent')
+    }
+  }, [router, sessionId])
 
   if (loading) {
     return (

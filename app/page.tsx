@@ -1,4 +1,16 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
+import { siteConfig } from '@/lib/site'
+
+export const metadata: Metadata = {
+  title: 'Turkiye Siyasi Eslesme Testi',
+  description:
+    'Turkiye\'de siyasi gorusunuzu kisa bir anketle analiz edin ve size en yakin partileri tarafsiz bir eslesme mantigiyla gorun.',
+  alternates: {
+    canonical: '/'
+  },
+  keywords: [...siteConfig.keywords, 'turkiye siyasi eslesme testi']
+}
 
 export default function Home() {
   return (

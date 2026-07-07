@@ -1,12 +1,12 @@
 import { NextResponse } from 'next/server'
-import { getAdminClient } from '@/lib/supabase/admin'
+import { getRouteClient } from '@/lib/supabase/route'
 
 export async function GET(
   request: Request,
   { params }: { params: Promise<{ sessionId: string }> }
 ) {
   try {
-    const supabase = getAdminClient()
+    const supabase = getRouteClient()
     const { sessionId } = await params
 
     // Try to get existing result snapshot
@@ -30,6 +30,7 @@ export async function GET(
     return NextResponse.json(results)
   } catch (error) {
     console.error('Results fetch error:', error)
-    return NextResponse.json({ error: 'Failed to fetch results' }, { status: 500 })
+    const message = error instanceof Error ? error.message : 'Failed to fetch results'
+    return NextResponse.json({ error: message }, { status: 500 })
   }
 }

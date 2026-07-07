@@ -14,6 +14,7 @@ Set these environment variables in Coolify's dashboard:
 
 ```bash
 # Required
+NEXT_PUBLIC_SITE_URL=https://oyvergitsin.org
 NEXT_PUBLIC_SUPABASE_URL=https://your-project-ref.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 SUPABASE_SERVICE_KEY=your_supabase_service_role_key
@@ -121,6 +122,7 @@ docker build -t oyvergitsin .
 
 # Run container locally
 docker run -p 3000:3000 \
+  -e NEXT_PUBLIC_SITE_URL=https://oyvergitsin.org \
   -e NEXT_PUBLIC_SUPABASE_URL=your_url \
   -e NEXT_PUBLIC_SUPABASE_ANON_KEY=your_key \
   -e SUPABASE_SERVICE_KEY=your_service_key \

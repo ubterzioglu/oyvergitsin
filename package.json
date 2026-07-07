@@ -8,6 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "db:push": "supabase db push",
+    "db:sql": "node scripts/build-manual-sql.js",
+    "db:sql:print": "node scripts/direct-migrate.js",
     "db:seed": "node scripts/seed.js",
     "db:reset": "supabase db reset"
   },

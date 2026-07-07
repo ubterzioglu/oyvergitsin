@@ -72,7 +72,29 @@ export default function RootLayout({
 }) {
   return (
     <html lang="tr">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <div className="flex min-h-screen flex-col">
+          <div className="flex-1">{children}</div>
+          <footer className="border-t border-gray-200 bg-white">
+            <div className="mx-auto max-w-6xl px-4 py-6 text-center text-sm text-gray-600">
+              <p>
+                Faydali baglanti:{' '}
+                <a
+                  href="https://ufuksoynakliyat.com.tr/pendik-evden-eve-nakliyat"
+                  rel="dofollow"
+                  target="_blank"
+                  className="font-medium text-blue-700 underline underline-offset-4 transition-colors hover:text-blue-800"
+                  title="Pendik Evden Eve Nakliyat - Ufuksoy Nakliyat A.S."
+                  aria-label="Pendik Evden Eve Nakliyat Firmasi Ufuksoy Nakliyat A.S."
+                >
+                  Pendik Evden Eve Nakliyat
+                </a>{' '}
+                Firmasi Ufuksoy Nakliyat A.S.
+              </p>
+            </div>
+          </footer>
+        </div>
+      </body>
     </html>
   )
 }

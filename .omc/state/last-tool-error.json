@@ -1,0 +1,7 @@
+{
+  "tool_name": "Bash",
+  "tool_input_preview": "{\"command\":\"ls -la .github 2>&1\",\"description\":\"Check if .github directory exists\"}",
+  "error": "Exit code 2\nls: cannot access '.github': No such file or directory",
+  "timestamp": "2026-07-20T12:59:30.106Z",
+  "retry_count": 1
+}

@@ -151,8 +151,8 @@
     },
     {
       "path": "",
-      "accessCount": 29,
-      "lastAccessed": 1784551151031,
+      "accessCount": 30,
+      "lastAccessed": 1784552290331,
       "type": "directory"
     },
     {
@@ -165,6 +165,12 @@
       "path": "app\\admin\\page.tsx",
       "accessCount": 19,
       "lastAccessed": 1784550630438,
+      "type": "file"
+    },
+    {
+      "path": "components\\layout\\Footer.tsx",
+      "accessCount": 16,
+      "lastAccessed": 1784552360376,
       "type": "file"
     },
     {
@@ -186,21 +192,15 @@
       "type": "file"
     },
     {
-      "path": "components\\layout\\Footer.tsx",
+      "path": "lib\\supabase\\route.ts",
       "accessCount": 14,
-      "lastAccessed": 1784551125110,
+      "lastAccessed": 1784551415972,
       "type": "file"
     },
     {
       "path": "lib\\supabase\\client.ts",
       "accessCount": 13,
       "lastAccessed": 1784550537880,
-      "type": "file"
-    },
-    {
-      "path": "lib\\supabase\\route.ts",
-      "accessCount": 13,
-      "lastAccessed": 1784550902472,
       "type": "file"
     },
     {
@@ -240,6 +240,12 @@
       "type": "file"
     },
     {
+      "path": ".env.local",
+      "accessCount": 11,
+      "lastAccessed": 1784551407692,
+      "type": "file"
+    },
+    {
       "path": "app\\results\\[sessionId]\\page.tsx",
       "accessCount": 10,
       "lastAccessed": 1784547641118,
@@ -261,12 +267,6 @@
       "path": "components\\ui\\Card.tsx",
       "accessCount": 10,
       "lastAccessed": 1784550659107,
-      "type": "file"
-    },
-    {
-      "path": ".env.local",
-      "accessCount": 10,
-      "lastAccessed": 1784550858468,
       "type": "file"
     },
     {
@@ -396,6 +396,12 @@
       "type": "file"
     },
     {
+      "path": "scripts\\direct-migrate.js",
+      "accessCount": 2,
+      "lastAccessed": 1784551689095,
+      "type": "file"
+    },
+    {
       "path": "supabase\\migrations",
       "accessCount": 1,
       "lastAccessed": 1784535316180,
@@ -405,12 +411,6 @@
       "path": "new.env.local",
       "accessCount": 1,
       "lastAccessed": 1784535640415,
-      "type": "file"
-    },
-    {
-      "path": "scripts\\direct-migrate.js",
-      "accessCount": 1,
-      "lastAccessed": 1784535657133,
       "type": "file"
     },
     {

@@ -12,7 +12,7 @@ export function Footer() {
   const year = new Date().getFullYear()
 
   return (
-    <footer className="border-t border-brand-accent/30 bg-brand-ink text-white/80">
+    <footer className="bg-brand-ink text-white/80">
       <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-4 gap-y-2 px-4 pt-4 text-sm font-medium tracking-wide text-white/70">
         {LEGAL_LINKS.map((link, index) => (
           <span key={link.href} className="flex items-center gap-x-4">
@@ -26,7 +26,7 @@ export function Footer() {
           </span>
         ))}
       </div>
-      <div className="mx-auto max-w-6xl px-4 py-1.5 text-center text-[9px] leading-snug text-white/50">
+      <div className="mx-auto mt-4 max-w-6xl border-t border-brand-accent/30 px-4 py-1.5 text-center text-[9px] leading-snug text-white/50">
         <span className="font-heading font-semibold text-white/80">{siteConfig.shortName}</span>
         {' · '}
         Türkiye Siyasi Eşleşme Platformu

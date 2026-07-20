@@ -151,26 +151,32 @@
     },
     {
       "path": "app\\layout.tsx",
-      "accessCount": 18,
-      "lastAccessed": 1784543979623,
+      "accessCount": 19,
+      "lastAccessed": 1784546572267,
       "type": "file"
     },
     {
       "path": "app\\survey\\page.tsx",
-      "accessCount": 12,
-      "lastAccessed": 1784545704524,
+      "accessCount": 13,
+      "lastAccessed": 1784546561913,
       "type": "file"
     },
     {
       "path": "app\\admin\\layout.tsx",
-      "accessCount": 11,
-      "lastAccessed": 1784545683822,
+      "accessCount": 12,
+      "lastAccessed": 1784546547770,
       "type": "file"
     },
     {
       "path": "supabase\\migrations\\001_initial_schema.sql",
+      "accessCount": 10,
+      "lastAccessed": 1784546560717,
+      "type": "file"
+    },
+    {
+      "path": "supabase\\migrations\\004_fix_roles_rls_recursion.sql",
       "accessCount": 9,
-      "lastAccessed": 1784545689744,
+      "lastAccessed": 1784546561200,
       "type": "file"
     },
     {
@@ -186,9 +192,27 @@
       "type": "file"
     },
     {
-      "path": "supabase\\migrations\\004_fix_roles_rls_recursion.sql",
+      "path": "lib\\supabase\\client.ts",
       "accessCount": 8,
-      "lastAccessed": 1784545690214,
+      "lastAccessed": 1784546540988,
+      "type": "file"
+    },
+    {
+      "path": "lib\\supabase\\route.ts",
+      "accessCount": 8,
+      "lastAccessed": 1784546541966,
+      "type": "file"
+    },
+    {
+      "path": "lib\\supabase\\admin.ts",
+      "accessCount": 8,
+      "lastAccessed": 1784546542728,
+      "type": "file"
+    },
+    {
+      "path": "lib\\site.ts",
+      "accessCount": 8,
+      "lastAccessed": 1784546589820,
       "type": "file"
     },
     {
@@ -198,45 +222,33 @@
       "type": "file"
     },
     {
-      "path": "lib\\site.ts",
-      "accessCount": 7,
-      "lastAccessed": 1784543945103,
-      "type": "file"
-    },
-    {
-      "path": "lib\\supabase\\client.ts",
-      "accessCount": 7,
-      "lastAccessed": 1784545672801,
-      "type": "file"
-    },
-    {
-      "path": "lib\\supabase\\route.ts",
-      "accessCount": 7,
-      "lastAccessed": 1784545681603,
-      "type": "file"
-    },
-    {
-      "path": "lib\\supabase\\admin.ts",
-      "accessCount": 7,
-      "lastAccessed": 1784545682016,
-      "type": "file"
-    },
-    {
       "path": "tailwind.config.ts",
       "accessCount": 7,
       "lastAccessed": 1784545718716,
       "type": "file"
     },
     {
-      "path": "app\\page.tsx",
-      "accessCount": 6,
-      "lastAccessed": 1784541727204,
+      "path": "app\\admin\\page.tsx",
+      "accessCount": 7,
+      "lastAccessed": 1784546554385,
+      "type": "file"
+    },
+    {
+      "path": "package.json",
+      "accessCount": 7,
+      "lastAccessed": 1784546567111,
       "type": "file"
     },
     {
       "path": "app\\admin\\login\\page.tsx",
-      "accessCount": 6,
-      "lastAccessed": 1784545031970,
+      "accessCount": 7,
+      "lastAccessed": 1784546568873,
+      "type": "file"
+    },
+    {
+      "path": "app\\page.tsx",
+      "accessCount": 7,
+      "lastAccessed": 1784546573725,
       "type": "file"
     },
     {
@@ -246,45 +258,33 @@
       "type": "file"
     },
     {
-      "path": "package.json",
-      "accessCount": 6,
-      "lastAccessed": 1784545186025,
-      "type": "file"
-    },
-    {
-      "path": "app\\admin\\page.tsx",
-      "accessCount": 6,
-      "lastAccessed": 1784545697853,
-      "type": "file"
-    },
-    {
-      "path": "components\\layout\\Header.tsx",
-      "accessCount": 5,
-      "lastAccessed": 1784543893968,
-      "type": "file"
-    },
-    {
       "path": "README.md",
-      "accessCount": 5,
-      "lastAccessed": 1784543917550,
+      "accessCount": 6,
+      "lastAccessed": 1784546566780,
+      "type": "file"
+    },
+    {
+      "path": "scripts\\seed.js",
+      "accessCount": 6,
+      "lastAccessed": 1784546571979,
       "type": "file"
     },
     {
       "path": ".env.local",
-      "accessCount": 5,
-      "lastAccessed": 1784544067671,
+      "accessCount": 6,
+      "lastAccessed": 1784546583444,
+      "type": "file"
+    },
+    {
+      "path": "components\\layout\\Header.tsx",
+      "accessCount": 6,
+      "lastAccessed": 1784546653378,
       "type": "file"
     },
     {
       "path": "lib\\supabase\\server.ts",
       "accessCount": 5,
       "lastAccessed": 1784545042775,
-      "type": "file"
-    },
-    {
-      "path": "scripts\\seed.js",
-      "accessCount": 5,
-      "lastAccessed": 1784545060956,
       "type": "file"
     },
     {
@@ -306,27 +306,39 @@
       "type": "file"
     },
     {
+      "path": "components\\ui\\Button.tsx",
+      "accessCount": 5,
+      "lastAccessed": 1784546567846,
+      "type": "file"
+    },
+    {
+      "path": "components\\ui\\Card.tsx",
+      "accessCount": 5,
+      "lastAccessed": 1784546568150,
+      "type": "file"
+    },
+    {
+      "path": "app\\manifest.ts",
+      "accessCount": 5,
+      "lastAccessed": 1784546573537,
+      "type": "file"
+    },
+    {
       "path": "app\\opengraph-image.tsx",
       "accessCount": 4,
       "lastAccessed": 1784542627234,
       "type": "file"
     },
     {
-      "path": "app\\manifest.ts",
+      "path": "app\\survey\\layout.tsx",
       "accessCount": 4,
-      "lastAccessed": 1784543952010,
+      "lastAccessed": 1784546582457,
       "type": "file"
     },
     {
-      "path": "components\\ui\\Button.tsx",
+      "path": "components\\layout\\Footer.tsx",
       "accessCount": 4,
-      "lastAccessed": 1784545697138,
-      "type": "file"
-    },
-    {
-      "path": "components\\ui\\Card.tsx",
-      "accessCount": 4,
-      "lastAccessed": 1784545697496,
+      "lastAccessed": 1784546652495,
       "type": "file"
     },
     {
@@ -336,21 +348,9 @@
       "type": "directory"
     },
     {
-      "path": "components\\layout\\Footer.tsx",
-      "accessCount": 3,
-      "lastAccessed": 1784542871776,
-      "type": "file"
-    },
-    {
       "path": "app\\api\\sessions\\route.ts",
       "accessCount": 3,
       "lastAccessed": 1784545041568,
-      "type": "file"
-    },
-    {
-      "path": "app\\survey\\layout.tsx",
-      "accessCount": 3,
-      "lastAccessed": 1784545070100,
       "type": "file"
     },
     {
@@ -369,6 +369,24 @@
       "path": "scripts\\migrate-data.js",
       "accessCount": 2,
       "lastAccessed": 1784536350348,
+      "type": "file"
+    },
+    {
+      "path": "components\\ui\\Container.tsx",
+      "accessCount": 2,
+      "lastAccessed": 1784546580167,
+      "type": "file"
+    },
+    {
+      "path": "components\\ui\\Badge.tsx",
+      "accessCount": 2,
+      "lastAccessed": 1784546580315,
+      "type": "file"
+    },
+    {
+      "path": "app\\consent\\layout.tsx",
+      "accessCount": 2,
+      "lastAccessed": 1784546583201,
       "type": "file"
     },
     {
@@ -414,27 +432,9 @@
       "type": "file"
     },
     {
-      "path": "components\\ui\\Container.tsx",
-      "accessCount": 1,
-      "lastAccessed": 1784541662655,
-      "type": "file"
-    },
-    {
-      "path": "components\\ui\\Badge.tsx",
-      "accessCount": 1,
-      "lastAccessed": 1784541669044,
-      "type": "file"
-    },
-    {
       "path": "components\\ui\\ProgressBar.tsx",
       "accessCount": 1,
       "lastAccessed": 1784541674477,
-      "type": "file"
-    },
-    {
-      "path": "app\\consent\\layout.tsx",
-      "accessCount": 1,
-      "lastAccessed": 1784542075803,
       "type": "file"
     },
     {

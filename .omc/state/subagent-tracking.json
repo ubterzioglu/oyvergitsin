@@ -41,11 +41,29 @@
       "agent_type": "Plan",
       "started_at": "2026-07-20T11:07:41.749Z",
       "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-07-20T11:10:59.076Z",
+      "duration_ms": 197327
+    },
+    {
+      "agent_id": "a2e3a560993214f24",
+      "agent_type": "Plan",
+      "started_at": "2026-07-20T11:22:16.041Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-07-20T11:25:01.931Z",
+      "duration_ms": 165890
+    },
+    {
+      "agent_id": "a127eea99a506d419",
+      "agent_type": "security-reviewer",
+      "started_at": "2026-07-20T11:25:00.761Z",
+      "parent_mode": "none",
       "status": "running"
     }
   ],
-  "total_spawned": 5,
-  "total_completed": 36,
+  "total_spawned": 7,
+  "total_completed": 49,
   "total_failed": 0,
-  "last_updated": "2026-07-20T11:07:41.856Z"
+  "last_updated": "2026-07-20T11:25:02.047Z"
 }

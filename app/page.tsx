@@ -153,7 +153,7 @@ export default function Home() {
 
       <section className="bg-surface-muted py-20">
         <Container>
-          <div className="flex flex-wrap justify-center gap-4">
+          <div className="mx-auto grid max-w-md grid-cols-1 gap-4">
             {TRUST_SIGNALS.map((signal) => (
               <Badge key={signal.title} className="flex-col items-start gap-1 px-5 py-4 text-left">
                 <span className="font-semibold text-ink-primary">{signal.title}</span>

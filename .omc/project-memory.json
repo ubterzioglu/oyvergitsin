@@ -144,21 +144,33 @@
   },
   "hotPaths": [
     {
+      "path": "app\\layout.tsx",
+      "accessCount": 23,
+      "lastAccessed": 1784547532052,
+      "type": "file"
+    },
+    {
       "path": "",
       "accessCount": 22,
       "lastAccessed": 1784546856434,
       "type": "directory"
     },
     {
-      "path": "app\\layout.tsx",
-      "accessCount": 21,
-      "lastAccessed": 1784546800909,
+      "path": "app\\page.tsx",
+      "accessCount": 16,
+      "lastAccessed": 1784547654490,
+      "type": "file"
+    },
+    {
+      "path": "supabase\\migrations\\001_initial_schema.sql",
+      "accessCount": 14,
+      "lastAccessed": 1784547626494,
       "type": "file"
     },
     {
       "path": "app\\survey\\page.tsx",
-      "accessCount": 13,
-      "lastAccessed": 1784546561913,
+      "accessCount": 14,
+      "lastAccessed": 1784547640585,
       "type": "file"
     },
     {
@@ -168,39 +180,33 @@
       "type": "file"
     },
     {
-      "path": "supabase\\migrations\\001_initial_schema.sql",
-      "accessCount": 13,
-      "lastAccessed": 1784546816142,
-      "type": "file"
-    },
-    {
-      "path": "app\\page.tsx",
-      "accessCount": 12,
-      "lastAccessed": 1784546815268,
-      "type": "file"
-    },
-    {
       "path": "supabase\\migrations\\004_fix_roles_rls_recursion.sql",
       "accessCount": 10,
       "lastAccessed": 1784546763892,
       "type": "file"
     },
     {
+      "path": "lib\\supabase\\route.ts",
+      "accessCount": 10,
+      "lastAccessed": 1784547627018,
+      "type": "file"
+    },
+    {
       "path": "lib\\supabase\\admin.ts",
-      "accessCount": 9,
-      "lastAccessed": 1784546733891,
+      "accessCount": 10,
+      "lastAccessed": 1784547627759,
       "type": "file"
     },
     {
       "path": "lib\\supabase\\client.ts",
-      "accessCount": 9,
-      "lastAccessed": 1784546733935,
+      "accessCount": 10,
+      "lastAccessed": 1784547628047,
       "type": "file"
     },
     {
-      "path": "lib\\supabase\\route.ts",
-      "accessCount": 9,
-      "lastAccessed": 1784546742331,
+      "path": "app\\results\\[sessionId]\\page.tsx",
+      "accessCount": 10,
+      "lastAccessed": 1784547641118,
       "type": "file"
     },
     {
@@ -210,15 +216,15 @@
       "type": "file"
     },
     {
-      "path": "app\\results\\[sessionId]\\page.tsx",
+      "path": "app\\admin\\page.tsx",
       "accessCount": 9,
-      "lastAccessed": 1784546884381,
+      "lastAccessed": 1784547640528,
       "type": "file"
     },
     {
       "path": "app\\consent\\page.tsx",
-      "accessCount": 8,
-      "lastAccessed": 1784541768317,
+      "accessCount": 9,
+      "lastAccessed": 1784547640827,
       "type": "file"
     },
     {
@@ -252,12 +258,6 @@
       "type": "file"
     },
     {
-      "path": "app\\admin\\page.tsx",
-      "accessCount": 7,
-      "lastAccessed": 1784546554385,
-      "type": "file"
-    },
-    {
       "path": ".env.local",
       "accessCount": 7,
       "lastAccessed": 1784546716758,
@@ -267,6 +267,24 @@
       "path": "lib\\supabase\\config.ts",
       "accessCount": 7,
       "lastAccessed": 1784546742620,
+      "type": "file"
+    },
+    {
+      "path": "app\\manifest.ts",
+      "accessCount": 7,
+      "lastAccessed": 1784547559606,
+      "type": "file"
+    },
+    {
+      "path": "supabase\\migrations\\002_public_survey_policies.sql",
+      "accessCount": 7,
+      "lastAccessed": 1784547618299,
+      "type": "file"
+    },
+    {
+      "path": "supabase\\migrations\\003_public_session_select.sql",
+      "accessCount": 7,
+      "lastAccessed": 1784547618603,
       "type": "file"
     },
     {
@@ -300,27 +318,15 @@
       "type": "file"
     },
     {
-      "path": "supabase\\migrations\\002_public_survey_policies.sql",
-      "accessCount": 6,
-      "lastAccessed": 1784546762799,
-      "type": "file"
-    },
-    {
-      "path": "supabase\\migrations\\003_public_session_select.sql",
-      "accessCount": 6,
-      "lastAccessed": 1784546763102,
-      "type": "file"
-    },
-    {
       "path": "lib\\scoring\\engine.ts",
       "accessCount": 6,
       "lastAccessed": 1784546779867,
       "type": "directory"
     },
     {
-      "path": "app\\manifest.ts",
+      "path": "app\\api\\sessions\\route.ts",
       "accessCount": 5,
-      "lastAccessed": 1784546573537,
+      "lastAccessed": 1784547619016,
       "type": "file"
     },
     {
@@ -342,16 +348,16 @@
       "type": "file"
     },
     {
-      "path": "app\\api\\sessions\\route.ts",
-      "accessCount": 4,
-      "lastAccessed": 1784546750114,
-      "type": "file"
-    },
-    {
       "path": ".dockerignore",
       "accessCount": 4,
       "lastAccessed": 1784546862274,
       "type": "directory"
+    },
+    {
+      "path": "components\\ui\\Badge.tsx",
+      "accessCount": 3,
+      "lastAccessed": 1784547607128,
+      "type": "file"
     },
     {
       "path": "MIGRATION_PLAN.md",
@@ -375,12 +381,6 @@
       "path": "components\\ui\\Container.tsx",
       "accessCount": 2,
       "lastAccessed": 1784546580167,
-      "type": "file"
-    },
-    {
-      "path": "components\\ui\\Badge.tsx",
-      "accessCount": 2,
-      "lastAccessed": 1784546580315,
       "type": "file"
     },
     {

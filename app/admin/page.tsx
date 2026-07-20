@@ -102,6 +102,79 @@ export default function AdminDashboard() {
           </a>
         </div>
       </div>
+
+      <AdminGuide />
+    </div>
+  )
+}
+
+function AdminGuide() {
+  return (
+    <div className="mt-8 bg-white rounded-lg shadow-md p-6">
+      <h2 className="text-xl font-bold mb-4">Kullanım Kılavuzu</h2>
+
+      <div className="space-y-6 text-sm text-gray-700">
+        <section>
+          <h3 className="font-semibold text-gray-900 mb-1">Site nedir?</h3>
+          <p>
+            &quot;Oy Ver Gitsin&quot;, ziyaretçilere bir anket doldurtup cevaplarına göre
+            hangi Türkiye siyasi partisine ne kadar yakın olduklarını gösteren bir
+            eşleştirme platformudur. Akış: <strong>Ana sayfa → Onay (consent) →
+            Anket → Sonuçlar</strong>. Ziyaretçi anketi bitirdiğinde sistem, cevaplarını
+            10 ideolojik eksende puanlar ve bu puanları partilerin eksen
+            pozisyonlarıyla karşılaştırıp bir benzerlik yüzdesi hesaplar.
+          </p>
+        </section>
+
+        <section>
+          <h3 className="font-semibold text-gray-900 mb-1">Veri modeli nasıl işliyor?</h3>
+          <ol className="list-decimal list-inside space-y-1">
+            <li>
+              <strong>Eksenler</strong> (<a href="/admin/axes" className="text-blue-600 hover:underline">Eksenler</a>) —
+              &quot;Ekonomi: Piyasa vs Devlet&quot;, &quot;Sekülerizm&quot; gibi 10 ideolojik
+              boyut. Her ekseni -100 ile +100 arası bir skor temsil eder.
+            </li>
+            <li>
+              <strong>Sorular ve seçenekler</strong> (<a href="/admin/questions" className="text-blue-600 hover:underline">Sorular</a>) —
+              ziyaretçiye sorulan sorular ve her sorunun cevap seçenekleri.
+              Bir soruyu düzenlerken seçenekleri de aynı ekrandan yönetirsin.
+            </li>
+            <li>
+              <strong>Puanlama kuralları</strong> — soru detay sayfasında, her
+              seçenek için &quot;bu cevap işaretlenirse şu eksene şu kadar puan
+              eklensin&quot; kuralı tanımlanır. Bir kullanıcı anketi tamamladığında
+              işaretlediği tüm seçeneklerin puanları eksen bazında toplanır ve
+              [-100, 100] aralığına sıkıştırılır.
+            </li>
+            <li>
+              <strong>Partiler</strong> (<a href="/admin/parties" className="text-blue-600 hover:underline">Partiler</a>) —
+              her partinin her eksendeki kendi pozisyonu (-100..100) tanımlıdır.
+              Sonuç ekranında, kullanıcının eksen skorları ile partilerin eksen
+              skorları arasındaki fark üzerinden bir benzerlik yüzdesi hesaplanıp
+              partiler sıralanır.
+            </li>
+          </ol>
+        </section>
+
+        <section>
+          <h3 className="font-semibold text-gray-900 mb-1">Pratik notlar</h3>
+          <ul className="list-disc list-inside space-y-1">
+            <li>
+              Bir soru veya eksen silinirse, ona bağlı seçenekler / puanlama
+              kuralları / parti pozisyonları da otomatik silinir — panel silmeden
+              önce uyarı gösterir.
+            </li>
+            <li>
+              Soru tipi olarak 25 farklı seçenek sunulur, ancak anket ekranı bugün
+              yalnızca <em>seçenek tabanlı</em> tipleri (tekli/çoklu seçim, likert,
+              açılır liste vb.) doğru şekilde gösterir. Diğer tipler ileride
+              kullanılmak üzere veri girişine açıktır.
+            </li>
+            <li>Sıra numaraları (order_index), ilgili tablodaki ▲ / ▼ butonlarıyla değiştirilebilir.</li>
+            <li>Değişiklikler kaydedildiği anda canlı ankete yansır — ayrı bir yayınlama adımı yoktur.</li>
+          </ul>
+        </section>
+      </div>
     </div>
   )
 }

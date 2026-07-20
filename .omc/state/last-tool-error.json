@@ -1,7 +1,0 @@
-{
-  "tool_name": "Bash",
-  "tool_input_preview": "{\"command\":\"cd \\\"c:\\\\temp_private\\\\oyvergitsin\\\" && npx tsc --noEmit -p tsconfig.json 2>&1 | tail -30\",\"timeout\":120000,\"description\":\"Type-check the project\"}",
-  "error": "Exit code 1\n/usr/bin/bash: line 1: /c/Users/BARIS-~1/AppData/Local/Temp/claude-61d8-cwd: No such file or directory",
-  "timestamp": "2026-07-20T13:21:44.199Z",
-  "retry_count": 2
-}

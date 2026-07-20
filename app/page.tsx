@@ -125,13 +125,13 @@ export default function Home() {
         </video>
         <Container className="relative py-24 md:py-32">
           <div className="mx-auto max-w-2xl rounded-[1.75rem] border border-white/15 bg-white/10 p-8 text-center shadow-[0_8px_32px_rgba(0,0,0,0.25)] backdrop-blur-xl backdrop-saturate-150 md:p-14">
-            <h1 className="font-heading text-5xl font-semibold text-white md:text-6xl">
+            <h1 className="font-heading text-5xl font-semibold text-brand-ink md:text-6xl">
               oyvergitsin.org
             </h1>
-            <p className="mt-6 text-xl text-white/80">
+            <p className="mt-6 text-xl text-brand-ink/80">
               Türkiye Siyasi Eşleşme Platformu
             </p>
-            <p className="mt-4 text-xl text-white/65">
+            <p className="mt-4 text-xl text-brand-ink/65">
               Siyasi görüşlerinizi anonim ve kısa bir anketle analiz edin; tarafsız bir
               eşleşme mantığıyla size en yakın partileri keşfedin.
             </p>

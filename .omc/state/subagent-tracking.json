@@ -30,11 +30,20 @@
       "agent_type": "Explore",
       "started_at": "2026-07-20T11:53:07.988Z",
       "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-07-20T12:00:59.377Z",
+      "duration_ms": 471389
+    },
+    {
+      "agent_id": "a9032360bb2ddeef5",
+      "agent_type": "oh-my-claudecode:code-reviewer",
+      "started_at": "2026-07-20T12:01:45.930Z",
+      "parent_mode": "none",
       "status": "running"
     }
   ],
-  "total_spawned": 4,
-  "total_completed": 26,
+  "total_spawned": 5,
+  "total_completed": 29,
   "total_failed": 0,
-  "last_updated": "2026-07-20T11:53:08.095Z"
+  "last_updated": "2026-07-20T12:01:46.036Z"
 }

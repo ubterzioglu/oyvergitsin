@@ -1,7 +1,7 @@
 {
   "tool_name": "Bash",
-  "tool_input_preview": "{\"command\":\"git log -1 --format='%B' ee78fd1 2>&1; echo ---; git log -1 --format='%B' c27e3ca 2>&1; echo ---; git log -1 --format='%B' 95a4e05 2>&1; echo ---; git log -1 --format='%B' 034b815 2>&1\",\"d...",
-  "error": "Exit code 1\n.\n\n---\n.\n\n---\n.\n\n---\n.\n\n/usr/bin/bash: line 1: /c/Users/BARIS-~1/AppData/Local/Temp/claude-989d-cwd: No such file or directory",
-  "timestamp": "2026-07-20T13:02:12.812Z",
-  "retry_count": 7
+  "tool_input_preview": "{\"command\":\"supabase link --project-ref inejvgbkesnrohvjqmon 2>&1\",\"description\":\"Link local project to the Supabase remote project\"}",
+  "error": "Exit code 1\nWARNING: Local database version differs from the linked project.\nUpdate your supabase\\config.toml to fix it:\n[db]\nmajor_version = 17\nFinished supabase link.\nA new version of Supabase CLI is available: v2.109.1 (currently installed v2.75.0)\nWe recommend updating regularly for new features and bug fixes: https://supabase.com/docs/guides/cli/getting-started#updating-the-supabase-cli\n/usr/bin/bash: line 1: /c/Users/BARIS-~1/AppData/Local/Temp/claude-855e-cwd: No such file or directory",
+  "timestamp": "2026-07-20T13:11:22.293Z",
+  "retry_count": 3
 }

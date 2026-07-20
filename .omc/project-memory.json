@@ -222,15 +222,15 @@
       "type": "file"
     },
     {
-      "path": "lib\\supabase\\admin.ts",
-      "accessCount": 12,
-      "lastAccessed": 1784550462852,
+      "path": ".env.local",
+      "accessCount": 13,
+      "lastAccessed": 1784553045803,
       "type": "file"
     },
     {
-      "path": ".env.local",
+      "path": "lib\\supabase\\admin.ts",
       "accessCount": 12,
-      "lastAccessed": 1784552503614,
+      "lastAccessed": 1784550462852,
       "type": "file"
     },
     {
@@ -243,6 +243,12 @@
       "path": "tailwind.config.ts",
       "accessCount": 11,
       "lastAccessed": 1784551097401,
+      "type": "file"
+    },
+    {
+      "path": "components\\layout\\Header.tsx",
+      "accessCount": 11,
+      "lastAccessed": 1784552877586,
       "type": "file"
     },
     {
@@ -276,12 +282,6 @@
       "type": "file"
     },
     {
-      "path": "components\\layout\\Header.tsx",
-      "accessCount": 10,
-      "lastAccessed": 1784552539176,
-      "type": "file"
-    },
-    {
       "path": "app\\admin\\login\\page.tsx",
       "accessCount": 9,
       "lastAccessed": 1784546791911,
@@ -289,8 +289,8 @@
     },
     {
       "path": "scripts\\seed.js",
-      "accessCount": 8,
-      "lastAccessed": 1784546709751,
+      "accessCount": 9,
+      "lastAccessed": 1784552613746,
       "type": "file"
     },
     {
@@ -325,8 +325,8 @@
     },
     {
       "path": "supabase\\migrations\\002_public_survey_policies.sql",
-      "accessCount": 7,
-      "lastAccessed": 1784547618299,
+      "accessCount": 8,
+      "lastAccessed": 1784552601040,
       "type": "file"
     },
     {
@@ -372,6 +372,24 @@
       "type": "file"
     },
     {
+      "path": "scripts\\direct-migrate.js",
+      "accessCount": 3,
+      "lastAccessed": 1784552656606,
+      "type": "file"
+    },
+    {
+      "path": "scripts\\migrate-data.js",
+      "accessCount": 3,
+      "lastAccessed": 1784552656864,
+      "type": "file"
+    },
+    {
+      "path": "scripts\\setup-db.js",
+      "accessCount": 3,
+      "lastAccessed": 1784552657184,
+      "type": "file"
+    },
+    {
       "path": "MIGRATION_PLAN.md",
       "accessCount": 2,
       "lastAccessed": 1784535802887,
@@ -381,24 +399,6 @@
       "path": "AGENTS.md",
       "accessCount": 2,
       "lastAccessed": 1784535835506,
-      "type": "file"
-    },
-    {
-      "path": "scripts\\migrate-data.js",
-      "accessCount": 2,
-      "lastAccessed": 1784536350348,
-      "type": "file"
-    },
-    {
-      "path": "scripts\\setup-db.js",
-      "accessCount": 2,
-      "lastAccessed": 1784546843864,
-      "type": "file"
-    },
-    {
-      "path": "scripts\\direct-migrate.js",
-      "accessCount": 2,
-      "lastAccessed": 1784551689095,
       "type": "file"
     },
     {

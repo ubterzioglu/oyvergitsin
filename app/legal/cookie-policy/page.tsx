@@ -14,7 +14,7 @@ export default function CookiePolicyPage() {
 
       <div className="space-y-6 text-ink-secondary">
         <p>
-          Bu Çerez Politikası, Oy Ver Gitsin&apos;in ("Site") kullandığı çerezleri ve
+          Bu Çerez Politikası, Oy Ver Gitsin&apos;in (&quot;Site&quot;) kullandığı çerezleri ve
           benzeri izleme teknolojilerini açıklar.
         </p>
 

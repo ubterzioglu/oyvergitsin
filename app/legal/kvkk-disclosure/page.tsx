@@ -15,7 +15,7 @@ export default function KvkkDisclosurePage() {
       <div className="space-y-6 text-ink-secondary">
         <p>
           İşbu Aydınlatma Metni, 6698 sayılı Kişisel Verilerin Korunması Kanunu
-          ("KVKK") m.10 uyarınca, Oy Ver Gitsin ("Site") üzerinden kişisel
+          (&quot;KVKK&quot;) m.10 uyarınca, Oy Ver Gitsin (&quot;Site&quot;) üzerinden kişisel
           verilerinizin işlenmesine ilişkin olarak sizi bilgilendirmek amacıyla
           hazırlanmıştır.
         </p>

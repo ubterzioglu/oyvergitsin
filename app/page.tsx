@@ -4,6 +4,7 @@ import { siteConfig } from '@/lib/site'
 import { Button } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
 import { Container } from '@/components/ui/Container'
+import { LatestNews } from '@/components/home/LatestNews'
 
 export const metadata: Metadata = {
   title: 'Turkiye Siyasi Eslesme Testi',
@@ -231,6 +232,8 @@ export default function Home() {
           </div>
         </Container>
       </section>
+
+      <LatestNews />
 
       <section className="bg-surface-muted py-20">
         <Container>

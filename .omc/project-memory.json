@@ -145,21 +145,21 @@
   "hotPaths": [
     {
       "path": "app\\page.tsx",
-      "accessCount": 43,
-      "lastAccessed": 1784550832942,
+      "accessCount": 46,
+      "lastAccessed": 1784550848213,
       "type": "file"
+    },
+    {
+      "path": "",
+      "accessCount": 26,
+      "lastAccessed": 1784550924464,
+      "type": "directory"
     },
     {
       "path": "app\\layout.tsx",
       "accessCount": 25,
       "lastAccessed": 1784547845675,
       "type": "file"
-    },
-    {
-      "path": "",
-      "accessCount": 23,
-      "lastAccessed": 1784547873184,
-      "type": "directory"
     },
     {
       "path": "app\\admin\\page.tsx",
@@ -192,6 +192,12 @@
       "type": "file"
     },
     {
+      "path": "lib\\supabase\\route.ts",
+      "accessCount": 13,
+      "lastAccessed": 1784550902472,
+      "type": "file"
+    },
+    {
       "path": "supabase\\migrations\\004_fix_roles_rls_recursion.sql",
       "accessCount": 12,
       "lastAccessed": 1784550334431,
@@ -210,15 +216,9 @@
       "type": "file"
     },
     {
-      "path": "lib\\supabase\\route.ts",
-      "accessCount": 12,
-      "lastAccessed": 1784550475351,
-      "type": "file"
-    },
-    {
       "path": "package.json",
-      "accessCount": 11,
-      "lastAccessed": 1784550475924,
+      "accessCount": 12,
+      "lastAccessed": 1784550862883,
       "type": "file"
     },
     {
@@ -258,6 +258,12 @@
       "type": "file"
     },
     {
+      "path": ".env.local",
+      "accessCount": 10,
+      "lastAccessed": 1784550858468,
+      "type": "file"
+    },
+    {
       "path": "app\\admin\\login\\page.tsx",
       "accessCount": 9,
       "lastAccessed": 1784546791911,
@@ -270,9 +276,9 @@
       "type": "file"
     },
     {
-      "path": ".env.local",
+      "path": "lib\\supabase\\server.ts",
       "accessCount": 9,
-      "lastAccessed": 1784550492924,
+      "lastAccessed": 1784550895398,
       "type": "file"
     },
     {
@@ -297,12 +303,6 @@
       "path": "lib\\supabase\\config.ts",
       "accessCount": 8,
       "lastAccessed": 1784549975997,
-      "type": "file"
-    },
-    {
-      "path": "lib\\supabase\\server.ts",
-      "accessCount": 8,
-      "lastAccessed": 1784550475046,
       "type": "file"
     },
     {
@@ -331,8 +331,8 @@
     },
     {
       "path": "components\\layout\\Header.tsx",
-      "accessCount": 6,
-      "lastAccessed": 1784546653378,
+      "accessCount": 7,
+      "lastAccessed": 1784550917614,
       "type": "file"
     },
     {

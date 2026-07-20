@@ -1,4 +1,4 @@
-import { getPublicServerClient } from '@/lib/supabase/server'
+import { getPublicServerClient } from '@/lib/supabase/route'
 import { Card } from '@/components/ui/Card'
 import { Container } from '@/components/ui/Container'
 

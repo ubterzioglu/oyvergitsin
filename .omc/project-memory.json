@@ -175,8 +175,8 @@
     },
     {
       "path": "supabase\\migrations\\001_initial_schema.sql",
-      "accessCount": 15,
-      "lastAccessed": 1784549994874,
+      "accessCount": 16,
+      "lastAccessed": 1784552492624,
       "type": "file"
     },
     {
@@ -186,27 +186,27 @@
       "type": "file"
     },
     {
+      "path": "lib\\supabase\\route.ts",
+      "accessCount": 15,
+      "lastAccessed": 1784552471482,
+      "type": "file"
+    },
+    {
       "path": "app\\survey\\page.tsx",
       "accessCount": 14,
       "lastAccessed": 1784547640585,
       "type": "file"
     },
     {
-      "path": "lib\\supabase\\route.ts",
+      "path": "app\\api\\sessions\\route.ts",
       "accessCount": 14,
-      "lastAccessed": 1784551415972,
+      "lastAccessed": 1784552464352,
       "type": "file"
     },
     {
       "path": "lib\\supabase\\client.ts",
       "accessCount": 13,
       "lastAccessed": 1784550537880,
-      "type": "file"
-    },
-    {
-      "path": "app\\api\\sessions\\route.ts",
-      "accessCount": 13,
-      "lastAccessed": 1784551143292,
       "type": "file"
     },
     {
@@ -217,14 +217,20 @@
     },
     {
       "path": "supabase\\migrations\\004_fix_roles_rls_recursion.sql",
-      "accessCount": 12,
-      "lastAccessed": 1784550334431,
+      "accessCount": 13,
+      "lastAccessed": 1784552522051,
       "type": "file"
     },
     {
       "path": "lib\\supabase\\admin.ts",
       "accessCount": 12,
       "lastAccessed": 1784550462852,
+      "type": "file"
+    },
+    {
+      "path": ".env.local",
+      "accessCount": 12,
+      "lastAccessed": 1784552503614,
       "type": "file"
     },
     {
@@ -237,12 +243,6 @@
       "path": "tailwind.config.ts",
       "accessCount": 11,
       "lastAccessed": 1784551097401,
-      "type": "file"
-    },
-    {
-      "path": ".env.local",
-      "accessCount": 11,
-      "lastAccessed": 1784551407692,
       "type": "file"
     },
     {
@@ -270,15 +270,21 @@
       "type": "file"
     },
     {
-      "path": "app\\admin\\login\\page.tsx",
-      "accessCount": 9,
-      "lastAccessed": 1784546791911,
+      "path": "lib\\supabase\\server.ts",
+      "accessCount": 10,
+      "lastAccessed": 1784552472278,
       "type": "file"
     },
     {
-      "path": "lib\\supabase\\server.ts",
+      "path": "components\\layout\\Header.tsx",
+      "accessCount": 10,
+      "lastAccessed": 1784552539176,
+      "type": "file"
+    },
+    {
+      "path": "app\\admin\\login\\page.tsx",
       "accessCount": 9,
-      "lastAccessed": 1784550895398,
+      "lastAccessed": 1784546791911,
       "type": "file"
     },
     {
@@ -306,27 +312,21 @@
       "type": "file"
     },
     {
-      "path": "components\\layout\\Header.tsx",
-      "accessCount": 8,
-      "lastAccessed": 1784551042627,
-      "type": "file"
-    },
-    {
       "path": "components\\ui\\Button.tsx",
       "accessCount": 8,
       "lastAccessed": 1784551097880,
       "type": "file"
     },
     {
-      "path": "supabase\\migrations\\002_public_survey_policies.sql",
-      "accessCount": 7,
-      "lastAccessed": 1784547618299,
+      "path": "supabase\\migrations\\003_public_session_select.sql",
+      "accessCount": 8,
+      "lastAccessed": 1784552521500,
       "type": "file"
     },
     {
-      "path": "supabase\\migrations\\003_public_session_select.sql",
+      "path": "supabase\\migrations\\002_public_survey_policies.sql",
       "accessCount": 7,
-      "lastAccessed": 1784547618603,
+      "lastAccessed": 1784547618299,
       "type": "file"
     },
     {

@@ -6,16 +6,9 @@ export function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-brand-accent/30 bg-white">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
-        <Link href="/" className="flex items-center gap-3">
-          <Image
-            src="/logo.png"
-            alt={siteConfig.shortName}
-            width={40}
-            height={40}
-            priority
-            className="-translate-y-0.5"
-          />
-          <span className="font-heading text-xl font-semibold text-brand-ink">
+        <Link href="/" className="flex items-center gap-2">
+          <Image src="/logo.png" alt={siteConfig.shortName} width={36} height={36} priority />
+          <span className="font-heading text-xl font-bold leading-none text-[#1B2A4A]">
             {siteConfig.shortName}
           </span>
         </Link>

@@ -1,7 +1,17 @@
 {
-  "agents": [],
-  "total_spawned": 0,
-  "total_completed": 0,
+  "agents": [
+    {
+      "agent_id": "a127eea99a506d419",
+      "agent_type": "security-reviewer",
+      "started_at": "2026-07-20T11:33:53.481Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-07-20T11:37:59.792Z",
+      "duration_ms": 246311
+    }
+  ],
+  "total_spawned": 1,
+  "total_completed": 9,
   "total_failed": 0,
-  "last_updated": "2026-07-20T11:33:05.444Z"
+  "last_updated": "2026-07-20T11:37:59.908Z"
 }

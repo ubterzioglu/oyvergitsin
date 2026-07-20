@@ -1,0 +1,7 @@
+{
+  "tool_name": "Bash",
+  "tool_input_preview": "{\"command\":\"cd \\\"C:/temp_private/oyvergitsin\\\" && node -e \\\"try{require.resolve('sharp'); console.log('sharp ok')}catch(e){console.log('no sharp')}\\\"\",\"description\":\"Check if sharp package is availabl...",
+  "error": "Exit code 1\nno sharp\n/usr/bin/bash: line 1: /c/Users/BARIS-~1/AppData/Local/Temp/claude-f6e8-cwd: No such file or directory",
+  "timestamp": "2026-07-20T11:38:24.835Z",
+  "retry_count": 2
+}

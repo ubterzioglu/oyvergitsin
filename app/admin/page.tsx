@@ -175,6 +175,45 @@ function AdminGuide() {
             <li>Değişiklikler kaydedildiği anda canlı ankete yansır — ayrı bir yayınlama adımı yoktur.</li>
           </ul>
         </section>
+
+        <section>
+          <h3 className="font-semibold text-gray-900 mb-1">Veri görünürlüğü ve güvenlik</h3>
+          <p className="mb-2">
+            Bu panelde ne görebildiğin ve ziyaretçilere ne gösterildiği net şekilde
+            ayrılmıştır:
+          </p>
+          <ul className="list-disc list-inside space-y-1">
+            <li>
+              <strong>Admin panelinde gördüğün veri:</strong> yalnızca anket
+              <em> yapılandırması</em> (Eksenler, Sorular, Partiler) ve bu sayfadaki
+              toplam sayaçlar (toplam/tamamlanan oturum, toplam soru, toplam parti).
+              Tek bir ziyaretçinin kim olduğunu, hangi cevapları verdiğini veya
+              sonucunu gösteren bir ekran şu an panelde <strong>yok</strong>.
+            </li>
+            <li>
+              <strong>Ziyaretçiye gösterilen veri:</strong> Sonuçlar ekranı
+              (<code>/results/[sessionId]</code>) sadece kendi eksen skorlarını ve
+              kendi parti eşleşme yüzdelerini gösterir. Başka bir ziyaretçinin
+              sonuç linkini bilse bile, tarayıcısında doğru oturum çerezi
+              (token) yoksa API bu isteği <code>403 Yetkisiz istek</code> ile
+              reddeder — yani sonuçlar birbirinden izole.
+            </li>
+            <li>
+              <strong>Panele erişim:</strong> <code>/admin/*</code> yolları
+              middleware tarafından korunur. Giriş yapılmamışsa
+              <code> /admin/login</code>&apos;a yönlendirilir; giriş yapılmış olsa
+              bile hesap <code>is_admin</code> yetkisine sahip değilse oturumu
+              otomatik kapatılıp login sayfasına geri gönderilir. Panel herkese
+              açık değildir.
+            </li>
+            <li>
+              <strong>Özet:</strong> Admin = anket tanımı + genel sayaçlar.
+              Kullanıcı = sadece kendi sonucu. Şu an “tüm katılımcıların
+              cevaplarını/sonuçlarını listeleyen” bir admin ekranı yoktur; böyle
+              bir ihtiyaç varsa bu ayrıca geliştirilmesi gereken bir özelliktir.
+            </li>
+          </ul>
+        </section>
       </div>
     </div>
   )

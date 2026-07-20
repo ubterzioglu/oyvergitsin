@@ -1,7 +1,0 @@
-{
-  "tool_name": "Bash",
-  "tool_input_preview": "{\"command\":\"git log origin/main -1 --oneline 2>&1\\necho \\\"---\\\"\\ngit log HEAD -1 --oneline 2>&1\",\"description\":\"Confirm origin/main and HEAD point to same commit\"}",
-  "error": "Exit code 1\n1b5b8a6 feat: seed ranking question options for question 5\n---\n1b5b8a6 feat: seed ranking question options for question 5\n/usr/bin/bash: line 3: /c/Users/BARIS-~1/AppData/Local/Temp/claude-c391-cwd: No such file or directory",
-  "timestamp": "2026-07-20T15:38:10.689Z",
-  "retry_count": 3
-}

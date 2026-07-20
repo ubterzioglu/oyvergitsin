@@ -1,7 +1,7 @@
 {
   "tool_name": "Bash",
-  "tool_input_preview": "{\"command\":\"gh api repos/ubterzioglu/corteqsmvp/contents/supabase/functions/radar-news-scan/lib/types.ts --jq .content | base64 -d\",\"description\":\"Fetch types.ts\"}",
-  "error": "Exit code 1\nexport type RadarSourceType = \"rss\" | \"atom\" | \"gdelt\" | \"json_api\";\nexport type RadarTrustLevel = \"official\" | \"high\" | \"standard\" | \"discovery_only\";\nexport type RadarReviewStatus = \"pending\" | \"approved\" | \"rejected\" | \"duplicate\" | \"archived\";\nexport type RadarTriggerType = \"cron\" | \"manual\" | \"retry\";\nexport type RadarScanStatus = \"running\" | \"completed\" | \"partial\" | \"failed\";\n\nexport type RadarNewsSource = {\n  id: string;\n  name: string;\n  source_type: RadarSourceType;\n  adapt...",
-  "timestamp": "2026-07-20T11:54:43.641Z",
-  "retry_count": 9
+  "tool_input_preview": "{\"command\":\"npm audit --audit-level=high 2>&1 | tail -40\",\"timeout\":60000,\"description\":\"Re-check npm audit after Next.js upgrade\"}",
+  "error": "Exit code 1\nSeverity: moderate\nPostCSS has XSS via Unescaped </style> in its CSS Stringify Output - https://github.com/advisories/GHSA-qx2v-qp2m-jg93\nfix available via `npm audit fix --force`\nWill install next@9.3.3, which is a breaking change\nnode_modules/next/node_modules/postcss\nnode_modules/postcss\n  next  9.3.4-canary.0 - 16.3.0-canary.5\n  Depends on vulnerable versions of postcss\n  node_modules/next\n\ntar  <=7.5.15\nSeverity: high\nnode-tar Vulnerable to Arbitrary File Creation/Overwrite via ...",
+  "timestamp": "2026-07-20T11:55:44.585Z",
+  "retry_count": 25
 }

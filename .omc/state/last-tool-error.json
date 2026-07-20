@@ -1,7 +1,7 @@
 {
-  "tool_name": "PowerShell",
-  "tool_input_preview": "{\"command\":\"Start-Sleep -Seconds 1\\n$r = Invoke-WebRequest -Uri \\\"http://localhost:4177/\\\" -UseBasicParsing -TimeoutSec 15\\n$html = $r.Content\\n$idx = $html.IndexOf(\\\"<header\\\")\\n$html.Substring($idx,...",
-  "error": "Exit code 1\nInvoke-WebRequest: \r\nLine |\r\n   2 |  $r = Invoke-WebRequest -Uri \"http://localhost:4177/\" -UseBasicParsing …\r\n     |       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n     | Internal Server Error\r\nInvalidOperation: \r\nLine |\r\n   4 |  $idx = $html.IndexOf(\"<header\")\r\n     |  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n     | You cannot call a method on a null-valued expression.\r\nInvalidOperation: \r\nLine |\r\n   5 |  $html.Substring($idx, 600)\r\n     |  ~~~~~~~~~~~~~~~~~~~~~~~~~...",
-  "timestamp": "2026-07-20T12:42:01.702Z",
-  "retry_count": 2
+  "tool_name": "Bash",
+  "tool_input_preview": "{\"command\":\"npm run build 2>&1 | tail -100\",\"timeout\":180000,\"description\":\"Run production build and check for errors\"}",
+  "error": "Exit code 1\n\n> oyvergitsin@0.1.0 build\n> next build\n\n   ▲ Next.js 15.5.20\n   - Environments: .env.local, .env\n\n   Creating an optimized production build ...\n<w> [webpack.cache.PackFileCacheStrategy] Serializing big strings (133kiB) impacts deserialization performance (consider using Buffer instead and decode when needed)\n ✓ Compiled successfully in 14.8s\n   Linting and checking validity of types ...\n\n./app/admin/questions/[id]/page.tsx\n83:6  Warning: React Hook useEffect has a missing dependency...",
+  "timestamp": "2026-07-20T12:42:25.241Z",
+  "retry_count": 1
 }

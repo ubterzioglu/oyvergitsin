@@ -1,7 +1,0 @@
-{
-  "tool_name": "Bash",
-  "tool_input_preview": "{\"command\":\"cat \\\"c:/temp_private/oyvergitsin/.omc/state/mission-state.json\\\" 2>&1 | grep -v \\\"cwd:\\\" | head -60\",\"description\":\"Check OMC mission state for active automation info\"}",
-  "error": "Exit code 1\n{\n  \"updatedAt\": \"2026-07-20T12:06:31.528Z\",\n  \"missions\": [\n    {\n      \"id\": \"session:d662f19c-17bc-4917-a56f-a968b08e4232:none\",\n      \"source\": \"session\",\n      \"name\": \"none\",\n      \"objective\": \"Session mission\",\n      \"createdAt\": \"2026-07-20T10:54:26.725Z\",\n      \"updatedAt\": \"2026-07-20T11:25:25.776Z\",\n      \"status\": \"done\",\n      \"workerCount\": 6,\n      \"taskCounts\": {\n        \"total\": 6,\n        \"pending\": 0,\n        \"blocked\": 0,\n        \"inProgress\": 0,\n        \"complet...",
-  "timestamp": "2026-07-20T12:06:38.577Z",
-  "retry_count": 2
-}

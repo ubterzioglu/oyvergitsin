@@ -151,8 +151,8 @@
     },
     {
       "path": "app\\page.tsx",
-      "accessCount": 24,
-      "lastAccessed": 1784548254684,
+      "accessCount": 25,
+      "lastAccessed": 1784549976854,
       "type": "file"
     },
     {
@@ -169,8 +169,8 @@
     },
     {
       "path": "supabase\\migrations\\001_initial_schema.sql",
-      "accessCount": 14,
-      "lastAccessed": 1784547626494,
+      "accessCount": 15,
+      "lastAccessed": 1784549994874,
       "type": "file"
     },
     {
@@ -181,14 +181,14 @@
     },
     {
       "path": "app\\admin\\layout.tsx",
-      "accessCount": 13,
-      "lastAccessed": 1784546791158,
+      "accessCount": 14,
+      "lastAccessed": 1784549993580,
       "type": "file"
     },
     {
       "path": "supabase\\migrations\\004_fix_roles_rls_recursion.sql",
-      "accessCount": 11,
-      "lastAccessed": 1784547692396,
+      "accessCount": 12,
+      "lastAccessed": 1784550334431,
       "type": "file"
     },
     {
@@ -205,14 +205,14 @@
     },
     {
       "path": "lib\\supabase\\admin.ts",
-      "accessCount": 10,
-      "lastAccessed": 1784547627759,
+      "accessCount": 11,
+      "lastAccessed": 1784549975599,
       "type": "file"
     },
     {
       "path": "lib\\supabase\\client.ts",
-      "accessCount": 10,
-      "lastAccessed": 1784547628047,
+      "accessCount": 11,
+      "lastAccessed": 1784550334096,
       "type": "file"
     },
     {
@@ -231,6 +231,12 @@
       "path": "package.json",
       "accessCount": 10,
       "lastAccessed": 1784548016091,
+      "type": "file"
+    },
+    {
+      "path": "components\\layout\\Footer.tsx",
+      "accessCount": 10,
+      "lastAccessed": 1784549805275,
       "type": "file"
     },
     {
@@ -282,15 +288,15 @@
       "type": "file"
     },
     {
-      "path": ".env.local",
-      "accessCount": 7,
-      "lastAccessed": 1784546716758,
+      "path": "lib\\supabase\\config.ts",
+      "accessCount": 8,
+      "lastAccessed": 1784549975997,
       "type": "file"
     },
     {
-      "path": "lib\\supabase\\config.ts",
-      "accessCount": 7,
-      "lastAccessed": 1784546742620,
+      "path": ".env.local",
+      "accessCount": 8,
+      "lastAccessed": 1784550334606,
       "type": "file"
     },
     {
@@ -327,12 +333,6 @@
       "path": "components\\layout\\Header.tsx",
       "accessCount": 6,
       "lastAccessed": 1784546653378,
-      "type": "file"
-    },
-    {
-      "path": "components\\layout\\Footer.tsx",
-      "accessCount": 5,
-      "lastAccessed": 1784547736625,
       "type": "file"
     },
     {

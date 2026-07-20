@@ -262,6 +262,18 @@ Devam ederek yukarıdaki koşulları kabul etmiş sayılırsınız.`,
       )
     }
 
+    // Options for question 5 (ranking)
+    const q5 = questions.find(q => q.order_index === 5)
+    if (q5) {
+      questionOptions.push(
+        { question_id: q5.id, text: 'Ekonomi', value: 'economy', order_index: 1 },
+        { question_id: q5.id, text: 'Eğitim', value: 'education', order_index: 2 },
+        { question_id: q5.id, text: 'Sağlık', value: 'health', order_index: 3 },
+        { question_id: q5.id, text: 'Güvenlik', value: 'security', order_index: 4 },
+        { question_id: q5.id, text: 'Çevre', value: 'environment', order_index: 5 }
+      )
+    }
+
     // Options for question 6 (forced_choice_pair)
     const q6 = questions.find(q => q.order_index === 6)
     if (q6) {

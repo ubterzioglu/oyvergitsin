@@ -13,6 +13,13 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 const generateId = () => crypto.randomUUID()
 
 const OPTIONS_BY_ORDER_INDEX = {
+  5: [
+    { text: 'Ekonomi', value: 'economy' },
+    { text: 'Eğitim', value: 'education' },
+    { text: 'Sağlık', value: 'health' },
+    { text: 'Güvenlik', value: 'security' },
+    { text: 'Çevre', value: 'environment' }
+  ],
   3: [
     { text: 'Merkezi müfredat', value: 'centralized' },
     { text: 'Yerel özerklik', value: 'local_autonomy' },

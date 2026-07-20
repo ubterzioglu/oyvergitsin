@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Inter, Source_Serif_4 } from 'next/font/google'
 import Script from 'next/script'
 import { getSiteUrl, siteConfig } from '@/lib/site'
@@ -8,6 +8,12 @@ import './globals.css'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-body' })
 const sourceSerif = Source_Serif_4({ subsets: ['latin'], variable: '--font-heading' })
+
+export const viewport: Viewport = {
+  themeColor: siteConfig.themeColor,
+  width: 'device-width',
+  initialScale: 1
+}
 
 export function generateMetadata(): Metadata {
   const siteUrl = getSiteUrl()
@@ -22,6 +28,7 @@ export function generateMetadata(): Metadata {
     applicationName: siteConfig.name,
     keywords: [...siteConfig.keywords],
     category: 'politics',
+    manifest: '/manifest.webmanifest',
     alternates: {
       canonical: '/',
       languages: {
@@ -35,21 +42,12 @@ export function generateMetadata(): Metadata {
       siteName: siteConfig.name,
       title: siteConfig.title,
       description: siteConfig.description,
-      countryName: siteConfig.countryName,
-      images: [
-        {
-          url: '/opengraph-image',
-          width: 1200,
-          height: 630,
-          alt: `${siteConfig.name} sosyal paylasim gorseli`
-        }
-      ]
+      countryName: siteConfig.countryName
     },
     twitter: {
       card: 'summary_large_image',
       title: siteConfig.title,
-      description: siteConfig.description,
-      images: ['/opengraph-image']
+      description: siteConfig.description
     },
     robots: {
       index: true,

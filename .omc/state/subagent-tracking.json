@@ -57,15 +57,13 @@
     {
       "agent_id": "a127eea99a506d419",
       "agent_type": "security-reviewer",
-      "started_at": "2026-07-20T11:25:00.761Z",
+      "started_at": "2026-07-20T11:30:48.771Z",
       "parent_mode": "none",
-      "status": "completed",
-      "completed_at": "2026-07-20T11:30:31.114Z",
-      "duration_ms": 330353
+      "status": "running"
     }
   ],
-  "total_spawned": 7,
-  "total_completed": 61,
+  "total_spawned": 8,
+  "total_completed": 63,
   "total_failed": 0,
-  "last_updated": "2026-07-20T11:30:31.220Z"
+  "last_updated": "2026-07-20T11:30:48.885Z"
 }

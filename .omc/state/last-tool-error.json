@@ -1,7 +1,7 @@
 {
   "tool_name": "Bash",
-  "tool_input_preview": "{\"command\":\"cd \\\"c:\\\\temp_private\\\\oyvergitsin\\\" && npm audit --audit-level=high --json > \\\"C:\\\\Users\\\\BARIS-~1\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--temp-private-oyvergitsin\\\\df95dbfa-c67b-4acd-be5f-f80c...",
-  "error": "Exit code 1\nEXIT:1\n/usr/bin/bash: line 1: /c/Users/BARIS-~1/AppData/Local/Temp/claude-a010-cwd: No such file or directory",
-  "timestamp": "2026-07-20T11:27:05.611Z",
-  "retry_count": 13
+  "tool_input_preview": "{\"command\":\"cd c:/temp_private/oyvergitsin && npm run build > \\\"C:/Users/BARIS-~1/AppData/Local/Temp/claude/c--temp-private-oyvergitsin/52e41807-11c1-4380-9cbd-45d293630b0a/scratchpad/build.log\\\" 2>&1...",
+  "error": "Exit code 1\nEXIT_CODE=0\n├ ƒ /results/[sessionId]                 95.8 kB         192 kB\n├ ○ /robots.txt                          0 B                0 B\n├ ○ /sitemap.xml                         0 B                0 B\n└ ○ /survey                              2 kB           89.5 kB\n+ First Load JS shared by all            87.5 kB\n  ├ chunks/117-0e3ab11047fe8a2c.js       31.9 kB\n  ├ chunks/fd9d1056-b11c29269aaa4b36.js  53.6 kB\n  └ other shared chunks (total)          2 kB\n\n\nƒ Middleware             ...",
+  "timestamp": "2026-07-20T11:28:53.612Z",
+  "retry_count": 17
 }

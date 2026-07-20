@@ -1,7 +1,7 @@
 # Repository Guidelines
 
 ## Project Structure & Module Organization
-`app/` contains the Next.js 14 App Router code: public pages in `app/page.tsx`, `app/consent`, `app/survey`, results in `app/results/[sessionId]`, admin tooling in `app/admin`, and API handlers in `app/api/*`. Shared logic lives in `lib/`, mainly `lib/supabase/*` for client/server setup and `lib/scoring/engine.ts` for match calculation. Database assets live in `supabase/migrations/`, while operational scripts such as `scripts/seed.js` and migration helpers stay in `scripts/`. Deployment notes are documented in `COOLIFY_DEPLOYMENT.md`.
+`app/` contains the Next.js 14 App Router code: public pages in `app/page.tsx`, `app/consent`, `app/survey`, results in `app/results/[sessionId]`, admin tooling in `app/admin`, and API handlers in `app/api/*`. Shared logic lives in `lib/`, mainly `lib/supabase/*` for client/server setup and `lib/scoring/engine.ts` for match calculation. Database assets live in `supabase/migrations/`, while operational scripts such as `scripts/seed.js` and migration helpers stay in `scripts/`. Deployment notes are documented in `docs/COOLIFY_DEPLOYMENT.md`.
 
 ## Build, Test, and Development Commands
 Use `npm install` to sync dependencies. `npm run dev` starts the local app on port 3000. `npm run build` creates the production bundle, and `npm run start` serves that build. `npm run lint` runs the Next.js ESLint rules. For database work, use `npm run db:push` to apply Supabase schema changes, `npm run db:seed` to seed content, and `npm run db:reset` to rebuild the local database. For container checks, `docker compose up --build` mirrors the Coolify deployment path.

@@ -26,8 +26,7 @@ docker-compose*.yml
 
 # Documentation
 README.md
-oyvergitsin_dokumentation.md
-COOLIFY_DEPLOYMENT.md
+docs
 
 # IDE
 .vscode

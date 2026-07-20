@@ -34,24 +34,26 @@ const STEPS = [
   },
 ]
 
+const RAINBOW_ACCENTS = ['#F5C518', '#F5821F', '#E8385C', '#7B4FE0', '#1E9BE0', '#3CB043']
+
 const TRUST_SIGNALS = [
-  { title: 'Tamamen Anonim', description: 'Kimliğiniz veya iletişim bilgileriniz talep edilmez.', icon: '🕶️', accent: '#1B2A4A' },
-  { title: 'Tarafsız Algoritma', description: 'Skorlama, herhangi bir partiye avantaj sağlamayan sabit kurallarla çalışır.', icon: '⚖️', accent: '#2F6F4E' },
-  { title: 'Açık Kaynak', description: 'Eşleşme mantığı ve veri kullanımı şeffaf bir şekilde belgelenmiştir.', icon: '🔓', accent: '#C8A256' },
-]
+  { title: 'Tamamen Anonim', description: 'Kimliğiniz veya iletişim bilgileriniz talep edilmez.', icon: '🕶️' },
+  { title: 'Tarafsız Algoritma', description: 'Skorlama, herhangi bir partiye avantaj sağlamayan sabit kurallarla çalışır.', icon: '⚖️' },
+  { title: 'Açık Kaynak', description: 'Eşleşme mantığı ve veri kullanımı şeffaf bir şekilde belgelenmiştir.', icon: '🔓' },
+].map((signal, index) => ({ ...signal, accent: RAINBOW_ACCENTS[index % RAINBOW_ACCENTS.length] }))
 
 const IDEOLOGICAL_AXES = [
-  { name: 'Ekonomi: Piyasa vs Devlet', description: 'Ekonomik kararların piyasa mekanizmaları mı yoksa devlet müdahalesi mi ile yönetilmesi gerektiği', icon: '📈', accent: '#C8A256' },
-  { name: 'Gelir Dağılımı', description: 'Gelir ve servetin dağılımı ile ilgili bakış açısı', icon: '⚖️', accent: '#2F6F4E' },
-  { name: 'Sivil Özgürlükler', description: 'Bireysel özgürlüklerin devlet otoritesi ile dengesi', icon: '🕊️', accent: '#3E6FA6' },
-  { name: 'Güvenlik ve Devlet', description: 'Milli güvenlik öncelikleri ve devletin rolü', icon: '🛡️', accent: '#1B2A4A' },
-  { name: 'Sekülerizm', description: 'Din ve devlet ilişkisi', icon: '🏛️', accent: '#8B5E3C' },
-  { name: 'Kimlik ve Göç', description: 'Ulusal kimlik ve göç politikaları', icon: '🌍', accent: '#A6473E' },
-  { name: 'Dış Politika', description: 'Uluslararası ilişkiler ve dış politika yaklaşımı', icon: '🤝', accent: '#3E6FA6' },
-  { name: 'AB İlişkileri', description: 'Avrupa Birliği ile ilişkiler ve uyum süreci', icon: '🇪🇺', accent: '#2F6F4E' },
-  { name: 'Eğitim ve Sosyal Politika', description: 'Eğitim sistemi ve sosyal politikalar', icon: '🎓', accent: '#C8A256' },
-  { name: 'Çevre ve Kalkınma', description: 'Çevre koruma ve ekonomik kalkınma dengesi', icon: '🌱', accent: '#2F6F4E' },
-]
+  { name: 'Ekonomi: Piyasa vs Devlet', description: 'Ekonomik kararların piyasa mekanizmaları mı yoksa devlet müdahalesi mi ile yönetilmesi gerektiği', icon: '📈' },
+  { name: 'Gelir Dağılımı', description: 'Gelir ve servetin dağılımı ile ilgili bakış açısı', icon: '⚖️' },
+  { name: 'Sivil Özgürlükler', description: 'Bireysel özgürlüklerin devlet otoritesi ile dengesi', icon: '🕊️' },
+  { name: 'Güvenlik ve Devlet', description: 'Milli güvenlik öncelikleri ve devletin rolü', icon: '🛡️' },
+  { name: 'Sekülerizm', description: 'Din ve devlet ilişkisi', icon: '🏛️' },
+  { name: 'Kimlik ve Göç', description: 'Ulusal kimlik ve göç politikaları', icon: '🌍' },
+  { name: 'Dış Politika', description: 'Uluslararası ilişkiler ve dış politika yaklaşımı', icon: '🤝' },
+  { name: 'AB İlişkileri', description: 'Avrupa Birliği ile ilişkiler ve uyum süreci', icon: '🇪🇺' },
+  { name: 'Eğitim ve Sosyal Politika', description: 'Eğitim sistemi ve sosyal politikalar', icon: '🎓' },
+  { name: 'Çevre ve Kalkınma', description: 'Çevre koruma ve ekonomik kalkınma dengesi', icon: '🌱' },
+].map((axis, index) => ({ ...axis, accent: RAINBOW_ACCENTS[index % RAINBOW_ACCENTS.length] }))
 
 const FAQ_ITEMS = [
   {
@@ -59,37 +61,32 @@ const FAQ_ITEMS = [
     answer:
       'oyvergitsin.org, Türkiye\'deki seçmenlerin siyasi görüşlerini kısa ve anonim bir anketle analiz ederek hangi siyasi partiye ne kadar yakın olduklarını gösteren tarafsız bir siyasi eşleşme platformudur.',
     icon: '❓',
-    accent: '#C8A256',
   },
   {
     question: 'Anket ne kadar sürer?',
     answer:
       '10 ideolojik eksen üzerinden hazırlanmış kısa sorulardan oluşur ve birkaç dakika içinde tamamlanabilir.',
     icon: '⏱️',
-    accent: '#2F6F4E',
   },
   {
     question: 'Verilerim anonim mi tutuluyor?',
     answer:
       'Evet. Anket tamamen anonimdir; ad, e-posta veya telefon gibi kimliğinizi ortaya çıkaracak herhangi bir bilgi talep edilmez.',
     icon: '🔒',
-    accent: '#3E6FA6',
   },
   {
     question: 'Eşleşme sonucu nasıl hesaplanıyor?',
     answer:
       'Cevaplarınızdan her ideolojik eksen için bir puan hesaplanır ve bu puanlar Türkiye\'deki siyasi partilerin eksen pozisyonlarıyla karşılaştırılır. Sonuçta her parti için bir benzerlik yüzdesi elde edilir. Algoritma sabit kurallıdır ve herhangi bir partiye avantaj sağlamaz.',
     icon: '📊',
-    accent: '#1B2A4A',
   },
   {
     question: 'Hangi partiler karşılaştırmaya dahil?',
     answer:
       'AKP, CHP, MHP, İYİ Parti, DEVA, Gelecek Partisi, Saadet Partisi, TİP, Vatan Partisi, Yeşil Sol Parti, Zafer Partisi ve Memleket Partisi dahil olmak üzere Türkiye\'deki başlıca partiler karşılaştırmaya dahildir.',
     icon: '🤝',
-    accent: '#A6473E',
   },
-]
+].map((item, index) => ({ ...item, accent: RAINBOW_ACCENTS[index % RAINBOW_ACCENTS.length] }))
 
 export default function Home() {
   const faqStructuredData = {
@@ -111,7 +108,7 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqStructuredData) }}
       />
-      <section className="relative overflow-hidden bg-rainbow-blue">
+      <section className="relative overflow-hidden bg-ink-primary">
         <video
           className="absolute inset-0 h-full w-full object-cover motion-reduce:hidden"
           autoPlay
@@ -124,14 +121,14 @@ export default function Home() {
           <source src="/videos/hero-bg.mp4" type="video/mp4" />
         </video>
         <Container className="relative py-24 md:py-32">
-          <div className="mx-auto max-w-2xl rounded-[1.75rem] border border-white/15 bg-white/10 p-8 text-center shadow-[0_8px_32px_rgba(0,0,0,0.25)] backdrop-blur-xl backdrop-saturate-150 md:p-14">
+          <div className="mx-auto max-w-2xl rounded-[1.75rem] border-[3px] border-transparent bg-white/10 bg-origin-border p-8 text-center shadow-[0_8px_32px_rgba(0,0,0,0.25)] backdrop-blur-xl backdrop-saturate-150 md:p-14" style={{ backgroundClip: 'padding-box, border-box', backgroundImage: 'linear-gradient(rgba(255,255,255,0.1), rgba(255,255,255,0.1)), linear-gradient(90deg, #F5C518, #F5821F, #E8385C, #7B4FE0, #1E9BE0, #3CB043)' }}>
             <h1 className="font-heading text-5xl font-semibold text-ink-primary md:text-6xl">
               oyvergitsin.org
             </h1>
-            <p className="mt-6 text-xl text-white/80">
+            <p className="mt-6 text-xl text-ink-primary/80">
               Türkiye Siyasi Eşleşme Platformu
             </p>
-            <p className="mt-4 text-xl text-white/65">
+            <p className="mt-4 text-xl text-ink-primary/65">
               Siyasi görüşlerinizi anonim ve kısa bir anketle analiz edin; tarafsız bir
               eşleşme mantığıyla size en yakın partileri keşfedin.
             </p>
@@ -144,7 +141,7 @@ export default function Home() {
         </Container>
       </section>
 
-      <section className="bg-surface py-20">
+      <section className="bg-rainbow-yellow-tint py-20">
         <Container>
           <h2 className="text-center font-heading text-3xl font-semibold text-ink-primary">
             Nasıl Çalışır
@@ -163,7 +160,7 @@ export default function Home() {
         </Container>
       </section>
 
-      <section className="bg-surface-muted py-20">
+      <section className="bg-rainbow-orange-tint py-20">
         <Container>
           <div className="mx-auto grid max-w-4xl grid-cols-1 gap-6 md:grid-cols-3">
             {TRUST_SIGNALS.map((signal) => (
@@ -194,7 +191,7 @@ export default function Home() {
         </Container>
       </section>
 
-      <section className="bg-surface py-20">
+      <section className="bg-rainbow-purple-tint py-20">
         <Container>
           <h2 className="text-center font-heading text-3xl font-semibold text-ink-primary">
             10 İdeolojik Eksen
@@ -234,7 +231,7 @@ export default function Home() {
 
       <LatestNews />
 
-      <section className="bg-surface-muted py-20">
+      <section className="bg-rainbow-green-tint py-20">
         <Container>
           <h2 className="text-center font-heading text-3xl font-semibold text-ink-primary">
             Sıkça Sorulan Sorular
@@ -268,9 +265,9 @@ export default function Home() {
         </Container>
       </section>
 
-      <section className="bg-rainbow-blue py-16">
+      <section className="bg-rainbow-red-tint py-16">
         <Container className="text-center">
-          <h2 className="font-heading text-2xl font-semibold text-white">
+          <h2 className="font-heading text-2xl font-semibold text-ink-primary">
             Siyasi duruşunuzu birkaç dakikada keşfedin
           </h2>
           <div className="mt-8">

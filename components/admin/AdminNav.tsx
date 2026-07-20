@@ -29,7 +29,7 @@ export function AdminNav() {
   }
 
   return (
-    <nav className="bg-brand-ink shadow-md">
+    <nav className="bg-ink-primary shadow-md">
       <div className="mx-auto max-w-7xl px-4">
         <div className="flex h-16 justify-between">
           <div className="flex">

@@ -67,7 +67,7 @@ function AdminLoginForm() {
             required
             value={email}
             onChange={(event) => setEmail(event.target.value)}
-            className="w-full rounded-lg border border-border px-4 py-2 text-ink-primary focus:border-brand-accent focus:outline-none"
+            className="w-full rounded-lg border border-border px-4 py-2 text-ink-primary focus:border-rainbow-blue focus:outline-none"
           />
         </div>
         <div>
@@ -81,7 +81,7 @@ function AdminLoginForm() {
             required
             value={password}
             onChange={(event) => setPassword(event.target.value)}
-            className="w-full rounded-lg border border-border px-4 py-2 text-ink-primary focus:border-brand-accent focus:outline-none"
+            className="w-full rounded-lg border border-border px-4 py-2 text-ink-primary focus:border-rainbow-blue focus:outline-none"
           />
         </div>
         {errorMessage ? (

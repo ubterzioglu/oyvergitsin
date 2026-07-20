@@ -22,7 +22,7 @@ function FieldWrapper({ label, htmlFor, error, children }: FieldWrapperProps) {
 }
 
 const INPUT_CLASSES =
-  'w-full rounded-lg border border-border px-4 py-2 text-ink-primary focus:border-brand-accent focus:outline-none'
+  'w-full rounded-lg border border-border px-4 py-2 text-ink-primary focus:border-rainbow-blue focus:outline-none'
 
 interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string

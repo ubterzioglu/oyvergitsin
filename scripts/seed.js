@@ -240,6 +240,111 @@ Devam ederek yukarıdaki koşulları kabul etmiş sayılırsınız.`,
       )
     }
 
+    // Options for question 3 (dropdown_single - education model)
+    const q3 = questions.find(q => q.order_index === 3)
+    if (q3) {
+      questionOptions.push(
+        { question_id: q3.id, text: 'Merkezi müfredat', value: 'centralized', order_index: 1 },
+        { question_id: q3.id, text: 'Yerel özerklik', value: 'local_autonomy', order_index: 2 },
+        { question_id: q3.id, text: 'Özel eğitim teşviki', value: 'private_incentive', order_index: 3 },
+        { question_id: q3.id, text: 'Karma model', value: 'mixed', order_index: 4 }
+      )
+    }
+
+    // Options for question 4 (dropdown_multi - foreign policy priorities)
+    const q4 = questions.find(q => q.order_index === 4)
+    if (q4) {
+      questionOptions.push(
+        { question_id: q4.id, text: 'AB ile entegrasyon', value: 'eu_integration', order_index: 1 },
+        { question_id: q4.id, text: 'Bölgesel ittifaklar', value: 'regional_alliances', order_index: 2 },
+        { question_id: q4.id, text: 'Ekonomik anlaşmalar', value: 'economic_agreements', order_index: 3 },
+        { question_id: q4.id, text: 'Savunma işbirliği', value: 'defense_cooperation', order_index: 4 }
+      )
+    }
+
+    // Options for question 6 (forced_choice_pair)
+    const q6 = questions.find(q => q.order_index === 6)
+    if (q6) {
+      questionOptions.push(
+        { question_id: q6.id, text: 'Bireysel özgürlük', value: 'individual_freedom', order_index: 1 },
+        { question_id: q6.id, text: 'Toplumsal düzen', value: 'social_order', order_index: 2 }
+      )
+    }
+
+    // Options for question 10 (likert_7)
+    const q10 = questions.find(q => q.order_index === 10)
+    if (q10) {
+      questionOptions.push(
+        { question_id: q10.id, text: 'Kesinlikle katılmıyorum', value: 'strongly_disagree', order_index: 1 },
+        { question_id: q10.id, text: 'Katılmıyorum', value: 'disagree', order_index: 2 },
+        { question_id: q10.id, text: 'Kısmen katılmıyorum', value: 'somewhat_disagree', order_index: 3 },
+        { question_id: q10.id, text: 'Kararsızım', value: 'neutral', order_index: 4 },
+        { question_id: q10.id, text: 'Kısmen katılıyorum', value: 'somewhat_agree', order_index: 5 },
+        { question_id: q10.id, text: 'Katılıyorum', value: 'agree', order_index: 6 },
+        { question_id: q10.id, text: 'Kesinlikle katılıyorum', value: 'strongly_agree', order_index: 7 }
+      )
+    }
+
+    // Options for question 14 (scenario_single - economic crisis)
+    const q14 = questions.find(q => q.order_index === 14)
+    if (q14) {
+      questionOptions.push(
+        { question_id: q14.id, text: 'Kamu harcamalarını artır', value: 'increase_spending', order_index: 1 },
+        { question_id: q14.id, text: 'Vergileri düşür', value: 'lower_taxes', order_index: 2 },
+        { question_id: q14.id, text: 'Faiz oranlarını yükselt', value: 'raise_rates', order_index: 3 },
+        { question_id: q14.id, text: 'Müdahale etme', value: 'no_intervention', order_index: 4 }
+      )
+    }
+
+    // Options for question 15 (scenario_multi)
+    const q15 = questions.find(q => q.order_index === 15)
+    if (q15) {
+      questionOptions.push(
+        { question_id: q15.id, text: 'İşsizlik yardımını artır', value: 'increase_benefits', order_index: 1 },
+        { question_id: q15.id, text: 'Küçük işletmelere destek', value: 'sme_support', order_index: 2 },
+        { question_id: q15.id, text: 'Kamu istihdamı yarat', value: 'public_jobs', order_index: 3 },
+        { question_id: q15.id, text: 'Ithalatı kısıtla', value: 'import_restriction', order_index: 4 }
+      )
+    }
+
+    // Options for question 19 (image_choice_single)
+    const q19 = questions.find(q => q.order_index === 19)
+    if (q19) {
+      questionOptions.push(
+        { question_id: q19.id, text: 'Sembol A', value: 'symbol_a', order_index: 1 },
+        { question_id: q19.id, text: 'Sembol B', value: 'symbol_b', order_index: 2 },
+        { question_id: q19.id, text: 'Sembol C', value: 'symbol_c', order_index: 3 }
+      )
+    }
+
+    // Options for question 20 (image_choice_multi)
+    const q20 = questions.find(q => q.order_index === 20)
+    if (q20) {
+      questionOptions.push(
+        { question_id: q20.id, text: 'Görsel 1', value: 'image_1', order_index: 1 },
+        { question_id: q20.id, text: 'Görsel 2', value: 'image_2', order_index: 2 },
+        { question_id: q20.id, text: 'Görsel 3', value: 'image_3', order_index: 3 }
+      )
+    }
+
+    // Options for question 23 (consent_checkbox_group)
+    const q23 = questions.find(q => q.order_index === 23)
+    if (q23) {
+      questionOptions.push(
+        { question_id: q23.id, text: 'Kişisel verilerimin işlenmesini kabul ediyorum', value: 'data_consent', order_index: 1 },
+        { question_id: q23.id, text: 'Katılım koşullarını kabul ediyorum', value: 'terms_consent', order_index: 2 }
+      )
+    }
+
+    // Options for question 24 (attention_check)
+    const q24 = questions.find(q => q.order_index === 24)
+    if (q24) {
+      questionOptions.push(
+        { question_id: q24.id, text: 'Evet', value: 'yes', order_index: 1 },
+        { question_id: q24.id, text: 'Hayır', value: 'no', order_index: 2 }
+      )
+    }
+
     const { error: optionsError } = await supabase
       .from('question_options')
       .insert(questionOptions.map(opt => ({

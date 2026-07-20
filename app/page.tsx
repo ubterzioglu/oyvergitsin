@@ -121,7 +121,7 @@ export default function Home() {
           <source src="/videos/hero-bg.mp4" type="video/mp4" />
         </video>
         <Container className="relative py-24 md:py-32">
-          <div className="mx-auto max-w-2xl rounded-[1.75rem] border border-white/40 bg-white/70 p-8 text-center shadow-[0_8px_32px_rgba(0,0,0,0.25)] backdrop-blur-xl backdrop-saturate-150 md:p-14">
+          <div className="mx-auto max-w-2xl rounded-[1.75rem] border border-white/50 bg-gradient-to-b from-white/80 to-white/60 p-8 text-center shadow-[0_8px_32px_rgba(0,0,0,0.25)] ring-1 ring-inset ring-white/20 backdrop-blur-xl backdrop-saturate-150 md:p-14">
             <h1 className="font-heading text-5xl font-semibold text-ink-primary md:text-6xl">
               oyvergitsin.org
             </h1>

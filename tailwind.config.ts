@@ -9,10 +9,20 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        brand: {
-          ink: '#1B2A4A',
-          accent: '#C1272D',
-          'accent-hover': '#A31F24',
+        rainbow: {
+          yellow: '#F5C518',
+          'yellow-tint': '#FDF6DC',
+          orange: '#F5821F',
+          'orange-tint': '#FDEBDA',
+          red: '#E8385C',
+          'red-tint': '#FBDEE4',
+          purple: '#7B4FE0',
+          'purple-tint': '#EBE3FA',
+          blue: '#1E9BE0',
+          'blue-tint': '#DDF0FB',
+          'blue-hover': '#1580BD',
+          green: '#3CB043',
+          'green-tint': '#DFF3E0',
         },
         surface: {
           DEFAULT: '#FAFBFC',

@@ -1,7 +1,7 @@
 {
   "tool_name": "Bash",
-  "tool_input_preview": "{\"command\":\"cd \\\"c:\\\\temp_private\\\\oyvergitsin\\\" && git log --oneline -20 && echo \\\"---STATUS---\\\" && git status\",\"description\":\"Show recent commits and status\"}",
-  "error": "Exit code 1\naab8177 .\ne022b5d feat: add brand logo and static OG image, refine SEO metadata\nbcb2bfa .\n3557c73 .\nc1921bc .\n7117e8f feat: premium corporate layout redesign\n76e6b77 .\nb3c0e91 .\na46d783 fix: migrate to new Supabase project and fix RLS recursion bug\n8646e38 docs: reorganize root documentation into docs/ folder\n1599210 supabase: add manual sql migration helpers\na74106f seo: strengthen footer and geo metadata\nf895a9f seo: add footer backlink for ufuksoy nakliyat\n929fd7a .\ndad2e90 difche...",
-  "timestamp": "2026-07-20T11:25:04.936Z",
-  "retry_count": 4
+  "tool_input_preview": "{\"command\":\"cd \\\"c:\\\\temp_private\\\\oyvergitsin\\\" && npm audit --audit-level=high --json > \\\"C:\\\\Users\\\\BARIS-~1\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--temp-private-oyvergitsin\\\\df95dbfa-c67b-4acd-be5f-f80c...",
+  "error": "Exit code 1\nEXIT:1\n/usr/bin/bash: line 1: /c/Users/BARIS-~1/AppData/Local/Temp/claude-a010-cwd: No such file or directory",
+  "timestamp": "2026-07-20T11:27:05.611Z",
+  "retry_count": 13
 }

@@ -9,7 +9,7 @@ import { Badge } from '@/components/ui/Badge'
 export const metadata: Metadata = {
   title: 'Turkiye Siyasi Eslesme Testi',
   description:
-    'Turkiye\'de siyasi gorusunuzu kisa bir anketle analiz edin ve size en yakin partileri tarafsiz bir eslesme mantigiyla gorun.',
+    'Turkiye\'de siyasi gorusunuzu 10 ideolojik eksende kisa bir anketle analiz edin; size en yakin partileri tarafsiz, anonim ve ucretsiz bir eslesme testiyle gorun.',
   alternates: {
     canonical: '/'
   },
@@ -40,9 +40,67 @@ const TRUST_SIGNALS = [
   { title: 'Açık Kaynak', description: 'Eşleşme mantığı ve veri kullanımı şeffaf bir şekilde belgelenmiştir.' },
 ]
 
+const IDEOLOGICAL_AXES = [
+  { name: 'Ekonomi: Piyasa vs Devlet', description: 'Ekonomik kararların piyasa mekanizmaları mı yoksa devlet müdahalesi mi ile yönetilmesi gerektiği' },
+  { name: 'Gelir Dağılımı', description: 'Gelir ve servetin dağılımı ile ilgili bakış açısı' },
+  { name: 'Sivil Özgürlükler', description: 'Bireysel özgürlüklerin devlet otoritesi ile dengesi' },
+  { name: 'Güvenlik ve Devlet', description: 'Milli güvenlik öncelikleri ve devletin rolü' },
+  { name: 'Sekülerizm', description: 'Din ve devlet ilişkisi' },
+  { name: 'Kimlik ve Göç', description: 'Ulusal kimlik ve göç politikaları' },
+  { name: 'Dış Politika', description: 'Uluslararası ilişkiler ve dış politika yaklaşımı' },
+  { name: 'AB İlişkileri', description: 'Avrupa Birliği ile ilişkiler ve uyum süreci' },
+  { name: 'Eğitim ve Sosyal Politika', description: 'Eğitim sistemi ve sosyal politikalar' },
+  { name: 'Çevre ve Kalkınma', description: 'Çevre koruma ve ekonomik kalkınma dengesi' },
+]
+
+const FAQ_ITEMS = [
+  {
+    question: 'Oy Ver Gitsin nedir?',
+    answer:
+      'Oy Ver Gitsin, Türkiye\'deki seçmenlerin siyasi görüşlerini kısa ve anonim bir anketle analiz ederek hangi siyasi partiye ne kadar yakın olduklarını gösteren tarafsız bir siyasi eşleşme platformudur.',
+  },
+  {
+    question: 'Anket ne kadar sürer?',
+    answer:
+      '10 ideolojik eksen üzerinden hazırlanmış kısa sorulardan oluşur ve birkaç dakika içinde tamamlanabilir.',
+  },
+  {
+    question: 'Verilerim anonim mi tutuluyor?',
+    answer:
+      'Evet. Anket tamamen anonimdir; ad, e-posta veya telefon gibi kimliğinizi ortaya çıkaracak herhangi bir bilgi talep edilmez.',
+  },
+  {
+    question: 'Eşleşme sonucu nasıl hesaplanıyor?',
+    answer:
+      'Cevaplarınızdan her ideolojik eksen için bir puan hesaplanır ve bu puanlar Türkiye\'deki siyasi partilerin eksen pozisyonlarıyla karşılaştırılır. Sonuçta her parti için bir benzerlik yüzdesi elde edilir. Algoritma sabit kurallıdır ve herhangi bir partiye avantaj sağlamaz.',
+  },
+  {
+    question: 'Hangi partiler karşılaştırmaya dahil?',
+    answer:
+      'AKP, CHP, MHP, İYİ Parti, DEVA, Gelecek Partisi, Saadet Partisi, TİP, Vatan Partisi, Yeşil Sol Parti, Zafer Partisi ve Memleket Partisi dahil olmak üzere Türkiye\'deki başlıca partiler karşılaştırmaya dahildir.',
+  },
+]
+
 export default function Home() {
+  const faqStructuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: FAQ_ITEMS.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer,
+      },
+    })),
+  }
+
   return (
     <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqStructuredData) }}
+      />
       <section className="bg-brand-ink">
         <Container className="grid items-center gap-12 py-24 md:grid-cols-2 md:py-32">
           <div className="text-center md:text-left">
@@ -101,6 +159,42 @@ export default function Home() {
                 <span className="font-semibold text-ink-primary">{signal.title}</span>
                 <span className="text-xs text-ink-muted">{signal.description}</span>
               </Badge>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      <section className="bg-surface py-20">
+        <Container>
+          <h2 className="text-center font-heading text-3xl font-semibold text-ink-primary">
+            10 İdeolojik Eksen
+          </h2>
+          <p className="mx-auto mt-3 max-w-2xl text-center text-sm text-ink-secondary">
+            Anket, Türkiye siyasetini yansıtan 10 ideolojik eksende sorular içerir. Her eksende
+            verdiğiniz cevaplar, partilerin bu eksenlerdeki konumlarıyla karşılaştırılır.
+          </p>
+          <div className="mt-12 grid gap-4 md:grid-cols-2">
+            {IDEOLOGICAL_AXES.map((axis) => (
+              <Card key={axis.name}>
+                <h3 className="text-base font-semibold text-ink-primary">{axis.name}</h3>
+                <p className="mt-1 text-sm text-ink-secondary">{axis.description}</p>
+              </Card>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      <section className="bg-surface-muted py-20">
+        <Container>
+          <h2 className="text-center font-heading text-3xl font-semibold text-ink-primary">
+            Sıkça Sorulan Sorular
+          </h2>
+          <div className="mx-auto mt-12 max-w-3xl space-y-6">
+            {FAQ_ITEMS.map((item) => (
+              <Card key={item.question}>
+                <h3 className="text-base font-semibold text-ink-primary">{item.question}</h3>
+                <p className="mt-2 text-sm text-ink-secondary">{item.answer}</p>
+              </Card>
             ))}
           </div>
         </Container>

@@ -112,6 +112,22 @@ export default function RootLayout({
             addressCountry: siteConfig.countryCode
           }
         }
+      },
+      {
+        '@type': 'WebApplication',
+        '@id': `${siteUrl}/#webapp`,
+        name: siteConfig.name,
+        url: siteUrl,
+        description: siteConfig.description,
+        applicationCategory: 'PoliticsApplication',
+        operatingSystem: 'Web',
+        isAccessibleForFree: true,
+        inLanguage: siteConfig.language,
+        offers: {
+          '@type': 'Offer',
+          price: '0',
+          priceCurrency: 'TRY'
+        }
       }
     ]
   }

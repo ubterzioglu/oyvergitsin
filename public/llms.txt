@@ -1,0 +1,23 @@
+# Oy Ver Gitsin
+
+> Oy Ver Gitsin, Türkiye'deki seçmenlerin siyasi görüşlerini kısa ve anonim bir anketle analiz ederek hangi siyasi partiye ne kadar yakın olduklarını gösteren tarafsız bir siyasi eşleşme platformudur.
+
+Kullanıcılar 10 ideolojik eksen (ekonomi, gelir dağılımı, sivil özgürlükler, güvenlik, sekülerizm, kimlik ve göç, dış politika, AB ilişkileri, eğitim ve sosyal politika, çevre ve kalkınma) üzerinden sorulara cevap verir. Sistem, kullanıcının eksen bazlı skorlarını Türkiye'deki siyasi partilerin pozisyonlarıyla karşılaştırarak bir benzerlik yüzdesi hesaplar. Anket tamamen anonimdir; kimlik veya iletişim bilgisi talep edilmez.
+
+## Temel Bilgiler
+
+- Platform: Web tabanlı, ücretsiz, üyelik gerektirmez
+- Dil: Türkçe
+- Kapsam: Türkiye siyaseti, 12 siyasi parti
+- Yöntem: 10 ideolojik eksende soru-cevap, sabit kurallı skorlama algoritması
+- Gizlilik: Anonim oturum, kişisel veri toplanmaz
+
+## Sayfalar
+
+- [Ana Sayfa](https://oyvergitsin.org/): Platformun tanıtımı ve anketi başlatma
+- [Açık Rıza](https://oyvergitsin.org/consent): Anket öncesi onam metni
+
+## Notlar
+
+- Sonuç sayfaları ve anket akışı oturuma özgüdür, indekslenmez.
+- Skorlama metodolojisi ve parti pozisyonları tarafsızlık ilkesiyle, kaynak dayalı olarak güncellenir.

@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-20T11:25:01.931Z",
+  "updatedAt": "2026-07-20T11:25:25.776Z",
   "missions": [
     {
       "id": "session:42d69fbd-87da-43f1-aed4-33fed9e16a7e:none",
@@ -155,7 +155,7 @@
       "name": "none",
       "objective": "Session mission",
       "createdAt": "2026-07-20T10:54:26.725Z",
-      "updatedAt": "2026-07-20T11:25:01.931Z",
+      "updatedAt": "2026-07-20T11:25:25.776Z",
       "status": "done",
       "workerCount": 6,
       "taskCounts": {
@@ -225,7 +225,7 @@
           "currentStep": null,
           "latestUpdate": "completed",
           "completedSummary": null,
-          "updatedAt": "2026-07-20T11:25:01.931Z"
+          "updatedAt": "2026-07-20T11:25:25.776Z"
         }
       ],
       "timeline": [
@@ -280,6 +280,46 @@
         {
           "id": "session-stop:a2e3a560993214f24:2026-07-20T11:25:01.931Z",
           "at": "2026-07-20T11:25:01.931Z",
+          "kind": "completion",
+          "agent": "Plan:a2e3a56",
+          "detail": "completed",
+          "sourceKey": "session-stop:a2e3a560993214f24"
+        },
+        {
+          "id": "session-stop:a2e3a560993214f24:2026-07-20T11:25:06.513Z",
+          "at": "2026-07-20T11:25:06.513Z",
+          "kind": "completion",
+          "agent": "Plan:a2e3a56",
+          "detail": "completed",
+          "sourceKey": "session-stop:a2e3a560993214f24"
+        },
+        {
+          "id": "session-stop:a2e3a560993214f24:2026-07-20T11:25:14.412Z",
+          "at": "2026-07-20T11:25:14.412Z",
+          "kind": "completion",
+          "agent": "Plan:a2e3a56",
+          "detail": "completed",
+          "sourceKey": "session-stop:a2e3a560993214f24"
+        },
+        {
+          "id": "session-stop:a2e3a560993214f24:2026-07-20T11:25:17.911Z",
+          "at": "2026-07-20T11:25:17.911Z",
+          "kind": "completion",
+          "agent": "Plan:a2e3a56",
+          "detail": "completed",
+          "sourceKey": "session-stop:a2e3a560993214f24"
+        },
+        {
+          "id": "session-stop:a2e3a560993214f24:2026-07-20T11:25:21.667Z",
+          "at": "2026-07-20T11:25:21.667Z",
+          "kind": "completion",
+          "agent": "Plan:a2e3a56",
+          "detail": "completed",
+          "sourceKey": "session-stop:a2e3a560993214f24"
+        },
+        {
+          "id": "session-stop:a2e3a560993214f24:2026-07-20T11:25:25.776Z",
+          "at": "2026-07-20T11:25:25.776Z",
           "kind": "completion",
           "agent": "Plan:a2e3a56",
           "detail": "completed",

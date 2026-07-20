@@ -1,7 +1,7 @@
 {
-  "tool_name": "Bash",
-  "tool_input_preview": "{\"command\":\"cd c:/temp_private/oyvergitsin && curl -sL \\\"https://videos.pexels.com/video-files/36305973/15396588_1920_1080_30fps.mp4\\\" -o public/videos/hero-bg.mp4 && ls -la public/videos/\",\"descripti...",
-  "error": "Exit code 1\ntotal 34044\ndrwxr-xr-x 1 ADESSO+baris-terzioglu ADESSO+baris-terzioglu        0 Jul 20 14:33 .\ndrwxr-xr-x 1 ADESSO+baris-terzioglu ADESSO+baris-terzioglu        0 Jul 20 14:30 ..\n-rw-r--r-- 1 ADESSO+baris-terzioglu ADESSO+baris-terzioglu 12256628 Jul 20 14:34 hero-bg.mp4\n-rw-r--r-- 1 ADESSO+baris-terzioglu ADESSO+baris-terzioglu 22600997 Jul 20 14:33 hero-bg.old.mp4\n/usr/bin/bash: line 1: /c/Users/BARIS-~1/AppData/Local/Temp/claude-be1d-cwd: No such file or directory",
-  "timestamp": "2026-07-20T12:34:45.864Z",
+  "tool_name": "PowerShell",
+  "tool_input_preview": "{\"command\":\"Start-Sleep -Seconds 1\\n$r = Invoke-WebRequest -Uri \\\"http://localhost:4177/\\\" -UseBasicParsing -TimeoutSec 15\\n$html = $r.Content\\n$idx = $html.IndexOf(\\\"<header\\\")\\n$html.Substring($idx,...",
+  "error": "Exit code 1\nInvoke-WebRequest: \r\nLine |\r\n   2 |  $r = Invoke-WebRequest -Uri \"http://localhost:4177/\" -UseBasicParsing …\r\n     |       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n     | Internal Server Error\r\nInvalidOperation: \r\nLine |\r\n   4 |  $idx = $html.IndexOf(\"<header\")\r\n     |  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n     | You cannot call a method on a null-valued expression.\r\nInvalidOperation: \r\nLine |\r\n   5 |  $html.Substring($idx, 600)\r\n     |  ~~~~~~~~~~~~~~~~~~~~~~~~~...",
+  "timestamp": "2026-07-20T12:42:01.702Z",
   "retry_count": 2
 }

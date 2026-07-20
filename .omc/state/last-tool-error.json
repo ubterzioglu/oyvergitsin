@@ -1,0 +1,7 @@
+{
+  "tool_name": "Bash",
+  "tool_input_preview": "{\"command\":\"powershell.exe -NoProfile -Command \\\"Get-Process node -ErrorAction SilentlyContinue | Where-Object { \\\\$_.MainWindowTitle -eq '' -and \\\\$_.Id -in (Get-NetTCPConnection -LocalPort 3411,3412...",
+  "error": "Exit code 1\n/usr/bin/bash: line 1: /c/Users/BARIS-~1/AppData/Local/Temp/claude-08f9-cwd: No such file or directory",
+  "timestamp": "2026-07-20T16:09:35.128Z",
+  "retry_count": 1
+}

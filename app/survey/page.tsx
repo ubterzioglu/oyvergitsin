@@ -182,7 +182,7 @@ export default function SurveyPage() {
 
         <Card
           elevated
-          className="flex w-full max-w-xl min-h-[32rem] flex-col border-t-4 sm:min-h-[30rem]"
+          className="flex w-full max-w-xl min-h-[40rem] flex-col border-t-4"
           style={{ borderTopColor: RAINBOW_ACCENTS[currentQuestion % RAINBOW_ACCENTS.length] }}
         >
           {question.description && (
@@ -192,7 +192,7 @@ export default function SurveyPage() {
             {question.text}
           </h2>
 
-          <div className="flex-1">
+          <div className="flex-1 flex flex-col justify-center">
             {question.type === 'ranking' && question.question_options?.length ? (
               <RankingQuestion
                 options={question.question_options}
@@ -235,6 +235,39 @@ export default function SurveyPage() {
             </Button>
           </div>
         </Card>
+
+        <div className="mt-4 flex w-full max-w-xl flex-wrap justify-center gap-1.5">
+          {questions.map((q, index) => {
+            const isActive = index === currentQuestion
+            const isAnswered = Boolean(answers[q.id])
+            return (
+              <button
+                key={q.id}
+                type="button"
+                onClick={() => setCurrentQuestion(index)}
+                aria-label={`Soru ${index + 1}`}
+                aria-current={isActive}
+                className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs font-semibold transition-all ${
+                  isActive
+                    ? 'text-white shadow-soft ring-2 ring-offset-1'
+                    : isAnswered
+                      ? 'bg-surface-muted text-ink-primary hover:bg-border'
+                      : 'bg-surface-card text-ink-secondary shadow-soft hover:text-ink-primary'
+                }`}
+                style={
+                  isActive
+                    ? {
+                        backgroundColor: RAINBOW_ACCENTS[index % RAINBOW_ACCENTS.length],
+                        ['--tw-ring-color' as string]: RAINBOW_ACCENTS[index % RAINBOW_ACCENTS.length],
+                      }
+                    : undefined
+                }
+              >
+                {index + 1}
+              </button>
+            )
+          })}
+        </div>
       </Container>
     </div>
   )

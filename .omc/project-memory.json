@@ -145,8 +145,8 @@
   "hotPaths": [
     {
       "path": "",
-      "accessCount": 13,
-      "lastAccessed": 1784541635106,
+      "accessCount": 14,
+      "lastAccessed": 1784543005494,
       "type": "directory"
     },
     {
@@ -210,6 +210,12 @@
       "type": "file"
     },
     {
+      "path": "app\\admin\\layout.tsx",
+      "accessCount": 4,
+      "lastAccessed": 1784543263988,
+      "type": "file"
+    },
+    {
       "path": ".dockerignore",
       "accessCount": 3,
       "lastAccessed": 1784535857145,
@@ -228,9 +234,15 @@
       "type": "file"
     },
     {
-      "path": "app\\admin\\layout.tsx",
+      "path": "components\\layout\\Footer.tsx",
       "accessCount": 3,
-      "lastAccessed": 1784541891137,
+      "lastAccessed": 1784542871776,
+      "type": "file"
+    },
+    {
+      "path": "supabase\\migrations\\001_initial_schema.sql",
+      "accessCount": 3,
+      "lastAccessed": 1784543274911,
       "type": "file"
     },
     {
@@ -252,15 +264,33 @@
       "type": "file"
     },
     {
-      "path": "supabase\\migrations\\001_initial_schema.sql",
-      "accessCount": 2,
-      "lastAccessed": 1784537469292,
-      "type": "file"
-    },
-    {
       "path": "app\\manifest.ts",
       "accessCount": 2,
       "lastAccessed": 1784540682321,
+      "type": "file"
+    },
+    {
+      "path": "components\\layout\\Header.tsx",
+      "accessCount": 2,
+      "lastAccessed": 1784543000166,
+      "type": "file"
+    },
+    {
+      "path": "lib\\supabase\\config.ts",
+      "accessCount": 2,
+      "lastAccessed": 1784543002535,
+      "type": "file"
+    },
+    {
+      "path": "package.json",
+      "accessCount": 2,
+      "lastAccessed": 1784543264058,
+      "type": "file"
+    },
+    {
+      "path": "supabase\\migrations\\004_fix_roles_rls_recursion.sql",
+      "accessCount": 2,
+      "lastAccessed": 1784543272434,
       "type": "file"
     },
     {
@@ -273,12 +303,6 @@
       "path": "lib\\supabase\\route.ts",
       "accessCount": 1,
       "lastAccessed": 1784535283061,
-      "type": "file"
-    },
-    {
-      "path": "lib\\supabase\\config.ts",
-      "accessCount": 1,
-      "lastAccessed": 1784535283376,
       "type": "file"
     },
     {
@@ -342,18 +366,6 @@
       "type": "file"
     },
     {
-      "path": "supabase\\migrations\\004_fix_roles_rls_recursion.sql",
-      "accessCount": 1,
-      "lastAccessed": 1784537490544,
-      "type": "file"
-    },
-    {
-      "path": "package.json",
-      "accessCount": 1,
-      "lastAccessed": 1784540948136,
-      "type": "file"
-    },
-    {
       "path": "lib\\parties.ts",
       "accessCount": 1,
       "lastAccessed": 1784541605073,
@@ -390,18 +402,6 @@
       "type": "file"
     },
     {
-      "path": "components\\layout\\Header.tsx",
-      "accessCount": 1,
-      "lastAccessed": 1784541682150,
-      "type": "file"
-    },
-    {
-      "path": "components\\layout\\Footer.tsx",
-      "accessCount": 1,
-      "lastAccessed": 1784541692959,
-      "type": "file"
-    },
-    {
       "path": "app\\consent\\layout.tsx",
       "accessCount": 1,
       "lastAccessed": 1784542075803,
@@ -417,6 +417,24 @@
       "path": "app\\icon.tsx",
       "accessCount": 1,
       "lastAccessed": 1784542637599,
+      "type": "file"
+    },
+    {
+      "path": "lib\\supabase\\client.ts",
+      "accessCount": 1,
+      "lastAccessed": 1784543000638,
+      "type": "file"
+    },
+    {
+      "path": "lib\\supabase\\server.ts",
+      "accessCount": 1,
+      "lastAccessed": 1784543000969,
+      "type": "file"
+    },
+    {
+      "path": "lib\\supabase\\admin.ts",
+      "accessCount": 1,
+      "lastAccessed": 1784543001485,
       "type": "file"
     }
   ],

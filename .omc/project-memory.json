@@ -204,6 +204,12 @@
       "type": "file"
     },
     {
+      "path": ".env.local",
+      "accessCount": 14,
+      "lastAccessed": 1784553305519,
+      "type": "file"
+    },
+    {
       "path": "lib\\supabase\\client.ts",
       "accessCount": 13,
       "lastAccessed": 1784550537880,
@@ -219,12 +225,6 @@
       "path": "supabase\\migrations\\004_fix_roles_rls_recursion.sql",
       "accessCount": 13,
       "lastAccessed": 1784552522051,
-      "type": "file"
-    },
-    {
-      "path": ".env.local",
-      "accessCount": 13,
-      "lastAccessed": 1784553045803,
       "type": "file"
     },
     {

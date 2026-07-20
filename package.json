@@ -20,6 +20,7 @@
     "crypto": "^1.0.1",
     "fast-xml-parser": "^4.5.7",
     "next": "^15.5.20",
+    "nodemailer": "^9.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "recharts": "^2.12.0",
@@ -28,6 +29,7 @@
   },
   "devDependencies": {
     "@types/node": "^20.11.0",
+    "@types/nodemailer": "^8.0.1",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
     "autoprefixer": "^10.4.0",

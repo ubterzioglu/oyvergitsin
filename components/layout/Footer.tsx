@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { siteConfig } from '@/lib/site'
+import { FeedbackButton } from '@/components/feedback/FeedbackButton'
 
 const LEGAL_LINKS = [
   { href: '/legal/privacy-policy', label: 'Gizlilik Politikası' },
@@ -26,6 +27,10 @@ export function Footer() {
             </Link>
           </span>
         ))}
+        <span className="flex items-center gap-x-4">
+          <span className="h-4 w-px bg-white/20" aria-hidden="true" />
+          <FeedbackButton className="underline underline-offset-4 transition-colors hover:text-rainbow-blue" />
+        </span>
       </div>
       <div className="mx-auto mt-4 max-w-6xl border-t border-white/20 px-4 py-1.5 text-center text-[9px] leading-snug text-white/50">
         <span className="font-heading font-semibold text-white/80">{siteConfig.shortName}</span>

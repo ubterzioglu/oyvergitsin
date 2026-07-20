@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-20T11:32:13.964Z",
+  "updatedAt": "2026-07-20T11:33:05.331Z",
   "missions": [
     {
       "id": "session:d662f19c-17bc-4917-a56f-a968b08e4232:none",
@@ -185,15 +185,15 @@
       "name": "none",
       "objective": "Session mission",
       "createdAt": "2026-07-20T11:25:00.761Z",
-      "updatedAt": "2026-07-20T11:30:48.771Z",
-      "status": "running",
+      "updatedAt": "2026-07-20T11:33:05.331Z",
+      "status": "done",
       "workerCount": 1,
       "taskCounts": {
         "total": 1,
         "pending": 0,
         "blocked": 0,
-        "inProgress": 1,
-        "completed": 0,
+        "inProgress": 0,
+        "completed": 1,
         "failed": 0
       },
       "agents": [
@@ -201,11 +201,11 @@
           "name": "security-reviewer:a127eea",
           "role": "security-reviewer",
           "ownership": "a127eea99a506d419",
-          "status": "running",
+          "status": "done",
           "currentStep": null,
-          "latestUpdate": null,
+          "latestUpdate": "completed",
           "completedSummary": null,
-          "updatedAt": "2026-07-20T11:30:48.771Z"
+          "updatedAt": "2026-07-20T11:33:05.331Z"
         }
       ],
       "timeline": [
@@ -232,6 +232,22 @@
           "agent": "security-reviewer:a127eea",
           "detail": "started security-reviewer:a127eea",
           "sourceKey": "session-start:a127eea99a506d419"
+        },
+        {
+          "id": "session-stop:a127eea99a506d419:2026-07-20T11:32:53.252Z",
+          "at": "2026-07-20T11:32:53.252Z",
+          "kind": "completion",
+          "agent": "security-reviewer:a127eea",
+          "detail": "completed",
+          "sourceKey": "session-stop:a127eea99a506d419"
+        },
+        {
+          "id": "session-stop:a127eea99a506d419:2026-07-20T11:33:05.331Z",
+          "at": "2026-07-20T11:33:05.331Z",
+          "kind": "completion",
+          "agent": "security-reviewer:a127eea",
+          "detail": "completed",
+          "sourceKey": "session-stop:a127eea99a506d419"
         }
       ]
     }

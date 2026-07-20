@@ -1,10 +1,29 @@
+import Link from 'next/link'
 import { siteConfig } from '@/lib/site'
+
+const LEGAL_LINKS = [
+  { href: '/legal/privacy-policy', label: 'Gizlilik Politikası' },
+  { href: '/legal/terms-of-use', label: 'Kullanım Şartları' },
+  { href: '/legal/kvkk-disclosure', label: 'KVKK Aydınlatma Metni' },
+  { href: '/legal/cookie-policy', label: 'Çerez Politikası' },
+]
 
 export function Footer() {
   const year = new Date().getFullYear()
 
   return (
     <footer className="border-t border-brand-accent/30 bg-brand-ink text-white/80">
+      <div className="mx-auto flex max-w-6xl flex-wrap justify-center gap-x-4 gap-y-1 px-4 pt-3 text-[11px] text-white/50">
+        {LEGAL_LINKS.map((link) => (
+          <Link
+            key={link.href}
+            href={link.href}
+            className="underline underline-offset-4 transition-colors hover:text-brand-accent"
+          >
+            {link.label}
+          </Link>
+        ))}
+      </div>
       <div className="mx-auto max-w-6xl px-4 py-3 text-center text-[11px] leading-relaxed text-white/50">
         <span className="font-heading font-semibold text-white/80">{siteConfig.shortName}</span>
         {' · '}

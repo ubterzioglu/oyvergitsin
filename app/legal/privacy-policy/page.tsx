@@ -14,7 +14,7 @@ export default function PrivacyPolicyPage() {
 
       <div className="space-y-6 text-ink-secondary">
         <p>
-          Oy Ver Gitsin (&quot;Site&quot;), bağımsız/kişisel bir proje olarak yürütülmektedir; Site&apos;nin
+          oyvergitsin.org (&quot;Site&quot;), bağımsız/kişisel bir proje olarak yürütülmektedir; Site&apos;nin
           arkasında ticari bir şirket bulunmamaktadır. Bu Gizlilik Politikası, Site&apos;yi kullanırken
           hangi verilerin toplandığını, nasıl işlendiğini ve haklarınızın neler olduğunu açıklar.
         </p>

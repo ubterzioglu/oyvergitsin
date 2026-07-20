@@ -4,7 +4,6 @@ import { siteConfig } from '@/lib/site'
 import { Button } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
 import { Container } from '@/components/ui/Container'
-import { Badge } from '@/components/ui/Badge'
 
 export const metadata: Metadata = {
   title: 'Turkiye Siyasi Eslesme Testi',
@@ -35,9 +34,9 @@ const STEPS = [
 ]
 
 const TRUST_SIGNALS = [
-  { title: 'Tamamen Anonim', description: 'Kimliğiniz veya iletişim bilgileriniz talep edilmez.' },
-  { title: 'Tarafsız Algoritma', description: 'Skorlama, herhangi bir partiye avantaj sağlamayan sabit kurallarla çalışır.' },
-  { title: 'Açık Kaynak', description: 'Eşleşme mantığı ve veri kullanımı şeffaf bir şekilde belgelenmiştir.' },
+  { title: 'Tamamen Anonim', description: 'Kimliğiniz veya iletişim bilgileriniz talep edilmez.', icon: '🕶️', accent: '#1B2A4A' },
+  { title: 'Tarafsız Algoritma', description: 'Skorlama, herhangi bir partiye avantaj sağlamayan sabit kurallarla çalışır.', icon: '⚖️', accent: '#2F6F4E' },
+  { title: 'Açık Kaynak', description: 'Eşleşme mantığı ve veri kullanımı şeffaf bir şekilde belgelenmiştir.', icon: '🔓', accent: '#C8A256' },
 ]
 
 const IDEOLOGICAL_AXES = [
@@ -55,29 +54,39 @@ const IDEOLOGICAL_AXES = [
 
 const FAQ_ITEMS = [
   {
-    question: 'Oy Ver Gitsin nedir?',
+    question: 'oyvergitsin.org nedir?',
     answer:
-      'Oy Ver Gitsin, Türkiye\'deki seçmenlerin siyasi görüşlerini kısa ve anonim bir anketle analiz ederek hangi siyasi partiye ne kadar yakın olduklarını gösteren tarafsız bir siyasi eşleşme platformudur.',
+      'oyvergitsin.org, Türkiye\'deki seçmenlerin siyasi görüşlerini kısa ve anonim bir anketle analiz ederek hangi siyasi partiye ne kadar yakın olduklarını gösteren tarafsız bir siyasi eşleşme platformudur.',
+    icon: '❓',
+    accent: '#C8A256',
   },
   {
     question: 'Anket ne kadar sürer?',
     answer:
       '10 ideolojik eksen üzerinden hazırlanmış kısa sorulardan oluşur ve birkaç dakika içinde tamamlanabilir.',
+    icon: '⏱️',
+    accent: '#2F6F4E',
   },
   {
     question: 'Verilerim anonim mi tutuluyor?',
     answer:
       'Evet. Anket tamamen anonimdir; ad, e-posta veya telefon gibi kimliğinizi ortaya çıkaracak herhangi bir bilgi talep edilmez.',
+    icon: '🔒',
+    accent: '#3E6FA6',
   },
   {
     question: 'Eşleşme sonucu nasıl hesaplanıyor?',
     answer:
       'Cevaplarınızdan her ideolojik eksen için bir puan hesaplanır ve bu puanlar Türkiye\'deki siyasi partilerin eksen pozisyonlarıyla karşılaştırılır. Sonuçta her parti için bir benzerlik yüzdesi elde edilir. Algoritma sabit kurallıdır ve herhangi bir partiye avantaj sağlamaz.',
+    icon: '📊',
+    accent: '#1B2A4A',
   },
   {
     question: 'Hangi partiler karşılaştırmaya dahil?',
     answer:
       'AKP, CHP, MHP, İYİ Parti, DEVA, Gelecek Partisi, Saadet Partisi, TİP, Vatan Partisi, Yeşil Sol Parti, Zafer Partisi ve Memleket Partisi dahil olmak üzere Türkiye\'deki başlıca partiler karşılaştırmaya dahildir.',
+    icon: '🤝',
+    accent: '#A6473E',
   },
 ]
 
@@ -117,7 +126,7 @@ export default function Home() {
         <Container className="relative py-24 text-center md:py-32">
           <div className="mx-auto max-w-2xl">
             <h1 className="font-heading text-5xl font-semibold text-white md:text-6xl">
-              Oy Ver Gitsin
+              oyvergitsin.org
             </h1>
             <p className="mt-6 text-xl text-white/70">
               Türkiye Siyasi Eşleşme Platformu
@@ -156,12 +165,30 @@ export default function Home() {
 
       <section className="bg-surface-muted py-20">
         <Container>
-          <div className="mx-auto grid max-w-md grid-cols-1 gap-4">
+          <div className="mx-auto grid max-w-4xl grid-cols-1 gap-6 md:grid-cols-3">
             {TRUST_SIGNALS.map((signal) => (
-              <Badge key={signal.title} className="flex-col items-start gap-1 px-5 py-4 text-left">
-                <span className="font-semibold text-ink-primary">{signal.title}</span>
-                <span className="text-xs text-ink-muted">{signal.description}</span>
-              </Badge>
+              <Card
+                key={signal.title}
+                className="group relative overflow-hidden border border-border transition-all duration-300 hover:-translate-y-0.5 hover:shadow-elevated"
+                style={{ borderTopColor: signal.accent, borderTopWidth: '3px' }}
+              >
+                <div
+                  className="pointer-events-none absolute -right-6 -top-6 h-24 w-24 rounded-full opacity-10 transition-opacity duration-300 group-hover:opacity-20"
+                  style={{ backgroundColor: signal.accent }}
+                />
+                <div className="relative flex items-start gap-4">
+                  <span
+                    className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-lg"
+                    style={{ backgroundColor: `${signal.accent}1A` }}
+                  >
+                    {signal.icon}
+                  </span>
+                  <div>
+                    <h3 className="text-base font-semibold text-ink-primary">{signal.title}</h3>
+                    <p className="mt-1 text-sm text-ink-secondary">{signal.description}</p>
+                  </div>
+                </div>
+              </Card>
             ))}
           </div>
         </Container>
@@ -210,11 +237,29 @@ export default function Home() {
           <h2 className="text-center font-heading text-3xl font-semibold text-ink-primary">
             Sıkça Sorulan Sorular
           </h2>
-          <div className="mx-auto mt-12 max-w-3xl space-y-6">
+          <div className="mx-auto mt-12 max-w-3xl space-y-4">
             {FAQ_ITEMS.map((item) => (
-              <Card key={item.question}>
-                <h3 className="text-base font-semibold text-ink-primary">{item.question}</h3>
-                <p className="mt-2 text-sm text-ink-secondary">{item.answer}</p>
+              <Card
+                key={item.question}
+                className="group relative overflow-hidden border border-border transition-all duration-300 hover:-translate-y-0.5 hover:shadow-elevated"
+                style={{ borderTopColor: item.accent, borderTopWidth: '3px' }}
+              >
+                <div
+                  className="pointer-events-none absolute -right-6 -top-6 h-24 w-24 rounded-full opacity-10 transition-opacity duration-300 group-hover:opacity-20"
+                  style={{ backgroundColor: item.accent }}
+                />
+                <div className="relative flex items-start gap-4">
+                  <span
+                    className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-lg"
+                    style={{ backgroundColor: `${item.accent}1A` }}
+                  >
+                    {item.icon}
+                  </span>
+                  <div>
+                    <h3 className="text-base font-semibold text-ink-primary">{item.question}</h3>
+                    <p className="mt-2 text-sm text-ink-secondary">{item.answer}</p>
+                  </div>
+                </div>
               </Card>
             ))}
           </div>

@@ -9,6 +9,7 @@ const NAV_LINKS = [
   { href: '/admin/axes', label: 'Eksenler' },
   { href: '/admin/questions', label: 'Sorular' },
   { href: '/admin/parties', label: 'Partiler' },
+  { href: '/admin/radar', label: 'Haberler' },
   { href: '/admin/consent', label: 'Onay Metinleri' },
 ]
 

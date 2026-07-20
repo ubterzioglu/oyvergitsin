@@ -14,7 +14,7 @@ export default function TermsOfUsePage() {
 
       <div className="space-y-6 text-ink-secondary">
         <p>
-          Oy Ver Gitsin&apos;i (&quot;Site&quot;) kullanarak aşağıdaki şartları kabul etmiş
+          oyvergitsin.org&apos;u (&quot;Site&quot;) kullanarak aşağıdaki şartları kabul etmiş
           sayılırsınız. Site, bağımsız/kişisel bir proje olarak yürütülmektedir.
         </p>
 

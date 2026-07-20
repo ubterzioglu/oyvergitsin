@@ -375,6 +375,342 @@ export type Database = {
           timestamp?: string
         }
       }
+      news_sources: {
+        Row: {
+          id: string
+          name: string
+          source_type: string
+          endpoint_url: string
+          website_url: string | null
+          language: string | null
+          country: string | null
+          category_default: string | null
+          trust_level: string
+          is_enabled: boolean
+          terms_checked: boolean
+          terms_checked_at: string | null
+          terms_notes: string | null
+          max_items_per_scan: number
+          timeout_ms: number
+          last_success_at: string | null
+          last_error_at: string | null
+          last_error_message: string | null
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          name: string
+          source_type: string
+          endpoint_url: string
+          website_url?: string | null
+          language?: string | null
+          country?: string | null
+          category_default?: string | null
+          trust_level?: string
+          is_enabled?: boolean
+          terms_checked?: boolean
+          terms_checked_at?: string | null
+          terms_notes?: string | null
+          max_items_per_scan?: number
+          timeout_ms?: number
+          last_success_at?: string | null
+          last_error_at?: string | null
+          last_error_message?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          name?: string
+          source_type?: string
+          endpoint_url?: string
+          website_url?: string | null
+          language?: string | null
+          country?: string | null
+          category_default?: string | null
+          trust_level?: string
+          is_enabled?: boolean
+          terms_checked?: boolean
+          terms_checked_at?: string | null
+          terms_notes?: string | null
+          max_items_per_scan?: number
+          timeout_ms?: number
+          last_success_at?: string | null
+          last_error_at?: string | null
+          last_error_message?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+      }
+      news_scan_runs: {
+        Row: {
+          id: string
+          trigger_type: string
+          status: string
+          started_at: string
+          completed_at: string | null
+          started_by: string | null
+          source_count: number
+          fetched_count: number
+          inserted_count: number
+          duplicate_count: number
+          filtered_count: number
+          failed_source_count: number
+          error_message: string | null
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          trigger_type: string
+          status: string
+          started_at?: string
+          completed_at?: string | null
+          started_by?: string | null
+          source_count?: number
+          fetched_count?: number
+          inserted_count?: number
+          duplicate_count?: number
+          filtered_count?: number
+          failed_source_count?: number
+          error_message?: string | null
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          trigger_type?: string
+          status?: string
+          started_at?: string
+          completed_at?: string | null
+          started_by?: string | null
+          source_count?: number
+          fetched_count?: number
+          inserted_count?: number
+          duplicate_count?: number
+          filtered_count?: number
+          failed_source_count?: number
+          error_message?: string | null
+          created_at?: string
+        }
+      }
+      news_candidates: {
+        Row: {
+          id: string
+          source_id: string
+          scan_run_id: string | null
+          source_name: string
+          source_url: string | null
+          original_url: string
+          canonical_url: string
+          title: string
+          normalized_title: string
+          summary: string | null
+          image_source_url: string | null
+          category: string | null
+          language: string | null
+          country: string | null
+          published_at: string | null
+          relevance_score: number
+          relevance_reasons: RelevanceReason[]
+          canonical_url_hash: string
+          content_hash: string
+          review_status: string
+          approved_news_post_id: string | null
+          duplicate_of_candidate_id: string | null
+          reviewed_by: string | null
+          reviewed_at: string | null
+          review_note: string | null
+          raw_payload: Record<string, any>
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          source_id: string
+          scan_run_id?: string | null
+          source_name: string
+          source_url?: string | null
+          original_url: string
+          canonical_url: string
+          title: string
+          normalized_title: string
+          summary?: string | null
+          image_source_url?: string | null
+          category?: string | null
+          language?: string | null
+          country?: string | null
+          published_at?: string | null
+          relevance_score?: number
+          relevance_reasons?: RelevanceReason[]
+          canonical_url_hash: string
+          content_hash: string
+          review_status?: string
+          approved_news_post_id?: string | null
+          duplicate_of_candidate_id?: string | null
+          reviewed_by?: string | null
+          reviewed_at?: string | null
+          review_note?: string | null
+          raw_payload?: Record<string, any>
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          source_id?: string
+          scan_run_id?: string | null
+          source_name?: string
+          source_url?: string | null
+          original_url?: string
+          canonical_url?: string
+          title?: string
+          normalized_title?: string
+          summary?: string | null
+          image_source_url?: string | null
+          category?: string | null
+          language?: string | null
+          country?: string | null
+          published_at?: string | null
+          relevance_score?: number
+          relevance_reasons?: RelevanceReason[]
+          canonical_url_hash?: string
+          content_hash?: string
+          review_status?: string
+          approved_news_post_id?: string | null
+          duplicate_of_candidate_id?: string | null
+          reviewed_by?: string | null
+          reviewed_at?: string | null
+          review_note?: string | null
+          raw_payload?: Record<string, any>
+          created_at?: string
+          updated_at?: string
+        }
+      }
+      news_review_logs: {
+        Row: {
+          id: string
+          candidate_id: string
+          action: string
+          actor_user_id: string | null
+          note: string | null
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          candidate_id: string
+          action: string
+          actor_user_id?: string | null
+          note?: string | null
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          candidate_id?: string
+          action?: string
+          actor_user_id?: string | null
+          note?: string | null
+          created_at?: string
+        }
+      }
+      news_keywords: {
+        Row: {
+          id: string
+          keyword: string
+          language: string
+          category: string | null
+          weight: number
+          is_negative: boolean
+          is_enabled: boolean
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          keyword: string
+          language: string
+          category?: string | null
+          weight?: number
+          is_negative?: boolean
+          is_enabled?: boolean
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          keyword?: string
+          language?: string
+          category?: string | null
+          weight?: number
+          is_negative?: boolean
+          is_enabled?: boolean
+          created_at?: string
+          updated_at?: string
+        }
+      }
+      news_posts: {
+        Row: {
+          id: string
+          title: string
+          summary: string | null
+          source_name: string
+          source_url: string | null
+          original_url: string
+          image_url: string | null
+          category: string | null
+          language: string | null
+          country: string | null
+          published_at: string | null
+          status: string
+          radar_candidate_id: string | null
+          approved_by: string | null
+          approved_at: string | null
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          title: string
+          summary?: string | null
+          source_name: string
+          source_url?: string | null
+          original_url: string
+          image_url?: string | null
+          category?: string | null
+          language?: string | null
+          country?: string | null
+          published_at?: string | null
+          status?: string
+          radar_candidate_id?: string | null
+          approved_by?: string | null
+          approved_at?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          title?: string
+          summary?: string | null
+          source_name?: string
+          source_url?: string | null
+          original_url?: string
+          image_url?: string | null
+          category?: string | null
+          language?: string | null
+          country?: string | null
+          published_at?: string | null
+          status?: string
+          radar_candidate_id?: string | null
+          approved_by?: string | null
+          approved_at?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+      }
     }
   }
+}
+
+export interface RelevanceReason {
+  rule: string
+  value?: string
+  score: number
 }

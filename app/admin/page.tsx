@@ -118,7 +118,7 @@ function AdminGuide() {
         <section>
           <h3 className="font-semibold text-gray-900 mb-1">Site nedir?</h3>
           <p>
-            &quot;Oy Ver Gitsin&quot;, ziyaretçilere bir anket doldurtup cevaplarına göre
+            &quot;oyvergitsin.org&quot;, ziyaretçilere bir anket doldurtup cevaplarına göre
             hangi Türkiye siyasi partisine ne kadar yakın olduklarını gösteren bir
             eşleştirme platformudur. Akış: <strong>Ana sayfa → Onay (consent) →
             Anket → Sonuçlar</strong>. Ziyaretçi anketi bitirdiğinde sistem, cevaplarını

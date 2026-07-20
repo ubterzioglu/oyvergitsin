@@ -1,4 +1,4 @@
-# Oy Ver Gitsin - Türkiye Siyasi Eşleşme Platformu
+# oyvergitsin.org - Türkiye Siyasi Eşleşme Platformu
 
 Full MVP infrastructure for a production-ready political alignment platform using Next.js, Supabase, and TypeScript.
 

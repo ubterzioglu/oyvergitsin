@@ -11,8 +11,8 @@ const config: Config = {
       colors: {
         brand: {
           ink: '#1B2A4A',
-          accent: '#C8A256',
-          'accent-hover': '#B8923E',
+          accent: '#C1272D',
+          'accent-hover': '#A31F24',
         },
         surface: {
           DEFAULT: '#FAFBFC',

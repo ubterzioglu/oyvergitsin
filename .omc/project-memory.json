@@ -145,14 +145,14 @@
   "hotPaths": [
     {
       "path": "app\\page.tsx",
-      "accessCount": 53,
-      "lastAccessed": 1784553197016,
+      "accessCount": 55,
+      "lastAccessed": 1784553674892,
       "type": "file"
     },
     {
       "path": "",
-      "accessCount": 30,
-      "lastAccessed": 1784552290331,
+      "accessCount": 34,
+      "lastAccessed": 1784553691157,
       "type": "directory"
     },
     {
@@ -192,6 +192,12 @@
       "type": "file"
     },
     {
+      "path": "tailwind.config.ts",
+      "accessCount": 15,
+      "lastAccessed": 1784553682753,
+      "type": "file"
+    },
+    {
       "path": "app\\survey\\page.tsx",
       "accessCount": 14,
       "lastAccessed": 1784547640585,
@@ -225,12 +231,6 @@
       "path": "supabase\\migrations\\004_fix_roles_rls_recursion.sql",
       "accessCount": 13,
       "lastAccessed": 1784552522051,
-      "type": "file"
-    },
-    {
-      "path": "tailwind.config.ts",
-      "accessCount": 13,
-      "lastAccessed": 1784553494156,
       "type": "file"
     },
     {
@@ -295,8 +295,8 @@
     },
     {
       "path": "app\\globals.css",
-      "accessCount": 8,
-      "lastAccessed": 1784548175652,
+      "accessCount": 9,
+      "lastAccessed": 1784553653839,
       "type": "file"
     },
     {

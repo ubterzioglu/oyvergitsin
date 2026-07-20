@@ -1,7 +1,7 @@
 {
   "tool_name": "Bash",
-  "tool_input_preview": "{\"command\":\"curl -s -i -X POST https://oyvergitsin.org/api/sessions -H \\\"Content-Type: application/json\\\" -d '{\\\"isGuest\\\":true}' 2>&1 | head -30\",\"description\":\"Test live session creation endpoint\"}",
-  "error": "Exit code 1\nHTTP/1.1 200 OK\r\nAlt-Svc: h3=\":443\"; ma=2592000\r\nContent-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://www.clarity.ms; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://*.supabase.co https://*.clarity.ms; frame-ancestors 'none'\r\nContent-Type: application/json\r\nDate: Mon, 20 Jul 2026 13:18:04 GMT\r\nPermissions-Policy: camera=(), microphone=(), geolocation=()\r\nReferrer-Policy: strict-origin-w...",
-  "timestamp": "2026-07-20T13:18:03.216Z",
-  "retry_count": 3
+  "tool_input_preview": "{\"command\":\"cd \\\"c:\\\\temp_private\\\\oyvergitsin\\\" && npx tsc --noEmit -p tsconfig.json 2>&1 | tail -30\",\"timeout\":120000,\"description\":\"Type-check the project\"}",
+  "error": "Exit code 1\n/usr/bin/bash: line 1: /c/Users/BARIS-~1/AppData/Local/Temp/claude-61d8-cwd: No such file or directory",
+  "timestamp": "2026-07-20T13:21:44.199Z",
+  "retry_count": 2
 }

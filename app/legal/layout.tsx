@@ -21,7 +21,7 @@ export default function LegalLayout({
         <Card elevated>
           {children}
           <div className="mt-8 border-t border-border pt-4 text-sm">
-            <Link href="/" className="text-brand-accent underline underline-offset-4 hover:text-brand-accent-hover">
+            <Link href="/" className="text-rainbow-blue underline underline-offset-4 hover:text-rainbow-blue-hover">
               Ana sayfaya dön
             </Link>
           </div>

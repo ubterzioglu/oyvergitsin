@@ -29,7 +29,7 @@ export default function KvkkDisclosurePage() {
             sıfatıyla Site&apos;yi işleten kişidir. İletişim için:{' '}
             <a
               href="mailto:supabase@oyvergitsin.org"
-              className="text-brand-accent underline underline-offset-4 hover:text-brand-accent-hover"
+              className="text-rainbow-blue underline underline-offset-4 hover:text-rainbow-blue-hover"
             >
               supabase@oyvergitsin.org
             </a>
@@ -105,7 +105,7 @@ export default function KvkkDisclosurePage() {
             haklarına sahipsiniz. Bu haklarınızı kullanmak için{' '}
             <a
               href="mailto:supabase@oyvergitsin.org"
-              className="text-brand-accent underline underline-offset-4 hover:text-brand-accent-hover"
+              className="text-rainbow-blue underline underline-offset-4 hover:text-rainbow-blue-hover"
             >
               supabase@oyvergitsin.org
             </a>{' '}

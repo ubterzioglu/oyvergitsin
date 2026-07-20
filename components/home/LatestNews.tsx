@@ -59,7 +59,7 @@ export async function LatestNews() {
   }
 
   return (
-    <section className="bg-surface py-20">
+    <section className="bg-rainbow-blue-tint py-20">
       <Container>
         <h2 className="text-center font-heading text-3xl font-semibold text-ink-primary">
           Son Haberler
@@ -71,7 +71,7 @@ export async function LatestNews() {
                 href={post.original_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-base font-semibold text-ink-primary hover:text-brand-accent"
+                className="text-base font-semibold text-ink-primary hover:text-rainbow-blue"
               >
                 {post.title}
               </a>

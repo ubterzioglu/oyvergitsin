@@ -64,7 +64,7 @@ export default function PrivacyPolicyPage() {
             anonim şekilde kaydedebilir. Detaylar için{' '}
             <a
               href="/legal/cookie-policy"
-              className="text-brand-accent underline underline-offset-4 hover:text-brand-accent-hover"
+              className="text-rainbow-blue underline underline-offset-4 hover:text-rainbow-blue-hover"
             >
               Çerez Politikası
             </a>{' '}
@@ -92,7 +92,7 @@ export default function PrivacyPolicyPage() {
             Gizlilikle ilgili sorularınız için{' '}
             <a
               href="mailto:supabase@oyvergitsin.org"
-              className="text-brand-accent underline underline-offset-4 hover:text-brand-accent-hover"
+              className="text-rainbow-blue underline underline-offset-4 hover:text-rainbow-blue-hover"
             >
               supabase@oyvergitsin.org
             </a>{' '}

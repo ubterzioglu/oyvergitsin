@@ -177,7 +177,7 @@ export default function SurveyPage() {
                 onClick={() => handleAnswer(option.value)}
                 className={`w-full rounded-lg border-2 p-4 text-left transition-all ${
                   answers[question.id] === option.value
-                    ? 'border-brand-accent bg-surface-muted'
+                    ? 'border-rainbow-blue bg-surface-muted'
                     : 'border-border hover:border-border-strong'
                 }`}
               >

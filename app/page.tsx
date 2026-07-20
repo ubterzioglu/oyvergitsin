@@ -111,7 +111,7 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqStructuredData) }}
       />
-      <section className="relative overflow-hidden bg-brand-ink">
+      <section className="relative overflow-hidden bg-rainbow-blue">
         <video
           className="absolute inset-0 h-full w-full object-cover motion-reduce:hidden"
           autoPlay
@@ -125,13 +125,13 @@ export default function Home() {
         </video>
         <Container className="relative py-24 md:py-32">
           <div className="mx-auto max-w-2xl rounded-[1.75rem] border border-white/15 bg-white/10 p-8 text-center shadow-[0_8px_32px_rgba(0,0,0,0.25)] backdrop-blur-xl backdrop-saturate-150 md:p-14">
-            <h1 className="font-heading text-5xl font-semibold text-brand-ink md:text-6xl">
+            <h1 className="font-heading text-5xl font-semibold text-ink-primary md:text-6xl">
               oyvergitsin.org
             </h1>
-            <p className="mt-6 text-xl text-brand-ink/80">
+            <p className="mt-6 text-xl text-white/80">
               Türkiye Siyasi Eşleşme Platformu
             </p>
-            <p className="mt-4 text-xl text-brand-ink/65">
+            <p className="mt-4 text-xl text-white/65">
               Siyasi görüşlerinizi anonim ve kısa bir anketle analiz edin; tarafsız bir
               eşleşme mantığıyla size en yakın partileri keşfedin.
             </p>
@@ -152,7 +152,7 @@ export default function Home() {
           <div className="mt-12 grid gap-6 md:grid-cols-3">
             {STEPS.map((step) => (
               <Card key={step.number}>
-                <span className="font-heading text-3xl font-semibold text-brand-accent">
+                <span className="font-heading text-3xl font-semibold text-rainbow-blue">
                   {step.number}
                 </span>
                 <h3 className="mt-4 text-lg font-semibold text-ink-primary">{step.title}</h3>
@@ -268,7 +268,7 @@ export default function Home() {
         </Container>
       </section>
 
-      <section className="bg-brand-ink py-16">
+      <section className="bg-rainbow-blue py-16">
         <Container className="text-center">
           <h2 className="font-heading text-2xl font-semibold text-white">
             Siyasi duruşunuzu birkaç dakikada keşfedin

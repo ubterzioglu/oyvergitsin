@@ -1,13 +1,9 @@
 import type { Metadata, Viewport } from 'next'
-import { Inter, Source_Serif_4 } from 'next/font/google'
 import Script from 'next/script'
 import { getSiteUrl, siteConfig } from '@/lib/site'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import './globals.css'
-
-const inter = Inter({ subsets: ['latin'], variable: '--font-body' })
-const sourceSerif = Source_Serif_4({ subsets: ['latin'], variable: '--font-heading' })
 
 export const viewport: Viewport = {
   themeColor: siteConfig.themeColor,
@@ -134,7 +130,7 @@ export default function RootLayout({
 
   return (
     <html lang="tr">
-      <body className={`${inter.variable} ${sourceSerif.variable} font-body`}>
+      <body className="font-body">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}

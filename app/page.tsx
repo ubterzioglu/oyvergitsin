@@ -41,16 +41,16 @@ const TRUST_SIGNALS = [
 ]
 
 const IDEOLOGICAL_AXES = [
-  { name: 'Ekonomi: Piyasa vs Devlet', description: 'Ekonomik kararların piyasa mekanizmaları mı yoksa devlet müdahalesi mi ile yönetilmesi gerektiği' },
-  { name: 'Gelir Dağılımı', description: 'Gelir ve servetin dağılımı ile ilgili bakış açısı' },
-  { name: 'Sivil Özgürlükler', description: 'Bireysel özgürlüklerin devlet otoritesi ile dengesi' },
-  { name: 'Güvenlik ve Devlet', description: 'Milli güvenlik öncelikleri ve devletin rolü' },
-  { name: 'Sekülerizm', description: 'Din ve devlet ilişkisi' },
-  { name: 'Kimlik ve Göç', description: 'Ulusal kimlik ve göç politikaları' },
-  { name: 'Dış Politika', description: 'Uluslararası ilişkiler ve dış politika yaklaşımı' },
-  { name: 'AB İlişkileri', description: 'Avrupa Birliği ile ilişkiler ve uyum süreci' },
-  { name: 'Eğitim ve Sosyal Politika', description: 'Eğitim sistemi ve sosyal politikalar' },
-  { name: 'Çevre ve Kalkınma', description: 'Çevre koruma ve ekonomik kalkınma dengesi' },
+  { name: 'Ekonomi: Piyasa vs Devlet', description: 'Ekonomik kararların piyasa mekanizmaları mı yoksa devlet müdahalesi mi ile yönetilmesi gerektiği', icon: '📈', accent: '#C8A256' },
+  { name: 'Gelir Dağılımı', description: 'Gelir ve servetin dağılımı ile ilgili bakış açısı', icon: '⚖️', accent: '#2F6F4E' },
+  { name: 'Sivil Özgürlükler', description: 'Bireysel özgürlüklerin devlet otoritesi ile dengesi', icon: '🕊️', accent: '#3E6FA6' },
+  { name: 'Güvenlik ve Devlet', description: 'Milli güvenlik öncelikleri ve devletin rolü', icon: '🛡️', accent: '#1B2A4A' },
+  { name: 'Sekülerizm', description: 'Din ve devlet ilişkisi', icon: '🏛️', accent: '#8B5E3C' },
+  { name: 'Kimlik ve Göç', description: 'Ulusal kimlik ve göç politikaları', icon: '🌍', accent: '#A6473E' },
+  { name: 'Dış Politika', description: 'Uluslararası ilişkiler ve dış politika yaklaşımı', icon: '🤝', accent: '#3E6FA6' },
+  { name: 'AB İlişkileri', description: 'Avrupa Birliği ile ilişkiler ve uyum süreci', icon: '🇪🇺', accent: '#2F6F4E' },
+  { name: 'Eğitim ve Sosyal Politika', description: 'Eğitim sistemi ve sosyal politikalar', icon: '🎓', accent: '#C8A256' },
+  { name: 'Çevre ve Kalkınma', description: 'Çevre koruma ve ekonomik kalkınma dengesi', icon: '🌱', accent: '#2F6F4E' },
 ]
 
 const FAQ_ITEMS = [
@@ -175,9 +175,27 @@ export default function Home() {
           </p>
           <div className="mt-12 grid gap-4 md:grid-cols-2">
             {IDEOLOGICAL_AXES.map((axis) => (
-              <Card key={axis.name}>
-                <h3 className="text-base font-semibold text-ink-primary">{axis.name}</h3>
-                <p className="mt-1 text-sm text-ink-secondary">{axis.description}</p>
+              <Card
+                key={axis.name}
+                className="group relative overflow-hidden border border-border transition-all duration-300 hover:-translate-y-0.5 hover:shadow-elevated"
+                style={{ borderTopColor: axis.accent, borderTopWidth: '3px' }}
+              >
+                <div
+                  className="pointer-events-none absolute -right-6 -top-6 h-24 w-24 rounded-full opacity-10 transition-opacity duration-300 group-hover:opacity-20"
+                  style={{ backgroundColor: axis.accent }}
+                />
+                <div className="relative flex items-start gap-4">
+                  <span
+                    className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-lg"
+                    style={{ backgroundColor: `${axis.accent}1A` }}
+                  >
+                    {axis.icon}
+                  </span>
+                  <div>
+                    <h3 className="text-base font-semibold text-ink-primary">{axis.name}</h3>
+                    <p className="mt-1 text-sm text-ink-secondary">{axis.description}</p>
+                  </div>
+                </div>
               </Card>
             ))}
           </div>

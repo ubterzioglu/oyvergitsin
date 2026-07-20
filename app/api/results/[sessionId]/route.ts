@@ -1,13 +1,30 @@
 import { NextResponse } from 'next/server'
+import { z } from 'zod'
 import { getRouteClient } from '@/lib/supabase/route'
+import { assertSessionOwnership } from '@/lib/session-ownership'
+
+const ParamsSchema = z.object({ sessionId: z.string().uuid() })
 
 export async function GET(
   request: Request,
   { params }: { params: Promise<{ sessionId: string }> }
 ) {
   try {
+    const resolvedParams = await params
+    const parsed = ParamsSchema.safeParse(resolvedParams)
+
+    if (!parsed.success) {
+      return NextResponse.json({ error: 'Geçersiz oturum kimliği.' }, { status: 400 })
+    }
+
+    const { sessionId } = parsed.data
+
+    const owns = await assertSessionOwnership(sessionId)
+    if (!owns) {
+      return NextResponse.json({ error: 'Yetkisiz istek.' }, { status: 403 })
+    }
+
     const supabase = getRouteClient()
-    const { sessionId } = await params
 
     // Try to get existing result snapshot
     const { data: snapshot, error: snapshotError } = await supabase
@@ -30,7 +47,6 @@ export async function GET(
     return NextResponse.json(results)
   } catch (error) {
     console.error('Results fetch error:', error)
-    const message = error instanceof Error ? error.message : 'Failed to fetch results'
-    return NextResponse.json({ error: message }, { status: 500 })
+    return NextResponse.json({ error: 'Sonuçlar alınamadı. Lütfen tekrar deneyin.' }, { status: 500 })
   }
 }

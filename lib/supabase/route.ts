@@ -38,9 +38,9 @@ export function getPublicServerClient() {
 export function getRouteClient() {
   assertBaseConfig()
 
-  if (supabaseServiceKey) {
-    return createSupabaseClient(supabaseServiceKey)
+  if (!supabaseServiceKey) {
+    throw new Error('SUPABASE_SERVICE_KEY is not configured')
   }
 
-  return getPublicServerClient()
+  return createSupabaseClient(supabaseServiceKey)
 }

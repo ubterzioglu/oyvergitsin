@@ -1,21 +1,35 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getPublicServerClient } from '@/lib/supabase/route'
+import { getRouteClient } from '@/lib/supabase/route'
+import { SubmitAnswersSchema } from '@/lib/validation/survey'
+import { assertSessionOwnership } from '@/lib/session-ownership'
+import { isRateLimited, getClientIp } from '@/lib/rate-limit'
 
 export async function POST(request: NextRequest) {
   try {
-    const supabase = getPublicServerClient()
-    const body = await request.json()
-    const { sessionId, answers } = body
-
-    if (!sessionId || !answers || !Array.isArray(answers)) {
-      return NextResponse.json({ error: 'Invalid request' }, { status: 400 })
+    const clientIp = getClientIp(request)
+    if (isRateLimited(`answers:${clientIp}`, 30, 60 * 1000)) {
+      return NextResponse.json({ error: 'Çok fazla istek. Lütfen biraz sonra tekrar deneyin.' }, { status: 429 })
     }
 
-    // Insert all answers
+    const body = await request.json().catch(() => ({}))
+    const parsed = SubmitAnswersSchema.safeParse(body)
+
+    if (!parsed.success) {
+      return NextResponse.json({ error: 'Geçersiz istek.' }, { status: 400 })
+    }
+
+    const { sessionId, answers } = parsed.data
+
+    const owns = await assertSessionOwnership(sessionId)
+    if (!owns) {
+      return NextResponse.json({ error: 'Yetkisiz istek.' }, { status: 403 })
+    }
+
+    const supabase = getRouteClient()
     const { data, error } = await supabase
       .from('answers')
       .insert(
-        answers.map((answer: any) => ({
+        answers.map((answer) => ({
           session_id: sessionId,
           question_id: answer.questionId,
           answer_value: answer.value
@@ -28,7 +42,6 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ success: true, count: data.length })
   } catch (error) {
     console.error('Answers submission error:', error)
-    const message = error instanceof Error ? error.message : 'Failed to submit answers'
-    return NextResponse.json({ error: message }, { status: 500 })
+    return NextResponse.json({ error: 'Cevaplar kaydedilemedi. Lütfen tekrar deneyin.' }, { status: 500 })
   }
 }

@@ -1,16 +1,32 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getRouteClient } from '@/lib/supabase/route'
 import { calculateResults } from '@/lib/scoring/engine'
+import { CompleteSessionSchema } from '@/lib/validation/survey'
+import { assertSessionOwnership } from '@/lib/session-ownership'
+import { isRateLimited, getClientIp } from '@/lib/rate-limit'
 
 export async function POST(request: NextRequest) {
   try {
-    const supabase = getRouteClient()
-    const body = await request.json()
-    const { sessionId } = body
-
-    if (!sessionId) {
-      return NextResponse.json({ error: 'Session ID required' }, { status: 400 })
+    const clientIp = getClientIp(request)
+    if (isRateLimited(`complete:${clientIp}`, 10, 60 * 1000)) {
+      return NextResponse.json({ error: 'Çok fazla istek. Lütfen biraz sonra tekrar deneyin.' }, { status: 429 })
     }
+
+    const body = await request.json().catch(() => ({}))
+    const parsed = CompleteSessionSchema.safeParse(body)
+
+    if (!parsed.success) {
+      return NextResponse.json({ error: 'Geçersiz istek.' }, { status: 400 })
+    }
+
+    const { sessionId } = parsed.data
+
+    const owns = await assertSessionOwnership(sessionId)
+    if (!owns) {
+      return NextResponse.json({ error: 'Yetkisiz istek.' }, { status: 403 })
+    }
+
+    const supabase = getRouteClient()
 
     // Mark session as completed
     const { error: sessionError } = await supabase
@@ -37,7 +53,6 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(results)
   } catch (error) {
     console.error('Complete session error:', error)
-    const message = error instanceof Error ? error.message : 'Failed to complete session'
-    return NextResponse.json({ error: message }, { status: 500 })
+    return NextResponse.json({ error: 'Anket tamamlanamadı. Lütfen tekrar deneyin.' }, { status: 500 })
   }
 }

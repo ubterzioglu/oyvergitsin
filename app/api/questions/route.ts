@@ -24,7 +24,6 @@ export async function GET() {
     })
   } catch (error) {
     console.error('Questions fetch error:', error)
-    const message = error instanceof Error ? error.message : 'Failed to fetch questions'
-    return NextResponse.json({ error: message }, { status: 500 })
+    return NextResponse.json({ error: 'Sorular yüklenemedi. Lütfen tekrar deneyin.' }, { status: 500 })
   }
 }

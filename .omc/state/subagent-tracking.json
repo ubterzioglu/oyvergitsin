@@ -14,11 +14,27 @@
       "agent_type": "general-purpose",
       "started_at": "2026-07-20T11:45:53.131Z",
       "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-07-20T11:52:38.195Z",
+      "duration_ms": 405064
+    },
+    {
+      "agent_id": "acaf3ef079cd16df6",
+      "agent_type": "general-purpose",
+      "started_at": "2026-07-20T11:52:49.792Z",
+      "parent_mode": "none",
+      "status": "running"
+    },
+    {
+      "agent_id": "acde8783809c21a00",
+      "agent_type": "Explore",
+      "started_at": "2026-07-20T11:53:07.988Z",
+      "parent_mode": "none",
       "status": "running"
     }
   ],
-  "total_spawned": 2,
-  "total_completed": 9,
+  "total_spawned": 4,
+  "total_completed": 26,
   "total_failed": 0,
-  "last_updated": "2026-07-20T11:45:53.245Z"
+  "last_updated": "2026-07-20T11:53:08.095Z"
 }

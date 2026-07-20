@@ -101,33 +101,36 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqStructuredData) }}
       />
-      <section className="bg-brand-ink">
-        <Container className="grid items-center gap-12 py-24 md:grid-cols-2 md:py-32">
-          <div className="text-center md:text-left">
+      <section className="relative overflow-hidden bg-brand-ink">
+        <video
+          className="absolute inset-0 h-full w-full object-cover motion-reduce:hidden"
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster="/logo.png"
+          aria-hidden="true"
+        >
+          <source src="/videos/hero-bg.mp4" type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-brand-ink/70" aria-hidden="true" />
+        <Container className="relative py-24 text-center md:py-32">
+          <div className="mx-auto max-w-2xl">
             <h1 className="font-heading text-5xl font-semibold text-white md:text-6xl">
               Oy Ver Gitsin
             </h1>
             <p className="mt-6 text-xl text-white/70">
               Türkiye Siyasi Eşleşme Platformu
             </p>
-            <p className="mt-4 max-w-xl text-white/60">
+            <p className="mt-4 text-white/60">
               Siyasi görüşlerinizi anonim ve kısa bir anketle analiz edin; tarafsız bir
               eşleşme mantığıyla size en yakın partileri keşfedin.
             </p>
-            <div className="mt-10 flex justify-center gap-4 md:justify-start">
+            <div className="mt-10 flex justify-center gap-4">
               <Link href="/consent">
                 <Button variant="primary">Anketi Başlat</Button>
               </Link>
             </div>
-          </div>
-          <div className="hidden md:block" aria-hidden="true">
-            <svg viewBox="0 0 400 400" className="mx-auto w-full max-w-sm text-brand-accent/40">
-              <circle cx="200" cy="200" r="160" fill="none" stroke="currentColor" strokeWidth="1" />
-              <circle cx="200" cy="200" r="110" fill="none" stroke="currentColor" strokeWidth="1" />
-              <circle cx="200" cy="200" r="60" fill="none" stroke="currentColor" strokeWidth="1" />
-              <line x1="200" y1="40" x2="200" y2="360" stroke="currentColor" strokeWidth="1" />
-              <line x1="40" y1="200" x2="360" y2="200" stroke="currentColor" strokeWidth="1" />
-            </svg>
           </div>
         </Container>
       </section>

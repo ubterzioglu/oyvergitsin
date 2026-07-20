@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import Link from 'next/link'
 import { supabase } from '@/lib/supabase/client'
 
 interface Stats {
@@ -79,27 +80,27 @@ export default function AdminDashboard() {
       <div className="mt-8 bg-white rounded-lg shadow-md p-6">
         <h2 className="text-xl font-bold mb-4">Hızlı İşlemler</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <a
+          <Link
             href="/admin/axes"
             className="block p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-all"
           >
             <h3 className="font-semibold text-blue-900">Eksenleri Yönet</h3>
             <p className="text-sm text-blue-700">İdeolojik eksenleri düzenle</p>
-          </a>
-          <a
+          </Link>
+          <Link
             href="/admin/questions"
             className="block p-4 bg-green-50 rounded-lg hover:bg-green-100 transition-all"
           >
             <h3 className="font-semibold text-green-900">Soruları Yönet</h3>
             <p className="text-sm text-green-700">Anket sorularını düzenle</p>
-          </a>
-          <a
+          </Link>
+          <Link
             href="/admin/parties"
             className="block p-4 bg-purple-50 rounded-lg hover:bg-purple-100 transition-all"
           >
             <h3 className="font-semibold text-purple-900">Partileri Yönet</h3>
             <p className="text-sm text-purple-700">Parti bilgilerini düzenle</p>
-          </a>
+          </Link>
         </div>
       </div>
 
@@ -130,12 +131,12 @@ function AdminGuide() {
           <h3 className="font-semibold text-gray-900 mb-1">Veri modeli nasıl işliyor?</h3>
           <ol className="list-decimal list-inside space-y-1">
             <li>
-              <strong>Eksenler</strong> (<a href="/admin/axes" className="text-blue-600 hover:underline">Eksenler</a>) —
+              <strong>Eksenler</strong> (<Link href="/admin/axes" className="text-blue-600 hover:underline">Eksenler</Link>) —
               &quot;Ekonomi: Piyasa vs Devlet&quot;, &quot;Sekülerizm&quot; gibi 10 ideolojik
               boyut. Her ekseni -100 ile +100 arası bir skor temsil eder.
             </li>
             <li>
-              <strong>Sorular ve seçenekler</strong> (<a href="/admin/questions" className="text-blue-600 hover:underline">Sorular</a>) —
+              <strong>Sorular ve seçenekler</strong> (<Link href="/admin/questions" className="text-blue-600 hover:underline">Sorular</Link>) —
               ziyaretçiye sorulan sorular ve her sorunun cevap seçenekleri.
               Bir soruyu düzenlerken seçenekleri de aynı ekrandan yönetirsin.
             </li>
@@ -147,7 +148,7 @@ function AdminGuide() {
               [-100, 100] aralığına sıkıştırılır.
             </li>
             <li>
-              <strong>Partiler</strong> (<a href="/admin/parties" className="text-blue-600 hover:underline">Partiler</a>) —
+              <strong>Partiler</strong> (<Link href="/admin/parties" className="text-blue-600 hover:underline">Partiler</Link>) —
               her partinin her eksendeki kendi pozisyonu (-100..100) tanımlıdır.
               Sonuç ekranında, kullanıcının eksen skorları ile partilerin eksen
               skorları arasındaki fark üzerinden bir benzerlik yüzdesi hesaplanıp

@@ -1,7 +1,7 @@
 {
   "tool_name": "Bash",
-  "tool_input_preview": "{\"command\":\"curl -sIL \\\"https://www.pexels.com/download/video/28561463/\\\" -A \\\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36\\\" 2>&1 | head...",
-  "error": "Exit code 1\nHTTP/1.1 302 Found\r\nDate: Mon, 20 Jul 2026 11:50:16 GMT\r\nContent-Type: text/html; charset=utf-8\r\nConnection: keep-alive\r\nLocation: https://videos.pexels.com/video-files/28561463/12421439_3840_2160_30fps.mp4\r\nset-cookie: __cf_bm=EcZOGswV5Ht4P08KcYp5wbTCdsQ7oLtmUvCJl5t1RpE-1784548216.381302-1.0.1.1-y8SsoF71FB4LAGDMRhuJPswrvcuIqJWIN5j8kGZB5Ox53pXgCs112ttaxO5eVyF50zugnMiF9l5M7QSfbYyYiXgbx8DkYWHRvYcJc3EBt0oyXCjHBmx9cEckvWmHP6CJ; HttpOnly; SameSite=None; Secure; Path=/; Domain=pexels.com; ...",
-  "timestamp": "2026-07-20T11:50:16.440Z",
-  "retry_count": 4
+  "tool_input_preview": "{\"command\":\"gh api repos/ubterzioglu/corteqsmvp/contents/supabase/functions/radar-news-scan/lib/types.ts --jq .content | base64 -d\",\"description\":\"Fetch types.ts\"}",
+  "error": "Exit code 1\nexport type RadarSourceType = \"rss\" | \"atom\" | \"gdelt\" | \"json_api\";\nexport type RadarTrustLevel = \"official\" | \"high\" | \"standard\" | \"discovery_only\";\nexport type RadarReviewStatus = \"pending\" | \"approved\" | \"rejected\" | \"duplicate\" | \"archived\";\nexport type RadarTriggerType = \"cron\" | \"manual\" | \"retry\";\nexport type RadarScanStatus = \"running\" | \"completed\" | \"partial\" | \"failed\";\n\nexport type RadarNewsSource = {\n  id: string;\n  name: string;\n  source_type: RadarSourceType;\n  adapt...",
+  "timestamp": "2026-07-20T11:54:43.641Z",
+  "retry_count": 9
 }

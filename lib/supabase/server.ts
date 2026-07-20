@@ -12,6 +12,21 @@ export async function createClient() {
         get(name: string) {
           return cookieStore.get(name)?.value
         },
+        set(name: string, value: string, options: CookieOptions) {
+          try {
+            cookieStore.set({ name, value, ...options })
+          } catch {
+            // Called from a Server Component without a mutable cookie store; safe to ignore
+            // because the middleware refreshes the session on every request.
+          }
+        },
+        remove(name: string, options: CookieOptions) {
+          try {
+            cookieStore.set({ name, value: '', ...options })
+          } catch {
+            // Same as above.
+          }
+        },
       },
     }
   )

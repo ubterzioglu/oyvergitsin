@@ -12,9 +12,6 @@ export function Header() {
           <Link href="/consent" className="transition-colors hover:text-white">
             Anketi Başlat
           </Link>
-          <Link href="/admin" className="transition-colors hover:text-white">
-            Yönetim Paneli
-          </Link>
         </nav>
       </div>
     </header>

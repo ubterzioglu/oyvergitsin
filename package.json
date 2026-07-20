@@ -11,6 +11,7 @@
     "db:sql": "node scripts/build-manual-sql.js",
     "db:sql:print": "node scripts/direct-migrate.js",
     "db:seed": "node scripts/seed.js",
+    "db:seed:admin": "node scripts/seed-admin.js",
     "db:reset": "supabase db reset"
   },
   "dependencies": {

@@ -6,6 +6,9 @@ import { Button } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
 import { Container } from '@/components/ui/Container'
 import { ProgressBar } from '@/components/ui/ProgressBar'
+import { RankingQuestion } from '@/components/survey/RankingQuestion'
+
+const RAINBOW_ACCENTS = ['#F5C518', '#F5821F', '#E8385C', '#7B4FE0', '#1E9BE0', '#3CB043']
 
 interface Question {
   id: string
@@ -40,6 +43,21 @@ export default function SurveyPage() {
 
     fetchQuestions()
   }, [router])
+
+  useEffect(() => {
+    const rankingDefaults: Record<string, string> = {}
+    questions.forEach((question) => {
+      if (question.type === 'ranking' && question.question_options?.length) {
+        rankingDefaults[question.id] = question.question_options
+          .map((option) => option.value)
+          .join(',')
+      }
+    })
+
+    if (Object.keys(rankingDefaults).length > 0) {
+      setAnswers((prev) => ({ ...rankingDefaults, ...prev }))
+    }
+  }, [questions])
 
   const fetchQuestions = async () => {
     try {
@@ -156,37 +174,55 @@ export default function SurveyPage() {
   const progress = ((currentQuestion + 1) / questions.length) * 100
 
   return (
-    <div className="min-h-screen bg-surface px-4 py-8">
-      <Container size="md">
-        <div className="mb-8">
+    <div className="min-h-screen bg-surface px-4 py-4 sm:py-6">
+      <Container size="md" className="flex flex-col items-center">
+        <div className="mb-4 w-full max-w-xl sm:mb-5">
           <ProgressBar progress={progress} label={`Soru ${currentQuestion + 1} / ${questions.length}`} />
         </div>
 
-        <Card elevated>
+        <Card
+          elevated
+          className="flex w-full max-w-xl min-h-[32rem] flex-col border-t-4 sm:min-h-[30rem]"
+          style={{ borderTopColor: RAINBOW_ACCENTS[currentQuestion % RAINBOW_ACCENTS.length] }}
+        >
           {question.description && (
-            <p className="mb-4 text-ink-secondary">{question.description}</p>
+            <p className="mb-3 text-ink-secondary">{question.description}</p>
           )}
-          <h2 className="mb-6 font-heading text-2xl font-semibold text-ink-primary">
+          <h2 className="mb-5 font-heading text-2xl font-semibold text-ink-primary">
             {question.text}
           </h2>
 
-          <div className="mb-8 space-y-3">
-            {question.question_options?.map((option) => (
-              <button
-                key={option.id}
-                onClick={() => handleAnswer(option.value)}
-                className={`w-full rounded-lg border-2 p-4 text-left transition-all ${
-                  answers[question.id] === option.value
-                    ? 'border-rainbow-blue bg-surface-muted'
-                    : 'border-border hover:border-border-strong'
-                }`}
-              >
-                {option.text}
-              </button>
-            ))}
+          <div className="flex-1">
+            {question.type === 'ranking' && question.question_options?.length ? (
+              <RankingQuestion
+                options={question.question_options}
+                order={answers[question.id] ? answers[question.id].split(',') : []}
+                onChange={(order) => handleAnswer(order.join(','))}
+              />
+            ) : question.type === 'ranking' ? (
+              <p className="mb-8 text-sm text-ink-secondary">
+                Bu soru için sıralanacak seçenek tanımlanmamış.
+              </p>
+            ) : (
+              <div className="mb-8 space-y-3">
+                {question.question_options?.map((option) => (
+                  <button
+                    key={option.id}
+                    onClick={() => handleAnswer(option.value)}
+                    className={`w-full rounded-lg border-2 p-4 text-left transition-all ${
+                      answers[question.id] === option.value
+                        ? 'border-rainbow-blue bg-surface-muted'
+                        : 'border-border hover:border-border-strong'
+                    }`}
+                  >
+                    {option.text}
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
 
-          <div className="flex justify-between">
+          <div className="mt-auto flex justify-between">
             <Button onClick={handlePrevious} disabled={currentQuestion === 0} variant="secondary">
               Önceki
             </Button>

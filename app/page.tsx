@@ -121,7 +121,7 @@ export default function Home() {
           <source src="/videos/hero-bg.mp4" type="video/mp4" />
         </video>
         <Container className="relative py-24 md:py-32">
-          <div className="mx-auto max-w-2xl rounded-[1.75rem] border-[3px] border-transparent bg-white/10 bg-origin-border p-8 text-center shadow-[0_8px_32px_rgba(0,0,0,0.25)] backdrop-blur-xl backdrop-saturate-150 md:p-14" style={{ backgroundClip: 'padding-box, border-box', backgroundImage: 'linear-gradient(rgba(255,255,255,0.1), rgba(255,255,255,0.1)), linear-gradient(90deg, #F5C518, #F5821F, #E8385C, #7B4FE0, #1E9BE0, #3CB043)' }}>
+          <div className="mx-auto max-w-2xl rounded-[1.75rem] border border-white/40 bg-white/70 p-8 text-center shadow-[0_8px_32px_rgba(0,0,0,0.25)] backdrop-blur-xl backdrop-saturate-150 md:p-14">
             <h1 className="font-heading text-5xl font-semibold text-ink-primary md:text-6xl">
               oyvergitsin.org
             </h1>

@@ -1,7 +1,7 @@
 {
   "tool_name": "Bash",
-  "tool_input_preview": "{\"command\":\"powershell.exe -NoProfile -Command \\\"Get-Process node -ErrorAction SilentlyContinue | Where-Object { \\\\$_.MainWindowTitle -eq '' -and \\\\$_.Id -in (Get-NetTCPConnection -LocalPort 3411,3412...",
-  "error": "Exit code 1\n/usr/bin/bash: line 1: /c/Users/BARIS-~1/AppData/Local/Temp/claude-08f9-cwd: No such file or directory",
-  "timestamp": "2026-07-20T16:09:35.128Z",
-  "retry_count": 1
+  "tool_input_preview": "{\"command\":\"git log -1 --format=\\\"%H %s\\\" HEAD && echo \\\"---\\\" && git log -1 --format=\\\"%H %s\\\" origin/main && echo \\\"---status---\\\" && git status -sb\",\"description\":\"Compare local HEAD and origin/mai...",
+  "error": "Exit code 1\n4d20a78a499738ec454a642760b067d15b019608 .\n---\n4d20a78a499738ec454a642760b067d15b019608 .\n---status---\n## main...origin/main\n M .omc/project-memory.json\n M .omc/state/last-tool-error.json\n/usr/bin/bash: line 1: /c/Users/BARIS-~1/AppData/Local/Temp/claude-4683-cwd: No such file or directory",
+  "timestamp": "2026-07-20T16:15:35.246Z",
+  "retry_count": 2
 }

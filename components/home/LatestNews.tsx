@@ -59,7 +59,7 @@ export async function LatestNews() {
   }
 
   return (
-    <section className="bg-rainbow-blue-tint py-20">
+    <section className="bg-white py-20">
       <Container>
         <h2 className="text-center font-heading text-3xl font-semibold text-ink-primary">
           Son Haberler

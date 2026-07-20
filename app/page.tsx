@@ -141,7 +141,7 @@ export default function Home() {
         </Container>
       </section>
 
-      <section className="bg-rainbow-yellow-tint py-20">
+      <section className="bg-white py-20">
         <Container>
           <h2 className="text-center font-heading text-3xl font-semibold text-ink-primary">
             Nasıl Çalışır
@@ -160,7 +160,7 @@ export default function Home() {
         </Container>
       </section>
 
-      <section className="bg-rainbow-orange-tint py-20">
+      <section className="bg-white py-20">
         <Container>
           <div className="mx-auto grid max-w-4xl grid-cols-1 gap-6 md:grid-cols-3">
             {TRUST_SIGNALS.map((signal) => (
@@ -191,7 +191,7 @@ export default function Home() {
         </Container>
       </section>
 
-      <section className="bg-rainbow-purple-tint py-20">
+      <section className="bg-white py-20">
         <Container>
           <h2 className="text-center font-heading text-3xl font-semibold text-ink-primary">
             10 İdeolojik Eksen
@@ -231,7 +231,7 @@ export default function Home() {
 
       <LatestNews />
 
-      <section className="bg-rainbow-green-tint py-20">
+      <section className="bg-white py-20">
         <Container>
           <h2 className="text-center font-heading text-3xl font-semibold text-ink-primary">
             Sıkça Sorulan Sorular
@@ -265,7 +265,7 @@ export default function Home() {
         </Container>
       </section>
 
-      <section className="bg-rainbow-red-tint py-16">
+      <section className="bg-white py-16">
         <Container className="text-center">
           <h2 className="font-heading text-2xl font-semibold text-ink-primary">
             Siyasi duruşunuzu birkaç dakikada keşfedin

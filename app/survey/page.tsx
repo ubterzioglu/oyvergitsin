@@ -2,6 +2,10 @@
 
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { Button } from '@/components/ui/Button'
+import { Card } from '@/components/ui/Card'
+import { Container } from '@/components/ui/Container'
+import { ProgressBar } from '@/components/ui/ProgressBar'
 
 interface Question {
   id: string
@@ -116,15 +120,15 @@ export default function SurveyPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-gray-600">Yükleniyor...</div>
+      <div className="flex min-h-screen items-center justify-center">
+        <div className="text-ink-secondary">Yükleniyor...</div>
       </div>
     )
   }
 
   if (errorMessage) {
     return (
-      <div className="min-h-screen flex items-center justify-center px-4">
+      <div className="flex min-h-screen items-center justify-center px-4">
         <div className="w-full max-w-xl rounded-lg border border-red-200 bg-red-50 p-6 text-center">
           <p className="text-sm text-red-700">{errorMessage}</p>
           <button
@@ -140,9 +144,9 @@ export default function SurveyPage() {
 
   if (questions.length === 0) {
     return (
-      <div className="min-h-screen flex items-center justify-center px-4">
-        <div className="w-full max-w-xl rounded-lg border border-gray-200 bg-white p-6 text-center">
-          <p className="text-sm text-gray-700">Gosterilecek soru bulunamadi.</p>
+      <div className="flex min-h-screen items-center justify-center px-4">
+        <div className="w-full max-w-xl rounded-lg border border-border bg-surface-card p-6 text-center">
+          <p className="text-sm text-ink-secondary">Gosterilecek soru bulunamadi.</p>
         </div>
       </div>
     )
@@ -152,40 +156,29 @@ export default function SurveyPage() {
   const progress = ((currentQuestion + 1) / questions.length) * 100
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-8 px-4">
-      <div className="max-w-3xl mx-auto">
-        {/* Progress bar */}
+    <div className="min-h-screen bg-surface px-4 py-8">
+      <Container size="md">
         <div className="mb-8">
-          <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
-            <div
-              className="h-full bg-gradient-to-r from-blue-600 to-blue-700 transition-all duration-300"
-              style={{ width: `${progress}%` }}
-            />
-          </div>
-          <p className="text-sm text-gray-600 mt-2 text-center">
-            Soru {currentQuestion + 1} / {questions.length}
-          </p>
+          <ProgressBar progress={progress} label={`Soru ${currentQuestion + 1} / ${questions.length}`} />
         </div>
 
-        {/* Question card */}
-        <div className="bg-white rounded-2xl shadow-xl p-8">
+        <Card elevated>
           {question.description && (
-            <p className="text-gray-600 mb-4">{question.description}</p>
+            <p className="mb-4 text-ink-secondary">{question.description}</p>
           )}
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">
+          <h2 className="mb-6 font-heading text-2xl font-semibold text-ink-primary">
             {question.text}
           </h2>
 
-          {/* Render options based on question type */}
-          <div className="space-y-3 mb-8">
+          <div className="mb-8 space-y-3">
             {question.question_options?.map((option) => (
               <button
                 key={option.id}
                 onClick={() => handleAnswer(option.value)}
-                className={`w-full p-4 text-left rounded-lg border-2 transition-all ${
+                className={`w-full rounded-lg border-2 p-4 text-left transition-all ${
                   answers[question.id] === option.value
-                    ? 'border-blue-600 bg-blue-50'
-                    : 'border-gray-200 hover:border-gray-300'
+                    ? 'border-brand-accent bg-surface-muted'
+                    : 'border-border hover:border-border-strong'
                 }`}
               >
                 {option.text}
@@ -193,25 +186,20 @@ export default function SurveyPage() {
             ))}
           </div>
 
-          {/* Navigation */}
           <div className="flex justify-between">
-            <button
-              onClick={handlePrevious}
-              disabled={currentQuestion === 0}
-              className="px-6 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed"
-            >
+            <Button onClick={handlePrevious} disabled={currentQuestion === 0} variant="secondary">
               Önceki
-            </button>
-            <button
+            </Button>
+            <Button
               onClick={handleNext}
               disabled={!answers[question.id] && question.required}
-              className="px-6 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg hover:from-blue-700 hover:to-blue-800 disabled:opacity-50 disabled:cursor-not-allowed"
+              variant="primary"
             >
               {currentQuestion === questions.length - 1 ? 'Sonuçları Gör' : 'Sonraki'}
-            </button>
+            </Button>
           </div>
-        </div>
-      </div>
+        </Card>
+      </Container>
     </div>
   )
 }

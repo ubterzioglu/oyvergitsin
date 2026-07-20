@@ -1,7 +1,7 @@
 export const siteConfig = {
-  name: 'Öy Ver Gitsin',
-  shortName: 'Öy Ver Gitsin',
-  title: 'Öy Ver Gitsin | Türkiye Siyasi Eşleşme Platformu',
+  name: 'Oy Ver Gitsin',
+  shortName: 'Oy Ver Gitsin',
+  title: 'Oy Ver Gitsin | Türkiye Siyasi Eşleşme Platformu',
   description:
     'Siyasi görüşlerinizi anonim şekilde analiz edin ve Türkiye\'de hangi partiye daha yakın olduğunuzu öğrenin.',
   locale: 'tr_TR',

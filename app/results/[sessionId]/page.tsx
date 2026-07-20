@@ -4,6 +4,10 @@ import { useEffect, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { PolarAngleAxis, PolarGrid, PolarRadiusAxis, Radar, RadarChart, ResponsiveContainer } from 'recharts'
+import { getPartyColor } from '@/lib/parties'
+import { Button } from '@/components/ui/Button'
+import { Card } from '@/components/ui/Card'
+import { Container } from '@/components/ui/Container'
 
 interface Result {
   axisScores: Record<string, number>
@@ -50,15 +54,15 @@ export default function ResultsPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-gray-600">Sonuçlar yükleniyor...</div>
+      <div className="flex min-h-screen items-center justify-center">
+        <div className="text-ink-secondary">Sonuçlar yükleniyor...</div>
       </div>
     )
   }
 
   if (!result) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="flex min-h-screen items-center justify-center">
         <div className="text-red-600">Sonuç bulunamadı.</div>
       </div>
     )
@@ -72,26 +76,25 @@ export default function ResultsPage() {
   const topMatch = result.parties[0]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-12 px-4">
-      <div className="max-w-6xl mx-auto">
-        <h1 className="text-4xl font-bold text-gray-900 mb-8 text-center">
+    <div className="min-h-screen bg-surface px-4 py-12">
+      <Container>
+        <h1 className="mb-8 text-center font-heading text-4xl font-semibold text-ink-primary">
           Sonuçlarınız
         </h1>
 
-        {/* Top match */}
-        <div className="bg-white rounded-2xl shadow-xl p-8 mb-8">
-          <h2 className="text-2xl font-bold mb-4">En Uyumlu Partiniz</h2>
+        <Card elevated className="mb-8">
+          <h2 className="mb-4 font-heading text-2xl font-semibold text-ink-primary">En Uyumlu Partiniz</h2>
           {topMatch && (
             <div className="flex items-center gap-6">
               <div
-                className="w-24 h-24 rounded-full flex items-center justify-center text-white font-bold text-2xl"
+                className="flex h-24 w-24 items-center justify-center rounded-full text-2xl font-bold text-white"
                 style={{ backgroundColor: getPartyColor(topMatch.partyShortName) }}
               >
                 {topMatch.partyShortName}
               </div>
               <div className="flex-1">
-                <h3 className="text-2xl font-bold">{topMatch.partyName}</h3>
-                <p className="text-gray-600">
+                <h3 className="text-2xl font-bold text-ink-primary">{topMatch.partyName}</h3>
+                <p className="text-ink-secondary">
                   {getMatchExplanation(topMatch, result.axes)}
                 </p>
               </div>
@@ -99,16 +102,15 @@ export default function ResultsPage() {
                 <div className="text-4xl font-bold" style={{ color: getPartyColor(topMatch.partyShortName) }}>
                   %{topMatch.similarity}
                 </div>
-                <div className="text-gray-600">Eşleşme</div>
+                <div className="text-ink-secondary">Eşleşme</div>
               </div>
             </div>
           )}
-        </div>
+        </Card>
 
-        <div className="grid md:grid-cols-2 gap-8 mb-8">
-          {/* Radar chart */}
-          <div className="bg-white rounded-2xl shadow-xl p-8">
-            <h2 className="text-2xl font-bold mb-4">Eksen Skorları</h2>
+        <div className="mb-8 grid gap-8 md:grid-cols-2">
+          <Card elevated>
+            <h2 className="mb-4 font-heading text-2xl font-semibold text-ink-primary">Eksen Skorları</h2>
             <ResponsiveContainer width="100%" height={400}>
               <RadarChart data={radarData}>
                 <PolarGrid />
@@ -117,32 +119,31 @@ export default function ResultsPage() {
                 <Radar
                   name="Skor"
                   dataKey="score"
-                  stroke="#3B82F6"
-                  fill="#3B82F6"
+                  stroke="#1B2A4A"
+                  fill="#1B2A4A"
                   fillOpacity={0.6}
                 />
               </RadarChart>
             </ResponsiveContainer>
-          </div>
+          </Card>
 
-          {/* Party rankings */}
-          <div className="bg-white rounded-2xl shadow-xl p-8">
-            <h2 className="text-2xl font-bold mb-4">Parti Eşleşmeleri</h2>
+          <Card elevated>
+            <h2 className="mb-4 font-heading text-2xl font-semibold text-ink-primary">Parti Eşleşmeleri</h2>
             <div className="space-y-3">
               {result.parties.map((party, index) => (
                 <div
                   key={party.partyId}
-                  className="flex items-center justify-between p-4 rounded-lg border-2 hover:border-gray-300 transition-all"
+                  className="flex items-center justify-between rounded-lg border-2 border-border p-4 transition-all hover:border-border-strong"
                 >
                   <div className="flex items-center gap-3">
-                    <div className="text-lg font-bold text-gray-400">#{index + 1}</div>
+                    <div className="text-lg font-bold text-ink-muted">#{index + 1}</div>
                     <div
-                      className="w-10 h-10 rounded-full flex items-center justify-center text-white text-sm font-bold"
+                      className="flex h-10 w-10 items-center justify-center rounded-full text-sm font-bold text-white"
                       style={{ backgroundColor: getPartyColor(party.partyShortName) }}
                     >
                       {party.partyShortName}
                     </div>
-                    <span className="font-medium">{party.partyName}</span>
+                    <span className="font-medium text-ink-primary">{party.partyName}</span>
                   </div>
                   <div className="text-right">
                     <div className="text-xl font-bold" style={{ color: getPartyColor(party.partyShortName) }}>
@@ -152,46 +153,20 @@ export default function ResultsPage() {
                 </div>
               ))}
             </div>
-          </div>
+          </Card>
         </div>
 
-        {/* Actions */}
-        <div className="flex gap-4 justify-center">
-          <Link
-            href="/"
-            className="px-8 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg font-semibold hover:from-blue-700 hover:to-blue-800 transition-all"
-          >
-            Ana Sayfa
+        <div className="flex justify-center gap-4">
+          <Link href="/">
+            <Button variant="primary">Ana Sayfa</Button>
           </Link>
-          <Link
-            href="/survey"
-            onClick={() => localStorage.removeItem('sessionId')}
-            className="px-8 py-3 bg-gray-200 text-gray-700 rounded-lg font-semibold hover:bg-gray-300 transition-all"
-          >
-            Yeni Anket
+          <Link href="/survey" onClick={() => localStorage.removeItem('sessionId')}>
+            <Button variant="secondary">Yeni Anket</Button>
           </Link>
         </div>
-      </div>
+      </Container>
     </div>
   )
-}
-
-function getPartyColor(shortName: string): string {
-  const colors: Record<string, string> = {
-    'AKP': '#F7941D',
-    'CHP': '#E30A17',
-    'MHP': '#F2B705',
-    'İYİ': '#0B1F3A',
-    'DEVA': '#7A3DB8',
-    'Gelecek': '#1B6FB3',
-    'Saadet': '#6A1BB3',
-    'TİP': '#333333',
-    'Vatan': '#D10F2F',
-    'YSP': '#0F7A3A',
-    'Zafer': '#00964C',
-    'Memleket': '#FDD007'
-  }
-  return colors[shortName] || '#6B7280'
 }
 
 function getMatchExplanation(party: any, axes: any[]): string {

@@ -3,6 +3,9 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { getSupabaseConfigError } from '@/lib/supabase/config'
+import { Button } from '@/components/ui/Button'
+import { Card } from '@/components/ui/Card'
+import { Container } from '@/components/ui/Container'
 
 export default function ConsentPage() {
   const router = useRouter()
@@ -51,46 +54,41 @@ export default function ConsentPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center p-4">
-      <div className="bg-white rounded-2xl shadow-xl max-w-2xl w-full p-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-6 text-center">
-          Açık Rıza Metni
-        </h1>
-        <div className="prose prose-gray max-w-none mb-8">
-          <p className="text-gray-700 mb-4">
-            Bu anket, siyasi görüşlerinizi analiz etmek ve size en yakın partileri göstermek amacıyla tasarlanmıştır.
-          </p>
-          <ul className="list-disc pl-6 text-gray-700 space-y-2">
-            <li>Cevaplarınız anonim olarak işlenecektir.</li>
-            <li>Verileriniz sadece analiz amaçlı kullanılacaktır.</li>
-            <li>Kişisel bilgileriniz asla üçüncü şahıslarla paylaşılmayacaktır.</li>
-            <li>İstediğiniz zaman anketi durdurabilirsiniz.</li>
-          </ul>
-          <p className="text-gray-700 mt-4">
-            Devam ederek yukarıdaki koşulları kabul etmiş sayılırsınız.
-          </p>
-        </div>
-        {errorMessage ? (
-          <div className="mb-4 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
-            {errorMessage}
+    <div className="flex min-h-screen items-center justify-center bg-surface p-4">
+      <Container size="md">
+        <Card elevated>
+          <h1 className="mb-6 text-center font-heading text-3xl font-semibold text-ink-primary">
+            Açık Rıza Metni
+          </h1>
+          <div className="prose prose-neutral mb-8 max-w-none">
+            <p className="mb-4 text-ink-secondary">
+              Bu anket, siyasi görüşlerinizi analiz etmek ve size en yakın partileri göstermek amacıyla tasarlanmıştır.
+            </p>
+            <ul className="list-disc space-y-2 pl-6 text-ink-secondary">
+              <li>Cevaplarınız anonim olarak işlenecektir.</li>
+              <li>Verileriniz sadece analiz amaçlı kullanılacaktır.</li>
+              <li>Kişisel bilgileriniz asla üçüncü şahıslarla paylaşılmayacaktır.</li>
+              <li>İstediğiniz zaman anketi durdurabilirsiniz.</li>
+            </ul>
+            <p className="mt-4 text-ink-secondary">
+              Devam ederek yukarıdaki koşulları kabul etmiş sayılırsınız.
+            </p>
           </div>
-        ) : null}
-        <div className="flex gap-4 justify-center">
-          <button
-            onClick={handleAccept}
-            disabled={loading}
-            className="px-8 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg font-semibold hover:from-blue-700 hover:to-blue-800 transition-all disabled:opacity-50"
-          >
-            {loading ? 'İşleniyor...' : 'Kabul Et ve Devam Et'}
-          </button>
-          <button
-            onClick={() => router.push('/')}
-            className="px-8 py-3 bg-gray-200 text-gray-700 rounded-lg font-semibold hover:bg-gray-300 transition-all"
-          >
-            Reddet
-          </button>
-        </div>
-      </div>
+          {errorMessage ? (
+            <div className="mb-4 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+              {errorMessage}
+            </div>
+          ) : null}
+          <div className="flex justify-center gap-4">
+            <Button onClick={handleAccept} disabled={loading} variant="primary">
+              {loading ? 'İşleniyor...' : 'Kabul Et ve Devam Et'}
+            </Button>
+            <Button onClick={() => router.push('/')} variant="secondary">
+              Reddet
+            </Button>
+          </div>
+        </Card>
+      </Container>
     </div>
   )
 }

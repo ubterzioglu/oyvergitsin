@@ -1,9 +1,13 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Inter, Source_Serif_4 } from 'next/font/google'
+import Script from 'next/script'
 import { getSiteUrl, siteConfig } from '@/lib/site'
+import { Header } from '@/components/layout/Header'
+import { Footer } from '@/components/layout/Footer'
 import './globals.css'
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ['latin'], variable: '--font-body' })
+const sourceSerif = Source_Serif_4({ subsets: ['latin'], variable: '--font-heading' })
 
 export function generateMetadata(): Metadata {
   const siteUrl = getSiteUrl()
@@ -116,31 +120,24 @@ export default function RootLayout({
 
   return (
     <html lang="tr">
-      <body className={inter.className}>
+      <body className={`${inter.variable} ${sourceSerif.variable} font-body`}>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
+        <Script id="microsoft-clarity" strategy="afterInteractive">
+          {`
+            (function(c,l,a,r,i,t,y){
+                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+            })(window, document, "clarity", "script", "xpckj8ftyr");
+          `}
+        </Script>
         <div className="flex min-h-screen flex-col">
+          <Header />
           <div className="flex-1">{children}</div>
-          <footer className="border-t border-gray-200 bg-white">
-            <div className="mx-auto max-w-6xl px-4 py-6 text-center text-sm text-gray-600">
-              <p>
-                Faydali baglanti:{' '}
-                <a
-                  href="https://ufuksoynakliyat.com.tr/pendik-evden-eve-nakliyat"
-                  rel="dofollow"
-                  target="_blank"
-                  className="font-medium text-blue-700 underline underline-offset-4 transition-colors hover:text-blue-800"
-                  title="Pendik Evden Eve Nakliyat - Ufuksoy Nakliyat A.Ş."
-                  aria-label="Pendik Evden Eve Nakliyat Firması Ufuksoy Nakliyat A.Ş."
-                >
-                  Pendik Evden Eve Nakliyat
-                </a>{' '}
-                Firması Ufuksoy Nakliyat A.Ş.
-              </p>
-            </div>
-          </footer>
+          <Footer />
         </div>
       </body>
     </html>

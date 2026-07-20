@@ -9,23 +9,38 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Turkish political party colors
-        akp: '#F7941D',
-        chp: '#E30A17',
-        mhp: '#F2B705',
-        iyy: '#0B1F3A',
-        dem: '#7A3DB8',
-        deva: '#2EAD4A',
-        gelep: '#1B6FB3',
-        saadet: '#6A1BB3',
-        tip: '#333333',
-        vatan: '#D10F2F',
-        ysp: '#0F7A3A',
-        zp: '#D61F26',
-        dbp: '#F2C300',
-        hdp: '#E31B23',
-        zafer: '#00964C',
-        memleket: '#FDD007',
+        brand: {
+          ink: '#1B2A4A',
+          accent: '#C8A256',
+          'accent-hover': '#B8923E',
+        },
+        surface: {
+          DEFAULT: '#FAFBFC',
+          card: '#FFFFFF',
+          muted: '#F1F3F6',
+        },
+        ink: {
+          primary: '#1A1D23',
+          secondary: '#5A6270',
+          muted: '#8B919A',
+        },
+        border: {
+          DEFAULT: '#E2E5EA',
+          strong: '#CBD0D7',
+        },
+      },
+      fontFamily: {
+        heading: ['var(--font-heading)'],
+        body: ['var(--font-body)'],
+      },
+      borderRadius: {
+        card: '1rem',
+        button: '0.625rem',
+        badge: '0.375rem',
+      },
+      boxShadow: {
+        soft: '0 1px 3px rgba(0,0,0,0.06), 0 6px 16px rgba(0,0,0,0.04)',
+        elevated: '0 2px 8px rgba(0,0,0,0.08), 0 12px 32px rgba(0,0,0,0.06)',
       },
     },
   },

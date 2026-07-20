@@ -2,18 +2,19 @@ const { createClient } = require('@supabase/supabase-js')
 const fs = require('fs')
 const path = require('path')
 
-const OLD_DB_URL = 'https://8068ca9136860e0c323555cbdbf2d35835f58cb8.supabase.co'
+const OLD_DB_URL = 'https://ytcckzqafbfshiztlqaq.supabase.co'
 const OLD_SERVICE_KEY = process.env.OLD_SERVICE_KEY || ''
-const NEW_DB_URL = 'https://ytcckzqafbfshiztlqaq.supabase.co'
-const NEW_SERVICE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl0Y2NrenFhZmJmc2hpenRscWFxIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3MTQ1MTM5NywiZXhwIjoyMDg3MDI3Mzk3fQ.00LDHAABmTOnn5VreKD-QzwHUVLuAHd1h4WvUEQNXL4'
+const NEW_DB_URL = 'https://inejvgbkesnrohvjqmon.supabase.co'
+const NEW_SERVICE_KEY = process.env.NEW_SERVICE_KEY || ''
 
 const BATCH_SIZE = 100
 
-if (!OLD_SERVICE_KEY) {
-  console.error('ERROR: OLD_SERVICE_KEY env var required.')
-  console.error('Usage: OLD_SERVICE_KEY=<full_old_service_key> node scripts/migrate-data.js')
+if (!OLD_SERVICE_KEY || !NEW_SERVICE_KEY) {
+  console.error('ERROR: OLD_SERVICE_KEY and NEW_SERVICE_KEY env vars required.')
+  console.error('Usage: OLD_SERVICE_KEY=<old_service_key> NEW_SERVICE_KEY=<new_service_key> node scripts/migrate-data.js')
   console.error('')
-  console.error('Get the full service key from: https://supabase.com/dashboard/project/8068ca9136860e0c323555cbdbf2d35835f58cb8/settings/api')
+  console.error(`Get the old service key from: https://supabase.com/dashboard/project/${OLD_DB_URL.replace('https://', '').replace('.supabase.co', '')}/settings/api`)
+  console.error(`Get the new service key from: https://supabase.com/dashboard/project/${NEW_DB_URL.replace('https://', '').replace('.supabase.co', '')}/settings/api`)
   process.exit(1)
 }
 

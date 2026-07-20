@@ -144,6 +144,72 @@
   },
   "hotPaths": [
     {
+      "path": "",
+      "accessCount": 13,
+      "lastAccessed": 1784541635106,
+      "type": "directory"
+    },
+    {
+      "path": "app\\layout.tsx",
+      "accessCount": 13,
+      "lastAccessed": 1784541925666,
+      "type": "file"
+    },
+    {
+      "path": "app\\consent\\page.tsx",
+      "accessCount": 8,
+      "lastAccessed": 1784541768317,
+      "type": "file"
+    },
+    {
+      "path": "app\\results\\[sessionId]\\page.tsx",
+      "accessCount": 8,
+      "lastAccessed": 1784541862197,
+      "type": "file"
+    },
+    {
+      "path": "app\\globals.css",
+      "accessCount": 7,
+      "lastAccessed": 1784541934563,
+      "type": "file"
+    },
+    {
+      "path": "app\\page.tsx",
+      "accessCount": 6,
+      "lastAccessed": 1784541727204,
+      "type": "file"
+    },
+    {
+      "path": "app\\survey\\page.tsx",
+      "accessCount": 6,
+      "lastAccessed": 1784541813226,
+      "type": "file"
+    },
+    {
+      "path": "lib\\site.ts",
+      "accessCount": 5,
+      "lastAccessed": 1784541516568,
+      "type": "file"
+    },
+    {
+      "path": "tailwind.config.ts",
+      "accessCount": 5,
+      "lastAccessed": 1784541555622,
+      "type": "file"
+    },
+    {
+      "path": "README.md",
+      "accessCount": 4,
+      "lastAccessed": 1784541527662,
+      "type": "file"
+    },
+    {
+      "path": "app\\opengraph-image.tsx",
+      "accessCount": 4,
+      "lastAccessed": 1784542627234,
+      "type": "file"
+    },
+    {
       "path": ".dockerignore",
       "accessCount": 3,
       "lastAccessed": 1784535857145,
@@ -153,6 +219,18 @@
       "path": ".env.local",
       "accessCount": 3,
       "lastAccessed": 1784538650337,
+      "type": "file"
+    },
+    {
+      "path": "app\\admin\\page.tsx",
+      "accessCount": 3,
+      "lastAccessed": 1784540813790,
+      "type": "file"
+    },
+    {
+      "path": "app\\admin\\layout.tsx",
+      "accessCount": 3,
+      "lastAccessed": 1784541891137,
       "type": "file"
     },
     {
@@ -174,27 +252,21 @@
       "type": "file"
     },
     {
-      "path": "",
-      "accessCount": 2,
-      "lastAccessed": 1784537048621,
-      "type": "directory"
-    },
-    {
       "path": "supabase\\migrations\\001_initial_schema.sql",
       "accessCount": 2,
       "lastAccessed": 1784537469292,
       "type": "file"
     },
     {
-      "path": "app\\api\\sessions\\route.ts",
-      "accessCount": 1,
-      "lastAccessed": 1784535242202,
+      "path": "app\\manifest.ts",
+      "accessCount": 2,
+      "lastAccessed": 1784540682321,
       "type": "file"
     },
     {
-      "path": "app\\consent\\page.tsx",
+      "path": "app\\api\\sessions\\route.ts",
       "accessCount": 1,
-      "lastAccessed": 1784535264938,
+      "lastAccessed": 1784535242202,
       "type": "file"
     },
     {
@@ -246,12 +318,6 @@
       "type": "file"
     },
     {
-      "path": "README.md",
-      "accessCount": 1,
-      "lastAccessed": 1784535801109,
-      "type": "file"
-    },
-    {
       "path": "COOLIFY_DEPLOYMENT.md",
       "accessCount": 1,
       "lastAccessed": 1784535802065,
@@ -279,6 +345,78 @@
       "path": "supabase\\migrations\\004_fix_roles_rls_recursion.sql",
       "accessCount": 1,
       "lastAccessed": 1784537490544,
+      "type": "file"
+    },
+    {
+      "path": "package.json",
+      "accessCount": 1,
+      "lastAccessed": 1784540948136,
+      "type": "file"
+    },
+    {
+      "path": "lib\\parties.ts",
+      "accessCount": 1,
+      "lastAccessed": 1784541605073,
+      "type": "file"
+    },
+    {
+      "path": "components\\ui\\Button.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1784541649943,
+      "type": "file"
+    },
+    {
+      "path": "components\\ui\\Card.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1784541657120,
+      "type": "file"
+    },
+    {
+      "path": "components\\ui\\Container.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1784541662655,
+      "type": "file"
+    },
+    {
+      "path": "components\\ui\\Badge.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1784541669044,
+      "type": "file"
+    },
+    {
+      "path": "components\\ui\\ProgressBar.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1784541674477,
+      "type": "file"
+    },
+    {
+      "path": "components\\layout\\Header.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1784541682150,
+      "type": "file"
+    },
+    {
+      "path": "components\\layout\\Footer.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1784541692959,
+      "type": "file"
+    },
+    {
+      "path": "app\\consent\\layout.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1784542075803,
+      "type": "file"
+    },
+    {
+      "path": "app\\survey\\layout.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1784542076027,
+      "type": "file"
+    },
+    {
+      "path": "app\\icon.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1784542637599,
       "type": "file"
     }
   ],

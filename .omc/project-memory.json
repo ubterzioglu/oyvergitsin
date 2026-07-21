@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "lastScanned": 1784535186720,
+  "lastScanned": 1784637902044,
   "projectRoot": "c:\\temp_private\\oyvergitsin",
   "techStack": {
     "languages": [
@@ -24,7 +24,7 @@
     "frameworks": [
       {
         "name": "next",
-        "version": "14.1.0",
+        "version": "15.5.20",
         "category": "fullstack"
       },
       {
@@ -55,6 +55,7 @@
       "db:sql": "node scripts/build-manual-sql.js",
       "db:sql:print": "node scripts/direct-migrate.js",
       "db:seed": "node scripts/seed.js",
+      "db:seed:admin": "node scripts/seed-admin.js",
       "db:reset": "supabase db reset"
     }
   },
@@ -69,56 +70,89 @@
     "workspaces": [],
     "mainDirectories": [
       "app",
+      "components",
+      "docs",
       "lib",
+      "public",
       "scripts"
     ],
-    "gitBranches": {
-      "defaultBranch": "main",
-      "branchingStrategy": null
-    }
+    "gitBranches": null
   },
   "customNotes": [],
   "directoryMap": {
     "app": {
       "path": "app",
       "purpose": "Application code",
-      "fileCount": 7,
-      "lastAccessed": 1784535186669,
+      "fileCount": 10,
+      "lastAccessed": 1784637901994,
       "keyFiles": [
+        "apple-icon.png",
         "globals.css",
+        "icon.png",
         "layout.tsx",
-        "manifest.ts",
-        "opengraph-image.tsx",
-        "page.tsx"
+        "manifest.ts"
+      ]
+    },
+    "components": {
+      "path": "components",
+      "purpose": "UI components",
+      "fileCount": 0,
+      "lastAccessed": 1784637901995,
+      "keyFiles": []
+    },
+    "docs": {
+      "path": "docs",
+      "purpose": "Documentation",
+      "fileCount": 4,
+      "lastAccessed": 1784637902022,
+      "keyFiles": [
+        "COOLIFY_DEPLOYMENT.md",
+        "party-positions-2026-update.md",
+        "research-input-remaining-parties.md",
+        "research-input.md"
       ]
     },
     "lib": {
       "path": "lib",
       "purpose": "Library code",
-      "fileCount": 1,
-      "lastAccessed": 1784535186670,
+      "fileCount": 5,
+      "lastAccessed": 1784637902023,
       "keyFiles": [
+        "parties.ts",
+        "rate-limit.ts",
+        "session-ownership.ts",
+        "session-token.ts",
         "site.ts"
+      ]
+    },
+    "public": {
+      "path": "public",
+      "purpose": "Public files",
+      "fileCount": 2,
+      "lastAccessed": 1784637902024,
+      "keyFiles": [
+        "llms.txt",
+        "logo.png"
       ]
     },
     "scripts": {
       "path": "scripts",
       "purpose": "Build/utility scripts",
-      "fileCount": 6,
-      "lastAccessed": 1784535186698,
+      "fileCount": 9,
+      "lastAccessed": 1784637902024,
       "keyFiles": [
         "build-manual-sql.js",
         "direct-migrate.js",
+        "fix-missing-options.js",
         "migrate-data.js",
-        "migration-data.sql",
-        "seed.js"
+        "migration-data.sql"
       ]
     },
     "supabase": {
       "path": "supabase",
       "purpose": null,
       "fileCount": 2,
-      "lastAccessed": 1784535186699,
+      "lastAccessed": 1784637902024,
       "keyFiles": [
         "config.toml",
         "manual-apply.sql"
@@ -128,319 +162,38 @@
       "path": "app\\api",
       "purpose": "API routes",
       "fileCount": 0,
-      "lastAccessed": 1784535186699,
+      "lastAccessed": 1784637902025,
       "keyFiles": []
     },
     "supabase\\migrations": {
       "path": "supabase\\migrations",
       "purpose": "Database migrations",
-      "fileCount": 2,
-      "lastAccessed": 1784535186700,
+      "fileCount": 7,
+      "lastAccessed": 1784637902028,
       "keyFiles": [
         "001_initial_schema.sql",
-        "002_public_survey_policies.sql"
+        "002_public_survey_policies.sql",
+        "003_public_session_select.sql"
       ]
     }
   },
   "hotPaths": [
     {
-      "path": "app\\page.tsx",
-      "accessCount": 88,
-      "lastAccessed": 1784562062871,
-      "type": "file"
-    },
-    {
-      "path": "",
-      "accessCount": 51,
-      "lastAccessed": 1784559740495,
-      "type": "directory"
-    },
-    {
       "path": "app\\survey\\page.tsx",
-      "accessCount": 45,
-      "lastAccessed": 1784564127099,
-      "type": "file"
-    },
-    {
-      "path": "app\\layout.tsx",
-      "accessCount": 32,
-      "lastAccessed": 1784558253921,
-      "type": "file"
-    },
-    {
-      "path": "tailwind.config.ts",
-      "accessCount": 30,
-      "lastAccessed": 1784559717424,
-      "type": "file"
-    },
-    {
-      "path": "app\\admin\\page.tsx",
-      "accessCount": 24,
-      "lastAccessed": 1784556813228,
-      "type": "file"
-    },
-    {
-      "path": "components\\layout\\Footer.tsx",
-      "accessCount": 21,
-      "lastAccessed": 1784558369613,
-      "type": "file"
-    },
-    {
-      "path": "package.json",
-      "accessCount": 21,
-      "lastAccessed": 1784562960474,
-      "type": "file"
-    },
-    {
-      "path": ".env.local",
-      "accessCount": 20,
-      "lastAccessed": 1784562313158,
-      "type": "file"
-    },
-    {
-      "path": "supabase\\migrations\\001_initial_schema.sql",
-      "accessCount": 19,
-      "lastAccessed": 1784556785973,
-      "type": "file"
-    },
-    {
-      "path": "app\\admin\\layout.tsx",
-      "accessCount": 18,
-      "lastAccessed": 1784556666100,
-      "type": "file"
-    },
-    {
-      "path": "app\\globals.css",
-      "accessCount": 18,
-      "lastAccessed": 1784558337265,
-      "type": "file"
-    },
-    {
-      "path": "scripts\\seed.js",
-      "accessCount": 18,
-      "lastAccessed": 1784561295013,
-      "type": "file"
-    },
-    {
-      "path": "lib\\supabase\\route.ts",
-      "accessCount": 17,
-      "lastAccessed": 1784556766522,
-      "type": "file"
-    },
-    {
-      "path": "components\\layout\\Header.tsx",
-      "accessCount": 16,
-      "lastAccessed": 1784557104552,
-      "type": "file"
-    },
-    {
-      "path": "app\\admin\\login\\page.tsx",
-      "accessCount": 16,
-      "lastAccessed": 1784559523062,
-      "type": "file"
-    },
-    {
-      "path": "components\\ui\\Button.tsx",
-      "accessCount": 16,
-      "lastAccessed": 1784562788161,
-      "type": "file"
-    },
-    {
-      "path": "lib\\supabase\\admin.ts",
-      "accessCount": 15,
-      "lastAccessed": 1784556766200,
-      "type": "file"
-    },
-    {
-      "path": "app\\api\\sessions\\route.ts",
-      "accessCount": 15,
-      "lastAccessed": 1784558658499,
-      "type": "file"
-    },
-    {
-      "path": "supabase\\migrations\\004_fix_roles_rls_recursion.sql",
-      "accessCount": 15,
-      "lastAccessed": 1784558787546,
-      "type": "file"
-    },
-    {
-      "path": "app\\results\\[sessionId]\\page.tsx",
-      "accessCount": 14,
-      "lastAccessed": 1784559724282,
-      "type": "file"
-    },
-    {
-      "path": "lib\\site.ts",
-      "accessCount": 14,
-      "lastAccessed": 1784559724767,
-      "type": "file"
-    },
-    {
-      "path": "components\\ui\\Card.tsx",
-      "accessCount": 14,
-      "lastAccessed": 1784562787875,
-      "type": "file"
-    },
-    {
-      "path": "lib\\supabase\\client.ts",
-      "accessCount": 13,
-      "lastAccessed": 1784550537880,
-      "type": "file"
-    },
-    {
-      "path": "lib\\supabase\\server.ts",
-      "accessCount": 12,
-      "lastAccessed": 1784556765902,
+      "accessCount": 2,
+      "lastAccessed": 1784637998701,
       "type": "file"
     },
     {
       "path": "app\\consent\\page.tsx",
-      "accessCount": 12,
-      "lastAccessed": 1784563134577,
-      "type": "file"
-    },
-    {
-      "path": "lib\\supabase\\config.ts",
-      "accessCount": 11,
-      "lastAccessed": 1784563433773,
-      "type": "file"
-    },
-    {
-      "path": "README.md",
-      "accessCount": 10,
-      "lastAccessed": 1784550641344,
-      "type": "file"
-    },
-    {
-      "path": "supabase\\migrations\\002_public_survey_policies.sql",
-      "accessCount": 9,
-      "lastAccessed": 1784556574404,
-      "type": "file"
-    },
-    {
-      "path": "supabase\\migrations\\003_public_session_select.sql",
-      "accessCount": 9,
-      "lastAccessed": 1784556764698,
-      "type": "file"
-    },
-    {
-      "path": "lib\\scoring\\engine.ts",
-      "accessCount": 9,
-      "lastAccessed": 1784560105841,
-      "type": "directory"
-    },
-    {
-      "path": "app\\manifest.ts",
-      "accessCount": 8,
-      "lastAccessed": 1784548281535,
-      "type": "file"
-    },
-    {
-      "path": "components\\ui\\ProgressBar.tsx",
-      "accessCount": 8,
-      "lastAccessed": 1784562765977,
+      "accessCount": 2,
+      "lastAccessed": 1784638027186,
       "type": "file"
     },
     {
       "path": "components\\ui\\Container.tsx",
-      "accessCount": 7,
-      "lastAccessed": 1784560604597,
-      "type": "file"
-    },
-    {
-      "path": "components\\ui\\Badge.tsx",
-      "accessCount": 6,
-      "lastAccessed": 1784555877552,
-      "type": "file"
-    },
-    {
-      "path": "app\\survey\\layout.tsx",
-      "accessCount": 5,
-      "lastAccessed": 1784560602454,
-      "type": "file"
-    },
-    {
-      "path": "app\\opengraph-image.tsx",
-      "accessCount": 4,
-      "lastAccessed": 1784542627234,
-      "type": "file"
-    },
-    {
-      "path": ".dockerignore",
-      "accessCount": 4,
-      "lastAccessed": 1784546862274,
-      "type": "directory"
-    },
-    {
-      "path": "app\\consent\\layout.tsx",
-      "accessCount": 3,
-      "lastAccessed": 1784547921870,
-      "type": "file"
-    },
-    {
-      "path": "scripts\\direct-migrate.js",
-      "accessCount": 3,
-      "lastAccessed": 1784552656606,
-      "type": "file"
-    },
-    {
-      "path": "scripts\\migrate-data.js",
-      "accessCount": 3,
-      "lastAccessed": 1784552656864,
-      "type": "file"
-    },
-    {
-      "path": "scripts\\setup-db.js",
-      "accessCount": 3,
-      "lastAccessed": 1784552657184,
-      "type": "file"
-    },
-    {
-      "path": "MIGRATION_PLAN.md",
-      "accessCount": 2,
-      "lastAccessed": 1784535802887,
-      "type": "file"
-    },
-    {
-      "path": "AGENTS.md",
-      "accessCount": 2,
-      "lastAccessed": 1784535835506,
-      "type": "file"
-    },
-    {
-      "path": "lib\\parties.ts",
-      "accessCount": 2,
-      "lastAccessed": 1784556330435,
-      "type": "file"
-    },
-    {
-      "path": "supabase\\migrations",
-      "accessCount": 2,
-      "lastAccessed": 1784562778305,
-      "type": "directory"
-    },
-    {
-      "path": "new.env.local",
       "accessCount": 1,
-      "lastAccessed": 1784535640415,
-      "type": "file"
-    },
-    {
-      "path": "COOLIFY_DEPLOYMENT.md",
-      "accessCount": 1,
-      "lastAccessed": 1784535802065,
-      "type": "file"
-    },
-    {
-      "path": "oyvergitsin_dokumentation.md",
-      "accessCount": 1,
-      "lastAccessed": 1784535803040,
-      "type": "file"
-    },
-    {
-      "path": "app\\icon.tsx",
-      "accessCount": 1,
-      "lastAccessed": 1784542637599,
+      "lastAccessed": 1784638015413,
       "type": "file"
     }
   ],

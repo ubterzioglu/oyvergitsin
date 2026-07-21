@@ -54,9 +54,9 @@ export default function ConsentPage() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-surface p-4">
-      <Container size="md">
-        <Card elevated>
+    <div className="min-h-screen bg-surface px-4 py-4 sm:py-6">
+      <Container size="md" className="flex flex-col items-center">
+        <Card elevated className="w-full max-w-xl">
           <h1 className="mb-6 text-center font-heading text-3xl font-semibold text-ink-primary">
             Açık Rıza Metni
           </h1>

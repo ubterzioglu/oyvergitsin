@@ -247,21 +247,19 @@ export default function SurveyPage() {
                 onClick={() => setCurrentQuestion(index)}
                 aria-label={`Soru ${index + 1}`}
                 aria-current={isActive}
-                className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs font-semibold transition-all ${
-                  isActive
-                    ? 'text-white shadow-soft ring-2 ring-offset-1'
-                    : isAnswered
-                      ? 'bg-surface-muted text-ink-primary hover:bg-border'
-                      : 'bg-surface-card text-ink-secondary shadow-soft hover:text-ink-primary'
+                className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs font-semibold text-white transition-colors duration-300 ${
+                  isActive ? 'shadow-soft ring-2 ring-offset-1' : 'shadow-soft'
                 }`}
-                style={
-                  isActive
-                    ? {
-                        backgroundColor: RAINBOW_ACCENTS[index % RAINBOW_ACCENTS.length],
-                        ['--tw-ring-color' as string]: RAINBOW_ACCENTS[index % RAINBOW_ACCENTS.length],
-                      }
-                    : undefined
-                }
+                style={{
+                  backgroundColor: isActive
+                    ? RAINBOW_ACCENTS[index % RAINBOW_ACCENTS.length]
+                    : isAnswered
+                      ? '#3CB043'
+                      : '#E8385C',
+                  ['--tw-ring-color' as string]: isActive
+                    ? RAINBOW_ACCENTS[index % RAINBOW_ACCENTS.length]
+                    : undefined,
+                }}
               >
                 {index + 1}
               </button>

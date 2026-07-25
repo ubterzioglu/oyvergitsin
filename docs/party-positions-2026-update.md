@@ -6,8 +6,10 @@ kayıt altına alır. Kaynak: `scripts/update-party-positions.js` bu dosyadaki s
 yazar.
 
 **Kapsam:** AKP, CHP, YSP (HDP–Yeşil Sol hattı), MHP, İYİ Parti, Saadet, Gelecek, DEVA
-(rapordaki 8 parti, DB'de 8 satır). TİP, Vatan, Zafer, Memleket bu turda **dokunulmadı**
-— bkz. `docs/research-input-remaining-parties.md`.
+(rapordaki 8 parti, DB'de 8 satır). 25 Temmuz 2026'da BBC Türkçe/Yargıtay/resmi program
+araştırmasıyla **YENİ PARTİ** de eklendi — bkz. `docs/new-party-2026-research.md`.
+TİP, Vatan, Zafer, Memleket bu turda **dokunulmadı** — bkz.
+`docs/research-input-remaining-parties.md`.
 
 **HDP/YSP notu (DB gerçeği ile düzeltildi):** DB'de ayrı bir "HDP" `short_name`'i **yok**
 — sadece `YSP` ("Yeşil Sol Parti") var (bkz. `lib/parties.ts`, `scripts/seed.js`). HDP,

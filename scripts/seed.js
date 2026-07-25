@@ -105,7 +105,8 @@ Devam ederek yukarıdaki koşulları kabul etmiş sayılırsınız.`,
       { name: 'Vatan Partisi', short_name: 'Vatan', color: '#D10F2F', description: 'Yurtsever, solcu bir partidir.' },
       { name: 'Yeşil Sol Parti', short_name: 'YSP', color: '#0F7A3A', description: 'Yeşil ve sol değerleri savunan partidir.' },
       { name: 'Zafar Partisi', short_name: 'Zafer', color: '#00964C', description: 'Milliyetçi bir partidir.' },
-      { name: 'Memleket Partisi', short_name: 'Memleket', color: '#FDD007', description: 'Merkezcilik ön plandadır.' }
+      { name: 'Memleket Partisi', short_name: 'Memleket', color: '#FDD007', description: 'Merkezcilik ön plandadır.' },
+      { name: 'YENİ Parti', short_name: 'YENİ PARTİ', color: '#E41E26', description: 'Sosyal demokrat çizgide, parlamenter sistem ve güçlü sosyal devlet vurgusuna sahip partidir.' }
     ]
 
     const { data: parties, error: partiesError } = await supabase

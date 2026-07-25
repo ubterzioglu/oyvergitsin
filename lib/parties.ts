@@ -11,6 +11,7 @@ export const PARTY_COLORS: Record<string, string> = {
   YSP: '#0F7A3A',
   Zafer: '#00964C',
   Memleket: '#FDD007',
+  'YENİ PARTİ': '#E41E26',
 }
 
 const DEFAULT_PARTY_COLOR = '#6B7280'

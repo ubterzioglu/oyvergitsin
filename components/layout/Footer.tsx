@@ -48,55 +48,13 @@ export function Footer() {
         >
           Pendik Evden Eve Nakliyat
         </a>{' '}
-        Firması Ufuksoy Nakliyat A.Ş.
-        {' · '}
-        <span>
-          <a href="https://tekhurdametal.com/istanbul-hurdaci/" rel="dofollow" className="font-medium text-rainbow-blue underline underline-offset-4 transition-colors hover:text-rainbow-blue-hover">
-            İstanbul Hurdacı
-          </a>{' '}
-          Firması Tek Hurda Metal A.Ş
-        </span>
-        {' · '}
-        <span>
-          <a href="https://tekhurdametal.com/hurda-fiyatlari/" rel="dofollow" className="font-medium text-rainbow-blue underline underline-offset-4 transition-colors hover:text-rainbow-blue-hover">
-            Hurda Fiyatları
-          </a>{' '}
-          Tek Hurda Metal
-        </span>
+        Firması Ufuksoy Nakliyat A.Ş
         {' · '}
         <span>
           <a href="https://tekhurdametal.com/hurda-demir-fiyatlari/" rel="dofollow" className="font-medium text-rainbow-blue underline underline-offset-4 transition-colors hover:text-rainbow-blue-hover">
             Demir Hurda Fiyatları
           </a>{' '}
           Tek Hurda Metal
-        </span>
-        {' · '}
-        <span>
-          <a href="https://tekhurdametal.com/beylikduzu-hurdaci/" rel="dofollow" className="font-medium text-rainbow-blue underline underline-offset-4 transition-colors hover:text-rainbow-blue-hover">
-            Beylikdüzü Hurdacı
-          </a>{' '}
-          Firması Tek Hurda Metal A.Ş
-        </span>
-        {' · '}
-        <span>
-          <a href="https://lionerotik.com/urunler/fetis-urunleri" rel="dofollow" className="font-medium text-rainbow-blue underline underline-offset-4 transition-colors hover:text-rainbow-blue-hover">
-            Antalya Sex Shop
-          </a>{' '}
-          Lion Erotik
-        </span>
-        {' · '}
-        <span>
-          <a href="https://lionerotik.com/urunler/fetis-urunleri" rel="dofollow" className="font-medium text-rainbow-blue underline underline-offset-4 transition-colors hover:text-rainbow-blue-hover">
-            Antalya Erotik Shop
-          </a>{' '}
-          Lion Erotik
-        </span>
-        {' · '}
-        <span>
-          <a href="https://lionerotik.com/urunler/fetis-urunleri" rel="dofollow" className="font-medium text-rainbow-blue underline underline-offset-4 transition-colors hover:text-rainbow-blue-hover">
-            Antalya Seks Shop
-          </a>{' '}
-          Lion Erotik
         </span>
         {' · '}
         © {year} {siteConfig.shortName}. Tüm hakları saklıdır.

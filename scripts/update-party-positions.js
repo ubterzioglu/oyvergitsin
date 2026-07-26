@@ -10,9 +10,11 @@ if (!supabaseUrl || !supabaseKey) {
 }
 
 const supabase = createClient(supabaseUrl, supabaseKey)
+const generateId = () => crypto.randomUUID()
 
 // Skorlar ve gerekçeler: docs/party-positions-2026-update.md
 // Kaynak: yeni_deep-research-report.md (2026-07-20)
+// Yeni Parti ek gerekçe: docs/new-party-2026-research.md
 const PARTY_POSITIONS = {
   AKP: {
     economy_market_state: 55,
@@ -113,17 +115,156 @@ const PARTY_POSITIONS = {
     education_social_policy: -20,
     environment_growth: -35,
   },
+  'YENİ PARTİ': {
+    economy_market_state: 25,
+    income_distribution: 65,
+    civil_liberties: 75,
+    security_state: 5,
+    secularism: -45,
+    identity_migration: -25,
+    foreign_policy: -30,
+    eu_relations: -60,
+    education_social_policy: -55,
+    environment_growth: -45,
+  },
 }
 
-const PARTY_DESCRIPTIONS = {
-  AKP: 'Muhafazakâr-demokrat çizgide, mevcut Cumhurbaşkanlığı Hükûmet Sistemi içinde yeni anayasa arayan bir parti. 2023 seçim beyannamesi yatırım, üretim, teknoloji, savunma sanayii ve dijitalleşmeyi öncelikli dosyalar olarak öne çıkarıyor.',
-  CHP: 'Sosyal demokrat çizgide, güçlendirilmiş parlamenter sisteme dönüşü, yargı bağımsızlığını ve AB tam üyelik hedefini savunuyor. Vergi adaleti, planlı kalkınma ve kurumsal restorasyon programının merkezinde yer alıyor.',
-  YSP: 'HDP\'nin 2023 seçiminde oyları yönlendirdiği, çoğulculuk, halkların eşitliği, kadın özgürlüğü ve yerel demokrasi ekseninde bir parti. İklim adaleti, ademimerkeziyetçilik ve yargı reformu programının belirleyici unsurları arasında.',
-  MHP: "Milliyetçi-devletçi çizgide, Cumhurbaşkanlığı Hükûmet Sistemi'nin devamını ve güçlü/merkezi bir devlet yapısını savunuyor. 2024 parti programı millî üretim, ekonomik güvenlik ve savunma-teknoloji önceliklerini vurguluyor.",
-  'İYİ': 'Merkezcilik ve milliyetçiliği birleştiren, güçlendirilmiş parlamenter sistem ve kuvvetler ayrılığını savunan bir parti. Program makroekonomik istikrar, TCMB bağımsızlığı ve yerel yönetim reformuna ayrıntılı yer veriyor.',
-  Saadet: "Milli Görüş geleneğini çağdaş bir siyasal programla sürdüren parti; adil hukuk düzeni, üretime dayalı ekonomi ve 'şahsiyetli dış politika' kavramlarını öne çıkarıyor. Yeni anayasa ve seçim barajının kaldırılmasını savunuyor.",
-  Gelecek: 'Muhafazakâr-demokrat kökenden kurumsal restorasyon, hukukun üstünlüğü ve AB çıpasına dayalı bir sentez sunan parti. Dijital dönüşüm ve çevresel sorumluluk programının öne çıkan başlıkları arasında.',
-  DEVA: 'Liberal-demokrat, piyasa dostu fakat kurumsal ve sosyal devlet boyutlarını dışlamayan bir çizgi izleyen parti. Program TCMB bağımsızlığı, şeffaflık, vergi reformu ve güçlendirilmiş parlamenter sistemi teknik ayrıntıyla ele alıyor.',
+const PARTY_METADATA = {
+  AKP: {
+    name: 'Adalet ve Kalkınma Partisi',
+    color: '#F7941D',
+    description: 'Muhafazakâr-demokrat çizgide, mevcut Cumhurbaşkanlığı Hükûmet Sistemi içinde yeni anayasa arayan bir parti. 2023 seçim beyannamesi yatırım, üretim, teknoloji, savunma sanayii ve dijitalleşmeyi öncelikli dosyalar olarak öne çıkarıyor.',
+  },
+  CHP: {
+    name: 'Cumhuriyet Halk Partisi',
+    color: '#E30A17',
+    description: 'Sosyal demokrat çizgide, güçlendirilmiş parlamenter sisteme dönüşü, yargı bağımsızlığını ve AB tam üyelik hedefini savunuyor. Vergi adaleti, planlı kalkınma ve kurumsal restorasyon programının merkezinde yer alıyor.',
+  },
+  YSP: {
+    name: 'Yeşil Sol Parti',
+    color: '#0F7A3A',
+    description: 'HDP\'nin 2023 seçiminde oyları yönlendirdiği, çoğulculuk, halkların eşitliği, kadın özgürlüğü ve yerel demokrasi ekseninde bir parti. İklim adaleti, ademimerkeziyetçilik ve yargı reformu programının belirleyici unsurları arasında.',
+  },
+  MHP: {
+    name: 'Milliyetçi Hareket Partisi',
+    color: '#F2B705',
+    description: "Milliyetçi-devletçi çizgide, Cumhurbaşkanlığı Hükûmet Sistemi'nin devamını ve güçlü/merkezi bir devlet yapısını savunuyor. 2024 parti programı millî üretim, ekonomik güvenlik ve savunma-teknoloji önceliklerini vurguluyor.",
+  },
+  'İYİ': {
+    name: 'İYİ Parti',
+    color: '#0B1F3A',
+    description: 'Merkezcilik ve milliyetçiliği birleştiren, güçlendirilmiş parlamenter sistem ve kuvvetler ayrılığını savunan bir parti. Program makroekonomik istikrar, TCMB bağımsızlığı ve yerel yönetim reformuna ayrıntılı yer veriyor.',
+  },
+  Saadet: {
+    name: 'Saadet Partisi',
+    color: '#6A1BB3',
+    description: "Milli Görüş geleneğini çağdaş bir siyasal programla sürdüren parti; adil hukuk düzeni, üretime dayalı ekonomi ve 'şahsiyetli dış politika' kavramlarını öne çıkarıyor. Yeni anayasa ve seçim barajının kaldırılmasını savunuyor.",
+  },
+  Gelecek: {
+    name: 'Gelecek Partisi',
+    color: '#1B6FB3',
+    description: 'Muhafazakâr-demokrat kökenden kurumsal restorasyon, hukukun üstünlüğü ve AB çıpasına dayalı bir sentez sunan parti. Dijital dönüşüm ve çevresel sorumluluk programının öne çıkan başlıkları arasında.',
+  },
+  DEVA: {
+    name: 'Demokrasi ve Atılım Partisi',
+    color: '#7A3DB8',
+    description: 'Liberal-demokrat, piyasa dostu fakat kurumsal ve sosyal devlet boyutlarını dışlamayan bir çizgi izleyen parti. Program TCMB bağımsızlığı, şeffaflık, vergi reformu ve güçlendirilmiş parlamenter sistemi teknik ayrıntıyla ele alıyor.',
+  },
+  'YENİ PARTİ': {
+    name: 'YENİ Parti',
+    color: '#E41E26',
+    description: 'Özgür Özel liderliğinde 24 Temmuz 2026 tarihinde kurulan sosyal demokrat çizgide bir parti. Programı parlamenter sistem, kuvvetler ayrılığı, güçlü sosyal devlet, eşit yurttaşlık, AB sürecinin hızlandırılması ve yeşil dönüşüm başlıklarını öne çıkarıyor.',
+  },
+}
+
+const NEWS_POSTS = [
+  {
+    title: "Özgür Özel dahil 91 milletvekili CHP'den istifa ederek Yeni Parti'yi kurdu",
+    summary: "BBC Türkçe'nin haberine göre Özgür Özel ve CHP'den ayrılan milletvekilleri Yeni Parti'nin kuruluş evraklarını imzaladı; Yargıtay kaydında YENİ PARTİ'nin kuruluş tarihi 24 Temmuz 2026 olarak görünüyor.",
+    source_name: 'BBC Türkçe',
+    source_url: 'https://www.bbc.com/turkce',
+    original_url: 'https://www.bbc.com/turkce/articles/c0jlnyg5v8po',
+    image_url: null,
+    category: 'siyaset',
+    language: 'tr',
+    country: 'TR',
+    published_at: '2026-07-24T10:00:00+03:00',
+    status: 'active',
+    approved_at: '2026-07-25T12:00:00+03:00',
+  },
+]
+
+async function ensureParty(shortName, existingParty) {
+  const metadata = PARTY_METADATA[shortName]
+  if (!metadata) {
+    return existingParty
+  }
+
+  if (existingParty) {
+    const { data, error } = await supabase
+      .from('parties')
+      .update({
+        name: metadata.name,
+        color: metadata.color,
+        description: metadata.description,
+      })
+      .eq('id', existingParty.id)
+      .select('id, short_name')
+      .single()
+
+    if (error) throw error
+    return data
+  }
+
+  const { data, error } = await supabase
+    .from('parties')
+    .insert({
+      id: generateId(),
+      name: metadata.name,
+      short_name: shortName,
+      color: metadata.color,
+      description: metadata.description,
+    })
+    .select('id, short_name')
+    .single()
+
+  if (error) throw error
+  return data
+}
+
+async function upsertNewsPosts() {
+  let upserted = 0
+
+  for (const post of NEWS_POSTS) {
+    const { data: existingPosts, error: selectError } = await supabase
+      .from('news_posts')
+      .select('id')
+      .eq('original_url', post.original_url)
+      .limit(1)
+
+    if (selectError) throw selectError
+
+    const existingPost = existingPosts?.[0]
+
+    if (existingPost) {
+      const { error } = await supabase
+        .from('news_posts')
+        .update(post)
+        .eq('id', existingPost.id)
+
+      if (error) throw error
+    } else {
+      const { error } = await supabase
+        .from('news_posts')
+        .insert({ id: generateId(), ...post })
+
+      if (error) throw error
+    }
+
+    upserted += 1
+  }
+
+  return upserted
 }
 
 async function updatePartyPositions() {
@@ -133,14 +274,14 @@ async function updatePartyPositions() {
   if (axesError) throw axesError
   const axisIdBySlug = Object.fromEntries(axes.map((axis) => [axis.slug, axis.id]))
 
-  const { data: parties, error: partiesError } = await supabase
+  const { data: partiesData, error: partiesError } = await supabase
     .from('parties')
     .select('id, short_name')
   if (partiesError) throw partiesError
-  const partyByShortName = Object.fromEntries(parties.map((party) => [party.short_name, party]))
+  const partyByShortName = Object.fromEntries(partiesData.map((party) => [party.short_name, party]))
 
   const coveredShortNames = Object.keys(PARTY_POSITIONS)
-  const skippedShortNames = parties
+  const skippedShortNames = partiesData
     .map((party) => party.short_name)
     .filter((shortName) => !coveredShortNames.includes(shortName))
 
@@ -154,7 +295,7 @@ async function updatePartyPositions() {
   let missingAxisWarnings = 0
 
   for (const shortName of coveredShortNames) {
-    const party = partyByShortName[shortName]
+    const party = await ensureParty(shortName, partyByShortName[shortName])
     if (!party) {
       console.warn(`Uyarı: DB'de "${shortName}" adında parti bulunamadı, atlanıyor.`)
       continue
@@ -180,21 +321,14 @@ async function updatePartyPositions() {
     if (upsertError) throw upsertError
     upsertCount += rows.length
 
-    const description = PARTY_DESCRIPTIONS[shortName]
-    if (description) {
-      const { error: descriptionError } = await supabase
-        .from('parties')
-        .update({ description })
-        .eq('id', party.id)
-
-      if (descriptionError) throw descriptionError
-    }
-
     console.log(`✓ ${shortName}: ${rows.length} eksen pozisyonu ve profil güncellendi.`)
   }
 
+  const newsPostCount = await upsertNewsPosts()
+
   console.log('✅ Parti pozisyonu güncellemesi tamamlandı.')
   console.log(`- Güncellenen satır sayısı (party_positions upsert): ${upsertCount}`)
+  console.log(`- Güncellenen/eklenen haber sayısı: ${newsPostCount}`)
   console.log(`- Eksik eksen uyarısı: ${missingAxisWarnings}`)
   console.log(`- Dokunulmayan parti sayısı: ${skippedShortNames.length}`)
 }

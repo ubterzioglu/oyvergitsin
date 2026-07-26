@@ -144,9 +144,9 @@ export default function Home() {
       <section className="bg-white py-20">
         <Container>
           <h2 className="text-center font-heading text-3xl font-semibold text-ink-primary">
-            Nasıl Çalışır
+            Nasıl Çalışır?
           </h2>
-          <div className="mt-12 grid gap-6 md:grid-cols-3">
+          <div className="mx-auto mt-12 grid max-w-4xl gap-6">
             {STEPS.map((step) => (
               <Card key={step.number}>
                 <span className="font-heading text-3xl font-semibold text-rainbow-blue">

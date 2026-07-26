@@ -1,7 +1,0 @@
-{
-  "tool_name": "Bash",
-  "tool_input_preview": "{\"command\":\"cd /cygdrive/c/temp_private/oyvergitsin && git add app/survey/page.tsx app/consent/page.tsx && git commit -m \\\"$(cat <<'EOF'\\nstyle: smooth answered/unanswered colors on survey nav, tighte...",
-  "error": "Exit code 1\n[main 6819e29] style: smooth answered/unanswered colors on survey nav, tighten consent layout\n 2 files changed, 15 insertions(+), 17 deletions(-)\nTo https://github.com/ubterzioglu/oyvergitsin.git\n   4ebada2..6819e29  main -> main\n/usr/bin/bash: line 8: /c/Users/BARIS-~1/AppData/Local/Temp/claude-6be3-cwd: No such file or directory",
-  "timestamp": "2026-07-21T12:50:34.907Z",
-  "retry_count": 4
-}

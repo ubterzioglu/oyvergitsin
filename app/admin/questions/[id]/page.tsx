@@ -322,7 +322,6 @@ export default function QuestionDetailPage() {
           {QUESTION_TYPES.map((t) => (
             <option key={t.value} value={t.value}>
               {t.label}
-              {!t.optionBased ? ' (anket ekranında henüz render edilmiyor)' : ''}
             </option>
           ))}
         </SelectField>
@@ -348,10 +347,16 @@ export default function QuestionDetailPage() {
       </form>
 
       {!showOptionSections ? (
-        <div className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">
-          Bu soru tipi bugün anket ekranında (/survey) render edilmiyor — sadece seçenek tabanlı
-          tipler (tekli/çoklu seçim, likert, açılır liste vb.) canlıda gösterilir. Seçenekler ve
-          puanlama kuralları yine de burada tanımlanabilir.
+        <div className="rounded-lg border border-blue-200 bg-blue-50 px-4 py-3 text-sm text-blue-800">
+          Bu soru tipi seçenek gerektirmez (serbest giriş: metin, sayı, tarih, dosya, kaydırıcı
+          veya CAPTCHA). Aşağıdaki &ldquo;Seçenekler&rdquo; bölümünü boş bırakabilirsiniz.
+        </div>
+      ) : null}
+      {questionForm.type === 'matrix_single' || questionForm.type === 'matrix_multi' ? (
+        <div className="rounded-lg border border-blue-200 bg-blue-50 px-4 py-3 text-sm text-blue-800">
+          Matris sorularda seçenek değerine satırlar için <code>row:</code>, sütunlar için{' '}
+          <code>col:</code> öneki ekleyin (örn. <code>row:economy</code>,{' '}
+          <code>col:strongly_agree</code>).
         </div>
       ) : null}
 

@@ -358,6 +358,58 @@ Devam ederek yukarıdaki koşulları kabul etmiş sayılırsınız.`,
       )
     }
 
+    // Options for question 7 (matrix_single) — satırlar "row:", sütunlar "col:" önekiyle
+    const q7 = questions.find(q => q.order_index === 7)
+    if (q7) {
+      questionOptions.push(
+        { question_id: q7.id, text: 'Ekonomik özgürlük', value: 'row:economic_freedom', order_index: 1 },
+        { question_id: q7.id, text: 'Sosyal adalet', value: 'row:social_justice', order_index: 2 },
+        { question_id: q7.id, text: 'Milli güvenlik', value: 'row:national_security', order_index: 3 },
+        { question_id: q7.id, text: 'Kesinlikle katılmıyorum', value: 'col:strongly_disagree', order_index: 4 },
+        { question_id: q7.id, text: 'Katılmıyorum', value: 'col:disagree', order_index: 5 },
+        { question_id: q7.id, text: 'Kararsızım', value: 'col:neutral', order_index: 6 },
+        { question_id: q7.id, text: 'Katılıyorum', value: 'col:agree', order_index: 7 },
+        { question_id: q7.id, text: 'Kesinlikle katılıyorum', value: 'col:strongly_agree', order_index: 8 }
+      )
+    }
+
+    // Options for question 8 (matrix_multi)
+    const q8 = questions.find(q => q.order_index === 8)
+    if (q8) {
+      questionOptions.push(
+        { question_id: q8.id, text: 'Vergi reformu', value: 'row:tax_reform', order_index: 1 },
+        { question_id: q8.id, text: 'Eğitim reformu', value: 'row:education_reform', order_index: 2 },
+        { question_id: q8.id, text: 'Sağlık reformu', value: 'row:health_reform', order_index: 3 },
+        { question_id: q8.id, text: 'Destekliyorum', value: 'col:support', order_index: 4 },
+        { question_id: q8.id, text: 'Kararsızım', value: 'col:undecided', order_index: 5 },
+        { question_id: q8.id, text: 'Karşıyım', value: 'col:oppose', order_index: 6 }
+      )
+    }
+
+    // Options for question 13 (allocation)
+    const q13 = questions.find(q => q.order_index === 13)
+    if (q13) {
+      questionOptions.push(
+        { question_id: q13.id, text: 'Eğitim', value: 'education', order_index: 1 },
+        { question_id: q13.id, text: 'Sağlık', value: 'health', order_index: 2 },
+        { question_id: q13.id, text: 'Savunma', value: 'defense', order_index: 3 },
+        { question_id: q13.id, text: 'Altyapı', value: 'infrastructure', order_index: 4 },
+        { question_id: q13.id, text: 'Sosyal yardım', value: 'social_aid', order_index: 5 }
+      )
+    }
+
+    // Options for question 16 (vignette_likert)
+    const q16 = questions.find(q => q.order_index === 16)
+    if (q16) {
+      questionOptions.push(
+        { question_id: q16.id, text: 'Kesinlikle doğru değil', value: 'strongly_disagree', order_index: 1 },
+        { question_id: q16.id, text: 'Doğru değil', value: 'disagree', order_index: 2 },
+        { question_id: q16.id, text: 'Kararsızım', value: 'neutral', order_index: 3 },
+        { question_id: q16.id, text: 'Doğru', value: 'agree', order_index: 4 },
+        { question_id: q16.id, text: 'Kesinlikle doğru', value: 'strongly_agree', order_index: 5 }
+      )
+    }
+
     const { error: optionsError } = await supabase
       .from('question_options')
       .insert(questionOptions.map(opt => ({

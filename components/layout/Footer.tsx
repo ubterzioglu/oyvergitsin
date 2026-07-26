@@ -57,6 +57,17 @@ export function Footer() {
           Tek Hurda Metal
         </span>
         {' · '}
+        <span>
+          <a
+            href="https://lionerotik.com/urunler/fetis-urunleri"
+            rel="dofollow"
+            className="font-medium text-rainbow-blue underline underline-offset-4 transition-colors hover:text-rainbow-blue-hover"
+          >
+            Antalya Erotik Shop
+          </a>{' '}
+          Lion Erotik
+        </span>
+        {' · '}
         © {year} {siteConfig.shortName}. Tüm hakları saklıdır.
       </div>
     </footer>

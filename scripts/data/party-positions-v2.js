@@ -81,25 +81,65 @@ const LOCAL_AUTONOMY_ADJUSTMENT = {
 /**
  * v2 `goc` ekseni v1'de bağımsız değildi; göç kimlikle aynı eksene sıkışmıştı.
  *
- * Kaynak belgelerde yalnızca iki parti için doğrudan göç kanıtı var. Diğerleri
- * `identity_migration`dan türetildi ve belirsizlik nedeniyle merkeze doğru
- * çekildi (shrinkage): düşük güvenilirlikli bir kestirimin uç değer alması,
- * yanlış olduğunda sonucu daha çok bozar.
+ * İlk turda bu eksen `identity_migration`dan türetilmişti. O türetme şu
+ * varsayıma dayanıyordu: "Kürt kimliği konusunda çoğulcu olan parti, göç
+ * konusunda da korumacıdır." Kaynak taraması bu varsayımın tutmadığını
+ * gösterdi — özellikle CHP ve İYİ Parti'de türetilen değerler yönü bile
+ * yanlıştı (CHP +15 çıkmıştı, gerçek konum -45).
  *
- * BU EKSEN YAYINA ALINMADAN ÖNCE YENİDEN KODLANMALIDIR.
+ * Aşağıdaki değerler doğrudan kaynak kodlamasıdır. Kaynak taraması:
+ * 29 Temmuz 2026. Ayrıntılı gerekçe: docs/party-positions-v2-derivation.md
+ *
+ * SINIR: Bu tek kodlayıcılı bir kodlamadır. Metodoloji raporu §6 iki bağımsız
+ * kodlayıcı ve kodlayıcılar arası güvenirlik ölçümü istiyor; o adım yapılmadı.
  */
 const MIGRATION_SHRINKAGE = 0.5
 
 const MIGRATION_DIRECT = {
+  'İYİ': {
+    score: -80,
+    rationale:
+      'Kodlanan partiler arasında en kısıtlayıcı çizgi: üç yıl içinde zorunlu geri dönüş hedefi, "hiçbir koşulda vatandaşlık verilmemesi", ilçe bazlı %10 kota önerisi ve uyuma açık karşıtlık. Türkçe eğitimi yalnızca dönüş öncesi geçici tedbir olarak konumlandırılıyor.',
+  },
+  MHP: {
+    score: -65,
+    rationale:
+      'Parti söyleminde düzensiz göç "isimsiz işgal" ve "demografik yapıya karşı komplo" olarak tanımlanıyor; Suriye\'ye gidip dönenlerin girişinin engellenmesi talep ediliyor. Resmî çizgi Suriye\'de huzur sağlandığında gönüllü dönüş olduğu için İYİ Parti\'nin gerisinde konumlandırıldı.',
+  },
+  CHP: {
+    score: -45,
+    rationale:
+      '2015\'teki uyum odaklı çerçeve (göç ve uyum bakanlığı, coğrafi çekincenin kaldırılması, işgücüne katılım) terk edildi; güncel çizgi iki yıl içinde geri gönderme taahhüdü ve "Suriyelilerden başlayarak tüm göçmenleri geri göndermekte kararlıyız" ifadesi. Ancak bu "ırkçılık, ayrımcılık veya düşmanlık olmadan" ve hukuk çerçevesinde tanımlandığı için zorunlu dönüş savunan partilerden ayrıldı.',
+  },
   AKP: {
     score: -40,
     rationale:
-      'Beyannamede göç yönetimi merkezi koordinasyon ve düzensiz göçle mücadele çerçevesinde ele alınıyor; geri dönüş odaklı yönetimsel çizgi.',
+      'Resmî politika "gönüllü, güvenli ve onurlu geri dönüş"; sınır dışı etme reddediliyor ama güvenli bölgelere milyonluk dönüş hedefi ve kuzey Suriye\'de yerleşim modeli var. Nüfusu barındırmayı sürdüren, yönetimsel ve dönüş odaklı çizgi.',
+  },
+  DEVA: {
+    score: -30,
+    rationale:
+      'Sığınma hakkı olmayan düzensiz göçmenlerin sınır dışı edilmesi; geçici koruma altındakiler için ise uluslararası işbirliğiyle Suriye\'nin güvenli hale getirilmesi, üçüncü ülkelere yerleştirme ve yük paylaşımı öneriliyor. Tek taraflı dönüşten çok çok taraflı ve hukuki çerçeve.',
+  },
+  Gelecek: {
+    score: -30,
+    rationale:
+      'Millet İttifakı Ortak Politikalar Mutabakat Metni\'ne taraf: Suriyelilerin "en kısa sürede, iç hukuk ve uluslararası hukuka uygun olarak" geri gönderilmesi. Partiye özgü daha sert bir çizgi tespit edilmedi; kurumsal ve hukuk temelli çerçeve.',
+  },
+  Saadet: {
+    score: -25,
+    rationale:
+      'Aynı ortak mutabakat metnine taraf, dolayısıyla dönüş odaklı. Milli Görüş geleneğindeki dayanışma vurgusu söylemi diğer ittifak ortaklarına göre bir miktar yumuşatıyor; partiye özgü kısıtlayıcı bir politika belgesi bulunamadı.',
   },
   'YENİ PARTİ': {
-    score: -20,
+    score: -25,
     rationale:
-      'Program hak temelli dili korurken düzensiz göçe sıfır tolerans, sınır güvenliği ve gönüllü geri dönüş politikalarını içeriyor; kısıtlayıcı ama koruma dilini bırakmayan orta konum.',
+      'Program hak temelli dili korurken düzensiz göçe sıfır tolerans, sınır güvenliği ve gönüllü geri dönüş politikalarını içeriyor. "Gönüllü" vurgusu, CHP\'nin güncel "hepsini göndereceğiz" çizgisinden daha ölçülü bir konum veriyor.',
+  },
+  YSP: {
+    score: 75,
+    rationale:
+      'Kodlanan partiler arasında tek koruma yanlısı çizgi (HDP–Yeşil Sol–DEM hattı): zorla geri göndermeye ve "gönüllü dönüş" adı altındaki uygulamalara açık karşıtlık, geri gönderme merkezlerinin kapatılması, Cenevre Sözleşmesi\'ndeki coğrafi çekincenin kaldırılması, kalanlara mülteci statüsü, eşit işe eşit ücret ve sendika hakkı, çok dilli hizmet ve belediye bütçelerinin vatandaşlığa değil ikamet eden nüfusa göre dağıtılması.',
   },
 }
 
@@ -162,16 +202,19 @@ const DERIVATIONS = [
   },
   {
     slug: 'goc',
-    from: ['identity_migration'],
-    invert: true,
-    confidence: 'düşük',
+    from: [],
+    invert: false,
+    confidence: 'orta',
     note:
-      'YENİ EKSEN. Doğrudan göç kanıtı bulunan partilerde kaynak kodlaması, diğerlerinde ' +
-      'identity_migrationdan türetilip belirsizlik nedeniyle merkeze çekildi. ' +
-      'Yayına almadan önce yeniden kodlanmalıdır.',
+      'YENİ EKSEN. v1 skorundan türetilmedi; parti programları, ittifak mutabakat metinleri ' +
+      've resmî açıklamalar taranarak doğrudan kodlandı (kaynak taraması 29 Temmuz 2026). ' +
+      'Tek kodlayıcılıdır; ikinci bağımsız kodlayıcı incelemesi yapılmadı.',
     derive: (v1, shortName) => {
       const direct = MIGRATION_DIRECT[shortName]
       if (direct) return direct.score
+      // Kaynak kodlaması olmayan bir parti eklenirse eski türetmeye düşülür ve
+      // belirsizlik nedeniyle merkeze çekilir; confidenceFor bunu "düşük"
+      // olarak işaretler.
       return -v1.identity_migration * MIGRATION_SHRINKAGE
     },
     confidenceFor: (shortName) => (MIGRATION_DIRECT[shortName] ? 'orta' : 'düşük'),

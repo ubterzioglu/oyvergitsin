@@ -30,7 +30,7 @@ eşleştirir.
 | `demokrasi` | `civil_liberties` + `security_state` | Ortalama, `security_state` **çevrildi** | Orta |
 | `sekulerizm` | `secularism` | **Çevrildi** | Yüksek |
 | `kimlik` | `identity_migration` | **Çevrildi** + yerel özerklik düzeltmesi | Orta |
-| `goc` | `identity_migration` | **Çevrildi** + merkeze çekme (aşağıya bakınız) | **Düşük** |
+| `goc` | — | **Türetilmedi**, kaynaklardan doğrudan kodlandı | Orta |
 | `sosyal` | `education_social_policy` | **Çevrildi** | Orta |
 | `cevre` | `environment_growth` | **Çevrildi** | Yüksek |
 | `dis` | `foreign_policy` + `eu_relations` | Ortalama, **çevrildi** | Yüksek |
@@ -91,23 +91,47 @@ v2 ekseni v1'den farklı olarak **yerel özerkliği** de kapsıyor. `yeni_deep-r
 | DEVA | +10 | "yerel kalkınma ve veri-temelli koordinasyon" |
 | YENİ PARTİ | +10 | güçlü Meclis ve yerel demokrasi vurgusu |
 
-### `goc` — YAYIN ÖNCESİ ENGEL
+### `goc` — türetme terk edildi, doğrudan kodlandı
 
-v1'de göç, kimlikle aynı eksene sıkışmıştı. Ayrıştırma yeni kanıt gerektiriyor ve **kaynak
-belgelerde yalnızca iki parti için doğrudan göç kanıtı var**:
+**Bu eksen artık v1 skorlarından türetilmiyor.** İlk turda `identity_migration` işaret çevrilerek
+kullanılmıştı; o türetme şu örtük varsayıma dayanıyordu:
 
-- **AKP** (−40): beyannamede göç yönetimi merkezi koordinasyon ve düzensiz göçle mücadele
-  çerçevesinde ele alınıyor.
-- **YENİ PARTİ** (−20): program hak temelli dili korurken düzensiz göçe sıfır tolerans, sınır
-  güvenliği ve gönüllü geri dönüş politikalarını içeriyor.
+> *Kürt kimliği konusunda çoğulcu olan parti, göç konusunda da korumacıdır.*
 
-Kalan 7 parti için değer `identity_migration`dan türetildi ve **belirsizlik nedeniyle 0,5
-katsayısıyla merkeze çekildi**. Gerekçe: düşük güvenilirlikli bir kestirim uç değer aldığında,
-yanlış olduğunda sonucu daha çok bozar; merkeze çekmek hatanın maliyetini düşürür.
+Kaynak taraması (29 Temmuz 2026) bu varsayımın Türkiye'de **tutmadığını** gösterdi. En açık örnek
+CHP: kimlik ekseninde çoğulcu kodlandığı için göçte +15 (koruma yanlısı) çıkıyordu, oysa partinin
+güncel çizgisi iki yıl içinde geri gönderme taahhüdü. İYİ Parti'de fark daha da büyüktü: türetme
+−10 veriyordu, gerçek konum −80.
 
-> **Bu 7 hücre kaynak belgelerden yeniden kodlanmadan v2 AKTİF EDİLMEMELİDİR.** Türetme script'i
-> çalıştığında bu uyarıyı konsola da basar. Özellikle CHP ve YSP için kimlik ekseninden türetilen
-> pozitif (koruma yanlısı) değerlerin gerçek göç duruşlarını yansıttığına dair kanıt yoktur.
+Aşağıdaki değerler parti programları, ittifak mutabakat metinleri ve resmî açıklamalar taranarak
+**doğrudan kodlanmıştır**.
+
+| Parti | Skor | Önceki (türetme) | Dayanak |
+|---|---:|---:|---|
+| İYİ Parti | **−80** | −10 | Üç yıl içinde zorunlu geri dönüş hedefi, "hiçbir koşulda vatandaşlık yok", ilçe bazlı %10 kota, uyuma açık karşıtlık; Türkçe eğitimi yalnızca dönüş öncesi geçici tedbir |
+| MHP | **−65** | −35 | Düzensiz göç "isimsiz işgal" ve "demografik yapıya karşı komplo" olarak tanımlanıyor; Suriye'ye gidip dönenlerin girişinin engellenmesi talebi. Resmî çizgi gönüllü dönüş olduğu için İYİ'nin gerisinde |
+| CHP | **−45** | +15 | 2015'teki uyum çerçevesi (göç bakanlığı, coğrafi çekincenin kaldırılması, işgücüne katılım) terk edildi; güncel çizgi iki yılda geri gönderme ve "Suriyelilerden başlayarak tüm göçmenleri geri göndermekte kararlıyız". "Irkçılık, ayrımcılık veya düşmanlık olmadan" çerçevesi zorunlu dönüşçülerden ayırıyor |
+| AKP | **−40** | −40 | "Gönüllü, güvenli ve onurlu geri dönüş"; sınır dışı reddediliyor ama güvenli bölgelere milyonluk dönüş hedefi ve kuzey Suriye'de yerleşim modeli var |
+| DEVA | **−30** | +10 | Sığınma hakkı olmayanların sınır dışı edilmesi; geçici koruma altındakiler için uluslararası işbirliğiyle Suriye'nin güvenli hale getirilmesi, üçüncü ülkeye yerleştirme ve yük paylaşımı |
+| Gelecek | **−30** | +5 | Millet İttifakı Ortak Politikalar Mutabakat Metni: "en kısa sürede, iç hukuk ve uluslararası hukuka uygun olarak" geri gönderme. Partiye özgü daha sert çizgi bulunamadı |
+| Saadet | **−25** | −15 | Aynı ortak metne taraf; Milli Görüş geleneğindeki dayanışma vurgusu söylemi bir miktar yumuşatıyor |
+| YENİ PARTİ | **−25** | −20 | Hak temelli dil + düzensiz göçe sıfır tolerans + sınır güvenliği + **gönüllü** geri dönüş. "Gönüllü" vurgusu CHP'nin güncel çizgisinden ölçülü |
+| YSP (HDP–Yeşil Sol–DEM hattı) | **+75** | +38 | Zorla geri göndermeye ve "gönüllü dönüş" adı altındaki uygulamalara açık karşıtlık, geri gönderme merkezlerinin kapatılması, Cenevre Sözleşmesi coğrafi çekincesinin kaldırılması, kalanlara mülteci statüsü, eşit işe eşit ücret ve sendika hakkı, çok dilli hizmet, belediye bütçelerinin vatandaşlığa değil ikamet eden nüfusa göre dağıtılması |
+
+**Bu eksende dikkat edilmesi gereken bulgu:** dokuz partinin sekizi −80 ile −25 arasında, yalnızca
+YSP hattı pozitif tarafta. Türkiye parti siyasetinde göç konusunda gerçekten böyle bir asimetri
+var; eksen iki kümeyi (dönüş odaklı çoğunluk ve koruma odaklı tek hat) net ayırıyor ama küme içi
+ayrım sınırlı. Kullanıcı bu eksende ortada veya pozitif bir skor aldığında eşleşmesi büyük ölçüde
+YSP'ye kayar. Bu bir hata değil, verinin kendisi — fakat sonuç yorumlanırken bilinmelidir.
+
+**Sınır:** Bu kodlama **tek kodlayıcılıdır**. Metodoloji raporu §6 iki bağımsız kodlayıcı ve
+kodlayıcılar arası güvenirlik ölçümü (Cohen's kappa / ICC) istiyor; o adım yapılmadı.
+
+Kaynaklar: [Diken — Partilerin sığınmacı politikası](https://www.diken.com.tr/partilerin-siginmaci-politikasi-kim-ne-vadediyor/) ·
+[Euronews — Partiler hangi politikaları savunuyor](https://tr.euronews.com/2022/09/13/suriyeli-siginmacilar-sorunu-turkiyedeki-siyasi-partiler-hangi-politikalari-savunuyor) ·
+[DEM Parti — mülteci hakları açıklamaları](https://www.demparti.org.tr/tr/multeciler-uzerinden-yurutulen-kirli-pazarliklar-son-bulmali/17682/) ·
+[Heinrich Böll — Göçmen karşıtı tutumların siyasi parti temsili](https://tr.boell.org/tr/2023/03/28/gocmen-karsiti-tutumlarin-siyasi-parti-temsili-turkiye-ornegi) ·
+[Medyascope — Suriyeliler hakkında hangi siyasetçi ne demişti](https://medyascope.tv/2022/04/19/siyasetin-gundemi-multeciler-suriyeliler-hakkinda-hangi-siyasetci-ne-demisti/)
 
 ### `sosyal`, `cevre`, `sekulerizm`, `dis` — düz çevirme
 
@@ -122,17 +146,17 @@ alınıp çevrildi; iki eksen de v1'de aynı yöne bakıyordu (+ = Batı'dan uza
 | Parti | ekonomi | demokrasi | sekulerizm | kimlik | goc | sosyal | cevre | dis |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
 | AKP | 38 | −53 | −55 | −45 | −40 | −35 | −45 | −48 |
-| CHP | 15 | 35 | 35 | 40 | 15 | 40 | 30 | 40 |
-| YSP | 15 | 73 | 20 | 85 | 38 | 60 | 85 | 35 |
-| MHP | 28 | −65 | −45 | −75 | −35 | −30 | −25 | −58 |
-| İYİ | −23 | 20 | −10 | 0 | −10 | 45 | 15 | −3 |
-| Saadet | 30 | 10 | −60 | −10 | −15 | −20 | −5 | −33 |
-| Gelecek | −3 | 40 | 15 | 25 | 5 | 0 | 55 | 43 |
-| DEVA | −18 | 45 | 25 | 30 | 10 | 20 | 35 | 35 |
-| YENİ PARTİ | 45 | 35 | 45 | 35 | −20 | 55 | 45 | 45 |
+| CHP | 15 | 35 | 35 | 40 | −45 | 40 | 30 | 40 |
+| YSP | 15 | 73 | 20 | 85 | 75 | 60 | 85 | 35 |
+| MHP | 28 | −65 | −45 | −75 | −65 | −30 | −25 | −58 |
+| İYİ | −23 | 20 | −10 | 0 | −80 | 45 | 15 | −3 |
+| Saadet | 30 | 10 | −60 | −10 | −25 | −20 | −5 | −33 |
+| Gelecek | −3 | 40 | 15 | 25 | −30 | 0 | 55 | 43 |
+| DEVA | −18 | 45 | 25 | 30 | −30 | 20 | 35 | 35 |
+| YENİ PARTİ | 45 | 35 | 45 | 35 | −25 | 55 | 45 | 45 |
 
-`goc` sütunundaki italik olmayan iki değer (AKP, YENİ PARTİ) doğrudan kodlama; kalanı düşük
-güvenilirlikli türetmedir.
+`goc` sütunu doğrudan kaynak kodlamasıdır; diğer yedi sütun v1 skorlarından kurallı dönüşümle
+türetilmiştir.
 
 ## Kapsam dışı partiler
 
@@ -147,7 +171,8 @@ tamamen ortadan kaldırmasa da gizlemez.
 
 ## Yayın öncesi yapılacaklar
 
-- [ ] `goc` ekseninde 7 düşük güvenilirlikli hücrenin kaynak belgelerden yeniden kodlanması
+- [x] `goc` ekseninde 7 düşük güvenilirlikli hücrenin kaynak belgelerden yeniden kodlanması
+      *(29 Temmuz 2026 — türetme terk edildi, dokuz partinin tamamı doğrudan kodlandı)*
 - [ ] `ekonomi` ekseninde AKP ve MHP hücrelerinin bileşen ayrışması açısından gözden geçirilmesi
 - [ ] `sosyal` ekseninde toplumsal cinsiyet bileşeninin ayrıca kodlanması
 - [ ] TİP, Vatan, Zafer, Memleket için konum kodlaması ya da açıkça kapsam dışı ilan edilmesi

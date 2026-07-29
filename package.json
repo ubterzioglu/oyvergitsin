@@ -9,6 +9,7 @@
     "lint": "next lint",
     "test": "vitest run",
     "test:watch": "vitest",
+    "test:e2e": "playwright test",
     "db:push": "supabase db push",
     "db:sql": "node scripts/build-manual-sql.js",
     "db:sql:print": "node scripts/direct-migrate.js",
@@ -20,7 +21,8 @@
     "v2:positions": "node scripts/derive-party-positions-v2.js",
     "v2:verify": "node scripts/verify-axis-model-v2.js",
     "v2:activate": "node scripts/seed-axis-model-v2.js --activate",
-    "smoke": "node scripts/smoke-survey-flow.js"
+    "smoke": "node scripts/smoke-survey-flow.js",
+    "audit:rls": "node scripts/audit-rls.js"
   },
   "dependencies": {
     "@supabase/ssr": "^0.8.0",
@@ -36,6 +38,7 @@
     "zustand": "^4.5.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.62.0",
     "@types/node": "^20.11.0",
     "@types/nodemailer": "^8.0.1",
     "@types/react": "^18.2.0",

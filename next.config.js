@@ -1,4 +1,22 @@
 /** @type {import('next').NextConfig} */
+
+// Next.js gelistirme sunucusu HMR ve React Refresh icin eval kullanir. CSP
+// 'unsafe-eval' izni vermedigi surece uygulama YEREL GELISTIRMEDE tarayicida
+// hidrate olmaz: butonlar hicbir sey yapmaz. Uretimde eval kullanilmadigi icin
+// bu izin yalnizca gelistirmede verilir.
+const isDev = process.env.NODE_ENV !== 'production'
+
+const scriptSrc = [
+  "'self'",
+  "'unsafe-inline'",
+  isDev ? "'unsafe-eval'" : null,
+  // Clarity'nin yukleyici betigi www.clarity.ms'ten, asil betigi ise
+  // scripts.clarity.ms'ten geliyor; alt alan adlarinin tamami gerekiyor.
+  'https://*.clarity.ms',
+]
+  .filter(Boolean)
+  .join(' ')
+
 const nextConfig = {
   reactStrictMode: true,
   output: 'standalone',
@@ -15,7 +33,7 @@ const nextConfig = {
             key: 'Content-Security-Policy',
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-inline' https://www.clarity.ms",
+              `script-src ${scriptSrc}`,
               "style-src 'self' 'unsafe-inline'",
               "img-src 'self' data: https:",
               "font-src 'self' data:",

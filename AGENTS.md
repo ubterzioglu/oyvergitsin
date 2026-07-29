@@ -10,7 +10,13 @@ Use `npm install` to sync dependencies. `npm run dev` starts the local app on po
 Follow the existing TypeScript-first style with `strict` mode enabled. Use 2-space indentation, single quotes, and semicolon-free files to match the current codebase. Name React components and exported types in PascalCase, helper functions in camelCase, and route folders in lowercase (`app/api/health`, `app/admin/questions`). Prefer the `@/` path alias over long relative imports.
 
 ## Testing Guidelines
-`npm test` runs the Vitest suite (`vitest run`); tests are colocated next to the code they cover as `*.test.ts` / `*.test.tsx` and are currently limited to `lib/scoring/*`. The scoring core is deliberately free of Supabase and Next.js imports so it can be tested without a database — keep it that way and put data fetching in `lib/scoring/engine.ts`. `npm run lint` and `npm run build` remain required checks. For a full runtime pass, start the dev server and run `npm run smoke`, which exercises `/api/sessions` → `/api/questions` → `/api/answers` → `/api/complete` → `/api/results/[id]` including the legacy-snapshot path.
+`npm test` runs the Vitest suite (`vitest run`); tests are colocated next to the code they cover as `*.test.ts` / `*.test.tsx` and are currently limited to `lib/scoring/*`. The scoring core is deliberately free of Supabase and Next.js imports so it can be tested without a database — keep it that way and put data fetching in `lib/scoring/engine.ts`. `npm run lint` and `npm run build` remain required checks.
+
+`npm run test:e2e` runs the Playwright suite in `e2e/`, which starts its own dev server and drives a real browser: auto-advance, the importance toggle cancelling it, "Fikrim yok" sitting outside the Likert scale, and the full 25-item run through to the results page. Point it elsewhere with `BASE_URL=https://... npm run test:e2e` (it then skips starting a server). Note that E2E and smoke runs write real sessions and answers to whichever database the target is using.
+
+`npm run smoke` exercises the API chain directly — `/api/sessions` → `/api/questions` → `/api/answers` → `/api/complete` → `/api/results/[id]` — including the legacy-snapshot path.
+
+`npm run audit:rls` prints the row-level-security policies on the sensitive tables. The Next.js API layer's session-ownership check does **not** protect the Supabase REST endpoint, which is reachable with the public anon key — protection has to be in RLS.
 
 ## Axis Model Versions
 Survey content is versioned through `axis_models`. `v1` holds the original demo questions; `v2` holds the methodology question set derived from `resultdeepresearch.html`. Only the **active** model is served — `/api/questions` and the scoring engine both filter on it via `lib/scoring/active-model.ts`.

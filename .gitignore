@@ -47,3 +47,8 @@ next-env.d.ts
 
 # supabase
 .supabase
+
+# Playwright
+test-results/
+playwright-report/
+.prod-test.log

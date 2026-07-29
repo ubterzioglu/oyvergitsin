@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
@@ -21,6 +21,10 @@ import { ImageChoiceQuestion } from '@/components/survey/ImageChoiceQuestion'
 import { VignetteLikert } from '@/components/survey/VignetteLikert'
 
 const RAINBOW_ACCENTS = ['#F5C518', '#F5821F', '#E8385C', '#7B4FE0', '#1E9BE0', '#3CB043']
+
+// Tek seçimle tamamlanan sorularda kullanıcı şıkkı işaretledikten sonra
+// seçimin vurgulandığını görebilsin diye kısa bir gecikmeyle ilerlenir.
+const AUTO_ADVANCE_DELAY_MS = 280
 
 interface QuestionOption {
   id: string
@@ -99,6 +103,7 @@ export default function SurveyPage() {
   const [loading, setLoading] = useState(true)
   const [submitting, setSubmitting] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
+  const advanceTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   useEffect(() => {
     const sessionId = localStorage.getItem('sessionId')
@@ -144,6 +149,15 @@ export default function SurveyPage() {
     }
   }
 
+  const cancelScheduledAdvance = () => {
+    if (advanceTimerRef.current) {
+      clearTimeout(advanceTimerRef.current)
+      advanceTimerRef.current = null
+    }
+  }
+
+  useEffect(() => cancelScheduledAdvance, [])
+
   const handleAnswer = (value: string) => {
     const question = questions[currentQuestion]
     if (!question) return
@@ -154,7 +168,27 @@ export default function SurveyPage() {
     }))
   }
 
+  // Tek seçimlik sorularda şık işaretlenir işaretlenmez sonraki soruya geçilir.
+  // Son soruda otomatik gönderim yapılmaz; kullanıcı butonla onaylar.
+  const handleSingleSelectAnswer = (value: string) => {
+    handleAnswer(value)
+
+    if (!value || currentQuestion >= questions.length - 1) return
+
+    cancelScheduledAdvance()
+    advanceTimerRef.current = setTimeout(() => {
+      advanceTimerRef.current = null
+      setCurrentQuestion((index) => Math.min(index + 1, questions.length - 1))
+    }, AUTO_ADVANCE_DELAY_MS)
+  }
+
+  const goToQuestion = (index: number) => {
+    cancelScheduledAdvance()
+    setCurrentQuestion(index)
+  }
+
   const handleNext = () => {
+    cancelScheduledAdvance()
     if (currentQuestion < questions.length - 1) {
       setCurrentQuestion(currentQuestion + 1)
     } else {
@@ -163,6 +197,7 @@ export default function SurveyPage() {
   }
 
   const handlePrevious = () => {
+    cancelScheduledAdvance()
     if (currentQuestion > 0) {
       setCurrentQuestion(currentQuestion - 1)
     }
@@ -287,7 +322,9 @@ export default function SurveyPage() {
 
       case 'likert_5':
       case 'likert_7':
-        return <LikertScale options={options} value={rawAnswer ?? ''} onChange={handleAnswer} />
+        return (
+          <LikertScale options={options} value={rawAnswer ?? ''} onChange={handleSingleSelectAnswer} />
+        )
 
       case 'vignette_likert':
         return (
@@ -295,7 +332,7 @@ export default function SurveyPage() {
             vignetteText={question.vignette_text ?? question.description ?? ''}
             options={options}
             value={rawAnswer ?? ''}
-            onChange={handleAnswer}
+            onChange={handleSingleSelectAnswer}
           />
         )
 
@@ -360,9 +397,13 @@ export default function SurveyPage() {
             options={options}
             multi={question.type === 'image_choice_multi'}
             value={imageValue}
-            onChange={(next) =>
-              handleAnswer(question.type === 'image_choice_multi' ? JSON.stringify(next) : next[0] ?? '')
-            }
+            onChange={(next) => {
+              if (question.type === 'image_choice_multi') {
+                handleAnswer(JSON.stringify(next))
+                return
+              }
+              handleSingleSelectAnswer(next[0] ?? '')
+            }}
           />
         )
       }
@@ -401,7 +442,7 @@ export default function SurveyPage() {
         return (
           <select
             value={rawAnswer ?? ''}
-            onChange={(e) => handleAnswer(e.target.value)}
+            onChange={(e) => handleSingleSelectAnswer(e.target.value)}
             className="mb-8 w-full rounded-lg border-2 border-border p-4 text-ink-primary focus:border-rainbow-blue focus:outline-none"
           >
             <option value="" disabled>
@@ -421,7 +462,8 @@ export default function SurveyPage() {
             {options.map((option) => (
               <button
                 key={option.id}
-                onClick={() => handleAnswer(option.value)}
+                type="button"
+                onClick={() => handleSingleSelectAnswer(option.value)}
                 className={`w-full rounded-lg border-2 p-4 text-left transition-all ${
                   rawAnswer === option.value
                     ? 'border-rainbow-blue bg-surface-muted'
@@ -448,7 +490,7 @@ export default function SurveyPage() {
           className="flex w-full max-w-xl min-h-[40rem] flex-col border-t-4"
           style={{ borderTopColor: RAINBOW_ACCENTS[currentQuestion % RAINBOW_ACCENTS.length] }}
         >
-          {question.description && (
+          {question.description && question.type !== 'vignette_likert' && (
             <p className="mb-3 text-ink-secondary">{question.description}</p>
           )}
           <h2 className="mb-5 font-heading text-2xl font-semibold text-ink-primary">
@@ -479,7 +521,7 @@ export default function SurveyPage() {
               <button
                 key={q.id}
                 type="button"
-                onClick={() => setCurrentQuestion(index)}
+                onClick={() => goToQuestion(index)}
                 aria-label={`Soru ${index + 1}`}
                 aria-current={isActive}
                 className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs font-semibold text-white transition-colors duration-300 ${

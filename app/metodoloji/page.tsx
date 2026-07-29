@@ -12,8 +12,14 @@ export const metadata: Metadata = {
     'Soru setinin, puanlama algoritmasının ve parti konumlandırmasının nasıl belirlendiği; kaynaklar ve sınırlamalar.',
 }
 
-// Şeffaflık sayfası içerik değiştikçe güncel kalmalı.
-export const revalidate = 3600
+// Her istekte veritabanından okunur.
+//
+// Bu sayfa AKTİF eksen modelini yayımlar. Statik önbellekle (ISR) sunulduğunda,
+// aktif model değiştirildikten sonra sayfa bir sonraki yeniden doğrulamaya
+// kadar eski soru setini "yayımlanmış yöntem" diye göstermeye devam ediyordu —
+// yani canlı anketle çelişiyordu. Bir şeffaflık sayfası için bu kabul edilemez;
+// düşük trafikli olduğu için dinamik render'ın maliyeti önemsiz.
+export const dynamic = 'force-dynamic'
 
 interface AxisRow {
   id: string

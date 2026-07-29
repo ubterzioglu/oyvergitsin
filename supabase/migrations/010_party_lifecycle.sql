@@ -25,6 +25,9 @@ SET is_active = false,
     dissolution_note = 'Olağanüstü kongre kararıyla kapatıldı; üyeleri CHP''ye katıldı.'
 WHERE short_name = 'Memleket';
 
+-- Zafer Partisi'nin adı ilk seed'den beri "Zafar" olarak yanlış yazılmıştı.
+UPDATE parties SET name = 'Zafer Partisi' WHERE short_name = 'Zafer';
+
 -- Yeşil Sol Parti -> DEM Parti (ad değişikliği, aynı siyasi hat).
 UPDATE parties
 SET name = 'Halkların Eşitlik ve Demokrasi Partisi',

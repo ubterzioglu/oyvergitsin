@@ -48,7 +48,25 @@ export function Footer() {
         >
           Pendik Evden Eve Nakliyat
         </a>{' '}
-        Firması Ufuksoy Nakliyat A.Ş.
+        Firması Ufuksoy Nakliyat A.Ş
+        {' · '}
+        <span>
+          <a href="https://tekhurdametal.com/hurda-demir-fiyatlari/" rel="dofollow" className="font-medium text-rainbow-blue underline underline-offset-4 transition-colors hover:text-rainbow-blue-hover">
+            Demir Hurda Fiyatları
+          </a>{' '}
+          Tek Hurda Metal
+        </span>
+        {' · '}
+        <span>
+          <a
+            href="https://lionerotik.com/urunler/fetis-urunleri"
+            rel="dofollow"
+            className="font-medium text-rainbow-blue underline underline-offset-4 transition-colors hover:text-rainbow-blue-hover"
+          >
+            Antalya Erotik Shop
+          </a>{' '}
+          Lion Erotik
+        </span>
         {' · '}
         <a
           href="https://tekhurdametal.com/beylikduzu-hurdaci/"

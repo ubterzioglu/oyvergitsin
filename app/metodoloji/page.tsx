@@ -276,10 +276,37 @@ benzerlik = 100 × (1 − uzaklık / (200 × Σönem))`}
               sonuç ekranında ayrıca listelenir.
             </li>
             <li>
+              Konum kodlaması <strong>tek bir kodlayıcı</strong> tarafından yapılmıştır. İki bağımsız
+              kodlayıcı ve aralarındaki uyumun ölçülmesi daha güçlü bir yöntemdir; bu adım henüz
+              uygulanmadı.
+            </li>
+            <li>
               Soru seti henüz bilişsel görüşme ve psikometrik pilot aşamalarından geçmemiştir;
               maddelerin ayırt ediciliği ve iç tutarlılığı yayın öncesi test edilecektir.
             </li>
+            <li>
+              Bazı eksenlerde konumlar, önceki eksen modelindeki kodlamalardan kurallı dönüşümle
+              türetildi. Yukarıdaki tabloda türetilmiş hücreler işaretlidir.
+            </li>
           </ul>
+        </Card>
+
+        <Card elevated className="mb-8">
+          <h2 className="mb-2 font-heading text-2xl font-semibold text-ink-primary">
+            Kaynaklar ve düzeltme talebi
+          </h2>
+          <p className="mb-4 text-sm text-ink-secondary">
+            Parti konumları aşağıdaki kaynak türlerinden, bu sırayla kodlanır: güncel seçim
+            beyannamesi, resmî parti programı, resmî parti açıklaması, yasama davranışı, akademik
+            uzman veri setleri. Her parti-eksen konumu için kullanılan kaynak ve kodlama gerekçesi
+            kayıt altındadır.
+          </p>
+          <p className="text-sm text-ink-secondary">
+            Bir partinin konumunun yanlış kodlandığını düşünüyorsanız — özellikle bir parti
+            temsilcisiyseniz — sayfanın altındaki geri bildirim düğmesinden iletin. Yeni kaynak
+            gösteren bildirimler değerlendirilir; değişiklik yapıldığında eski ve yeni değer
+            gerekçesiyle birlikte kayda geçer.
+          </p>
         </Card>
 
         <div className="text-sm">

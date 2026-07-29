@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "lastScanned": 1784997425559,
+  "lastScanned": 1785324735090,
   "projectRoot": "c:\\temp_private\\oyvergitsin",
   "techStack": {
     "languages": [
@@ -76,7 +76,10 @@
       "public",
       "scripts"
     ],
-    "gitBranches": null
+    "gitBranches": {
+      "defaultBranch": "main",
+      "branchingStrategy": null
+    }
   },
   "customNotes": [],
   "directoryMap": {
@@ -84,7 +87,7 @@
       "path": "app",
       "purpose": "Application code",
       "fileCount": 10,
-      "lastAccessed": 1784997425509,
+      "lastAccessed": 1785324735026,
       "keyFiles": [
         "apple-icon.png",
         "globals.css",
@@ -97,16 +100,17 @@
       "path": "components",
       "purpose": "UI components",
       "fileCount": 0,
-      "lastAccessed": 1784997425510,
+      "lastAccessed": 1785324735026,
       "keyFiles": []
     },
     "docs": {
       "path": "docs",
       "purpose": "Documentation",
-      "fileCount": 4,
-      "lastAccessed": 1784997425511,
+      "fileCount": 5,
+      "lastAccessed": 1785324735027,
       "keyFiles": [
         "COOLIFY_DEPLOYMENT.md",
+        "new-party-2026-research.md",
         "party-positions-2026-update.md",
         "research-input-remaining-parties.md",
         "research-input.md"
@@ -116,7 +120,7 @@
       "path": "lib",
       "purpose": "Library code",
       "fileCount": 5,
-      "lastAccessed": 1784997425538,
+      "lastAccessed": 1785324735059,
       "keyFiles": [
         "parties.ts",
         "rate-limit.ts",
@@ -129,7 +133,7 @@
       "path": "public",
       "purpose": "Public files",
       "fileCount": 2,
-      "lastAccessed": 1784997425539,
+      "lastAccessed": 1785324735060,
       "keyFiles": [
         "llms.txt",
         "logo.png"
@@ -139,7 +143,7 @@
       "path": "scripts",
       "purpose": "Build/utility scripts",
       "fileCount": 9,
-      "lastAccessed": 1784997425539,
+      "lastAccessed": 1785324735061,
       "keyFiles": [
         "build-manual-sql.js",
         "direct-migrate.js",
@@ -152,7 +156,7 @@
       "path": "supabase",
       "purpose": null,
       "fileCount": 2,
-      "lastAccessed": 1784997425540,
+      "lastAccessed": 1785324735062,
       "keyFiles": [
         "config.toml",
         "manual-apply.sql"
@@ -162,14 +166,14 @@
       "path": "app\\api",
       "purpose": "API routes",
       "fileCount": 0,
-      "lastAccessed": 1784997425540,
+      "lastAccessed": 1785324735063,
       "keyFiles": []
     },
     "supabase\\migrations": {
       "path": "supabase\\migrations",
       "purpose": "Database migrations",
-      "fileCount": 7,
-      "lastAccessed": 1784997425542,
+      "fileCount": 8,
+      "lastAccessed": 1785324735065,
       "keyFiles": [
         "001_initial_schema.sql",
         "002_public_survey_policies.sql",
@@ -177,217 +181,6 @@
       ]
     }
   },
-  "hotPaths": [
-    {
-      "path": "app\\survey\\page.tsx",
-      "accessCount": 17,
-      "lastAccessed": 1784998597183,
-      "type": "file"
-    },
-    {
-      "path": "scripts\\seed.js",
-      "accessCount": 5,
-      "lastAccessed": 1784998674631,
-      "type": "directory"
-    },
-    {
-      "path": "app\\admin\\questions\\[id]\\page.tsx",
-      "accessCount": 5,
-      "lastAccessed": 1784998765815,
-      "type": "file"
-    },
-    {
-      "path": "",
-      "accessCount": 3,
-      "lastAccessed": 1784997711257,
-      "type": "directory"
-    },
-    {
-      "path": "supabase\\migrations\\006_radar_news_pipeline.sql",
-      "accessCount": 3,
-      "lastAccessed": 1785002815431,
-      "type": "file"
-    },
-    {
-      "path": "lib\\admin\\questionTypes.ts",
-      "accessCount": 2,
-      "lastAccessed": 1784998618974,
-      "type": "file"
-    },
-    {
-      "path": "supabase\\migrations\\008_bbc_turkce_news_source.sql",
-      "accessCount": 2,
-      "lastAccessed": 1785002825677,
-      "type": "file"
-    },
-    {
-      "path": "lib\\radar\\types.ts",
-      "accessCount": 1,
-      "lastAccessed": 1784997481475,
-      "type": "file"
-    },
-    {
-      "path": "components\\home\\LatestNews.tsx",
-      "accessCount": 1,
-      "lastAccessed": 1784997497603,
-      "type": "file"
-    },
-    {
-      "path": "tailwind.config.ts",
-      "accessCount": 1,
-      "lastAccessed": 1784997591530,
-      "type": "file"
-    },
-    {
-      "path": "app\\api\\admin\\radar\\candidates\\[id]\\route.ts",
-      "accessCount": 1,
-      "lastAccessed": 1784997591748,
-      "type": "file"
-    },
-    {
-      "path": "app\\api\\questions",
-      "accessCount": 1,
-      "lastAccessed": 1784997711829,
-      "type": "directory"
-    },
-    {
-      "path": "components\\survey\\RankingQuestion.tsx",
-      "accessCount": 1,
-      "lastAccessed": 1784997720933,
-      "type": "file"
-    },
-    {
-      "path": "supabase\\migrations\\001_initial_schema.sql",
-      "accessCount": 1,
-      "lastAccessed": 1784997727148,
-      "type": "file"
-    },
-    {
-      "path": "app\\admin\\questions\\page.tsx",
-      "accessCount": 1,
-      "lastAccessed": 1784998117162,
-      "type": "file"
-    },
-    {
-      "path": "app\\api\\questions\\route.ts",
-      "accessCount": 1,
-      "lastAccessed": 1784998328658,
-      "type": "file"
-    },
-    {
-      "path": "app\\api\\answers\\route.ts",
-      "accessCount": 1,
-      "lastAccessed": 1784998328738,
-      "type": "file"
-    },
-    {
-      "path": "lib\\validation\\survey.ts",
-      "accessCount": 1,
-      "lastAccessed": 1784998335926,
-      "type": "file"
-    },
-    {
-      "path": "components\\ui\\Button.tsx",
-      "accessCount": 1,
-      "lastAccessed": 1784998336225,
-      "type": "file"
-    },
-    {
-      "path": "components\\ui\\Card.tsx",
-      "accessCount": 1,
-      "lastAccessed": 1784998336542,
-      "type": "file"
-    },
-    {
-      "path": "components\\survey\\MatrixQuestion.tsx",
-      "accessCount": 1,
-      "lastAccessed": 1784998350601,
-      "type": "file"
-    },
-    {
-      "path": "components\\survey\\LikertScale.tsx",
-      "accessCount": 1,
-      "lastAccessed": 1784998353737,
-      "type": "file"
-    },
-    {
-      "path": "components\\survey\\SliderQuestion.tsx",
-      "accessCount": 1,
-      "lastAccessed": 1784998356747,
-      "type": "file"
-    },
-    {
-      "path": "components\\survey\\NumericInput.tsx",
-      "accessCount": 1,
-      "lastAccessed": 1784998358381,
-      "type": "file"
-    },
-    {
-      "path": "components\\survey\\AllocationQuestion.tsx",
-      "accessCount": 1,
-      "lastAccessed": 1784998363365,
-      "type": "file"
-    },
-    {
-      "path": "components\\survey\\OpenTextInput.tsx",
-      "accessCount": 1,
-      "lastAccessed": 1784998365976,
-      "type": "file"
-    },
-    {
-      "path": "components\\survey\\DateInput.tsx",
-      "accessCount": 1,
-      "lastAccessed": 1784998367422,
-      "type": "file"
-    },
-    {
-      "path": "components\\survey\\FileUploadInput.tsx",
-      "accessCount": 1,
-      "lastAccessed": 1784998369260,
-      "type": "file"
-    },
-    {
-      "path": "components\\survey\\ConsentCheckboxGroup.tsx",
-      "accessCount": 1,
-      "lastAccessed": 1784998372517,
-      "type": "file"
-    },
-    {
-      "path": "components\\survey\\CaptchaPlaceholder.tsx",
-      "accessCount": 1,
-      "lastAccessed": 1784998374499,
-      "type": "file"
-    },
-    {
-      "path": "components\\survey\\ImageChoiceQuestion.tsx",
-      "accessCount": 1,
-      "lastAccessed": 1784998386000,
-      "type": "file"
-    },
-    {
-      "path": "components\\survey\\VignetteLikert.tsx",
-      "accessCount": 1,
-      "lastAccessed": 1784998388507,
-      "type": "file"
-    },
-    {
-      "path": "app\\admin\\radar\\page.tsx",
-      "accessCount": 1,
-      "lastAccessed": 1784998851136,
-      "type": "file"
-    },
-    {
-      "path": "app\\admin\\radar\\sources\\page.tsx",
-      "accessCount": 1,
-      "lastAccessed": 1785002784740,
-      "type": "file"
-    },
-    {
-      "path": "supabase\\migrations\\007_feedback.sql",
-      "accessCount": 1,
-      "lastAccessed": 1785002796259,
-      "type": "file"
-    }
-  ],
+  "hotPaths": [],
   "userDirectives": []
 }

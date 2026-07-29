@@ -173,7 +173,9 @@ export async function calculateResults(sessionId: string): Promise<CalculationRe
       .select('id, type, is_scored, weight, max_contribution, expected_value')
       .eq('axis_model_id', axisModelId),
     supabase.from('answers').select('question_id, answer_value, is_important').eq('session_id', sessionId),
-    supabase.from('parties').select('id, name, short_name'),
+    // Kapanmış partiler eşleşmeye girmez. Satır silinmiyor: eski sonuç
+    // anlık görüntüleri parti id'lerine atıf yapıyor.
+    supabase.from('parties').select('id, name, short_name').eq('is_active', true),
   ])
 
   if (axesResult.error) throw axesResult.error

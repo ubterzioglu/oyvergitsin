@@ -50,6 +50,50 @@ describe('parti benzerliği sınırları', () => {
     expect(match.axesUsed).toBe(0)
   })
 
+  it('yeterince eksende konumlanmamış parti sıralamaya girmez', () => {
+    // 8 eksen karşılaştırılabilir; eşik %75 -> en az 6 konum gerekiyor.
+    const axes = Array.from({ length: 8 }, (_, index) => axis(`axis-${index}`, 50))
+    const sparse = Array.from({ length: 5 }, (_, index) => position('Az', `axis-${index}`, 50))
+    const full = Array.from({ length: 8 }, (_, index) => position('Tam', `axis-${index}`, 50))
+
+    const [az, tam] = computePartyMatches(['Az', 'Tam'], axes, [...sparse, ...full])
+
+    // Az kodlanmış parti her eksende birebir uyuyor ama yine de sıralanmaz.
+    expect(az.similarity).toBeNull()
+    expect(az.axesUsed).toBe(5)
+    expect(tam.similarity).toBe(100)
+  })
+
+  it('eşiği tam karşılayan parti sıralanır', () => {
+    const axes = Array.from({ length: 8 }, (_, index) => axis(`axis-${index}`, 50))
+    const positions = Array.from({ length: 6 }, (_, index) => position('Sinirda', `axis-${index}`, 50))
+
+    const [match] = computePartyMatches(['Sinirda'], axes, positions)
+
+    expect(match.similarity).toBe(100)
+    expect(match.axesUsed).toBe(6)
+  })
+
+  it('kullanıcının kapsaması düşükse eşik de küçülür', () => {
+    // Yalnızca 4 eksen karşılaştırılabilir -> eşik 3 konum.
+    const axes = [
+      axis(A, 50),
+      axis(B, 50),
+      axis('axis-c', 50),
+      axis('axis-d', 50),
+      axis('axis-e', null, { excludedFromMatching: true }),
+      axis('axis-f', null, { excludedFromMatching: true }),
+      axis('axis-g', null, { excludedFromMatching: true }),
+      axis('axis-h', null, { excludedFromMatching: true }),
+    ]
+    const positions = [position('X', A, 50), position('X', B, 50), position('X', 'axis-c', 50)]
+
+    const [match] = computePartyMatches(['X'], axes, positions)
+
+    expect(match.similarity).toBe(100)
+    expect(match.axesUsed).toBe(3)
+  })
+
   it('kapsama eşiğinin altındaki eksen hesaba katılmaz', () => {
     const axes = [axis(A, 100), axis(B, -100, { excludedFromMatching: true, tier: 'low', coverage: 0.33 })]
     const [match] = computePartyMatches(['X'], axes, [position('X', A, 100), position('X', B, 100)])

@@ -158,23 +158,103 @@ alınıp çevrildi; iki eksen de v1'de aynı yöne bakıyordu (+ = Batı'dan uza
 `goc` sütunu doğrudan kaynak kodlamasıdır; diğer yedi sütun v1 skorlarından kurallı dönüşümle
 türetilmiştir.
 
-## Kapsam dışı partiler
+## Parti listesindeki düzeltmeler (29 Temmuz 2026)
 
-TİP, Vatan, Zafer ve Memleket `parties` tablosunda kayıtlı ama hiçbir eksende konumları yok
-(bkz. `docs/research-input-remaining-parties.md`). v2'de de konumsuz kalıyorlar.
+Kaynak taraması sırasında parti listesinde iki hata çıktı:
 
-Motor bu partileri eşleşmeye dahil etmez ve benzerlikleri `null` döner — `0` değil. Bu ayrım
-önemli: `0` "tamamen zıt" demektir, `null` "yeterli kanıt yok" demektir. Sonuç ekranı bunları
-sıralamanın sonunda, kanıt eksikliği notuyla gösterir. Metodoloji raporu §10 küçük partilerin
-dışlanmasını sistematik bir yanlılık kaynağı sayıyor; kanıt yokluğunu görünür kılmak bu riski
-tamamen ortadan kaldırmasa da gizlemez.
+- **Memleket Partisi kapanmış.** 21–22 Temmuz 2025'teki olağanüstü kongrede 277 delegenin 220'si
+  kapanma yönünde oy kullandı; Muharrem İnce daha önce (24 Haziran 2025) CHP'ye dönmüştü. Var
+  olmayan bir partiyi eşleştirmeye sokmak yanlış olacağı için `parties.is_active = false`
+  işaretlendi. **Satır silinmedi:** eski oturumların sonuç anlık görüntüleri parti id'lerine atıf
+  yapıyor, silme onları çözümsüz bırakırdı.
+- **Yeşil Sol Parti artık DEM Parti.** Parti Ekim 2023'te "Halkların Eşitlik ve Demokrasi
+  Partisi" adını aldı; Yargıtay HEDEP kısaltmasını kabul etmeyince Aralık 2023'te kısaltma DEM
+  oldu. Aynı siyasi hat, güncel ad. Kayıt yeniden adlandırıldı.
+
+DEVA, Gelecek ve Saadet ayrı partiler olarak duruyor: "Yeni Yol" çatısı altında ortak bir
+parlamento grubu kurdular ama kurumsal kimliklerini, programlarını ve genel başkanlarını
+koruyorlar. Bu yüzden ayrı ayrı kodlanmaya devam ediyorlar.
+
+## Doğrudan kodlanan partiler (v1'de konumu olmayanlar)
+
+TİP, Vatan Partisi ve Zafer Partisi v1 modelinde hiç konumlandırılmamıştı, dolayısıyla türetilecek
+bir kaynak yok. Parti programları ve resmî belgeler taranarak doğrudan v2 eksenlerinde kodlandılar.
+
+| Parti | ekonomi | demokrasi | sekulerizm | kimlik | goc | sosyal | cevre | dis | Eksen |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| TİP | 90 | 70 | 90 | 70 | — | 90 | 60 | −70 | 7/8 |
+| Vatan | 75 | 40 | 80 | −80 | — | 20 | 25 | −85 | 7/8 |
+| Zafer | 30 | 45 | 80 | — | −95 | — | — | −55 | 5/8 |
+
+**Kanıt bulunamayan eksenler kasıtlı olarak boş bırakıldı.** TİP ve Vatan Partisi için partiye özgü
+bir göç politikası; Zafer Partisi için kimlik, sosyal politika ve çevre başlıklarında konum
+belgelerden çıkarılamadı (parti programının erişilebilir sürümü metin olarak okunamıyor). Uydurma
+sayı yazmaktansa boş bırakmak doğru olan.
+
+Dikkat çeken noktalar: TİP ve Vatan ekonomide en solda ama `dis` ekseninde negatif — ikisi de
+NATO ve Batı ittifakı karşıtı, yani "sol ekonomi = AB yanlısı" beklentisi burada da kırılıyor.
+Vatan Partisi ekonomide sol, laiklikte güçlü, kimlikte ise üniter-merkeziyetçi uçta: eksenler
+arası bu gerilim gerçek ve model onu koruyor.
+
+## Yetersiz kodlanmış partiler sıralamaya girmez
+
+Bir parti yalnızca birkaç eksende konumlandırılmışsa, benzerliği yalnızca o eksenler üzerinden
+hesaplanır — ayrıştığı konular hesaba hiç girmez ve parti haksız biçimde üste çıkabilir.
+
+Bu yüzden bir partinin sıralanabilmesi için **karşılaştırılabilir eksenlerin en az %75'inde**
+konumlandırılmış olması gerekir (`PARTY_AXIS_COVERAGE_THRESHOLD`). Sekiz eksenin tamamı
+karşılaştırılabilir olduğunda eşik 6 konumdur; Zafer Partisi (5/8) bu nedenle sıralama dışı kalır
+ve sonuç ekranında kaç eksende kodlandığı belirtilerek ayrıca listelenir.
+
+Benzerlik bu durumda `null` döner, `0` değil. Ayrım önemli: `0` "tamamen zıt", `null` "yeterli
+kodlama yok" demektir. Metodoloji raporu §10 küçük partilerin dışlanmasını sistematik bir yanlılık
+kaynağı sayıyor; kanıt eksikliğini görünür kılmak bu riski ortadan kaldırmaz ama gizlemez.
 
 ## Yayın öncesi yapılacaklar
 
 - [x] `goc` ekseninde 7 düşük güvenilirlikli hücrenin kaynak belgelerden yeniden kodlanması
       *(29 Temmuz 2026 — türetme terk edildi, dokuz partinin tamamı doğrudan kodlandı)*
-- [ ] `ekonomi` ekseninde AKP ve MHP hücrelerinin bileşen ayrışması açısından gözden geçirilmesi
-- [ ] `sosyal` ekseninde toplumsal cinsiyet bileşeninin ayrıca kodlanması
-- [ ] TİP, Vatan, Zafer, Memleket için konum kodlaması ya da açıkça kapsam dışı ilan edilmesi
+- [x] `ekonomi` ekseninde AKP ve MHP hücrelerinin bileşen ayrışması açısından gözden geçirilmesi
+      *(29 Temmuz 2026 — sorunun kaynağı AKP/MHP değil, v1'deki iki hatalı hücre çıktı; aşağıya bakınız)*
+- [x] `sosyal` ekseninde toplumsal cinsiyet bileşeninin ayrıca kodlanması
+      *(29 Temmuz 2026 — parti bazlı düzeltme eklendi)*
+- [x] TİP, Vatan, Zafer, Memleket için konum kodlaması ya da açıkça kapsam dışı ilan edilmesi
+      *(29 Temmuz 2026 — üçü kodlandı, Memleket kapandığı için listeden çıkarıldı)*
 - [ ] Metodoloji raporu §6'daki iki-kodlayıcı protokolünün en az `goc` ve `demokrasi` eksenlerinde
       uygulanması ve kodlayıcılar arası güvenirlik skorunun yayımlanması
+
+## `ekonomi` ekseni: sorun bileşen ayrışması değil, v1'de iki hatalı hücreymiş
+
+İlk turda AKP (38) ve MHP (28) ekonomide CHP (15) ve YSP (15) ile aynı hizada ya da onların
+üzerinde çıkıyordu. Bunu bileşik eksenin kaçınılmaz bir zaafı sanmıştım — yeniden dağıtım ile
+devlet yönlendirmesinin aynı sayıya sıkışması. İnceleyince gerçek neden çıktı:
+
+**v1'de iki hücrenin işareti kendi gerekçesiyle çelişiyordu.**
+
+| Parti | v1 `economy_market_state` | v1'deki gerekçe | Sorun |
+|---|---:|---|---|
+| CHP | −25 | "Planlı kalkınma + vergi adaleti, kurumsal düzenleme ağırlıklı" | Skor "serbest piyasa" tarafında, gerekçe planlı kalkınma diyor |
+| YSP/DEM | −50 | "Yeniden dağıtım, emek ve ekoloji merkezli ekonomi anlayışı" | Skor "asgari devlet müdahalesi" demek, gerekçe tam tersi |
+
+v1 konvansiyonunda bu eksende −100 "serbest piyasa, asgari devlet müdahalesi", +100 "devlet
+yönlendirmeli ekonomi" anlamına geliyor. İki hücre de yanlış işaretliydi. Düzeltildi:
+CHP −25 → **+25**, DEM −50 → **+55**.
+
+Sonuç: `ekonomi` ekseni artık beklenen sırayı veriyor — DEM 68, YENİ PARTİ 45, CHP 40, AKP 38,
+MHP 28, Saadet 30, Gelecek −3, DEVA −18, İYİ −23. Bileşik eksen tanımına dokunmak gerekmedi.
+
+## `sosyal` ekseni: toplumsal cinsiyet bileşeni eklendi
+
+v2 ekseni "Refah, Eğitim, Toplumsal Cinsiyet ve Aile" başlığını taşıyor ama v1'in
+`education_social_policy` ekseni toplumsal cinsiyeti hiç ölçmüyordu; düz çevirme bu bileşeni
+tamamen atlıyordu. Parti bazlı düzeltme eklendi (pozitif = toplumsal cinsiyet eşitliği yönünde):
+
+| Parti | Düzeltme | Dayanak |
+|---|---:|---|
+| AKP | −15 | Aile merkezli sosyal politika; İstanbul Sözleşmesi'nden çekilme kararı |
+| MHP | −10 | Geleneksel aile çerçevesi, kategorik destek yaklaşımı |
+| Saadet | −10 | Milli Görüş geleneğinde aile merkezli toplumsal düzen |
+| İYİ | 0 | Programda belirgin bir toplumsal cinsiyet vurgusu tespit edilmedi |
+| Gelecek, DEVA | +5 | Kurumsal ve kapsayıcı sosyal koruma dili |
+| CHP, YENİ PARTİ | +10 | Hak temelli sosyal devlet ve toplumsal cinsiyet eşitliği vurgusu |
+| DEM | +15 | Kadın özgürlüğü programın kurucu unsurlarından |

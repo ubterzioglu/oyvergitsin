@@ -19,13 +19,19 @@ const V1_SCORES = {
     secularism: 55, identity_migration: 40, foreign_policy: 60, eu_relations: 35,
     education_social_policy: 35, environment_growth: 45,
   },
+  // economy_market_state DÜZELTİLDİ (-25 -> 25). v1'de skor "serbest piyasa"
+  // tarafındaydı ama kendi gerekçesi "planlı kalkınma + vergi adaleti" diyordu;
+  // kutup konvansiyonuyla çelişen bir kodlama hatasıydı.
   CHP: {
-    economy_market_state: -25, income_distribution: 55, civil_liberties: 55, security_state: -15,
+    economy_market_state: 25, income_distribution: 55, civil_liberties: 55, security_state: -15,
     secularism: -35, identity_migration: -30, foreign_policy: -25, eu_relations: -55,
     education_social_policy: -40, environment_growth: -30,
   },
-  YSP: {
-    economy_market_state: -50, income_distribution: 80, civil_liberties: 85, security_state: -60,
+  // economy_market_state DÜZELTİLDİ (-50 -> 55). Aynı hata daha büyük ölçekte:
+  // gerekçe "yeniden dağıtım, emek ve ekoloji merkezli ekonomi" derken skor
+  // asgari devlet müdahalesi anlamına geliyordu.
+  DEM: {
+    economy_market_state: 55, income_distribution: 80, civil_liberties: 85, security_state: -60,
     secularism: -20, identity_migration: -75, foreign_policy: -40, eu_relations: -30,
     education_social_policy: -60, environment_growth: -85,
   },
@@ -69,7 +75,7 @@ const V1_SCORES = {
 const LOCAL_AUTONOMY_ADJUSTMENT = {
   AKP: -5,           // "merkezi koordinasyon baskın"
   CHP: 10,           // "katılımcı ve güçlü belediyecilik"
-  YSP: 10,           // "yerelleşme ve özerklik şartı"
+  DEM: 10,           // "yerelleşme ve özerklik şartı"
   MHP: -5,           // "hizmet kapasitesi artışı", genel çerçeve merkeziyetçi
   'İYİ': 20,         // "çerçeve kanun, katılımcı mahalli idare"
   Saadet: 20,        // "görev devri ve yerel güçlenme"
@@ -136,11 +142,31 @@ const MIGRATION_DIRECT = {
     rationale:
       'Program hak temelli dili korurken düzensiz göçe sıfır tolerans, sınır güvenliği ve gönüllü geri dönüş politikalarını içeriyor. "Gönüllü" vurgusu, CHP\'nin güncel "hepsini göndereceğiz" çizgisinden daha ölçülü bir konum veriyor.',
   },
-  YSP: {
+  DEM: {
     score: 75,
     rationale:
       'Kodlanan partiler arasında tek koruma yanlısı çizgi (HDP–Yeşil Sol–DEM hattı): zorla geri göndermeye ve "gönüllü dönüş" adı altındaki uygulamalara açık karşıtlık, geri gönderme merkezlerinin kapatılması, Cenevre Sözleşmesi\'ndeki coğrafi çekincenin kaldırılması, kalanlara mülteci statüsü, eşit işe eşit ücret ve sendika hakkı, çok dilli hizmet ve belediye bütçelerinin vatandaşlığa değil ikamet eden nüfusa göre dağıtılması.',
   },
+}
+
+/**
+ * v2 `sosyal` ekseni, v1 `education_social_policy`den farklı olarak toplumsal
+ * cinsiyet ve aile politikasını da kapsıyor. Bu bileşen v1'de hiç ölçülmemişti,
+ * dolayısıyla düz çevirme eksik kalıyordu.
+ *
+ * Pozitif değer toplumsal cinsiyet eşitliği yönünde, negatif değer geleneksel
+ * aile merkezli yaklaşım yönünde düzeltmedir.
+ */
+const GENDER_ADJUSTMENT = {
+  AKP: -15,          // Aile merkezli sosyal politika; İstanbul Sözleşmesi'nden çekilme kararı
+  MHP: -10,          // Aile-emekli-engelli odaklı, geleneksel aile çerçevesi
+  Saadet: -10,       // Milli Görüş geleneğinde aile merkezli toplumsal düzen
+  'İYİ': 0,          // Programda belirgin bir toplumsal cinsiyet vurgusu tespit edilmedi
+  Gelecek: 5,        // Aile ve yoksullukla mücadele çerçevesi, kurumsal dil
+  DEVA: 5,           // Kapsayıcı sosyal koruma, dezavantajlı gruplar ayrı işleniyor
+  CHP: 10,           // Hak temelli sosyal devlet, toplumsal cinsiyet eşitliği vurgusu
+  'YENİ PARTİ': 10,  // Programda toplumsal cinsiyet eşitliği ve İstanbul Sözleşmesi vurgusu
+  DEM: 15,           // Kadın özgürlüğü programın kurucu unsurlarından
 }
 
 /** Yarıyı sıfırdan uzağa yuvarlar; Math.round negatiflerde asimetriktir. */
@@ -226,8 +252,9 @@ const DERIVATIONS = [
     confidence: 'orta',
     note:
       'İŞARET ÇEVRİLDİ: v1de + = seçici/aile merkezli, v2de + = evrensel sosyal yatırım. ' +
-      'v2 ekseni toplumsal cinsiyet boyutunu da kapsıyor; bu bileşen v1de ayrı ölçülmemişti.',
-    derive: (v1) => -v1.education_social_policy,
+      'v2 ekseni toplumsal cinsiyet boyutunu da kapsadığı için, v1de hiç ölçülmemiş olan bu ' +
+      'bileşen parti bazlı düzeltmeyle eklendi.',
+    derive: (v1, shortName) => -v1.education_social_policy + (GENDER_ADJUSTMENT[shortName] ?? 0),
   },
   {
     slug: 'cevre',
@@ -250,6 +277,48 @@ const DERIVATIONS = [
 ]
 
 /**
+ * v1 modelinde hiç konumlandırılmamış partiler. Türetilecek bir kaynak
+ * olmadığı için doğrudan v2 eksenlerinde kodlandılar (kaynak taraması
+ * 29 Temmuz 2026).
+ *
+ * Kanıt bulunamayan eksenler KASITLI OLARAK BOŞ bırakıldı. Motor, konumu
+ * olmayan ekseni o parti için karşılaştırmaya sokmaz; uydurma sayı yazmaktansa
+ * eksik bırakmak doğru olan. Yeterince ekseni kodlanmamış partiler sonuç
+ * ekranında sıralanmaz, ayrıca listelenir.
+ */
+const DIRECT_PARTIES = {
+  'TİP': {
+    ekonomi: [90, 'Kapitalizm yerine sosyalizm; elektrik, su, doğalgaz ve internet gibi temel hizmetlerin kamulaştırılması, özelleştirilenlerin geri alınması, planlı ve kamucu üretim.'],
+    demokrasi: [70, 'Otoriterleşme karşıtı konumlanma, cumhuriyet ve özgürlük savunusu; başkanlık sistemine karşı parlamenter denetim vurgusu.'],
+    sekulerizm: [90, 'Laiklik parti için açık bir kırmızı çizgi: tarikat ve cemaatlerin kamu hizmetlerinden çıkarılması, parasız-bilimsel-laik eğitim.'],
+    kimlik: [70, 'Kürt halkının eşit yurttaşlık mücadelesinin desteklenmesi, anadilde eğitim ve anadilde yaşam hakkının savunulması.'],
+    sosyal: [90, 'Feminist ilkeler, LGBTİ+ hakları, toplumsal cinsiyet eşitliği, parasız eğitim ve evrensel sosyal koruma.'],
+    cevre: [60, 'Çevrecilik partinin temel ideolojileri arasında sayılıyor; ayrıntılı iklim politikası kaynaklarda bulunamadı.'],
+    dis: [-70, 'NATO karşıtlığı ve anti-emperyalist çizgi; Batı kurumlarıyla entegrasyon değil, onlardan kopuş savunuluyor.'],
+    // goc: kaynaklarda partiye özgü göç politikası bulunamadı.
+  },
+  Vatan: {
+    ekonomi: [75, 'Kapitalizm karşıtlığı, kamucu ve planlı üretim vurgusu, sınıfsız topluma yönelim.'],
+    demokrasi: [40, 'Başkanlık sistemine açık karşıtlık: hükümetlerin Meclis içinde kurulup denetlenmesi savunuluyor. Güçlü devlet vurgusu bu değeri sınırlıyor.'],
+    sekulerizm: [80, 'Atatürkçü-Kemalist çizgi; laiklik partinin kurucu ilkelerinden.'],
+    kimlik: [-80, 'Federasyon ve özerklik açıkça reddediliyor; "ortak vatan, ortak üniter devlet" çerçevesi ve Kürt sorununun demokratik haklar bakımından esasen çözüldüğü tezi.'],
+    sosyal: [20, 'Kadın-erkek eşitsizliğine karşıtlık var; buna karşılık LGBTİ+ karşıtı konumlanma bileşik eksende değeri merkeze çekiyor.'],
+    cevre: [25, 'Temiz ve yenilenebilir kaynaklara (su, güneş, rüzgâr, jeotermal) yönelim var ama gerekçe ekolojik koruma değil, enerjide dışa bağımlılığın azaltılması.'],
+    dis: [-85, 'Avrasyacılık; NATO üyeliğine ve Batı ittifakına açık karşıtlık.'],
+    // goc: kaynaklarda partiye özgü göç politikası bulunamadı.
+  },
+  Zafer: {
+    ekonomi: [30, 'Sürdürülebilir üretime dayalı planlı kalkınma ve tarımsal kendine yeterlik; buna karşılık kamu harcamalarında kesinti vurgusu değeri sınırlıyor.'],
+    demokrasi: [45, 'Parlamenter demokrasiye geçiş savunuluyor; yolsuzluk ve organize suçla mücadele vurgusu var, kurumsal reform ayrıntısı sınırlı.'],
+    sekulerizm: [80, 'Tarikat ve cemaatlerin bürokrasiden temizlenmesi vaadi; Kemalist laiklik çizgisi.'],
+    goc: [-95, 'Partinin kurucu meselesi. "Stratejik göç mühendisliği" karşıtlığı, sığınmacıların zorunlu geri dönüşü ve sınırda "Anadolu Kalesi" projesi. Kodlanan partiler arasında en kısıtlayıcı konum.'],
+    dis: [-55, 'Avrupa şüpheciliği ve "millî menfaatler" merkezli dış politika; Kıbrıs\'ta iki devletli çözüm savunusu.'],
+    // kimlik, sosyal, cevre: parti programının erişilebilir sürümünden
+    // bu başlıklarda konum çıkarılamadı.
+  },
+}
+
+/**
  * Tüm partiler için v2 konumlarını üretir.
  *
  * @returns {Array<{ shortName: string, axisSlug: string, score: number,
@@ -265,11 +334,26 @@ function deriveAllPositions() {
         axisSlug: derivation.slug,
         score: clamp(roundHalfAwayFromZero(derivation.derive(v1, shortName))),
         confidence: derivation.confidenceFor?.(shortName) ?? derivation.confidence,
-        note: MIGRATION_DIRECT[shortName]?.rationale && derivation.slug === 'goc'
-          ? MIGRATION_DIRECT[shortName].rationale
-          : derivation.note,
+        note:
+          derivation.slug === 'goc' && MIGRATION_DIRECT[shortName]
+            ? MIGRATION_DIRECT[shortName].rationale
+            : derivation.note,
         sourceAxes: derivation.from,
         isDirectlyCoded: derivation.slug === 'goc' && Boolean(MIGRATION_DIRECT[shortName]),
+      })
+    }
+  }
+
+  for (const [shortName, axes] of Object.entries(DIRECT_PARTIES)) {
+    for (const [axisSlug, [score, rationale]] of Object.entries(axes)) {
+      rows.push({
+        shortName,
+        axisSlug,
+        score: clamp(roundHalfAwayFromZero(score)),
+        confidence: 'orta',
+        note: rationale,
+        sourceAxes: [],
+        isDirectlyCoded: true,
       })
     }
   }
@@ -280,7 +364,9 @@ function deriveAllPositions() {
 module.exports = {
   V1_SCORES,
   DERIVATIONS,
+  DIRECT_PARTIES,
   LOCAL_AUTONOMY_ADJUSTMENT,
+  GENDER_ADJUSTMENT,
   MIGRATION_DIRECT,
   MIGRATION_SHRINKAGE,
   deriveAllPositions,

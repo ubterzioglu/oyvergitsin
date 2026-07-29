@@ -22,6 +22,18 @@ export const COVERAGE_MATCHING_THRESHOLD = COVERAGE_MEDIUM
 /** Sonuç ekranında "sonuçlar birbirine yakın" uyarısının eşiği (puan). */
 export const CLOSE_MATCH_MARGIN = 3
 
+/**
+ * Bir partinin sıralamaya girebilmesi için karşılaştırılabilir eksenlerin en az
+ * bu oranında konumlandırılmış olması gerekir.
+ *
+ * Az eksende konumlanmış bir parti, o eksenlerde tesadüfen kullanıcıya yakınsa
+ * haksız biçimde üste çıkar: benzerlik yalnızca kendi konumlandığı eksenler
+ * üzerinden hesaplandığı için ayrıştığı konular hesaba hiç girmez. Eşiğin
+ * altındaki partiler sıfır puan almaz — sıralama dışı bırakılıp "yeterli
+ * kodlama yok" olarak gösterilirler.
+ */
+export const PARTY_AXIS_COVERAGE_THRESHOLD = 0.75
+
 /** Kaydedilen snapshot'ların algoritma sürümü. */
 export const ALGORITHM_VERSION = 2
 

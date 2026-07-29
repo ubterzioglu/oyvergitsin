@@ -279,11 +279,12 @@ export default function ResultsPage() {
             {unpositioned.length > 0 && (
               <div className="mt-6 border-t border-border pt-4">
                 <p className="mb-2 text-sm font-medium text-ink-secondary">
-                  Konumlandırılmamış partiler
+                  Sıralamaya girmeyen partiler
                 </p>
                 <p className="mb-3 text-xs text-ink-muted">
-                  Bu partiler için yayımlanmış yeterli kaynak bulunmadığından eksen konumları
-                  kodlanmadı. Sıfır puan almıyorlar; karşılaştırma dışı bırakılıyorlar.
+                  Bu partiler için yayımlanmış kaynaklardan yeterli sayıda eksende konum
+                  kodlanamadı. Sıfır puan almıyorlar; az sayıda eksen üzerinden hesaplanan bir
+                  yüzde yanıltıcı olacağı için karşılaştırma dışı bırakılıyorlar.
                 </p>
                 <ul className="flex flex-wrap gap-2">
                   {unpositioned.map((party) => (
@@ -292,6 +293,11 @@ export default function ResultsPage() {
                       className="rounded-full border border-border px-3 py-1 text-xs text-ink-secondary"
                     >
                       {party.partyName}
+                      {party.axesUsed > 0 && (
+                        <span className="ml-1 text-ink-muted">
+                          ({party.axesUsed}/{axes.length} eksen)
+                        </span>
+                      )}
                     </li>
                   ))}
                 </ul>

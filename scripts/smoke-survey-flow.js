@@ -132,9 +132,26 @@ async function main() {
   )
 
   const ranked = parties.filter((party) => party.similarity !== null)
-  const unpositioned = parties.filter((party) => party.similarity === null)
-  assert(ranked.length === 9, `9 parti sıralandı (gelen: ${ranked.length})`)
-  assert(unpositioned.length > 0, `${unpositioned.length} parti "konum kodlanmamış" olarak ayrıldı`)
+  const unranked = parties.filter((party) => party.similarity === null)
+
+  // Beklenen sıralı parti sayısı kaynak veriden türetilir: yeterli eksende
+  // konumlanmış partiler sıralanır, azı kodlanmış olanlar sıralama dışı kalır.
+  const { deriveAllPositions } = require('./data/party-positions-v2')
+  const axisCountByParty = new Map()
+  for (const row of deriveAllPositions()) {
+    axisCountByParty.set(row.shortName, (axisCountByParty.get(row.shortName) ?? 0) + 1)
+  }
+  const required = Math.ceil(0.75 * axes.length)
+  const expectedRanked = [...axisCountByParty.values()].filter((count) => count >= required).length
+
+  assert(
+    ranked.length === expectedRanked,
+    `${expectedRanked} parti sıralandı (gelen: ${ranked.length})`
+  )
+  assert(
+    unranked.length > 0,
+    `${unranked.length} parti sıralama dışı (konum yok ya da yetersiz eksen)`
+  )
   assert(
     ranked.every((party) => party.similarity >= 0 && party.similarity <= 100),
     'tüm benzerlikler [0, 100] aralığında'

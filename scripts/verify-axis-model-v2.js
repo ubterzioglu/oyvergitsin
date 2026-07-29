@@ -7,6 +7,13 @@
 
 require('dotenv').config({ path: '.env.local' })
 const { Client } = require('pg')
+const { deriveAllPositions } = require('./data/party-positions-v2')
+
+const derivedRows = deriveAllPositions()
+const EXPECTED = {
+  parties: new Set(derivedRows.map((row) => row.shortName)).size,
+  rows: derivedRows.length,
+}
 
 const CHECKS = [
   {
@@ -52,8 +59,21 @@ const CHECKS = [
   {
     label: 'v2 parti konumu',
     sql: "select count(distinct party_id)::int as parti, count(*)::int as satir from party_positions p join axes a on a.id=p.axis_id join axis_models m on m.id=a.axis_model_id where m.version='v2'",
-    expect: (rows) => rows[0].parti === 9 && rows[0].satir === 72,
-    describe: (rows) => `${rows[0].parti} parti / ${rows[0].satir} satır (beklenen 9 / 72)`,
+    // Beklenti sabit değil, kaynak veri dosyasından türetilir; parti eklendikçe
+    // kontrolün elle güncellenmesi gerekmesin.
+    expect: (rows) => rows[0].parti === EXPECTED.parties && rows[0].satir === EXPECTED.rows,
+    describe: (rows) =>
+      `${rows[0].parti} parti / ${rows[0].satir} satır (beklenen ${EXPECTED.parties} / ${EXPECTED.rows})`,
+  },
+  {
+    label: 'kapanmış parti eşleşmeye girmiyor',
+    sql: `select count(*)::int as n from party_positions p
+          join parties pa on pa.id = p.party_id
+          join axes a on a.id = p.axis_id
+          join axis_models m on m.id = a.axis_model_id
+          where m.version='v2' and pa.is_active = false`,
+    expect: (rows) => rows[0].n === 0,
+    describe: (rows) => `${rows[0].n} konum kapanmış partiye ait (beklenen 0)`,
   },
   {
     label: 'her konumun kanıt kaydı var',

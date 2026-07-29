@@ -1,0 +1,76 @@
+
+> oyvergitsin@0.1.0 dev
+> next dev
+
+   ▲ Next.js 15.5.20
+   - Local:        http://localhost:3000
+   - Network:      http://172.19.80.1:3000
+   - Environments: .env.local, .env
+
+ ✓ Starting...
+ ✓ Ready in 2.7s
+ ○ Compiling /api/health ...
+ ✓ Compiled /api/health in 535ms (337 modules)
+ GET /api/health 200 in 1332ms
+ GET /api/health 200 in 180ms
+ ✓ Compiled /api/questions in 254ms (340 modules)
+ GET /api/questions 200 in 636ms
+ ✓ Compiled /api/sessions in 196ms (375 modules)
+ POST /api/sessions 200 in 633ms
+ ✓ Compiled /api/answers in 118ms (379 modules)
+ POST /api/answers 200 in 359ms
+ ✓ Compiled /api/complete in 316ms (388 modules)
+ POST /api/complete 200 in 994ms
+ ✓ Compiled /api/results/[sessionId] in 119ms (390 modules)
+ GET /api/results/3a7f4e8e-00f1-44e4-89cb-0fcf49fef4a1 200 in 1325ms
+ GET /api/health 200 in 183ms
+ GET /api/questions 200 in 239ms
+ POST /api/sessions 200 in 171ms
+ POST /api/answers 200 in 155ms
+ POST /api/complete 200 in 519ms
+ GET /api/results/b4f8c4d7-4e86-4206-9d39-089c31c37469 200 in 156ms
+ GET /api/results/b4f8c4d7-4e86-4206-9d39-089c31c37469 200 in 212ms
+ GET /api/health 200 in 256ms
+ GET /api/health 200 in 191ms
+ ○ Compiling /consent ...
+ ✓ Compiled /consent in 1953ms (765 modules)
+ ✓ Compiled in 415ms (249 modules)
+ GET /consent 200 in 2396ms
+ POST /api/sessions 200 in 328ms
+ ✓ Compiled /survey in 408ms (791 modules)
+ GET /survey 200 in 561ms
+ GET /api/questions 200 in 199ms
+ GET /api/questions 200 in 218ms
+ GET /consent 200 in 214ms
+ POST /api/sessions 200 in 302ms
+ GET /survey 200 in 43ms
+ GET /api/questions 200 in 152ms
+ GET /api/questions 200 in 185ms
+ GET /consent 200 in 95ms
+ POST /api/sessions 200 in 138ms
+ GET /survey 200 in 39ms
+ GET /api/questions 200 in 140ms
+ GET /api/questions 200 in 146ms
+ GET /consent 200 in 82ms
+ POST /api/sessions 200 in 234ms
+ GET /survey 200 in 41ms
+ GET /api/questions 200 in 158ms
+ GET /api/questions 200 in 1535ms
+ GET /consent 200 in 97ms
+ POST /api/sessions 200 in 153ms
+ GET /survey 200 in 44ms
+ GET /api/questions 200 in 128ms
+ GET /api/questions 200 in 145ms
+ GET /consent 200 in 103ms
+ POST /api/sessions 200 in 262ms
+ GET /survey 200 in 58ms
+ GET /api/questions 200 in 147ms
+ GET /api/questions 200 in 170ms
+ POST /api/answers 200 in 268ms
+ POST /api/complete 200 in 488ms
+ ○ Compiling /results/[sessionId] ...
+ ✓ Compiled /results/[sessionId] in 1174ms (1837 modules)
+ GET /results/86177094-b094-404e-8ec0-5553e306caad 200 in 2404ms
+ ✓ Compiled /api/results/[sessionId] in 380ms (1064 modules)
+ GET /api/results/86177094-b094-404e-8ec0-5553e306caad 200 in 687ms
+ GET /api/results/86177094-b094-404e-8ec0-5553e306caad 200 in 145ms

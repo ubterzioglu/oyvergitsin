@@ -138,7 +138,7 @@ test.describe('uçtan uca akış', () => {
     await expect(page.getByRole('heading', { name: 'Neden bu sonuç?' })).toBeVisible()
     await expect(page.getByText('En çok örtüşen konular')).toBeVisible()
 
-    // Konumlandırılmamış partiler ayrı listelenmeli, sıfır puan almamalı.
-    await expect(page.getByText('Konumlandırılmamış partiler')).toBeVisible()
+    // Yeterince kodlanmamış partiler ayrı listelenmeli, sıfır puan almamalı.
+    await expect(page.getByText('Sıralamaya girmeyen partiler')).toBeVisible()
   })
 })

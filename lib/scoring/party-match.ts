@@ -1,5 +1,13 @@
-import { AXIS_SCORE_RANGE } from './constants'
+import { AXIS_SCORE_RANGE, PARTY_AXIS_COVERAGE_THRESHOLD } from './constants'
 import type { AxisComparison, AxisResult, MatchExplanation, PartyMatch, PartyPosition } from './types'
+
+/**
+ * Kullanıcı tarafında karşılaştırmaya uygun eksen sayısı: skoru üretilmiş ve
+ * kapsama eşiğini geçmiş eksenler.
+ */
+function comparableAxisCount(axes: AxisResult[]): number {
+  return axes.filter((axis) => axis.score !== null && !axis.excludedFromMatching).length
+}
 
 /** Bir partinin karşılaştırılabildiği eksenler ve her birindeki fark. */
 function comparisonsFor(
@@ -60,11 +68,16 @@ export function computePartyMatches(
 ): PartyMatch[] {
   const positionsByParty = groupPositions(positions)
 
+  // Yeterince eksende konumlanmamış partiler sıralamaya girmez; aksi halde
+  // yalnızca kendilerine uyan birkaç eksen üzerinden haksız biçimde üste
+  // çıkarlar.
+  const required = Math.ceil(PARTY_AXIS_COVERAGE_THRESHOLD * comparableAxisCount(axes))
+
   return partyIds.map((partyId) => {
     const comparisons = comparisonsFor(partyId, axes, positionsByParty)
 
-    if (comparisons.length === 0) {
-      return { partyId, similarity: null, axesUsed: 0 }
+    if (comparisons.length === 0 || comparisons.length < required) {
+      return { partyId, similarity: null, axesUsed: comparisons.length }
     }
 
     const distance = comparisons.reduce((sum, comparison) => sum + comparison.impact, 0)

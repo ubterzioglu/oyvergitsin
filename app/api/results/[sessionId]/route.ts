@@ -34,10 +34,15 @@ export async function GET(
       .single()
 
     if (!snapshotError && snapshot) {
-      return NextResponse.json({
-        axisScores: snapshot.axis_scores,
-        partySimilarities: snapshot.party_similarities
-      })
+      // Snapshot yalnızca id -> skor eşlemesi tutuyor; istemci eksen ve parti
+      // adlarını içeren dizileri de bekliyor, bu yüzden aynı şekle tamamlanır.
+      const { formatStoredResults } = await import('@/lib/scoring/engine')
+      const storedResults = await formatStoredResults(
+        snapshot.axis_scores,
+        snapshot.party_similarities
+      )
+
+      return NextResponse.json(storedResults)
     }
 
     // If no snapshot, calculate on the fly

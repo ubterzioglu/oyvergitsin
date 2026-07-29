@@ -487,7 +487,7 @@ export default function SurveyPage() {
 
         <Card
           elevated
-          className="flex w-full max-w-xl min-h-[40rem] flex-col border-t-4"
+          className="flex w-full max-w-xl min-h-[30rem] flex-col border-t-4"
           style={{ borderTopColor: RAINBOW_ACCENTS[currentQuestion % RAINBOW_ACCENTS.length] }}
         >
           {question.description && question.type !== 'vignette_likert' && (

@@ -192,12 +192,38 @@ async function runEndToEnd(questions) {
   const resultsPayload = await resultsRes.json().catch(() => ({}))
   if (!resultsRes.ok) throw new Error(resultsPayload.error || `GET /api/results -> ${resultsRes.status}`)
 
+  // Sonuç sayfası axes/parties dizilerini map ettiği için yanıtın yalnızca
+  // skor sözlüklerini içermesi sayfayı çökertir; şeklin tamamı doğrulanır.
   const axisCount = Object.keys(resultsPayload.axisScores || {}).length
   const partyCount = Object.keys(resultsPayload.partySimilarities || {}).length
   if (!axisCount || !partyCount) {
     throw new Error(`Sonuçlar boş döndü (eksen=${axisCount}, parti=${partyCount})`)
   }
-  console.log(`OK   sonuçlar döndü (${axisCount} eksen, ${partyCount} parti eşleşmesi)`)
+
+  if (!Array.isArray(resultsPayload.axes) || !Array.isArray(resultsPayload.parties)) {
+    throw new Error(
+      `Sonuç yanıtında dizi alanları eksik (axes=${typeof resultsPayload.axes}, parties=${typeof resultsPayload.parties})`
+    )
+  }
+  if (!resultsPayload.axes.length || !resultsPayload.parties.length) {
+    throw new Error(
+      `Sonuç dizileri boş (axes=${resultsPayload.axes.length}, parties=${resultsPayload.parties.length})`
+    )
+  }
+
+  const missingAxisName = resultsPayload.axes.find((a) => !a.axisName)
+  const missingPartyName = resultsPayload.parties.find((p) => !p.partyName || !p.partyShortName)
+  if (missingAxisName || missingPartyName) {
+    throw new Error('Sonuç dizilerinde eksen/parti adı eksik')
+  }
+
+  console.log(
+    `OK   sonuçlar döndü (${axisCount} eksen, ${partyCount} parti; ` +
+      `axes[${resultsPayload.axes.length}], parties[${resultsPayload.parties.length}] adlarıyla dolu)`
+  )
+  console.log(
+    `OK   en yüksek eşleşme: ${resultsPayload.parties[0].partyShortName} %${resultsPayload.parties[0].similarity}`
+  )
 
   return resultsPayload
 }

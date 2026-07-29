@@ -30,6 +30,7 @@ export default function ResultsPage() {
   const router = useRouter()
   const [result, setResult] = useState<Result | null>(null)
   const [loading, setLoading] = useState(true)
+  const [errorMessage, setErrorMessage] = useState('')
   const sessionId = String(params.sessionId ?? '')
 
   useEffect(() => {
@@ -37,9 +38,17 @@ export default function ResultsPage() {
       try {
         const response = await fetch(`/api/results/${sessionId}`)
         const data = await response.json()
+
+        if (!response.ok) {
+          throw new Error(data.error || 'Sonuçlar alınamadı.')
+        }
+
         setResult(data)
       } catch (error) {
         console.error('Error fetching results:', error)
+        setErrorMessage(
+          error instanceof Error ? error.message : 'Sonuçlar alınamadı. Lütfen tekrar deneyin.'
+        )
       } finally {
         setLoading(false)
       }
@@ -60,20 +69,26 @@ export default function ResultsPage() {
     )
   }
 
-  if (!result) {
+  if (!result || errorMessage) {
     return (
-      <div className="flex min-h-screen items-center justify-center">
-        <div className="text-red-600">Sonuç bulunamadı.</div>
+      <div className="flex min-h-screen items-center justify-center px-4">
+        <div className="w-full max-w-xl rounded-lg border border-red-200 bg-red-50 p-6 text-center">
+          <p className="text-sm text-red-700">{errorMessage || 'Sonuç bulunamadı.'}</p>
+        </div>
       </div>
     )
   }
 
-  const radarData = result.axes.map(axis => ({
+  // Sunucu yanıtı beklenen dizileri içermezse sayfa çökmek yerine boş görünmeli.
+  const axes = result.axes ?? []
+  const parties = result.parties ?? []
+
+  const radarData = axes.map(axis => ({
     axis: axis.axisName.split(':')[0],
     score: axis.score
   }))
 
-  const topMatch = result.parties[0]
+  const topMatch = parties[0]
 
   return (
     <div className="min-h-screen bg-surface px-4 py-12">
@@ -95,7 +110,7 @@ export default function ResultsPage() {
               <div className="flex-1">
                 <h3 className="text-2xl font-bold text-ink-primary">{topMatch.partyName}</h3>
                 <p className="text-ink-secondary">
-                  {getMatchExplanation(topMatch, result.axes)}
+                  {getMatchExplanation(topMatch, axes)}
                 </p>
               </div>
               <div className="text-right">
@@ -130,7 +145,7 @@ export default function ResultsPage() {
           <Card elevated>
             <h2 className="mb-4 font-heading text-2xl font-semibold text-ink-primary">Parti Eşleşmeleri</h2>
             <div className="space-y-3">
-              {result.parties.map((party, index) => (
+              {parties.map((party, index) => (
                 <div
                   key={party.partyId}
                   className="flex items-center justify-between rounded-lg border-2 border-border p-4 transition-all hover:border-border-strong"
@@ -170,7 +185,7 @@ export default function ResultsPage() {
 }
 
 function getMatchExplanation(party: any, axes: any[]): string {
-  const topAxes = axes
+  const topAxes = [...axes]
     .sort((a, b) => Math.abs(b.score) - Math.abs(a.score))
     .slice(0, 2)
 

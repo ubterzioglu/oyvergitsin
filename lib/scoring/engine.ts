@@ -20,6 +20,68 @@ export interface CalculationResult {
   parties: PartySimilarity[]
 }
 
+interface AxisRow {
+  id: string
+  name: string
+}
+
+interface PartyRow {
+  id: string
+  name: string
+  short_name: string
+}
+
+/**
+ * Ham skor kayıtlarını istemcinin beklediği tam yanıt şekline dönüştürür.
+ * Hem anlık hesaplama hem de result_snapshots üzerinden okuma aynı şekli
+ * üretsin diye tek noktada tutulur.
+ */
+function formatResults(
+  axes: AxisRow[],
+  parties: PartyRow[],
+  axisScores: Record<string, number>,
+  partySimilarities: Record<string, number>
+): CalculationResult {
+  return {
+    axisScores,
+    partySimilarities,
+    axes: axes.map((axis) => ({
+      axisId: axis.id,
+      axisName: axis.name,
+      score: axisScores[axis.id] || 0
+    })),
+    parties: parties
+      .map((party) => ({
+        partyId: party.id,
+        partyName: party.name,
+        partyShortName: party.short_name,
+        similarity: partySimilarities[party.id] || 0
+      }))
+      .sort((a, b) => b.similarity - a.similarity)
+  }
+}
+
+/**
+ * Kaydedilmiş bir snapshot'ı isim bilgileriyle zenginleştirir. Snapshot yalnızca
+ * id -> skor eşlemesi tuttuğu için eksen/parti adları tablolardan tamamlanır.
+ */
+export async function formatStoredResults(
+  axisScores: Record<string, number>,
+  partySimilarities: Record<string, number>
+): Promise<CalculationResult> {
+  const supabase = getRouteClient()
+
+  const [{ data: axes, error: axesError }, { data: parties, error: partiesError }] = await Promise.all([
+    supabase.from('axes').select('id, name'),
+    supabase.from('parties').select('id, name, short_name')
+  ])
+
+  if (axesError) throw axesError
+  if (partiesError) throw partiesError
+
+  return formatResults(axes || [], parties || [], axisScores || {}, partySimilarities || {})
+}
+
 export async function calculateResults(sessionId: string): Promise<CalculationResult> {
   const supabase = getRouteClient()
 
@@ -112,32 +174,14 @@ export async function calculateResults(sessionId: string): Promise<CalculationRe
   })
 
   // 8. Format response
-  const formattedAxisScores: AxisScore[] = axes.map(axis => ({
-    axisId: axis.id,
-    axisName: axis.name,
-    score: normalizedAxisScores[axis.id] || 0
-  }))
-
-  const formattedPartySimilarities: PartySimilarity[] = parties.map(party => ({
-    partyId: party.id,
-    partyName: party.name,
-    partyShortName: party.short_name,
-    similarity: partySimilarities[party.id] || 0
-  })).sort((a, b) => b.similarity - a.similarity)
-
-  return {
-    axisScores: normalizedAxisScores,
-    partySimilarities,
-    axes: formattedAxisScores,
-    parties: formattedPartySimilarities
-  }
+  return formatResults(axes, parties, normalizedAxisScores, partySimilarities)
 }
 
 export function getExplanationForMatch(
   party: PartySimilarity,
   axisScores: AxisScore[]
 ): string {
-  const topAxes = axisScores
+  const topAxes = [...axisScores]
     .sort((a, b) => Math.abs(b.score) - Math.abs(a.score))
     .slice(0, 3)
 

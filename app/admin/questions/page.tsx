@@ -1,205 +1,206 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import { supabase } from '@/lib/supabase/client'
-import { Button } from '@/components/ui/Button'
-import { ConfirmDialog } from '@/components/admin/ConfirmDialog'
-import { ReorderButtons } from '@/components/admin/ReorderButtons'
-import { QUESTION_TYPES } from '@/lib/admin/questionTypes'
+import { ReadOnlyNotice } from '@/components/admin/ReadOnlyNotice'
 
 interface Question {
   id: string
+  code: string | null
   text: string
   type: string
   required: boolean
+  is_scored: boolean
+  weight: number
+  max_contribution: number | null
   order_index: number
+  axis_model_id: string | null
+}
+
+interface AxisModel {
+  id: string
+  name: string
+  version: string
+  is_active: boolean
 }
 
 export default function QuestionsPage() {
-  const router = useRouter()
+  const [models, setModels] = useState<AxisModel[]>([])
+  const [selectedModelId, setSelectedModelId] = useState('')
   const [questions, setQuestions] = useState<Question[]>([])
+  const [ruleCounts, setRuleCounts] = useState<Record<string, number>>({})
   const [loading, setLoading] = useState(true)
   const [errorMessage, setErrorMessage] = useState('')
-  const [creating, setCreating] = useState(false)
-  const [deleteTarget, setDeleteTarget] = useState<Question | null>(null)
-  const [deleting, setDeleting] = useState(false)
 
   useEffect(() => {
-    fetchQuestions()
+    const fetchModels = async () => {
+      const { data, error } = await supabase
+        .from('axis_models')
+        .select('id, name, version, is_active')
+        .order('created_at', { ascending: true })
+
+      if (error) {
+        console.error('Error fetching axis models:', error)
+        setErrorMessage('Eksen modelleri yüklenemedi')
+        setLoading(false)
+        return
+      }
+
+      const list = (data ?? []) as AxisModel[]
+      setModels(list)
+      setSelectedModelId(list.find((model) => model.is_active)?.id ?? list[0]?.id ?? '')
+    }
+
+    fetchModels()
   }, [])
 
-  const fetchQuestions = async () => {
+  const fetchQuestions = useCallback(async () => {
+    if (!selectedModelId) return
+
+    setLoading(true)
     try {
       setErrorMessage('')
       const { data, error } = await supabase
         .from('questions')
-        .select('*')
+        .select(
+          'id, code, text, type, required, is_scored, weight, max_contribution, order_index, axis_model_id'
+        )
+        .eq('axis_model_id', selectedModelId)
         .order('order_index', { ascending: true })
 
       if (error) throw error
-      setQuestions(data || [])
+
+      const list = (data ?? []) as Question[]
+      setQuestions(list)
+
+      if (list.length === 0) {
+        setRuleCounts({})
+        return
+      }
+
+      const { data: rules } = await supabase
+        .from('scoring_rules')
+        .select('question_id')
+        .in(
+          'question_id',
+          list.map((question) => question.id)
+        )
+
+      const counts: Record<string, number> = {}
+      for (const rule of rules ?? []) {
+        counts[rule.question_id] = (counts[rule.question_id] ?? 0) + 1
+      }
+      setRuleCounts(counts)
     } catch (error) {
       console.error('Error fetching questions:', error)
-      setErrorMessage('Sorular yüklenemedi.')
+      setErrorMessage('Sorular yüklenemedi')
     } finally {
       setLoading(false)
     }
-  }
+  }, [selectedModelId])
 
-  const handleCreate = async () => {
-    setCreating(true)
-    try {
-      const { data, error } = await supabase
-        .from('questions')
-        .insert({
-          text: 'Yeni soru',
-          type: QUESTION_TYPES[0].value,
-          required: true,
-          order_index: questions.length + 1,
-        })
-        .select()
-        .single()
+  useEffect(() => {
+    fetchQuestions()
+  }, [fetchQuestions])
 
-      if (error) throw error
-      router.push(`/admin/questions/${data.id}`)
-    } catch (error) {
-      console.error('Error creating question:', error)
-      setErrorMessage('Yeni soru oluşturulamadı.')
-      setCreating(false)
-    }
-  }
-
-  const handleDelete = async () => {
-    if (!deleteTarget) return
-
-    setDeleting(true)
-    try {
-      const { error } = await supabase.from('questions').delete().eq('id', deleteTarget.id)
-      if (error) throw error
-      setDeleteTarget(null)
-      await fetchQuestions()
-    } catch (error) {
-      console.error('Error deleting question:', error)
-      setErrorMessage('Soru silinemedi.')
-    } finally {
-      setDeleting(false)
-    }
-  }
-
-  const moveQuestion = async (question: Question, direction: 'up' | 'down') => {
-    const sorted = [...questions].sort((a, b) => a.order_index - b.order_index)
-    const index = sorted.findIndex((q) => q.id === question.id)
-    const swapIndex = direction === 'up' ? index - 1 : index + 1
-    if (swapIndex < 0 || swapIndex >= sorted.length) return
-
-    const neighbor = sorted[swapIndex]
-
-    try {
-      await Promise.all([
-        supabase.from('questions').update({ order_index: neighbor.order_index }).eq('id', question.id),
-        supabase.from('questions').update({ order_index: question.order_index }).eq('id', neighbor.id),
-      ])
-      await fetchQuestions()
-    } catch (error) {
-      console.error('Error reordering questions:', error)
-      setErrorMessage('Sıralama güncellenemedi.')
-    }
-  }
-
-  const typeLabel = (value: string) =>
-    QUESTION_TYPES.find((t) => t.value === value)?.label ?? value
-
-  if (loading) {
-    return <div className="text-gray-600">Yükleniyor...</div>
-  }
-
-  const sortedQuestions = [...questions].sort((a, b) => a.order_index - b.order_index)
+  const selectedModel = models.find((model) => model.id === selectedModelId)
 
   return (
     <div>
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold text-gray-900">Sorular</h1>
-        <Button onClick={handleCreate} disabled={creating}>
-          {creating ? 'Oluşturuluyor...' : 'Yeni Soru Ekle'}
-        </Button>
-      </div>
+      <h1 className="mb-2 text-3xl font-bold text-gray-900">Sorular</h1>
+      <p className="mb-6 text-sm text-gray-600">
+        Anket yalnızca <strong>aktif</strong> eksen modelinin sorularını gösterir; diğer sürümler
+        arşivdir.
+      </p>
 
-      {errorMessage ? (
-        <div className="mb-4 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+      <ReadOnlyNotice source="scripts/data/axis-model-v2.js" command="npm run v2:seed" />
+
+      {models.length > 1 && (
+        <div className="mb-4 flex flex-wrap gap-2">
+          {models.map((model) => (
+            <button
+              key={model.id}
+              type="button"
+              onClick={() => setSelectedModelId(model.id)}
+              className={`rounded-lg border px-3 py-2 text-sm transition-colors ${
+                model.id === selectedModelId
+                  ? 'border-gray-900 bg-gray-900 text-white'
+                  : 'border-gray-300 bg-white text-gray-700 hover:border-gray-400'
+              }`}
+            >
+              {model.name}
+              {model.is_active && (
+                <span className="ml-2 rounded bg-green-100 px-1.5 py-0.5 text-[11px] text-green-800">
+                  aktif
+                </span>
+              )}
+            </button>
+          ))}
+        </div>
+      )}
+
+      {errorMessage && (
+        <div className="mb-4 rounded border border-red-200 bg-red-50 p-3 text-sm text-red-700">
           {errorMessage}
         </div>
-      ) : null}
+      )}
 
-      <div className="bg-white rounded-lg shadow-md overflow-hidden">
-        <table className="min-w-full">
-          <thead className="bg-gray-50">
-            <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Sıra
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Soru
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Tip
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Zorunlu
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                İşlemler
-              </th>
-            </tr>
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
-            {sortedQuestions.map((question, index) => (
-              <tr key={question.id}>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                  <div className="flex items-center gap-2">
-                    <ReorderButtons
-                      onMoveUp={() => moveQuestion(question, 'up')}
-                      onMoveDown={() => moveQuestion(question, 'down')}
-                      disableUp={index === 0}
-                      disableDown={index === sortedQuestions.length - 1}
-                    />
-                    {question.order_index}
-                  </div>
-                </td>
-                <td className="px-6 py-4 text-sm text-gray-900">{question.text}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  <span className="px-2 py-1 bg-gray-100 rounded">{typeLabel(question.type)}</span>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {question.required ? 'Evet' : 'Hayır'}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                  <Link href={`/admin/questions/${question.id}`} className="text-blue-600 hover:text-blue-900 mr-3">
-                    Düzenle
-                  </Link>
-                  <button
-                    onClick={() => setDeleteTarget(question)}
-                    className="text-red-600 hover:text-red-900"
-                  >
-                    Sil
-                  </button>
-                </td>
+      {loading ? (
+        <div className="text-gray-600">Yükleniyor...</div>
+      ) : (
+        <div className="overflow-x-auto rounded-lg bg-white shadow-md">
+          <table className="min-w-full">
+            <thead className="bg-gray-50">
+              <tr>
+                <th className="px-4 py-3 text-left text-xs font-medium uppercase text-gray-500">#</th>
+                <th className="px-4 py-3 text-left text-xs font-medium uppercase text-gray-500">Kod</th>
+                <th className="px-4 py-3 text-left text-xs font-medium uppercase text-gray-500">Soru</th>
+                <th className="px-4 py-3 text-left text-xs font-medium uppercase text-gray-500">Tip</th>
+                <th className="px-4 py-3 text-left text-xs font-medium uppercase text-gray-500">
+                  Puanlama
+                </th>
+                <th className="px-4 py-3 text-left text-xs font-medium uppercase text-gray-500" />
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            </thead>
+            <tbody className="divide-y divide-gray-200">
+              {questions.map((question) => (
+                <tr key={question.id} className="hover:bg-gray-50">
+                  <td className="px-4 py-3 text-sm text-gray-500">{question.order_index}</td>
+                  <td className="px-4 py-3 font-mono text-xs text-gray-600">{question.code ?? '—'}</td>
+                  <td className="max-w-md px-4 py-3 text-sm text-gray-900">{question.text}</td>
+                  <td className="px-4 py-3 text-sm text-gray-600">{question.type}</td>
+                  <td className="px-4 py-3 text-sm text-gray-600">
+                    {question.is_scored ? (
+                      <>
+                        {ruleCounts[question.id] ?? 0} kural
+                        {Number(question.weight) !== 1 && ` · ağırlık ${question.weight}`}
+                        {question.max_contribution !== null && ` · maks ${question.max_contribution}`}
+                      </>
+                    ) : (
+                      <span className="text-gray-400">puanlanmaz</span>
+                    )}
+                  </td>
+                  <td className="px-4 py-3 text-sm">
+                    <Link
+                      href={`/admin/questions/${question.id}`}
+                      className="text-blue-600 hover:underline"
+                    >
+                      İncele
+                    </Link>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
 
-      {deleteTarget ? (
-        <ConfirmDialog
-          title="Soruyu sil"
-          message={`"${deleteTarget.text}" sorusunu silmek istediğinize emin misiniz? Bu soruya bağlı seçenekler ve puanlama kuralları da silinecektir.`}
-          onConfirm={handleDelete}
-          onCancel={() => setDeleteTarget(null)}
-          loading={deleting}
-        />
-      ) : null}
+          {questions.length === 0 && (
+            <div className="px-4 py-8 text-center text-sm text-gray-500">
+              {selectedModel ? `${selectedModel.name} için soru bulunamadı.` : 'Eksen modeli seçilmedi.'}
+            </div>
+          )}
+        </div>
+      )}
     </div>
   )
 }

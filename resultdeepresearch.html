@@ -1,0 +1,616 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>Türkiye için Oy Verme Danışma Aracı — Metodoloji Raporu</title>
+<style>
+:root {
+  --ink:#16202a; --muted:#5b6877; --line:#dfe5ea; --paper:#fbfaf7;
+  --card:#ffffff; --navy:#16324f; --teal:#0f6b68; --gold:#d49a34;
+  --soft:#eef4f5; --danger:#8b2f2f; --ok:#21634f;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,Segoe UI,Arial,sans-serif;line-height:1.62}
+a{color:var(--teal);text-decoration:none} a:hover{text-decoration:underline}
+.layout{display:grid;grid-template-columns:280px minmax(0,1fr);min-height:100vh}
+aside{position:sticky;top:0;height:100vh;padding:28px 22px;background:var(--navy);color:#fff;overflow:auto}
+.brand{font-weight:800;font-size:20px;line-height:1.2;margin-bottom:8px}
+.brand-sub{font-size:13px;color:#c9d5df;margin-bottom:25px}
+nav a{display:block;padding:8px 10px;margin:3px 0;border-radius:8px;color:#dce8ef;font-size:14px}
+nav a:hover{background:rgba(255,255,255,.09);text-decoration:none}
+main{max-width:1180px;width:100%;padding:42px 54px 100px}
+.hero{padding:44px;border:1px solid var(--line);border-radius:22px;background:linear-gradient(135deg,#fff 0%,#eff7f6 100%);box-shadow:0 12px 40px rgba(22,50,79,.07)}
+.eyebrow{text-transform:uppercase;letter-spacing:.12em;font-weight:800;color:var(--teal);font-size:12px}
+h1{font-size:44px;line-height:1.08;margin:10px 0 18px;color:var(--navy)}
+h2{font-size:30px;color:var(--navy);margin:64px 0 20px;padding-top:10px;border-top:3px solid var(--navy)}
+h3{font-size:21px;color:var(--navy);margin:0}
+.lead{font-size:19px;color:#344454;max-width:900px}
+.meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.pill{padding:7px 11px;border-radius:999px;background:#fff;border:1px solid var(--line);font-size:13px;color:var(--muted)}
+.callout{border-left:5px solid var(--gold);background:#fff8e8;padding:18px 20px;border-radius:10px;margin:24px 0}
+.warning{border-left-color:var(--danger);background:#fff1f1}
+.ok{border-left-color:var(--ok);background:#edf8f4}
+.grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.summary-card,.axis-card,.protocol-card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px}
+.summary-card strong{display:block;color:var(--teal);font-size:14px;margin-bottom:6px}
+.axis-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.axis-head{display:flex;justify-content:space-between;gap:20px;align-items:flex-start}
+.axis-code{font-family:ui-monospace,Consolas,monospace;background:var(--soft);padding:5px 8px;border-radius:7px;font-size:12px}
+.poles{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0}
+.poles div{background:var(--soft);padding:12px;border-radius:10px}
+.poles strong{display:block;color:var(--teal);font-size:16px}
+.poles span{display:block;font-size:13px;color:#3e5060}
+.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:14px;background:#fff}
+table{border-collapse:collapse;width:100%;min-width:840px;font-size:14px}
+th{position:sticky;top:0;background:var(--navy);color:white;text-align:left;padding:12px;vertical-align:top}
+td{padding:12px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:nth-child(even) td{background:#fafcfd}
+code,.qid{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;background:#eef2f5;padding:2px 5px;border-radius:5px;font-size:.92em}
+pre{background:#11283d;color:#ecf4f7;border-radius:14px;padding:18px;overflow:auto}
+.formula{font-size:16px}
+.cite{font-size:11px;font-weight:800;vertical-align:super;margin-left:2px}
+.steps{counter-reset:step;display:grid;gap:12px}
+.step{position:relative;padding:17px 18px 17px 58px;background:white;border:1px solid var(--line);border-radius:12px}
+.step:before{counter-increment:step;content:counter(step);position:absolute;left:16px;top:16px;width:28px;height:28px;border-radius:50%;background:var(--teal);color:#fff;display:grid;place-items:center;font-weight:800}
+.checklist{list-style:none;padding:0}
+.checklist li{position:relative;padding:9px 10px 9px 36px;border-bottom:1px solid var(--line)}
+.checklist li:before{content:"✓";position:absolute;left:8px;color:var(--ok);font-weight:900}
+.sources li{margin:10px 0;padding-bottom:10px;border-bottom:1px solid var(--line)}
+.ref-type{display:inline-block;min-width:155px;margin-right:8px;color:var(--muted);font-size:12px}
+.footer{margin-top:70px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}
+@media(max-width:900px){
+  .layout{display:block} aside{position:relative;height:auto} nav{columns:2}
+  main{padding:26px 18px 70px} h1{font-size:34px} .grid-2,.axis-grid{grid-template-columns:1fr}
+}
+@media print{
+  aside{display:none} .layout{display:block} main{max-width:none;padding:0}
+  .hero,.summary-card,.axis-card,.protocol-card{box-shadow:none;break-inside:avoid}
+  a{color:inherit} .table-wrap{overflow:visible} h2{break-before:page}
+}
+</style>
+</head>
+<body>
+<div class="layout">
+<aside>
+  <div class="brand">Türkiye VAA</div>
+  <div class="brand-sub">Soru seti, puanlama, parti kodlama, doğrulama ve hukuk metodolojisi</div>
+  <nav>
+    <a href="#ozet">1. Yönetici özeti</a>
+    <a href="#karsilastirma">2. VAA karşılaştırması</a>
+    <a href="#boyutlar">3. Boyut önerisi</a>
+    <a href="#sorular">4. Örnek soru seti</a>
+    <a href="#puanlama">5. Puanlama şeması</a>
+    <a href="#parti-kodlama">6. Parti kodlama protokolü</a>
+    <a href="#dogrulama">7. Doğrulama planı</a>
+    <a href="#hukuk">8. Hukuk ve etik</a>
+    <a href="#sonuc">9. Sonuç sunumu</a>
+    <a href="#riskler">10. Riskler</a>
+    <a href="#kaynaklar">Kaynakça</a>
+  </nav>
+</aside>
+
+<main>
+<header class="hero">
+  <span class="eyebrow">Uygulanabilir metodoloji dokümanı</span>
+  <h1>Türkiye için Oy Verme Danışma Aracı</h1>
+  <p class="lead">Türkiye seçmeninin politika tercihlerini ölçüp siyasi partilerle şeffaf, kaynaklandırılmış ve kodlanabilir biçimde eşleştiren bir VAA için önerilen soru mimarisi, puanlama algoritması, parti konumlandırma protokolü ve yayın öncesi doğrulama planı.</p>
+  <div class="meta">
+    <span class="pill">Önerilen çekirdek: 8 eksen</span>
+    <span class="pill">24–32 puanlanan madde</span>
+    <span class="pill">5’li Likert + fikrim yok</span>
+    <span class="pill">Ağırlıklı Manhattan eşleşmesi</span>
+    <span class="pill">Sürüm: 29 Temmuz 2026</span>
+  </div>
+</header>
+
+<section id="ozet">
+<h2>1. Yönetici özeti</h2>
+<div class="grid-2">
+  <div class="summary-card"><strong>01 — Eksen mimarisi</strong>Mevcut 10 eksen yerine kavramsal olarak daha tutarlı 8 çekirdek eksen kullanın. Ekonomi ile gelir dağılımını; dış politika ile AB ilişkilerini birleştirin.</div>
+  <div class="summary-card"><strong>02 — Türkiye’ye özgü ayrışmalar</strong>Klasik ekonomik sol–sağ tek başına yeterli değildir. Rejim-demokrasi, laiklik, Türk–Kürt kimliği ve göç ayrı ölçülmelidir. <a class="cite" href="#ref-9" aria-label="Kaynak 9">[9]</a><a class="cite" href="#ref-10" aria-label="Kaynak 10">[10]</a><a class="cite" href="#ref-13" aria-label="Kaynak 13">[13]</a><a class="cite" href="#ref-14" aria-label="Kaynak 14">[14]</a><a class="cite" href="#ref-15" aria-label="Kaynak 15">[15]</a><a class="cite" href="#ref-16" aria-label="Kaynak 16">[16]</a></div>
+  <div class="summary-card"><strong>03 — Çekirdek soru biçimi</strong>Puanlanan çekirdekte 5’li Likert kullanın. “Nötr” ile “fikrim yok” aynı seçenek olmamalıdır; fikrim yok puanlamadan dışlanmalıdır. <a class="cite" href="#ref-1" aria-label="Kaynak 1">[1]</a><a class="cite" href="#ref-4" aria-label="Kaynak 4">[4]</a></div>
+  <div class="summary-card"><strong>04 — Soru sayısı</strong>24–32 puanlanan madde hedefleyin. Her eksende en az 3 madde bulunsun; toplam tamamlama süresi yaklaşık 8–12 dakika olsun. <a class="cite" href="#ref-20" aria-label="Kaynak 20">[20]</a></div>
+  <div class="summary-card"><strong>05 — Kullanıcı skoru</strong>Ham toplamı kırpmak yerine, kullanıcının yanıtladığı maddelerde ulaşılabilir maksimum mutlak puana göre eksen bazında normalize edin.</div>
+  <div class="summary-card"><strong>06 — Parti eşleşmesi</strong>Birincil sıralama için eksen bazlı ağırlıklı Manhattan uzaklığı kullanın. İki boyutlu haritayı açıklayıcı görsel olarak tutun, ana sıralayıcı yapmayın. <a class="cite" href="#ref-4" aria-label="Kaynak 4">[4]</a><a class="cite" href="#ref-23" aria-label="Kaynak 23">[23]</a><a class="cite" href="#ref-24" aria-label="Kaynak 24">[24]</a></div>
+  <div class="summary-card"><strong>07 — Önem ağırlığı</strong>Kullanıcı “önemli” dediğinde ağırlığı 1’den 1,5’e yükseltin. İki kat ağırlık sonuçları gereğinden fazla oynatabilir.</div>
+  <div class="summary-card"><strong>08 — Parti konumlandırması</strong>Parti öz-beyanı + iki bağımsız kodlayıcı + kaynak kanıtı + hakemli uzlaştırma modeli kullanın. <a class="cite" href="#ref-5" aria-label="Kaynak 5">[5]</a><a class="cite" href="#ref-25" aria-label="Kaynak 25">[25]</a></div>
+  <div class="summary-card"><strong>09 — Veri koruma</strong>Siyasi görüş özel nitelikli veridir. Hesapsız ve anonim kullanım varsayılan olmalı; araştırma amacı için ayrı açık rıza alınmalıdır. <a class="cite" href="#ref-17" aria-label="Kaynak 17">[17]</a><a class="cite" href="#ref-18" aria-label="Kaynak 18">[18]</a><a class="cite" href="#ref-19" aria-label="Kaynak 19">[19]</a></div>
+  <div class="summary-card"><strong>10 — Şeffaflık</strong>Her parti-madde konumu için tarihli kaynak, kodlama gerekçesi, sürüm geçmişi ve itiraz prosedürü yayınlayın.</div>
+</div>
+<div class="callout warning"><strong>Mevcut sistemdeki temel tasarım hatası:</strong> soru sayısı farklı eksenlerin ham puanlarını toplamak ve sonra <code>[-100,+100]</code> aralığına kırpmak; eksenleri karşılaştırılamaz hale getirir ve erken doygunluk yaratır. Normalizasyon şarttır.</div>
+</section>
+
+<section id="karsilastirma">
+<h2>2. Yerleşik VAA’ların karşılaştırması</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Araç</th><th>Soru sayısı</th><th>Format</th><th>Model / formül</th><th>Önem ağırlığı</th><th>Parti konumu kaynağı</th><th>Kaynak</th></tr></thead>
+<tbody><tr><td>Wahl-O-Mat</td><td>38</td><td>Üçlü: katılıyorum / nötr / katılmıyorum + atla</td><td>Ham örtüşme puanı</td><td>Önemli maddeler iki kat</td><td>Partilerin resmî yanıtları</td><td><a class="cite" href="#ref-1" aria-label="Kaynak 1">[1]</a><a class="cite" href="#ref-2" aria-label="Kaynak 2">[2]</a></td></tr><tr><td>StemWijzer</td><td>Genellikle 25–30</td><td>Üçlü + fikrim yok</td><td>Örtüşme puanı</td><td>Önemli maddeler iki kat</td><td>Parti yanıtları ve editoryal süreç</td><td><a class="cite" href="#ref-3" aria-label="Kaynak 3">[3]</a></td></tr><tr><td>Kieskompas</td><td>Yaklaşık 30</td><td>Likert / konum ölçekleri</td><td>Çok boyutlu uzamsal model</td><td>Uygulamaya göre değişir</td><td>Parti öz-konumlandırması + uzman düzeltmesi</td><td><a class="cite" href="#ref-25" aria-label="Kaynak 25">[25]</a></td></tr><tr><td>smartvote</td><td>Yaklaşık 30–75</td><td>Likert</td><td>Öklid uzaklığı</td><td>Kullanıcı önem tercihi bulunabilir</td><td>Aday/parti öz-yanıtları</td><td><a class="cite" href="#ref-6" aria-label="Kaynak 6">[6]</a></td></tr><tr><td>Vote Compass</td><td>Yaklaşık 30</td><td>Likert</td><td>Uzamsal model ve Öklid uzaklığı</td><td>Konu salience bileşenleri</td><td>Uzman/araştırmacı kodlaması</td><td><a class="cite" href="#ref-7" aria-label="Kaynak 7">[7]</a></td></tr><tr><td>EU&I / EU Profiler</td><td>30 civarı</td><td>5’li ölçek + fikrim yok</td><td>Ağırlıklı Manhattan uzaklığı</td><td>Konu ağırlıkları</td><td>Parti beyanı + uzman doğrulaması</td><td><a class="cite" href="#ref-4" aria-label="Kaynak 4">[4]</a><a class="cite" href="#ref-5" aria-label="Kaynak 5">[5]</a></td></tr><tr><td>iSideWith</td><td>Geniş ve dallanan</td><td>Çoklu duruşlar + önem</td><td>Tescilli hibrit yüzde</td><td>Tutku/önem/güven bileşenleri</td><td>Kamuya açık söylem ve editoryal kodlama</td><td><a class="cite" href="#ref-8" aria-label="Kaynak 8">[8]</a></td></tr></tbody>
+</table></div>
+
+<div class="grid-2" style="margin-top:18px">
+  <div class="protocol-card"><h3>Ham örtüşme modeli</h3><p><strong>Avantaj:</strong> açıklaması ve denetimi kolaydır. <strong>Dezavantaj:</strong> tüm siyaseti tek yüzdeye sıkıştırır; yakın ama farklı yönlerdeki cevapları yeterince ayırt edemez.</p></div>
+  <div class="protocol-card"><h3>Uzamsal model</h3><p><strong>Avantaj:</strong> çok boyutlu siyasi konumu gösterebilir. <strong>Dezavantaj:</strong> boyut seçimi, ölçekleme ve uzaklık metriği sonuçları etkiler; mutlaka duyarlılık testi gerekir. <a class="cite" href="#ref-23" aria-label="Kaynak 23">[23]</a><a class="cite" href="#ref-24" aria-label="Kaynak 24">[24]</a></p></div>
+</div>
+</section>
+
+<section id="boyutlar">
+<h2>3. Türkiye için önerilen boyutlar</h2>
+<p>Önerilen yapı, kalıcı çekirdek eksenleri seçim dönemine özel modüllerden ayırır. Çekirdek sistem 8 eksendir; örneğin deprem politikası, belirli bir savaş veya güncel vergi paketi seçim modülü olarak eklenebilir.</p>
+<div class="axis-grid">
+<section class="axis-card" id="axis-ekonomi">
+  <div class="axis-head">
+    <div>
+      <span class="eyebrow">Eksen</span>
+      <h3>Ekonomik Model ve Yeniden Dağıtım</h3>
+    </div>
+    <span class="axis-code">ekonomi</span>
+  </div>
+  <div class="poles">
+    <div><strong>−100</strong><span>Piyasa ağırlıklı, düşük vergi ve sınırlı devlet müdahalesi</span></div>
+    <div><strong>+100</strong><span>Müdahaleci, yeniden dağıtımcı ve kamu yatırımı ağırlıklı yaklaşım</span></div>
+  </div>
+  <p><strong>Mevcut yapıyla ilişki:</strong> Mevcut “Ekonomi” ve “Gelir Dağılımı” eksenlerini birleştir.</p>
+  <p><strong>Ampirik dayanak:</strong> <a class="cite" href="#ref-9" aria-label="Kaynak 9">[9]</a><a class="cite" href="#ref-12" aria-label="Kaynak 12">[12]</a></p>
+</section>
+
+<section class="axis-card" id="axis-demokrasi">
+  <div class="axis-head">
+    <div>
+      <span class="eyebrow">Eksen</span>
+      <h3>Demokratik Kurumlar ve Hukukun Üstünlüğü</h3>
+    </div>
+    <span class="axis-code">demokrasi</span>
+  </div>
+  <div class="poles">
+    <div><strong>−100</strong><span>Yürütme gücünün merkezileşmesi ve çoğunlukçu yönetim</span></div>
+    <div><strong>+100</strong><span>Kuvvetler ayrılığı, yargı bağımsızlığı ve çoğulcu denetim</span></div>
+  </div>
+  <p><strong>Mevcut yapıyla ilişki:</strong> “Sivil Özgürlükler” ile “Güvenlik ve Devlet” eksenlerini yeniden tanımlayıp birleştir.</p>
+  <p><strong>Ampirik dayanak:</strong> <a class="cite" href="#ref-10" aria-label="Kaynak 10">[10]</a><a class="cite" href="#ref-11" aria-label="Kaynak 11">[11]</a><a class="cite" href="#ref-13" aria-label="Kaynak 13">[13]</a></p>
+</section>
+
+<section class="axis-card" id="axis-sekulerizm">
+  <div class="axis-head">
+    <div>
+      <span class="eyebrow">Eksen</span>
+      <h3>Sekülerizm ve Dinin Kamusal Rolü</h3>
+    </div>
+    <span class="axis-code">sekulerizm</span>
+  </div>
+  <div class="poles">
+    <div><strong>−100</strong><span>Dinin kamusal düzen ve kamu politikalarında daha belirleyici olması</span></div>
+    <div><strong>+100</strong><span>Devletin dinler karşısında tarafsız ve laik hukukla sınırlı olması</span></div>
+  </div>
+  <p><strong>Mevcut yapıyla ilişki:</strong> Mevcut “Sekülerizm” eksenini koru; adı ve uç tanımları netleştir.</p>
+  <p><strong>Ampirik dayanak:</strong> <a class="cite" href="#ref-14" aria-label="Kaynak 14">[14]</a></p>
+</section>
+
+<section class="axis-card" id="axis-kimlik">
+  <div class="axis-head">
+    <div>
+      <span class="eyebrow">Eksen</span>
+      <h3>Kimlik, Kürt Meselesi ve Yerel Özerklik</h3>
+    </div>
+    <span class="axis-code">kimlik</span>
+  </div>
+  <div class="poles">
+    <div><strong>−100</strong><span>Üniter-merkeziyetçi ve asimilasyoncu yaklaşım</span></div>
+    <div><strong>+100</strong><span>Çoğulcu tanınma, kültürel haklar ve daha güçlü yerel özerklik</span></div>
+  </div>
+  <p><strong>Mevcut yapıyla ilişki:</strong> Mevcut “Kimlik ve Göç” eksenini ikiye ayır; kimlik ve göç ayrı ölçülmeli.</p>
+  <p><strong>Ampirik dayanak:</strong> <a class="cite" href="#ref-15" aria-label="Kaynak 15">[15]</a><a class="cite" href="#ref-13" aria-label="Kaynak 13">[13]</a></p>
+</section>
+
+<section class="axis-card" id="axis-goc">
+  <div class="axis-head">
+    <div>
+      <span class="eyebrow">Eksen</span>
+      <h3>Göç ve Sığınmacı Politikası</h3>
+    </div>
+    <span class="axis-code">goc</span>
+  </div>
+  <div class="poles">
+    <div><strong>−100</strong><span>Kısıtlayıcı, geri dönüş öncelikli yaklaşım</span></div>
+    <div><strong>+100</strong><span>Koruma, uyum ve koşullu kalıcı statü yaklaşımı</span></div>
+  </div>
+  <p><strong>Mevcut yapıyla ilişki:</strong> Yeni ve bağımsız eksen olarak ekle.</p>
+  <p><strong>Ampirik dayanak:</strong> <a class="cite" href="#ref-16" aria-label="Kaynak 16">[16]</a></p>
+</section>
+
+<section class="axis-card" id="axis-sosyal">
+  <div class="axis-head">
+    <div>
+      <span class="eyebrow">Eksen</span>
+      <h3>Refah, Eğitim, Toplumsal Cinsiyet ve Aile</h3>
+    </div>
+    <span class="axis-code">sosyal</span>
+  </div>
+  <div class="poles">
+    <div><strong>−100</strong><span>Geleneksel aile merkezli ve hedefli sosyal yardım yaklaşımı</span></div>
+    <div><strong>+100</strong><span>Evrensel sosyal yatırım, kamusal hizmet ve toplumsal cinsiyet eşitliği</span></div>
+  </div>
+  <p><strong>Mevcut yapıyla ilişki:</strong> Mevcut “Eğitim ve Sosyal Politika” eksenini genişlet.</p>
+  <p><strong>Ampirik dayanak:</strong> <a class="cite" href="#ref-9" aria-label="Kaynak 9">[9]</a><a class="cite" href="#ref-14" aria-label="Kaynak 14">[14]</a></p>
+</section>
+
+<section class="axis-card" id="axis-cevre">
+  <div class="axis-head">
+    <div>
+      <span class="eyebrow">Eksen</span>
+      <h3>Çevre ve Kalkınma</h3>
+    </div>
+    <span class="axis-code">cevre</span>
+  </div>
+  <div class="poles">
+    <div><strong>−100</strong><span>Büyüme, altyapı ve yatırım öncelikli yaklaşım</span></div>
+    <div><strong>+100</strong><span>Ekolojik koruma, iklim dönüşümü ve çevresel sınırlama</span></div>
+  </div>
+  <p><strong>Mevcut yapıyla ilişki:</strong> Mevcut ekseni koru; kalkınma-çevre çatışmasını açık biçimde tanımla.</p>
+  <p><strong>Ampirik dayanak:</strong> <a class="cite" href="#ref-9" aria-label="Kaynak 9">[9]</a><a class="cite" href="#ref-12" aria-label="Kaynak 12">[12]</a></p>
+</section>
+
+<section class="axis-card" id="axis-dis">
+  <div class="axis-head">
+    <div>
+      <span class="eyebrow">Eksen</span>
+      <h3>Dış Politika, Güvenlik Yönelimi ve Avrupa</h3>
+    </div>
+    <span class="axis-code">dis</span>
+  </div>
+  <div class="poles">
+    <div><strong>−100</strong><span>Egemenlikçi stratejik özerklik ve Batı kurumlarından mesafe</span></div>
+    <div><strong>+100</strong><span>AB yönelimli, kurumsal uyum ve çok taraflı işbirliği</span></div>
+  </div>
+  <p><strong>Mevcut yapıyla ilişki:</strong> “Dış Politika” ve “AB İlişkileri” eksenlerini birleştir.</p>
+  <p><strong>Ampirik dayanak:</strong> <a class="cite" href="#ref-9" aria-label="Kaynak 9">[9]</a><a class="cite" href="#ref-10" aria-label="Kaynak 10">[10]</a></p>
+</section>
+</div>
+</section>
+
+<section id="sorular">
+<h2>4. Kodlanabilir örnek soru seti</h2>
+<p>Tüm maddeler politika önermesi biçiminde yazılmıştır. Varsayılan seçenekler: <code>strongly_agree</code>, <code>agree</code>, <code>neutral</code>, <code>disagree</code>, <code>strongly_disagree</code>, <code>no_opinion</code>.</p>
+<div class="callout"><strong>Uygulama notu:</strong> Aşağıdaki <code>score_modifier</code> değerleri soru seviyesinde ham katkıdır. Nihai eksen puanı, yanıtlanan maddelerin ulaşılabilir maksimum puanına göre normalize edilmelidir.</div>
+<div class="table-wrap"><table>
+<thead><tr><th>question_id</th><th>Tam soru metni</th><th>Tip</th><th>axis_id</th><th>answer_value → score_modifier</th></tr></thead>
+<tbody>
+        <tr>
+          <td><span class="qid">ekonomi_1</span></td>
+          <td>Büyük şirketler ve yüksek gelir grupları için vergi oranları artırılmalıdır.</td>
+          <td>5’li Likert + “Fikrim yok”</td>
+          <td><code>ekonomi</code></td>
+          <td><code>strongly_agree</code> → <strong>+25</strong><br><code>agree</code> → <strong>+12</strong><br><code>neutral</code> → <strong>0</strong><br><code>disagree</code> → <strong>-12</strong><br><code>strongly_disagree</code> → <strong>-25</strong><br><code>no_opinion</code> → <strong>hariç</strong></td>
+        </tr>
+        <tr>
+          <td><span class="qid">ekonomi_2</span></td>
+          <td>Stratejik sektörlerde devlet mülkiyeti ve kamu yatırımı artırılmalıdır.</td>
+          <td>5’li Likert + “Fikrim yok”</td>
+          <td><code>ekonomi</code></td>
+          <td><code>strongly_agree</code> → <strong>+25</strong><br><code>agree</code> → <strong>+12</strong><br><code>neutral</code> → <strong>0</strong><br><code>disagree</code> → <strong>-12</strong><br><code>strongly_disagree</code> → <strong>-25</strong><br><code>no_opinion</code> → <strong>hariç</strong></td>
+        </tr>
+        <tr>
+          <td><span class="qid">ekonomi_3</span></td>
+          <td>Asgari ücret artışları, enflasyonla mücadele gerekçesiyle daha sınırlı tutulmalıdır.</td>
+          <td>5’li Likert + “Fikrim yok”</td>
+          <td><code>ekonomi</code></td>
+          <td><code>strongly_agree</code> → <strong>-25</strong><br><code>agree</code> → <strong>-12</strong><br><code>neutral</code> → <strong>0</strong><br><code>disagree</code> → <strong>+12</strong><br><code>strongly_disagree</code> → <strong>+25</strong><br><code>no_opinion</code> → <strong>hariç</strong></td>
+        </tr>
+        <tr>
+          <td><span class="qid">demokrasi_1</span></td>
+          <td>Cumhurbaşkanının yetkileri azaltılarak Meclis ve yargı denetimi güçlendirilmelidir.</td>
+          <td>5’li Likert + “Fikrim yok”</td>
+          <td><code>demokrasi</code></td>
+          <td><code>strongly_agree</code> → <strong>+25</strong><br><code>agree</code> → <strong>+12</strong><br><code>neutral</code> → <strong>0</strong><br><code>disagree</code> → <strong>-12</strong><br><code>strongly_disagree</code> → <strong>-25</strong><br><code>no_opinion</code> → <strong>hariç</strong></td>
+        </tr>
+        <tr>
+          <td><span class="qid">demokrasi_2</span></td>
+          <td>Terörle mücadele gerekçesiyle ifade ve protesto özgürlüğüne daha geniş sınırlamalar getirilebilir.</td>
+          <td>5’li Likert + “Fikrim yok”</td>
+          <td><code>demokrasi</code></td>
+          <td><code>strongly_agree</code> → <strong>-25</strong><br><code>agree</code> → <strong>-12</strong><br><code>neutral</code> → <strong>0</strong><br><code>disagree</code> → <strong>+12</strong><br><code>strongly_disagree</code> → <strong>+25</strong><br><code>no_opinion</code> → <strong>hariç</strong></td>
+        </tr>
+        <tr>
+          <td><span class="qid">demokrasi_3</span></td>
+          <td>Seçilmiş belediye başkanları, kesin yargı kararı olmadan görevden alınmamalıdır.</td>
+          <td>5’li Likert + “Fikrim yok”</td>
+          <td><code>demokrasi</code></td>
+          <td><code>strongly_agree</code> → <strong>+25</strong><br><code>agree</code> → <strong>+12</strong><br><code>neutral</code> → <strong>0</strong><br><code>disagree</code> → <strong>-12</strong><br><code>strongly_disagree</code> → <strong>-25</strong><br><code>no_opinion</code> → <strong>hariç</strong></td>
+        </tr>
+        <tr>
+          <td><span class="qid">sekulerizm_1</span></td>
+          <td>Zorunlu din kültürü dersleri seçimlik hale getirilmelidir.</td>
+          <td>5’li Likert + “Fikrim yok”</td>
+          <td><code>sekulerizm</code></td>
+          <td><code>strongly_agree</code> → <strong>+25</strong><br><code>agree</code> → <strong>+12</strong><br><code>neutral</code> → <strong>0</strong><br><code>disagree</code> → <strong>-12</strong><br><code>strongly_disagree</code> → <strong>-25</strong><br><code>no_opinion</code> → <strong>hariç</strong></td>
+        </tr>
+        <tr>
+          <td><span class="qid">sekulerizm_2</span></td>
+          <td>Diyanet’in kamu politikaları üzerindeki rolü genişletilmelidir.</td>
+          <td>5’li Likert + “Fikrim yok”</td>
+          <td><code>sekulerizm</code></td>
+          <td><code>strongly_agree</code> → <strong>-25</strong><br><code>agree</code> → <strong>-12</strong><br><code>neutral</code> → <strong>0</strong><br><code>disagree</code> → <strong>+12</strong><br><code>strongly_disagree</code> → <strong>+25</strong><br><code>no_opinion</code> → <strong>hariç</strong></td>
+        </tr>
+        <tr>
+          <td><span class="qid">sekulerizm_3</span></td>
+          <td>Kamuda kararlar dini referanslardan bağımsız, laik hukuk çerçevesinde alınmalıdır.</td>
+          <td>5’li Likert + “Fikrim yok”</td>
+          <td><code>sekulerizm</code></td>
+          <td><code>strongly_agree</code> → <strong>+25</strong><br><code>agree</code> → <strong>+12</strong><br><code>neutral</code> → <strong>0</strong><br><code>disagree</code> → <strong>-12</strong><br><code>strongly_disagree</code> → <strong>-25</strong><br><code>no_opinion</code> → <strong>hariç</strong></td>
+        </tr>
+        <tr>
+          <td><span class="qid">kimlik_1</span></td>
+          <td>Kamu hizmetlerinde Türkçeden başka dillerin kullanımına daha fazla imkân tanınmalıdır.</td>
+          <td>5’li Likert + “Fikrim yok”</td>
+          <td><code>kimlik</code></td>
+          <td><code>strongly_agree</code> → <strong>+25</strong><br><code>agree</code> → <strong>+12</strong><br><code>neutral</code> → <strong>0</strong><br><code>disagree</code> → <strong>-12</strong><br><code>strongly_disagree</code> → <strong>-25</strong><br><code>no_opinion</code> → <strong>hariç</strong></td>
+        </tr>
+        <tr>
+          <td><span class="qid">kimlik_2</span></td>
+          <td>Yerel yönetimlere daha fazla idari ve mali özerklik verilmelidir.</td>
+          <td>5’li Likert + “Fikrim yok”</td>
+          <td><code>kimlik</code></td>
+          <td><code>strongly_agree</code> → <strong>+25</strong><br><code>agree</code> → <strong>+12</strong><br><code>neutral</code> → <strong>0</strong><br><code>disagree</code> → <strong>-12</strong><br><code>strongly_disagree</code> → <strong>-25</strong><br><code>no_opinion</code> → <strong>hariç</strong></td>
+        </tr>
+        <tr>
+          <td><span class="qid">kimlik_3</span></td>
+          <td>Kimlik ve terör riski gerekçesiyle merkezî idarenin yerel yönetimler üzerindeki denetimi artırılmalıdır.</td>
+          <td>5’li Likert + “Fikrim yok”</td>
+          <td><code>kimlik</code></td>
+          <td><code>strongly_agree</code> → <strong>-25</strong><br><code>agree</code> → <strong>-12</strong><br><code>neutral</code> → <strong>0</strong><br><code>disagree</code> → <strong>+12</strong><br><code>strongly_disagree</code> → <strong>+25</strong><br><code>no_opinion</code> → <strong>hariç</strong></td>
+        </tr>
+        <tr>
+          <td><span class="qid">goc_1</span></td>
+          <td>Suriyelilerin ve diğer sığınmacıların hızlı geri dönüşü devlet politikası olmalıdır.</td>
+          <td>5’li Likert + “Fikrim yok”</td>
+          <td><code>goc</code></td>
+          <td><code>strongly_agree</code> → <strong>-25</strong><br><code>agree</code> → <strong>-12</strong><br><code>neutral</code> → <strong>0</strong><br><code>disagree</code> → <strong>+12</strong><br><code>strongly_disagree</code> → <strong>+25</strong><br><code>no_opinion</code> → <strong>hariç</strong></td>
+        </tr>
+        <tr>
+          <td><span class="qid">goc_2</span></td>
+          <td>Uzun süredir Türkiye’de yaşayan ve belirli koşulları sağlayan sığınmacılara kademeli kalıcı statü verilmelidir.</td>
+          <td>5’li Likert + “Fikrim yok”</td>
+          <td><code>goc</code></td>
+          <td><code>strongly_agree</code> → <strong>+25</strong><br><code>agree</code> → <strong>+12</strong><br><code>neutral</code> → <strong>0</strong><br><code>disagree</code> → <strong>-12</strong><br><code>strongly_disagree</code> → <strong>-25</strong><br><code>no_opinion</code> → <strong>hariç</strong></td>
+        </tr>
+        <tr>
+          <td><span class="qid">goc_3</span></td>
+          <td>Belediyeler göçmenlere yönelik eğitim ve uyum hizmetlerine daha fazla kaynak ayırmalıdır.</td>
+          <td>5’li Likert + “Fikrim yok”</td>
+          <td><code>goc</code></td>
+          <td><code>strongly_agree</code> → <strong>+25</strong><br><code>agree</code> → <strong>+12</strong><br><code>neutral</code> → <strong>0</strong><br><code>disagree</code> → <strong>-12</strong><br><code>strongly_disagree</code> → <strong>-25</strong><br><code>no_opinion</code> → <strong>hariç</strong></td>
+        </tr>
+        <tr>
+          <td><span class="qid">sosyal_1</span></td>
+          <td>Devlet kreşleri ve bakım hizmetleri ülke genelinde hızla yaygınlaştırılmalıdır.</td>
+          <td>5’li Likert + “Fikrim yok”</td>
+          <td><code>sosyal</code></td>
+          <td><code>strongly_agree</code> → <strong>+25</strong><br><code>agree</code> → <strong>+12</strong><br><code>neutral</code> → <strong>0</strong><br><code>disagree</code> → <strong>-12</strong><br><code>strongly_disagree</code> → <strong>-25</strong><br><code>no_opinion</code> → <strong>hariç</strong></td>
+        </tr>
+        <tr>
+          <td><span class="qid">sosyal_2</span></td>
+          <td>Aile politikalarında kadının asli rolü annelik olarak görülmelidir.</td>
+          <td>5’li Likert + “Fikrim yok”</td>
+          <td><code>sosyal</code></td>
+          <td><code>strongly_agree</code> → <strong>-25</strong><br><code>agree</code> → <strong>-12</strong><br><code>neutral</code> → <strong>0</strong><br><code>disagree</code> → <strong>+12</strong><br><code>strongly_disagree</code> → <strong>+25</strong><br><code>no_opinion</code> → <strong>hariç</strong></td>
+        </tr>
+        <tr>
+          <td><span class="qid">sosyal_3</span></td>
+          <td>Devlet okullarında bilimsel ve eleştirel düşünmeyi güçlendiren müfredat öncelik olmalıdır.</td>
+          <td>5’li Likert + “Fikrim yok”</td>
+          <td><code>sosyal</code></td>
+          <td><code>strongly_agree</code> → <strong>+25</strong><br><code>agree</code> → <strong>+12</strong><br><code>neutral</code> → <strong>0</strong><br><code>disagree</code> → <strong>-12</strong><br><code>strongly_disagree</code> → <strong>-25</strong><br><code>no_opinion</code> → <strong>hariç</strong></td>
+        </tr>
+        <tr>
+          <td><span class="qid">cevre_1</span></td>
+          <td>Maden ve enerji projelerinde çevresel itirazlar karşısında yatırım süreçleri hızlandırılmalıdır.</td>
+          <td>5’li Likert + “Fikrim yok”</td>
+          <td><code>cevre</code></td>
+          <td><code>strongly_agree</code> → <strong>-25</strong><br><code>agree</code> → <strong>-12</strong><br><code>neutral</code> → <strong>0</strong><br><code>disagree</code> → <strong>+12</strong><br><code>strongly_disagree</code> → <strong>+25</strong><br><code>no_opinion</code> → <strong>hariç</strong></td>
+        </tr>
+        <tr>
+          <td><span class="qid">cevre_2</span></td>
+          <td>İklim hedefleri için fosil yakıt teşvikleri kademeli olarak kaldırılmalıdır.</td>
+          <td>5’li Likert + “Fikrim yok”</td>
+          <td><code>cevre</code></td>
+          <td><code>strongly_agree</code> → <strong>+25</strong><br><code>agree</code> → <strong>+12</strong><br><code>neutral</code> → <strong>0</strong><br><code>disagree</code> → <strong>-12</strong><br><code>strongly_disagree</code> → <strong>-25</strong><br><code>no_opinion</code> → <strong>hariç</strong></td>
+        </tr>
+        <tr>
+          <td><span class="qid">cevre_3</span></td>
+          <td>Su havzaları ve tarım arazileri, ekonomik büyüme pahasına da olsa daha sıkı korunmalıdır.</td>
+          <td>5’li Likert + “Fikrim yok”</td>
+          <td><code>cevre</code></td>
+          <td><code>strongly_agree</code> → <strong>+25</strong><br><code>agree</code> → <strong>+12</strong><br><code>neutral</code> → <strong>0</strong><br><code>disagree</code> → <strong>-12</strong><br><code>strongly_disagree</code> → <strong>-25</strong><br><code>no_opinion</code> → <strong>hariç</strong></td>
+        </tr>
+        <tr>
+          <td><span class="qid">dis_1</span></td>
+          <td>Türkiye’nin AB ile üyelik ve uyum süreci yeniden stratejik öncelik haline getirilmelidir.</td>
+          <td>5’li Likert + “Fikrim yok”</td>
+          <td><code>dis</code></td>
+          <td><code>strongly_agree</code> → <strong>+25</strong><br><code>agree</code> → <strong>+12</strong><br><code>neutral</code> → <strong>0</strong><br><code>disagree</code> → <strong>-12</strong><br><code>strongly_disagree</code> → <strong>-25</strong><br><code>no_opinion</code> → <strong>hariç</strong></td>
+        </tr>
+        <tr>
+          <td><span class="qid">dis_2</span></td>
+          <td>Türkiye dış politikada Batı kurumlarından bağımsız, daha sert ve özerk bir çizgi izlemelidir.</td>
+          <td>5’li Likert + “Fikrim yok”</td>
+          <td><code>dis</code></td>
+          <td><code>strongly_agree</code> → <strong>-25</strong><br><code>agree</code> → <strong>-12</strong><br><code>neutral</code> → <strong>0</strong><br><code>disagree</code> → <strong>+12</strong><br><code>strongly_disagree</code> → <strong>+25</strong><br><code>no_opinion</code> → <strong>hariç</strong></td>
+        </tr>
+        <tr>
+          <td><span class="qid">dis_3</span></td>
+          <td>NATO ve Avrupa kurumlarıyla güvenlik işbirliği Türkiye’nin güvenliği için vazgeçilmezdir.</td>
+          <td>5’li Likert + “Fikrim yok”</td>
+          <td><code>dis</code></td>
+          <td><code>strongly_agree</code> → <strong>+25</strong><br><code>agree</code> → <strong>+12</strong><br><code>neutral</code> → <strong>0</strong><br><code>disagree</code> → <strong>-12</strong><br><code>strongly_disagree</code> → <strong>-25</strong><br><code>no_opinion</code> → <strong>hariç</strong></td>
+        </tr></tbody>
+</table></div>
+</section>
+
+<section id="puanlama">
+<h2>5. Puanlama ve eşleştirme şeması</h2>
+<h3>5.1 Eksen skoru</h3>
+<pre class="formula">raw_a = Σᵢ (wᵢ × sᵢ)
+max_a = Σᵢ (wᵢ × Mᵢ)   yalnızca yanıtlanan maddeler
+
+axis_score_a = 100 × raw_a / max_a     (max_a &gt; 0)
+axis_score_a = missing                 (max_a = 0)</pre>
+<p><code>sᵢ</code>: cevap katkısı; <code>Mᵢ</code>: maddenin maksimum mutlak katkısı; <code>wᵢ</code>: madde ağırlığı. “Fikrim yok” hem paydan hem paydan çıkarılır. “Nötr” gerçek sıfır puandır.</p>
+
+<h3>5.2 Parti benzerliği</h3>
+<pre class="formula">distance_p = Σₐ (λₐ × |Uₐ − Pₚₐ|)
+
+match_p = 100 × (1 − distance_p / (200 × Σₐ λₐ))</pre>
+<p><code>Uₐ</code> kullanıcının eksen puanı, <code>Pₚₐ</code> partinin eksen puanı, <code>λₐ</code> önem ağırlığıdır. Varsayılan <code>λₐ=1</code>; kullanıcı önemli işaretlerse önerilen değer <code>1.5</code>.</p>
+
+<h3>5.3 Soru tiplerine göre hesaplama</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Soru tipi</th><th>Somut skor formülü</th><th>Mevcut şemaya uyum</th><th>Karar</th></tr></thead>
+<tbody>
+<tr><td>Tekli seçim / dropdown / forced choice</td><td>Her seçenek doğrudan bir veya birden fazla <code>scoring_rules</code> satırına bağlanır.</td><td>Doğrudan</td><td>V1 için uygun</td></tr>
+<tr><td>5’li / 7’li Likert</td><td>Önceden tanımlı simetrik puanlar. 7’li ölçek için örnek: −25, −17, −8, 0, +8, +17, +25.</td><td>Doğrudan</td><td>Çekirdek format</td></tr>
+<tr><td>0–100 slider</td><td><code>s = M × (x−50)/50</code>. Örnek <code>M=25</code>.</td><td>Dinamik parser gerekir; alternatif olarak bucket’lanabilir.</td><td>V1’de sınırlı</td></tr>
+<tr><td>Çoklu seçim</td><td>Her seçeneği sanal ikili alt-madde kabul et: <code>s = Σ selected option scores</code>. Maksimum katkı normalize edilir.</td><td>Parser veya alt-madde tablosu gerekir.</td><td>Çekirdek skorlamada dikkatli kullan</td></tr>
+<tr><td>Ranking</td><td>Borda: <code>b_j = n − rank_j</code>. İdeolojik etiketli seçeneklerde <code>s = Σ b_j × direction_j</code>, sonra maksimuma göre normalize.</td><td>Dinamik parser gerekir.</td><td>V1 dışı</td></tr>
+<tr><td>Matris</td><td>Her satır ayrı Likert maddesi olarak saklanır ve puanlanır.</td><td>Sanal alt-sorularla uyumlu</td><td>UI’da kullanılabilir</td></tr>
+<tr><td>100 puan dağıtımı</td><td>İki kutuplu tahsiste <code>s = M × (share_plus − share_minus)/100</code>.</td><td>Dinamik parser gerekir.</td><td>İleri sürüm</td></tr>
+<tr><td>Senaryo / vinyet</td><td>Seçenek veya Likert cevabı normal madde gibi puanlanır.</td><td>Uyumlu</td><td>Hassas konularda değerli</td></tr>
+<tr><td>Sayısal giriş</td><td>Önceden yayımlanmış eşiklere göre bucket’la; aralıkların ideolojik anlamı açık olmalı.</td><td>Bucket sonrası uyumlu</td><td>Nadiren kullan</td></tr>
+<tr><td>Açık metin</td><td>İdeolojik skora dahil edilmez.</td><td>Skor dışı</td><td>Geri bildirim için</td></tr>
+<tr><td>Dikkat kontrolü</td><td>Skor üretmez; kalite bayrağı üretir.</td><td>Uyumlu</td><td>1–2 adet</td></tr>
+</tbody></table></div>
+
+<h3>5.4 Eksik cevaplar ve güven göstergesi</h3>
+<p>Bir eksende üç maddeden yalnızca biri yanıtlandıysa skor hesaplanabilir; fakat sonuç kartında düşük kapsama uyarısı gösterilmelidir. Önerilen güven etiketi:</p>
+<ul>
+<li><strong>Yüksek:</strong> eksen maddelerinin ≥ %80’i yanıtlandı.</li>
+<li><strong>Orta:</strong> %50–79 yanıtlandı.</li>
+<li><strong>Düşük:</strong> &lt; %50 yanıtlandı; eksen parti eşleşmesine dahil edilmemeli veya uyarıyla dahil edilmelidir.</li>
+</ul>
+</section>
+
+<section id="parti-kodlama">
+<h2>6. Parti pozisyonu kodlama protokolü</h2>
+<div class="steps">
+  <div class="step"><strong>Soru setini dondur.</strong> Parti kodlaması başladıktan sonra soru metni değiştirilmez; değişirse yeni sürüm açılır.</div>
+  <div class="step"><strong>Partilere standart form gönder.</strong> Her cevap için resmî belge, tarih ve sayfa/URL talep edilir.</div>
+  <div class="step"><strong>İki bağımsız kodlayıcı kullan.</strong> Kodlayıcılar birbirinin puanını görmeden parti-madde konumunu kodlar.</div>
+  <div class="step"><strong>Kanıt hiyerarşisi uygula.</strong> Güncel seçim bildirgesi → resmî politika belgesi → resmî açıklama → TBMM/yerel yönetim davranışı → uzman veri setleri.</div>
+  <div class="step"><strong>Anlaşmazlığı ölç.</strong> Kategorik cevaplarda Cohen’s kappa; sürekli/ölçek puanlarında ICC veya ağırlıklı kappa raporlanır.</div>
+  <div class="step"><strong>Uzlaştırma yap.</strong> Büyük farklarda üçüncü uzman; küçük farklarda kanıt ağırlığına göre mutabakat.</div>
+  <div class="step"><strong>Partiye itiraz hakkı ver.</strong> Parti yeni kanıt sunabilir; nihai karar bağımsız metodoloji kurulundadır.</div>
+  <div class="step"><strong>Her sürümü arşivle.</strong> Değişiklik tarihi, eski ve yeni puan, gerekçe ve kaynak yayımlanır.</div>
+</div>
+<div class="callout ok"><strong>Hukuken ve itibaren en savunulabilir model:</strong> “Parti böyle cevap verdi” bilgisini saklamak; fakat nihai konumu yalnızca partiye bırakmayıp, kaynaklandırılmış bağımsız çift kodlama ve itiraz mekanizmasıyla belirlemek. <a class="cite" href="#ref-5" aria-label="Kaynak 5">[5]</a><a class="cite" href="#ref-25" aria-label="Kaynak 25">[25]</a></div>
+
+<h3>Yayımlanması gereken şeffaflık belgeleri</h3>
+<ul class="checklist">
+<li>Madde yazım ve seçim kılavuzu</li>
+<li>Parti dahil etme kriterleri</li>
+<li>Kaynak hiyerarşisi ve kodlama kitabı</li>
+<li>Her parti-madde konumu için kanıt tablosu</li>
+<li>Kodlayıcılar arası güvenirlik raporu</li>
+<li>Anlaşmazlık ve uzlaştırma günlüğü</li>
+<li>Sürüm geçmişi ve güncelleme politikası</li>
+<li>Parti itiraz ve düzeltme prosedürü</li>
+</ul>
+</section>
+
+<section id="dogrulama">
+<h2>7. Yayın öncesi doğrulama planı</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Aşama</th><th>Örneklem</th><th>Ölçüt</th><th>Başarı eşiği</th><th>Başarısızlıkta işlem</th></tr></thead>
+<tbody>
+<tr><td>Uzman içerik incelemesi</td><td>5–8 siyaset bilimci / anket uzmanı</td><td>Tarafsızlık, tek-anlamlılık, parti ayrıştırma potansiyeli</td><td>Maddelerin ≥ %80’i “uygun”</td><td>Yeniden yaz veya çıkar</td></tr>
+<tr><td>Bilişsel görüşme</td><td>20–30 kişi; ideolojik ve demografik çeşitlilik</td><td>Anlama, hatırlama, yargı ve cevap eşlemesi</td><td>Madde başına ciddi sorun &lt; %15</td><td>Metni sadeleştir; çift-namlulu ifadeyi böl</td></tr>
+<tr><td>Yumuşak pilot</td><td>150–300 kişi</td><td>Tamamlama, süre, eksik oranı, dikkat kontrolü</td><td>Tamamlama ≥ %75; medyan süre ≤ 12 dk</td><td>Soru sayısını azalt; mobil UX düzelt</td></tr>
+<tr><td>Psikometrik pilot</td><td>En az 500; tercihen 800–1.500</td><td>Madde dağılımı, madde-toplam korelasyonu, EFA/CFA</td><td>Düzeltilmiş madde-toplam ≥ .20; hedef faktör yükü ≥ .40</td><td>Zayıf maddeyi değiştir veya çıkar</td></tr>
+<tr><td>İç tutarlılık</td><td>Aynı pilot</td><td>Omega ve yardımcı olarak Cronbach alfa</td><td>Keşifsel eksenlerde yaklaşık ≥ .70</td><td>Eksen tanımını veya madde kümesini gözden geçir <a class="cite" href="#ref-21" aria-label="Kaynak 21">[21]</a></td></tr>
+<tr><td>Parti ayrıştırma</td><td>Parti kod matrisi</td><td>Varyans, benzersiz cevap örüntüsü, madde bilgi değeri</td><td>Her madde en az iki anlamlı parti kümesini ayırmalı</td><td>Düşük varyanslı maddeyi çıkar</td></tr>
+<tr><td>Duyarlılık testi</td><td>Tüm pilot</td><td>Madde çıkarma, ağırlık değiştirme, Manhattan/Öklid karşılaştırması</td><td>Küçük tasarım değişiklikleri top-1 sonucu aşırı değiştirmemeli</td><td>Ağırlıkları azalt; eksenleri yeniden ölçekle <a class="cite" href="#ref-23" aria-label="Kaynak 23">[23]</a><a class="cite" href="#ref-24" aria-label="Kaynak 24">[24]</a></td></tr>
+</tbody></table></div>
+
+<h3>Madde yazım kuralları</h3>
+<ul class="checklist">
+<li>Her madde yalnızca bir politika kararını ölçmeli.</li>
+<li>“Makul”, “doğru”, “adaletli”, “tehdit” gibi normatif yüklü kelimeler gerekmedikçe kullanılmamalı.</li>
+<li>İki tarafın da makul gerekçesi olabilen, gerçek politika tercihi içeren ifadeler seçilmeli.</li>
+<li>Güncel parti programlarında karşılığı olmayan soyut değer ifadeleri çekirdek skora alınmamalı.</li>
+<li>Olumsuz ve karmaşık cümlelerden kaçınılmalı; ters kodlama yalnızca cevap alışkanlığını test etmek için sınırlı kullanılmalı.</li>
+<li>Aynı eksende hem artı hem eksi anahtarlı maddeler dengeli biçimde bulunmalı.</li>
+</ul>
+
+<div class="grid-2">
+<div class="protocol-card"><h3>Kötü örnek</h3><p>“Ekonomiyi düzeltmek ve işsizliği azaltmak için devlet fabrikalar açmalıdır.”</p><p><strong>Sorun:</strong> çift-namlulu; “ekonomiyi düzeltmek” normatif ve herkesin kabul edeceği bir hedef.</p></div>
+<div class="protocol-card"><h3>İyi örnek</h3><p>“Stratejik sektörlerde devlet mülkiyeti ve kamu yatırımı artırılmalıdır.”</p><p><strong>Neden iyi:</strong> tek bir uygulanabilir politika tercihini ve açık bir eksen yönünü ölçüyor.</p></div>
+</div>
+</section>
+
+<section id="hukuk">
+<h2>8. Türkiye için hukuki ve etik kontrol listesi</h2>
+<div class="callout warning"><strong>Hukuki sınır:</strong> Bu bölüm ürün ve araştırma tasarımı için risk kontrolüdür; seçim dönemi yayını öncesinde Türkiye’de seçim ve KVKK alanında çalışan bir hukukçu tarafından güncel YSK kararlarıyla doğrulanmalıdır.</div>
+<ul class="checklist">
+<li>Siyasi görüş verisinin özel nitelikli kişisel veri olduğu varsayımıyla veri envanteri çıkarıldı. <a class="cite" href="#ref-17" aria-label="Kaynak 17">[17]</a><a class="cite" href="#ref-18" aria-label="Kaynak 18">[18]</a></li>
+<li>Varsayılan kullanım hesapsız ve anonim; e-posta, telefon, T.C. kimlik numarası ve hassas konum zorunlu değil.</li>
+<li>Ürün kullanımı ile araştırma amaçlı veri toplama için ayrı hukuki metin ve ayrı rıza akışı var.</li>
+<li>“Sonucu kaydet” özelliği açıkça isteğe bağlı; cevaplar kullanıcı hesabına otomatik bağlanmıyor.</li>
+<li>IP ve cihaz logları cevap yükünden ayrılıyor; kısa süre sonra siliniyor veya anonimleştiriliyor. <a class="cite" href="#ref-19" aria-label="Kaynak 19">[19]</a></li>
+<li>Saklama süreleri amaç bazında yazılı ve teknik olarak uygulanıyor.</li>
+<li>Parti eşleşmesi sonucu üçüncü taraf reklam/segmentasyon amacıyla kullanılmıyor.</li>
+<li>Metodoloji, finansman, ekip, dahil etme kriterleri ve çıkar çatışmaları yayımlanıyor.</li>
+<li>Seçim yasakları döneminde toplu kullanıcı eğilimlerini “anket sonucu” gibi yayımlayan dashboard kapalı veya hukuk incelemesine tabi. <a class="cite" href="#ref-20" aria-label="Kaynak 20">[20]</a></li>
+<li>Güvenlik: aktarım ve depolama şifrelemesi, erişim kayıtları, rol bazlı yetki ve ihlal müdahale planı mevcut.</li>
+<li>Kullanıcı verisini silme ve rızayı geri çekme mekanizması erişilebilir.</li>
+<li>18 yaş altı kullanıcılar için veri toplama ve açıklama tasarımı ayrıca değerlendirildi.</li>
+</ul>
+
+<h3>Parti dahil etme eşiği</h3>
+<p>Önerilen tarafsız kural: YSK tarafından ilgili seçime katılma yeterliliği ilan edilen ve standart kodlama formuna cevap veren ya da kamuya açık yeterli kanıtı bulunan tüm partileri dahil etmek. Teknik kapasite sınırlıysa, eşiği seçimden önce yayımlayın; seçim sonucuna veya ideolojik tercihe göre geriye dönük değiştirmeyin.</p>
+</section>
+
+<section id="sonuc">
+<h2>9. Sonuçların sunumu</h2>
+<div class="grid-2">
+<div class="protocol-card"><h3>Birincil görünüm</h3><p>Parti sıralaması + “yakın eşleşmeler” etiketi + kapsama/güven bilgisi. Yüzde tek başına kesinlik iddiası gibi sunulmamalı.</p></div>
+<div class="protocol-card"><h3>Neden bu sonuç?</h3><p>En çok katkı yapan 3 konu, en fazla ayrışılan 3 konu ve eksen bazlı kullanıcı-parti farkları gösterilmeli.</p></div>
+<div class="protocol-card"><h3>İki boyutlu harita</h3><p>Yalnızca açıklayıcı ikincil görsel. Sekiz boyutu iki boyuta indirgediği için “siyasi gerçeğin tam haritası” olarak sunulmamalı.</p></div>
+<div class="protocol-card"><h3>Sahte kesinliği azaltma</h3><p>Ondalıklı yüzdeler kullanmayın. İlk üç sonuç 3 puan içinde ise “sonuçlar birbirine yakın” uyarısı ve kısa ek soru modülü gösterin.</p></div>
+</div>
+
+<h3>Açıklama üretme formülü</h3>
+<pre>item_impact(i,p) = λ_axis(i) × |user_item_i − party_item_pi|
+
+En belirleyici uyumlar   = en küçük fark + yüksek önem
+En belirleyici ayrışmalar = en büyük fark + yüksek önem</pre>
+<p>Açıklama metni, parti hakkında serbest üretim yapan bir dil modelinden değil, puanlama matrisindeki doğrulanabilir farklardan ve kaynaklandırılmış parti pozisyonlarından üretilmelidir.</p>
+</section>
+
+<section id="riskler">
+<h2>10. Riskler ve açık sorular</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Risk</th><th>Neden önemli</th><th>Azaltma</th></tr></thead>
+<tbody>
+<tr><td>Boyutların aşırı korelasyonu</td><td>Türkiye’de laiklik, kimlik ve rejim tercihleri seçmen düzeyinde birlikte hareket edebilir.</td><td>Pilot EFA/CFA; yüksek korelasyonlu eksenleri birleştirmek yerine önce içerik geçerliliğini ve ayrışan parti pozisyonlarını incele.</td></tr>
+<tr><td>Parti stratejik cevapları</td><td>Partiler merkez seçmene yakın görünmek için kendini olduğundan farklı konumlandırabilir.</td><td>Bağımsız çift kodlama ve davranışsal kanıtla doğrulama.</td></tr>
+<tr><td>Madde seçiminin sonucu yönlendirmesi</td><td>Bir eksene fazla madde koymak o ekseni fiilen ağırlaştırır.</td><td>Eksen içi normalizasyon ve dengeli madde sayısı.</td></tr>
+<tr><td>Güncel gelişmelerin hızlı eskimesi</td><td>İttifaklar, lider söylemleri ve programlar seçim döneminde değişebilir.</td><td>Tarih damgası, sürümleme ve değişiklik günlüğü.</td></tr>
+<tr><td>Sosyal beğenilirlik yanlılığı</td><td>Kimlik, göç, din ve haklar alanında kullanıcı gerçek görüşünü saklayabilir.</td><td>Anonimlik vurgusu, yargılayıcı olmayan dil, gerektiğinde vinyet; liste deneyi yalnız araştırma modülünde.</td></tr>
+<tr><td>Yüzde eşleşmenin yanlış anlaşılması</td><td>Kullanıcı skoru “oy verme talimatı” veya istatistiksel olasılık sanabilir.</td><td>“Politika görüşü benzerliği” etiketi, yakın sonuç uyarısı ve yöntem açıklaması.</td></tr>
+<tr><td>Küçük partilerin dışlanması</td><td>Sonuçları sistematik olarak büyük partiler lehine eğer.</td><td>Önceden ilan edilmiş YSK-temelli kriter; “yeterli kanıt yok” durumunu açık göster.</td></tr>
+<tr><td>Hukuki sınıflandırma belirsizliği</td><td>Bir VAA’nın seçim anketi, siyasi reklam veya editoryal içerik sayılması bağlama göre tartışılabilir.</td><td>Yayın öncesi hukuk görüşü; toplu eğilim dashboard’unu bireysel eşleşmeden ayrı ele al.</td></tr>
+</tbody></table></div>
+</section>
+
+<section id="kaynaklar">
+<h2>Kaynakça</h2>
+<ol class="sources"><li id="ref-1"><span class="ref-type">Resmî kurum</span><a href="https://www.bpb.de/themen/wahl-o-mat/bundestagswahl-2025/558464/haeufig-gestellte-fragen-zum-wahl-o-mat/" target="_blank" rel="noopener noreferrer">BPB — Wahl-O-Mat: Sık Sorulan Sorular</a></li><li id="ref-2"><span class="ref-type">Resmî metodoloji</span><a href="https://www.bpb.de/system/files/dokument_pdf/Rechenmodell_des_Wahl-O-Mat.pdf" target="_blank" rel="noopener noreferrer">BPB — Wahl-O-Mat Hesaplama Modeli (PDF)</a></li><li id="ref-3"><span class="ref-type">Resmî metodoloji</span><a href="https://source.stemwijzer.nl/faq/" target="_blank" rel="noopener noreferrer">StemWijzer — FAQ ve metodoloji</a></li><li id="ref-4"><span class="ref-type">Resmî metodoloji</span><a href="https://euandi.eu/en/data-research/methodology.html" target="_blank" rel="noopener noreferrer">EU&amp;I — Methodology</a></li><li id="ref-5"><span class="ref-type">Resmî metodoloji</span><a href="https://euandi.eu/en/about/how-does-it-work.html" target="_blank" rel="noopener noreferrer">EU&amp;I — How does it work?</a></li><li id="ref-6"><span class="ref-type">Resmî metodoloji</span><a href="https://2024.smartwielen.lu/en/wiki/lux2024-methodology" target="_blank" rel="noopener noreferrer">smartvote / smartwielen — Methodology</a></li><li id="ref-7"><span class="ref-type">Ürün/metodoloji</span><a href="https://www.voxpoplabs.com/vote-compass/" target="_blank" rel="noopener noreferrer">Vox Pop Labs — Vote Compass</a></li><li id="ref-8"><span class="ref-type">Ürün/metodoloji</span><a href="https://www.isidewith.com/faqs/" target="_blank" rel="noopener noreferrer">iSideWith — FAQ</a></li><li id="ref-9"><span class="ref-type">Akademik veri seti</span><a href="https://www.chesdata.eu/" target="_blank" rel="noopener noreferrer">Chapel Hill Expert Survey</a></li><li id="ref-10"><span class="ref-type">Akademik veri seti</span><a href="https://v-dem.net/data/v-party-dataset/" target="_blank" rel="noopener noreferrer">V-Party Dataset</a></li><li id="ref-11"><span class="ref-type">Akademik veri seti</span><a href="https://v-dem.net/data/the-v-dem-dataset/" target="_blank" rel="noopener noreferrer">V-Dem Dataset</a></li><li id="ref-12"><span class="ref-type">Akademik veri seti</span><a href="https://gitlab.manifestoproject.wzb.eu/" target="_blank" rel="noopener noreferrer">Manifesto Project</a></li><li id="ref-13"><span class="ref-type">Kurumsal ülke raporu</span><a href="https://bti-project.org/en/reports/country-report/TUR" target="_blank" rel="noopener noreferrer">BTI 2026 Türkiye Country Report</a></li><li id="ref-14"><span class="ref-type">Hakemli akademik yayın</span><a href="https://journal.fi/ar/article/view/67555" target="_blank" rel="noopener noreferrer">Türkiye’de din–sekülerlik ve siyasal bölünmeler üzerine çalışma</a></li><li id="ref-15"><span class="ref-type">Hakemli akademik yayın</span><a href="https://journals.sagepub.com/doi/abs/10.1177/1468796817700934" target="_blank" rel="noopener noreferrer">Türkiye’de etnik/kimlik temelli parti rekabeti üzerine çalışma</a></li><li id="ref-16"><span class="ref-type">Hakemli akademik yayın</span><a href="https://www.tandfonline.com/doi/full/10.1080/1369183X.2025.2544083" target="_blank" rel="noopener noreferrer">Türkiye’de göç ve parti siyaseti üzerine güncel çalışma</a></li><li id="ref-17"><span class="ref-type">Resmî hukuk kaynağı</span><a href="https://www.kvkk.gov.tr/Icerik/7813/Secim-Faaliyetlerinde-Kisisel-Verilerin-Korunmasi-Rehberi" target="_blank" rel="noopener noreferrer">KVKK — Seçim Faaliyetlerinde Kişisel Verilerin Korunması Rehberi</a></li><li id="ref-18"><span class="ref-type">Resmî hukuk kaynağı</span><a href="https://www.kvkk.gov.tr/Icerik/8184/Ozel-Nitelikli-Kisisel-Verilerin-Islenmesine-Iliskin-Rehber" target="_blank" rel="noopener noreferrer">KVKK — Özel Nitelikli Kişisel Verilerin İşlenmesine İlişkin Rehber</a></li><li id="ref-19"><span class="ref-type">Resmî hukuk kaynağı</span><a href="https://www.kvkk.gov.tr/Icerik/2038/kisisel-verilerin-silinmesi-yok-edilmesi-veya-anonim-hale-getirilmesi" target="_blank" rel="noopener noreferrer">KVKK — Silme, yok etme ve anonimleştirme</a></li><li id="ref-20"><span class="ref-type">Resmî hukuk/uygulama kaynağı</span><a href="https://www.rtuk.gov.tr/ysk-secim-doneminde-uyulacak-yayin-esaslarini-belirledi/2633" target="_blank" rel="noopener noreferrer">RTÜK — YSK seçim döneminde yayın esasları</a></li><li id="ref-21"><span class="ref-type">Resmî araştırma yöntemi</span><a href="https://www.cdc.gov/nchs/CCQDER/index.html" target="_blank" rel="noopener noreferrer">CDC CCQDER — Cognitive Interviewing</a></li><li id="ref-22"><span class="ref-type">Akademik yöntem kaynağı</span><a href="https://stats.oarc.ucla.edu/spss/faq/what-does-cronbachs-alpha-mean/" target="_blank" rel="noopener noreferrer">UCLA — Cronbach’s Alpha açıklaması</a></li><li id="ref-23"><span class="ref-type">Akademik ön baskı</span><a href="https://arxiv.org/abs/2505.13329" target="_blank" rel="noopener noreferrer">VAA sonuçlarının sağlamlığı üzerine çalışma (2025)</a></li><li id="ref-24"><span class="ref-type">Akademik ön baskı</span><a href="https://arxiv.org/abs/2603.03532" target="_blank" rel="noopener noreferrer">VAA sonuçlarının algoritmik duyarlılığı üzerine çalışma (2026)</a></li><li id="ref-25"><span class="ref-type">Akademik çalışma</span><a href="https://www.researchgate.net/publication/257642640_Combining_strengths_of_methods_of_party_positioning_to_counter_their_weaknesses_The_development_of_a_new_methodology_to_calibrate_parties_on_issues_and_ideological_dimensions" target="_blank" rel="noopener noreferrer">Kieskompas tipi parti konumlandırma metodolojisi</a></li></ol>
+</section>
+
+<footer class="footer">
+Bu HTML raporu, kullanıcının sağladığı kapsam doğrultusunda hazırlanmış derin araştırma çıktısının uygulanabilir ürün metodolojisi biçiminde düzenlenmiş sürümüdür. Hukuki bölüm nihai hukuk görüşü yerine geçmez.
+</footer>
+</main>
+</div>
+</body>
+</html>

@@ -6,6 +6,7 @@ import { LogoutButton } from '@/components/admin/LogoutButton'
 
 const NAV_LINKS = [
   { href: '/admin', label: 'Dashboard' },
+  { href: '/admin/responses', label: 'Cevaplar' },
   { href: '/admin/axes', label: 'Eksenler' },
   { href: '/admin/questions', label: 'Sorular' },
   { href: '/admin/parties', label: 'Partiler' },

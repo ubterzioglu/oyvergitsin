@@ -39,13 +39,18 @@ export async function POST(request: NextRequest) {
     // Calculate results
     const results = await calculateResults(sessionId)
 
-    // Store result snapshot
+    // Store result snapshot. Algoritma sürümü ve kapsama bilgisi de yazılır;
+    // sonuç sayfası eski (v1) snapshot'ları bu alanla ayırt eder.
     const { error: snapshotError } = await supabase
       .from('result_snapshots')
       .insert({
         session_id: sessionId,
         axis_scores: results.axisScores,
-        party_similarities: results.partySimilarities
+        party_similarities: results.partySimilarities,
+        axis_coverage: results.axisCoverage,
+        quality_flags: results.qualityFlags,
+        algorithm_version: results.algorithmVersion,
+        result_payload: results
       })
 
     if (snapshotError) throw snapshotError

@@ -7,12 +7,20 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "db:push": "supabase db push",
     "db:sql": "node scripts/build-manual-sql.js",
     "db:sql:print": "node scripts/direct-migrate.js",
+    "db:migrate": "node scripts/apply-migration.js",
     "db:seed": "node scripts/seed.js",
     "db:seed:admin": "node scripts/seed-admin.js",
-    "db:reset": "supabase db reset"
+    "db:reset": "supabase db reset",
+    "v2:seed": "node scripts/seed-axis-model-v2.js",
+    "v2:positions": "node scripts/derive-party-positions-v2.js",
+    "v2:verify": "node scripts/verify-axis-model-v2.js",
+    "v2:activate": "node scripts/seed-axis-model-v2.js --activate",
+    "smoke": "node scripts/smoke-survey-flow.js"
   },
   "dependencies": {
     "@supabase/ssr": "^0.8.0",
@@ -36,9 +44,12 @@
     "dotenv": "^17.3.1",
     "eslint": "^8.56.0",
     "eslint-config-next": "^15.5.20",
+    "pg": "^8.22.0",
     "postcss": "^8.4.0",
     "supabase": "^1.145.0",
     "tailwindcss": "^3.4.0",
-    "typescript": "^5.3.0"
+    "typescript": "^5.3.0",
+    "vite-tsconfig-paths": "^5.1.4",
+    "vitest": "^3.2.7"
   }
 }

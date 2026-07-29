@@ -34,7 +34,12 @@ interface QuestionRow {
   order_index: number
 }
 
-const EMPTY_METHODOLOGY = { model: null, axes: [] as AxisRow[], questions: [] as QuestionRow[] }
+const EMPTY_METHODOLOGY = {
+  model: null,
+  axes: [] as AxisRow[],
+  questions: [] as QuestionRow[],
+  scoredQuestionIds: new Set<string>(),
+}
 
 /**
  * Sayfa build sırasında prerender edildiği için veritabanına erişilemediğinde
@@ -72,26 +77,61 @@ async function fetchMethodology() {
       .order('order_index', { ascending: true }),
   ])
 
+  const questions = (questionsResult.data ?? []) as QuestionRow[]
+
+  // "Puanlanan madde" sayısı questions.is_scored'dan okunamaz: o alan varsayılan
+  // olarak true ve puanlama kuralı olmayan maddelerde de true kalır. Gerçekten
+  // skora giren madde, en az bir scoring_rules satırı olan maddedir.
+  const { data: rules } = questions.length
+    ? await supabase
+        .from('scoring_rules')
+        .select('question_id')
+        .in(
+          'question_id',
+          questions.map((question) => question.id)
+        )
+    : { data: [] }
+
   return {
     model: modelResult.data,
     axes: (axesResult.data ?? []) as AxisRow[],
-    questions: (questionsResult.data ?? []) as QuestionRow[],
+    questions,
+    scoredQuestionIds: new Set((rules ?? []).map((rule) => rule.question_id)),
   }
 }
 
 export default async function MethodologyPage() {
-  const { model, axes, questions } = await loadMethodology()
-  const scoredQuestions = questions.filter((question) => question.is_scored)
+  const { model, axes, questions, scoredQuestionIds } = await loadMethodology()
+  const scoredQuestions = questions.filter((question) => scoredQuestionIds.has(question.id))
+
+  // Kutup tanımı, bir eksen modelinin belgelenmiş olmasının işaretidir. Tanımı
+  // olmayan bir model geliştirme içeriğidir ve "yayımlanmış yöntem" gibi
+  // sunulmamalıdır — şeffaflık sayfasının yanlış bilgi vermesi amacını bozar.
+  const isDocumented = axes.length > 0 && axes.every((axis) => axis.pole_negative && axis.pole_positive)
 
   return (
     <div className="min-h-screen bg-surface px-4 py-12">
       <Container size="md">
         <h1 className="mb-3 font-heading text-4xl font-semibold text-ink-primary">Metodoloji</h1>
-        <p className="mb-10 text-ink-secondary">
+        <p className="mb-6 text-ink-secondary">
           Bu araç, politika görüşlerinizin partilerin kayıtlı konumlarıyla ne kadar örtüştüğünü ölçer.
           Bir oy verme tavsiyesi değildir. Aşağıda soru setinin, puanlama algoritmasının ve parti
           konumlandırmasının nasıl belirlendiği, kaynaklarıyla birlikte açıklanmıştır.
         </p>
+
+        {!isDocumented && (
+          <Card className="mb-8 border-l-4 border-l-rainbow-orange">
+            <h2 className="mb-2 font-heading text-lg font-semibold text-ink-primary">
+              Yayına hazırlanan yöntem henüz devrede değil
+            </h2>
+            <p className="text-sm text-ink-secondary">
+              Şu anda ankette kullanılan soru seti bir <strong>geliştirme setidir</strong>: soru
+              tiplerini denemek için yazılmıştır, ampirik olarak doğrulanmış bir ölçüm aracı
+              değildir ve eksen uçları tanımlanmamıştır. Bu sayfa aşağıda o setin gerçek içeriğini
+              gösterir; sonuçları siyasi görüşünüzün geçerli bir ölçümü olarak okumayın.
+            </p>
+          </Card>
+        )}
 
         <Card elevated className="mb-8">
           <h2 className="mb-4 font-heading text-2xl font-semibold text-ink-primary">Sürüm</h2>
@@ -133,9 +173,18 @@ export default async function MethodologyPage() {
         <Card elevated className="mb-8">
           <h2 className="mb-2 font-heading text-2xl font-semibold text-ink-primary">Soru seti</h2>
           <p className="mb-6 text-sm text-ink-secondary">
-            Tüm maddeler politika önermesi biçimindedir. Her eksende hem olumlu hem olumsuz
-            anahtarlı maddeler bulunur; böylece &ldquo;hep katılıyorum&rdquo; işaretleme alışkanlığı
-            skoru tek yöne itmez.
+            {isDocumented ? (
+              <>
+                Tüm maddeler politika önermesi biçimindedir. Her eksende hem olumlu hem olumsuz
+                anahtarlı maddeler bulunur; böylece &ldquo;hep katılıyorum&rdquo; işaretleme
+                alışkanlığı skoru tek yöne itmez.
+              </>
+            ) : (
+              <>
+                Ankette şu an sorulan maddeler. Yanında &ldquo;puanlanmaz&rdquo; yazanlar hiçbir
+                eksene katkı vermez.
+              </>
+            )}
           </p>
           <ol className="space-y-2">
             {questions.map((question) => (
@@ -143,7 +192,7 @@ export default async function MethodologyPage() {
                 <span className="w-6 shrink-0 text-right text-ink-muted">{question.order_index}</span>
                 <span className="text-ink-secondary">
                   {question.text}
-                  {!question.is_scored && (
+                  {!scoredQuestionIds.has(question.id) && (
                     <span className="ml-2 rounded bg-surface-muted px-1.5 py-0.5 text-[11px] text-ink-muted">
                       puanlanmaz
                     </span>

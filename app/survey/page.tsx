@@ -19,12 +19,29 @@ import { ConsentCheckboxGroup } from '@/components/survey/ConsentCheckboxGroup'
 import { CaptchaPlaceholder } from '@/components/survey/CaptchaPlaceholder'
 import { ImageChoiceQuestion } from '@/components/survey/ImageChoiceQuestion'
 import { VignetteLikert } from '@/components/survey/VignetteLikert'
+import { NoOpinionButton } from '@/components/survey/NoOpinionButton'
+import { ImportanceToggle } from '@/components/survey/ImportanceToggle'
 
 const RAINBOW_ACCENTS = ['#F5C518', '#F5821F', '#E8385C', '#7B4FE0', '#1E9BE0', '#3CB043']
 
 // Tek seçimle tamamlanan sorularda kullanıcı şıkkı işaretledikten sonra
 // seçimin vurgulandığını görebilsin diye kısa bir gecikmeyle ilerlenir.
 const AUTO_ADVANCE_DELAY_MS = 280
+
+// "Fikrim yok" ölçeğin bir kutusu değildir; ayrı bir kontrol olarak render
+// edilir ve puanlama kuralı olmadığı için skordan tamamen düşer.
+const NO_OPINION_VALUE = 'no_opinion'
+
+// Önem işareti yalnızca ideolojik skora giren maddelerde anlamlı.
+const NON_SCORED_TYPES = new Set([
+  'attention_check',
+  'captcha_placeholder',
+  'consent_checkbox_group',
+  'date_input',
+  'file_upload',
+  'open_text_long',
+  'open_text_short',
+])
 
 interface QuestionOption {
   id: string
@@ -37,6 +54,15 @@ interface QuestionOption {
 // Matrix ve vignette gibi iki boyutlu sorular için question_options.value
 // "row:slug" / "col:slug" öneki taşır (bkz. seed.js). Bu, şemaya yeni kolon
 // eklemeden satır/sütun ayrımını mevcut düz tablo üzerinde temsil eder.
+// "Fikrim yok" ölçek kutularından ayrılır: nötr ile karıştırılmaması gerekiyor
+// (metodoloji raporu §1-03). Puanlama kuralı olmadığı için skora da girmez.
+function splitNoOpinion(options: QuestionOption[]) {
+  return {
+    scale: options.filter((option) => option.value !== NO_OPINION_VALUE),
+    noOpinion: options.find((option) => option.value === NO_OPINION_VALUE),
+  }
+}
+
 function splitMatrixOptions(options: QuestionOption[]) {
   const rows = options
     .filter((o) => o.value.startsWith('row:'))
@@ -100,6 +126,7 @@ export default function SurveyPage() {
   const [questions, setQuestions] = useState<Question[]>([])
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [answers, setAnswers] = useState<Record<string, string>>({})
+  const [importance, setImportance] = useState<Record<string, boolean>>({})
   const [loading, setLoading] = useState(true)
   const [submitting, setSubmitting] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
@@ -182,6 +209,17 @@ export default function SurveyPage() {
     }, AUTO_ADVANCE_DELAY_MS)
   }
 
+  // Önem işareti soru kartının altında duruyor; otomatik ilerleme çalışırsa
+  // kullanıcı işaretlemeye fırsat bulamadan sayfa değişirdi. Bu yüzden
+  // işaretleme zamanlanmış geçişi iptal eder.
+  const handleImportanceChange = (checked: boolean) => {
+    const question = questions[currentQuestion]
+    if (!question) return
+
+    cancelScheduledAdvance()
+    setImportance((prev) => ({ ...prev, [question.id]: checked }))
+  }
+
   const goToQuestion = (index: number) => {
     cancelScheduledAdvance()
     setCurrentQuestion(index)
@@ -216,7 +254,8 @@ export default function SurveyPage() {
         .filter(([, value]) => value.length > 0)
         .map(([questionId, value]) => ({
           questionId,
-          value
+          value,
+          isImportant: importance[questionId] ?? false
         }))
 
       await fetch('/api/answers', {
@@ -321,20 +360,42 @@ export default function SurveyPage() {
       }
 
       case 'likert_5':
-      case 'likert_7':
+      case 'likert_7': {
+        const { scale, noOpinion } = splitNoOpinion(options)
         return (
-          <LikertScale options={options} value={rawAnswer ?? ''} onChange={handleSingleSelectAnswer} />
+          <>
+            <LikertScale options={scale} value={rawAnswer ?? ''} onChange={handleSingleSelectAnswer} />
+            {noOpinion && (
+              <NoOpinionButton
+                text={noOpinion.text}
+                selected={rawAnswer === NO_OPINION_VALUE}
+                onSelect={() => handleSingleSelectAnswer(NO_OPINION_VALUE)}
+              />
+            )}
+          </>
         )
+      }
 
-      case 'vignette_likert':
+      case 'vignette_likert': {
+        const { scale, noOpinion } = splitNoOpinion(options)
         return (
-          <VignetteLikert
-            vignetteText={question.vignette_text ?? question.description ?? ''}
-            options={options}
-            value={rawAnswer ?? ''}
-            onChange={handleSingleSelectAnswer}
-          />
+          <>
+            <VignetteLikert
+              vignetteText={question.vignette_text ?? question.description ?? ''}
+              options={scale}
+              value={rawAnswer ?? ''}
+              onChange={handleSingleSelectAnswer}
+            />
+            {noOpinion && (
+              <NoOpinionButton
+                text={noOpinion.text}
+                selected={rawAnswer === NO_OPINION_VALUE}
+                onSelect={() => handleSingleSelectAnswer(NO_OPINION_VALUE)}
+              />
+            )}
+          </>
         )
+      }
 
       case 'slider_0_100':
         return (
@@ -499,7 +560,14 @@ export default function SurveyPage() {
 
           <div className="flex-1 flex flex-col justify-center">{renderQuestionBody()}</div>
 
-          <div className="mt-auto flex justify-between">
+          {!NON_SCORED_TYPES.has(question.type) && (
+            <ImportanceToggle
+              checked={importance[question.id] ?? false}
+              onChange={handleImportanceChange}
+            />
+          )}
+
+          <div className="mt-auto flex justify-between pt-4">
             <Button onClick={handlePrevious} disabled={currentQuestion === 0} variant="secondary">
               Önceki
             </Button>

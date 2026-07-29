@@ -10,7 +10,18 @@ Use `npm install` to sync dependencies. `npm run dev` starts the local app on po
 Follow the existing TypeScript-first style with `strict` mode enabled. Use 2-space indentation, single quotes, and semicolon-free files to match the current codebase. Name React components and exported types in PascalCase, helper functions in camelCase, and route folders in lowercase (`app/api/health`, `app/admin/questions`). Prefer the `@/` path alias over long relative imports.
 
 ## Testing Guidelines
-There is no dedicated automated test suite committed yet. Until one is added, treat `npm run lint` and `npm run build` as required checks, then smoke-test the main flows: `/`, `/consent`, `/survey`, `/results/[sessionId]`, `/admin`, and `/api/health`. If you add tests, colocate them near the feature or under a clear `tests/` folder and use names ending in `.test.ts` or `.test.tsx`.
+`npm test` runs the Vitest suite (`vitest run`); tests are colocated next to the code they cover as `*.test.ts` / `*.test.tsx` and are currently limited to `lib/scoring/*`. The scoring core is deliberately free of Supabase and Next.js imports so it can be tested without a database — keep it that way and put data fetching in `lib/scoring/engine.ts`. `npm run lint` and `npm run build` remain required checks. For a full runtime pass, start the dev server and run `npm run smoke`, which exercises `/api/sessions` → `/api/questions` → `/api/answers` → `/api/complete` → `/api/results/[id]` including the legacy-snapshot path.
+
+## Axis Model Versions
+Survey content is versioned through `axis_models`. `v1` holds the original demo questions; `v2` holds the methodology question set derived from `resultdeepresearch.html`. Only the **active** model is served — `/api/questions` and the scoring engine both filter on it via `lib/scoring/active-model.ts`.
+
+- `npm run v2:seed` writes the v2 content (idempotent, leaves the model **inactive**)
+- `npm run v2:positions` derives party positions for the v2 axes (see `docs/party-positions-v2-derivation.md`)
+- `npm run v2:verify` checks expected row counts and invariants
+- `npm run v2:activate` flips the active model — do this last, and only after the blockers in the derivation doc are cleared
+- `PREVIEW_AXIS_MODEL_VERSION=v2 npm run dev` previews an inactive model locally without touching the live flag. Never set this in production.
+
+Migrations apply with `npm run db:migrate <file.sql>` (uses `DBLINK` from `.env.local`; `supabase db push` prompts for a password and cannot run unattended).
 
 ## Commit & Pull Request Guidelines
 Recent history favors short, imperative subjects such as `seo geo`, `tr check`, and focused fixes like `Fix Docker build: install all deps...`. Keep commits small, scoped, and descriptive; start with the area when useful, for example `admin: validate consent form`. PRs should include a brief summary, note any schema or env changes, link the issue if there is one, and attach screenshots for UI changes.

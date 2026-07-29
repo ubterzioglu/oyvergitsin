@@ -37,10 +37,7 @@ export async function GET(
       // Snapshot yalnızca id -> skor eşlemesi tutuyor; istemci eksen ve parti
       // adlarını içeren dizileri de bekliyor, bu yüzden aynı şekle tamamlanır.
       const { formatStoredResults } = await import('@/lib/scoring/engine')
-      const storedResults = await formatStoredResults(
-        snapshot.axis_scores,
-        snapshot.party_similarities
-      )
+      const storedResults = await formatStoredResults(snapshot)
 
       return NextResponse.json(storedResults)
     }

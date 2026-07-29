@@ -32,7 +32,8 @@ export async function POST(request: NextRequest) {
         answers.map((answer) => ({
           session_id: sessionId,
           question_id: answer.questionId,
-          answer_value: answer.value
+          answer_value: answer.value,
+          is_important: answer.isImportant
         }))
       )
       .select()

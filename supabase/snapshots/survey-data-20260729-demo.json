@@ -1,0 +1,2222 @@
+{
+  "tables": {
+    "axes": [
+      {
+        "id": "06ae759f-94cc-43c5-b1ba-43ccc01d6132",
+        "axis_model_id": "073a1f44-85a0-45ef-8fb0-f88472769012",
+        "name": "AB İlişkileri",
+        "description": "Avrupa Birliği ile ilişkiler ve uyum süreci",
+        "slug": "eu_relations",
+        "order_index": 8,
+        "created_at": "2026-07-20T08:48:46.935263+00:00"
+      },
+      {
+        "id": "230ee83e-ac41-487f-a2eb-fb8dd313d581",
+        "axis_model_id": "073a1f44-85a0-45ef-8fb0-f88472769012",
+        "name": "Çevre ve Kalkınma",
+        "description": "Çevre koruma ve ekonomik kalkınma dengesi",
+        "slug": "environment_growth",
+        "order_index": 10,
+        "created_at": "2026-07-20T08:48:46.935263+00:00"
+      },
+      {
+        "id": "244d53da-062e-4cab-bc8a-30c15e841333",
+        "axis_model_id": "073a1f44-85a0-45ef-8fb0-f88472769012",
+        "name": "Dış Politika",
+        "description": "Uluslararası ilişkiler ve dış politika yaklaşımı",
+        "slug": "foreign_policy",
+        "order_index": 7,
+        "created_at": "2026-07-20T08:48:46.935263+00:00"
+      },
+      {
+        "id": "2071ca9a-8429-478b-8765-9eca1822ac4c",
+        "axis_model_id": "073a1f44-85a0-45ef-8fb0-f88472769012",
+        "name": "Eğitim ve Sosyal Politika",
+        "description": "Eğitim sistemi ve sosyal politikalar",
+        "slug": "education_social_policy",
+        "order_index": 9,
+        "created_at": "2026-07-20T08:48:46.935263+00:00"
+      },
+      {
+        "id": "39817ef1-2568-484d-a709-20cbe76c785e",
+        "axis_model_id": "073a1f44-85a0-45ef-8fb0-f88472769012",
+        "name": "Ekonomi: Piyasa vs Devlet",
+        "description": "Ekonomik kararların piyasa mekanizmaları mı yoksa devlet müdahalesi mi ile yönetilmesi gerektiği",
+        "slug": "economy_market_state",
+        "order_index": 1,
+        "created_at": "2026-07-20T08:48:46.935263+00:00"
+      },
+      {
+        "id": "dd65c96b-ce44-41ee-bb4f-aa139e524073",
+        "axis_model_id": "073a1f44-85a0-45ef-8fb0-f88472769012",
+        "name": "Gelir Dağılımı",
+        "description": "Gelir ve servetin dağılımı ile ilgili bakış açısı",
+        "slug": "income_distribution",
+        "order_index": 2,
+        "created_at": "2026-07-20T08:48:46.935263+00:00"
+      },
+      {
+        "id": "14047fc8-8776-48f8-ad39-bfb79388bac6",
+        "axis_model_id": "073a1f44-85a0-45ef-8fb0-f88472769012",
+        "name": "Güvenlik ve Devlet",
+        "description": "Milli güvenlik öncelikleri ve devletin rolü",
+        "slug": "security_state",
+        "order_index": 4,
+        "created_at": "2026-07-20T08:48:46.935263+00:00"
+      },
+      {
+        "id": "72ceb1ea-1cb1-4807-bbed-2aa4e586fd72",
+        "axis_model_id": "073a1f44-85a0-45ef-8fb0-f88472769012",
+        "name": "Kimlik ve Göç",
+        "description": "Ulusal kimlik ve göç politikaları",
+        "slug": "identity_migration",
+        "order_index": 6,
+        "created_at": "2026-07-20T08:48:46.935263+00:00"
+      },
+      {
+        "id": "437da7b6-47c5-451c-a3a4-22f6e21ab03d",
+        "axis_model_id": "073a1f44-85a0-45ef-8fb0-f88472769012",
+        "name": "Sekülerizm",
+        "description": "Din ve devlet ilişkisi",
+        "slug": "secularism",
+        "order_index": 5,
+        "created_at": "2026-07-20T08:48:46.935263+00:00"
+      },
+      {
+        "id": "316073b1-28d3-4f29-86a0-36193d2ae981",
+        "axis_model_id": "073a1f44-85a0-45ef-8fb0-f88472769012",
+        "name": "Sivil Özgürlükler",
+        "description": "Bireysel özgürlüklerin devlet otoritesi ile denge",
+        "slug": "civil_liberties",
+        "order_index": 3,
+        "created_at": "2026-07-20T08:48:46.935263+00:00"
+      }
+    ],
+    "parties": [
+      {
+        "id": "a12faaca-31a3-4eec-9d60-81b52a0d9300",
+        "name": "Adalet ve Kalkınma Partisi",
+        "short_name": "AKP",
+        "color": "#F7941D",
+        "logo_url": null,
+        "description": "Muhafazakâr-demokrat çizgide, mevcut Cumhurbaşkanlığı Hükûmet Sistemi içinde yeni anayasa arayan bir parti. 2023 seçim beyannamesi yatırım, üretim, teknoloji, savunma sanayii ve dijitalleşmeyi öncelikli dosyalar olarak öne çıkarıyor.",
+        "created_at": "2026-07-20T08:48:47.305886+00:00",
+        "updated_at": "2026-07-20T08:48:47.305886+00:00"
+      },
+      {
+        "id": "d54c162e-aec8-4df7-bd79-4b182919d9ea",
+        "name": "Cumhuriyet Halk Partisi",
+        "short_name": "CHP",
+        "color": "#E30A17",
+        "logo_url": null,
+        "description": "Sosyal demokrat çizgide, güçlendirilmiş parlamenter sisteme dönüşü, yargı bağımsızlığını ve AB tam üyelik hedefini savunuyor. Vergi adaleti, planlı kalkınma ve kurumsal restorasyon programının merkezinde yer alıyor.",
+        "created_at": "2026-07-20T08:48:47.305886+00:00",
+        "updated_at": "2026-07-20T08:48:47.305886+00:00"
+      },
+      {
+        "id": "14070735-1dfd-4392-ac70-ddf3b3e4550d",
+        "name": "Demokrasi ve Atılım Partisi",
+        "short_name": "DEVA",
+        "color": "#7A3DB8",
+        "logo_url": null,
+        "description": "Liberal-demokrat, piyasa dostu fakat kurumsal ve sosyal devlet boyutlarını dışlamayan bir çizgi izleyen parti. Program TCMB bağımsızlığı, şeffaflık, vergi reformu ve güçlendirilmiş parlamenter sistemi teknik ayrıntıyla ele alıyor.",
+        "created_at": "2026-07-20T08:48:47.305886+00:00",
+        "updated_at": "2026-07-20T08:48:47.305886+00:00"
+      },
+      {
+        "id": "99076b5a-11f2-482b-8a16-8608194d7f25",
+        "name": "Gelecek Partisi",
+        "short_name": "Gelecek",
+        "color": "#1B6FB3",
+        "logo_url": null,
+        "description": "Muhafazakâr-demokrat kökenden kurumsal restorasyon, hukukun üstünlüğü ve AB çıpasına dayalı bir sentez sunan parti. Dijital dönüşüm ve çevresel sorumluluk programının öne çıkan başlıkları arasında.",
+        "created_at": "2026-07-20T08:48:47.305886+00:00",
+        "updated_at": "2026-07-20T08:48:47.305886+00:00"
+      },
+      {
+        "id": "6a9fb495-6f53-4359-a036-a6931c9bf60b",
+        "name": "İYİ Parti",
+        "short_name": "İYİ",
+        "color": "#0B1F3A",
+        "logo_url": null,
+        "description": "Merkezcilik ve milliyetçiliği birleştiren, güçlendirilmiş parlamenter sistem ve kuvvetler ayrılığını savunan bir parti. Program makroekonomik istikrar, TCMB bağımsızlığı ve yerel yönetim reformuna ayrıntılı yer veriyor.",
+        "created_at": "2026-07-20T08:48:47.305886+00:00",
+        "updated_at": "2026-07-20T08:48:47.305886+00:00"
+      },
+      {
+        "id": "39855158-02ba-4eea-b9eb-902605e62b0a",
+        "name": "Memleket Partisi",
+        "short_name": "Memleket",
+        "color": "#FDD007",
+        "logo_url": null,
+        "description": "Merkezcilik ön plandadır.",
+        "created_at": "2026-07-20T08:48:47.305886+00:00",
+        "updated_at": "2026-07-20T08:48:47.305886+00:00"
+      },
+      {
+        "id": "b2ab0d64-9afe-4983-84a9-98f935e7ee29",
+        "name": "Milliyetçi Hareket Partisi",
+        "short_name": "MHP",
+        "color": "#F2B705",
+        "logo_url": null,
+        "description": "Milliyetçi-devletçi çizgide, Cumhurbaşkanlığı Hükûmet Sistemi'nin devamını ve güçlü/merkezi bir devlet yapısını savunuyor. 2024 parti programı millî üretim, ekonomik güvenlik ve savunma-teknoloji önceliklerini vurguluyor.",
+        "created_at": "2026-07-20T08:48:47.305886+00:00",
+        "updated_at": "2026-07-20T08:48:47.305886+00:00"
+      },
+      {
+        "id": "508b0f8b-c2f0-494e-be21-d73a33cea368",
+        "name": "Saadet Partisi",
+        "short_name": "Saadet",
+        "color": "#6A1BB3",
+        "logo_url": null,
+        "description": "Milli Görüş geleneğini çağdaş bir siyasal programla sürdüren parti; adil hukuk düzeni, üretime dayalı ekonomi ve 'şahsiyetli dış politika' kavramlarını öne çıkarıyor. Yeni anayasa ve seçim barajının kaldırılmasını savunuyor.",
+        "created_at": "2026-07-20T08:48:47.305886+00:00",
+        "updated_at": "2026-07-20T08:48:47.305886+00:00"
+      },
+      {
+        "id": "b38e8036-33ae-488e-af4a-be668d315c88",
+        "name": "Türkiye İşçi Partisi",
+        "short_name": "TİP",
+        "color": "#333333",
+        "logo_url": null,
+        "description": "Sosyalist bir partidir.",
+        "created_at": "2026-07-20T08:48:47.305886+00:00",
+        "updated_at": "2026-07-20T08:48:47.305886+00:00"
+      },
+      {
+        "id": "a12758fe-ac56-46cf-a35e-d7d564284e7b",
+        "name": "Vatan Partisi",
+        "short_name": "Vatan",
+        "color": "#D10F2F",
+        "logo_url": null,
+        "description": "Yurtsever, solcu bir partidir.",
+        "created_at": "2026-07-20T08:48:47.305886+00:00",
+        "updated_at": "2026-07-20T08:48:47.305886+00:00"
+      },
+      {
+        "id": "c53d4243-a742-4e23-be00-f48f3a2df35c",
+        "name": "YENİ Parti",
+        "short_name": "YENİ PARTİ",
+        "color": "#E41E26",
+        "logo_url": null,
+        "description": "Özgür Özel liderliğinde 24 Temmuz 2026 tarihinde kurulan sosyal demokrat çizgide bir parti. Programı parlamenter sistem, kuvvetler ayrılığı, güçlü sosyal devlet, eşit yurttaşlık, AB sürecinin hızlandırılması ve yeşil dönüşüm başlıklarını öne çıkarıyor.",
+        "created_at": "2026-07-25T16:42:53.958316+00:00",
+        "updated_at": "2026-07-25T16:42:53.958316+00:00"
+      },
+      {
+        "id": "319db93e-6835-492f-98eb-fb45ebc6c2aa",
+        "name": "Yeşil Sol Parti",
+        "short_name": "YSP",
+        "color": "#0F7A3A",
+        "logo_url": null,
+        "description": "HDP'nin 2023 seçiminde oyları yönlendirdiği, çoğulculuk, halkların eşitliği, kadın özgürlüğü ve yerel demokrasi ekseninde bir parti. İklim adaleti, ademimerkeziyetçilik ve yargı reformu programının belirleyici unsurları arasında.",
+        "created_at": "2026-07-20T08:48:47.305886+00:00",
+        "updated_at": "2026-07-20T08:48:47.305886+00:00"
+      },
+      {
+        "id": "2c410587-c21a-417c-8d5f-eb77baf954aa",
+        "name": "Zafar Partisi",
+        "short_name": "Zafer",
+        "color": "#00964C",
+        "logo_url": null,
+        "description": "Milliyetçi bir partidir.",
+        "created_at": "2026-07-20T08:48:47.305886+00:00",
+        "updated_at": "2026-07-20T08:48:47.305886+00:00"
+      }
+    ],
+    "party_positions": [
+      {
+        "id": "e10f5349-a1bf-4e4d-8800-f5d4120045d5",
+        "party_id": "14070735-1dfd-4392-ac70-ddf3b3e4550d",
+        "axis_id": "39817ef1-2568-484d-a709-20cbe76c785e",
+        "score": -45,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "3cda8c70-000e-4cdd-96aa-ac70630b9d97",
+        "party_id": "14070735-1dfd-4392-ac70-ddf3b3e4550d",
+        "axis_id": "dd65c96b-ce44-41ee-bb4f-aa139e524073",
+        "score": 10,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "36d2078c-4266-495b-ac22-70e7e7a3ebc3",
+        "party_id": "14070735-1dfd-4392-ac70-ddf3b3e4550d",
+        "axis_id": "316073b1-28d3-4f29-86a0-36193d2ae981",
+        "score": 65,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "49bb17e4-5206-4c89-bf03-eb98d7cc6f4f",
+        "party_id": "14070735-1dfd-4392-ac70-ddf3b3e4550d",
+        "axis_id": "14047fc8-8776-48f8-ad39-bfb79388bac6",
+        "score": -25,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "94b59010-bc60-450c-b53f-a435b3493943",
+        "party_id": "14070735-1dfd-4392-ac70-ddf3b3e4550d",
+        "axis_id": "437da7b6-47c5-451c-a3a4-22f6e21ab03d",
+        "score": -25,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "77e0175d-64bf-4e2d-acfd-aeb1d47f03c5",
+        "party_id": "14070735-1dfd-4392-ac70-ddf3b3e4550d",
+        "axis_id": "72ceb1ea-1cb1-4807-bbed-2aa4e586fd72",
+        "score": -20,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "a67ac036-86b3-4868-9c26-3b6f9d76ecfe",
+        "party_id": "14070735-1dfd-4392-ac70-ddf3b3e4550d",
+        "axis_id": "244d53da-062e-4cab-bc8a-30c15e841333",
+        "score": -30,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "bf8bcf66-7de5-46b8-b6e0-6dd73cafc240",
+        "party_id": "14070735-1dfd-4392-ac70-ddf3b3e4550d",
+        "axis_id": "06ae759f-94cc-43c5-b1ba-43ccc01d6132",
+        "score": -40,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "1da684ae-5d40-40c3-9b94-74168f1ae012",
+        "party_id": "14070735-1dfd-4392-ac70-ddf3b3e4550d",
+        "axis_id": "2071ca9a-8429-478b-8765-9eca1822ac4c",
+        "score": -20,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "172d6db1-13c4-4556-aef8-dce3f3df37a2",
+        "party_id": "14070735-1dfd-4392-ac70-ddf3b3e4550d",
+        "axis_id": "230ee83e-ac41-487f-a2eb-fb8dd313d581",
+        "score": -35,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "1d3e1af9-e725-43b6-8d7d-a0a685085e12",
+        "party_id": "2c410587-c21a-417c-8d5f-eb77baf954aa",
+        "axis_id": "39817ef1-2568-484d-a709-20cbe76c785e",
+        "score": 51,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "629c8078-1376-4bff-adcb-66e47065eade",
+        "party_id": "2c410587-c21a-417c-8d5f-eb77baf954aa",
+        "axis_id": "dd65c96b-ce44-41ee-bb4f-aa139e524073",
+        "score": -46,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "761a0f89-f741-4426-ba7a-123238c5a8d5",
+        "party_id": "2c410587-c21a-417c-8d5f-eb77baf954aa",
+        "axis_id": "316073b1-28d3-4f29-86a0-36193d2ae981",
+        "score": -59,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "759698ef-0cc1-40ef-9ed0-5899401e97dd",
+        "party_id": "2c410587-c21a-417c-8d5f-eb77baf954aa",
+        "axis_id": "14047fc8-8776-48f8-ad39-bfb79388bac6",
+        "score": -87,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "9a7caa51-a773-40f6-b00b-b9ed0b818748",
+        "party_id": "2c410587-c21a-417c-8d5f-eb77baf954aa",
+        "axis_id": "437da7b6-47c5-451c-a3a4-22f6e21ab03d",
+        "score": -34,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "d2a293f4-d4dd-47b2-8bfd-08de1b0f3421",
+        "party_id": "2c410587-c21a-417c-8d5f-eb77baf954aa",
+        "axis_id": "72ceb1ea-1cb1-4807-bbed-2aa4e586fd72",
+        "score": 85,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "97bd3883-e1c7-4dfc-bf3e-28875f368b76",
+        "party_id": "2c410587-c21a-417c-8d5f-eb77baf954aa",
+        "axis_id": "244d53da-062e-4cab-bc8a-30c15e841333",
+        "score": -76,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "fdb4ceb3-df92-4e83-9726-120fea20e61d",
+        "party_id": "2c410587-c21a-417c-8d5f-eb77baf954aa",
+        "axis_id": "06ae759f-94cc-43c5-b1ba-43ccc01d6132",
+        "score": -27,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "92080735-ce55-439d-bfdd-8483559bba47",
+        "party_id": "2c410587-c21a-417c-8d5f-eb77baf954aa",
+        "axis_id": "2071ca9a-8429-478b-8765-9eca1822ac4c",
+        "score": 29,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "9f33469b-8c6b-4e7e-8f88-828a58f84efe",
+        "party_id": "2c410587-c21a-417c-8d5f-eb77baf954aa",
+        "axis_id": "230ee83e-ac41-487f-a2eb-fb8dd313d581",
+        "score": -66,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "0c7b5d48-5ec0-41e8-800a-e11c19fb5316",
+        "party_id": "319db93e-6835-492f-98eb-fb45ebc6c2aa",
+        "axis_id": "39817ef1-2568-484d-a709-20cbe76c785e",
+        "score": -50,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "44a5ad87-2e9a-41e9-99af-6b0a1f9a0801",
+        "party_id": "319db93e-6835-492f-98eb-fb45ebc6c2aa",
+        "axis_id": "dd65c96b-ce44-41ee-bb4f-aa139e524073",
+        "score": 80,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "9931b365-cdc8-47d6-8639-73e0384d3332",
+        "party_id": "319db93e-6835-492f-98eb-fb45ebc6c2aa",
+        "axis_id": "316073b1-28d3-4f29-86a0-36193d2ae981",
+        "score": 85,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "54392a06-f2ba-47ea-8c65-6b200dd35cda",
+        "party_id": "319db93e-6835-492f-98eb-fb45ebc6c2aa",
+        "axis_id": "14047fc8-8776-48f8-ad39-bfb79388bac6",
+        "score": -60,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "56307ce1-81cc-42f5-986f-b765c920defd",
+        "party_id": "319db93e-6835-492f-98eb-fb45ebc6c2aa",
+        "axis_id": "437da7b6-47c5-451c-a3a4-22f6e21ab03d",
+        "score": -20,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "68d7fa72-1b0a-42d5-bcfa-d75e20bf2dd5",
+        "party_id": "319db93e-6835-492f-98eb-fb45ebc6c2aa",
+        "axis_id": "72ceb1ea-1cb1-4807-bbed-2aa4e586fd72",
+        "score": -75,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "df76efd7-c129-44f8-b2f8-67de1e2bac5a",
+        "party_id": "319db93e-6835-492f-98eb-fb45ebc6c2aa",
+        "axis_id": "244d53da-062e-4cab-bc8a-30c15e841333",
+        "score": -40,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "e1f8a0e0-f48a-4eb9-8454-b4c74a83f97e",
+        "party_id": "319db93e-6835-492f-98eb-fb45ebc6c2aa",
+        "axis_id": "06ae759f-94cc-43c5-b1ba-43ccc01d6132",
+        "score": -30,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "b0ccbab6-fab5-4044-bb3c-7f4df77e7fe1",
+        "party_id": "319db93e-6835-492f-98eb-fb45ebc6c2aa",
+        "axis_id": "2071ca9a-8429-478b-8765-9eca1822ac4c",
+        "score": -60,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "3347e84a-d897-437c-a25a-068764536f83",
+        "party_id": "319db93e-6835-492f-98eb-fb45ebc6c2aa",
+        "axis_id": "230ee83e-ac41-487f-a2eb-fb8dd313d581",
+        "score": -85,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "acbf40fd-ebdc-463b-9a73-8de6beb00469",
+        "party_id": "39855158-02ba-4eea-b9eb-902605e62b0a",
+        "axis_id": "39817ef1-2568-484d-a709-20cbe76c785e",
+        "score": -25,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "a57f26aa-de78-47ea-9b91-243ba2e065b7",
+        "party_id": "39855158-02ba-4eea-b9eb-902605e62b0a",
+        "axis_id": "dd65c96b-ce44-41ee-bb4f-aa139e524073",
+        "score": -71,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "e01d5e09-0db3-40ed-a15f-308c89ad322a",
+        "party_id": "39855158-02ba-4eea-b9eb-902605e62b0a",
+        "axis_id": "316073b1-28d3-4f29-86a0-36193d2ae981",
+        "score": 36,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "f6e82d12-4e9b-4bbc-ac65-8dc0249a3d2d",
+        "party_id": "39855158-02ba-4eea-b9eb-902605e62b0a",
+        "axis_id": "14047fc8-8776-48f8-ad39-bfb79388bac6",
+        "score": 30,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "79a0ef0d-7c98-44e3-aed4-79e88beadb28",
+        "party_id": "39855158-02ba-4eea-b9eb-902605e62b0a",
+        "axis_id": "437da7b6-47c5-451c-a3a4-22f6e21ab03d",
+        "score": 73,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "df19b774-92de-4af4-bdd9-a18787f0e185",
+        "party_id": "39855158-02ba-4eea-b9eb-902605e62b0a",
+        "axis_id": "72ceb1ea-1cb1-4807-bbed-2aa4e586fd72",
+        "score": 35,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "8dbd1c5c-34e5-4999-8049-a12072386c17",
+        "party_id": "39855158-02ba-4eea-b9eb-902605e62b0a",
+        "axis_id": "244d53da-062e-4cab-bc8a-30c15e841333",
+        "score": -23,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "381a52d3-a624-4b38-8e0a-b4f4b0c44929",
+        "party_id": "39855158-02ba-4eea-b9eb-902605e62b0a",
+        "axis_id": "06ae759f-94cc-43c5-b1ba-43ccc01d6132",
+        "score": -22,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "e9a7b5b7-1bf8-4c09-9705-8ea8b3220be6",
+        "party_id": "39855158-02ba-4eea-b9eb-902605e62b0a",
+        "axis_id": "2071ca9a-8429-478b-8765-9eca1822ac4c",
+        "score": -53,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "3cd63b80-70e9-4283-9310-345ae50e7493",
+        "party_id": "39855158-02ba-4eea-b9eb-902605e62b0a",
+        "axis_id": "230ee83e-ac41-487f-a2eb-fb8dd313d581",
+        "score": -11,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "98978d1b-734e-4cd0-814f-b12a96f47a63",
+        "party_id": "508b0f8b-c2f0-494e-be21-d73a33cea368",
+        "axis_id": "39817ef1-2568-484d-a709-20cbe76c785e",
+        "score": 15,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "b90c738c-ece1-43ab-9cd4-54fc3d9f5675",
+        "party_id": "508b0f8b-c2f0-494e-be21-d73a33cea368",
+        "axis_id": "dd65c96b-ce44-41ee-bb4f-aa139e524073",
+        "score": 45,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "945f2872-f8ac-455b-b122-2365e2c80a6a",
+        "party_id": "508b0f8b-c2f0-494e-be21-d73a33cea368",
+        "axis_id": "316073b1-28d3-4f29-86a0-36193d2ae981",
+        "score": 40,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "d00461a5-22cf-4c98-98b6-cc56d8462811",
+        "party_id": "508b0f8b-c2f0-494e-be21-d73a33cea368",
+        "axis_id": "14047fc8-8776-48f8-ad39-bfb79388bac6",
+        "score": 20,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "8f6f63a2-d3a3-4c9a-80e9-1c9ee595ddcd",
+        "party_id": "508b0f8b-c2f0-494e-be21-d73a33cea368",
+        "axis_id": "437da7b6-47c5-451c-a3a4-22f6e21ab03d",
+        "score": 60,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "5455390b-532e-44a8-800e-6c20a40bb72b",
+        "party_id": "508b0f8b-c2f0-494e-be21-d73a33cea368",
+        "axis_id": "72ceb1ea-1cb1-4807-bbed-2aa4e586fd72",
+        "score": 30,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "03f53a48-e492-4623-ac71-57cb90725731",
+        "party_id": "508b0f8b-c2f0-494e-be21-d73a33cea368",
+        "axis_id": "244d53da-062e-4cab-bc8a-30c15e841333",
+        "score": 45,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "234d6159-2c8e-4f62-8a00-0aac365db8cb",
+        "party_id": "508b0f8b-c2f0-494e-be21-d73a33cea368",
+        "axis_id": "06ae759f-94cc-43c5-b1ba-43ccc01d6132",
+        "score": 20,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "c401c0db-121f-4922-b29a-9e76f7389133",
+        "party_id": "508b0f8b-c2f0-494e-be21-d73a33cea368",
+        "axis_id": "2071ca9a-8429-478b-8765-9eca1822ac4c",
+        "score": 20,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "800d70de-f468-4473-b488-34d0d7a973a7",
+        "party_id": "508b0f8b-c2f0-494e-be21-d73a33cea368",
+        "axis_id": "230ee83e-ac41-487f-a2eb-fb8dd313d581",
+        "score": 5,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "9a05bbaa-b521-4fe1-bcb9-52f8a1de7dc4",
+        "party_id": "6a9fb495-6f53-4359-a036-a6931c9bf60b",
+        "axis_id": "39817ef1-2568-484d-a709-20cbe76c785e",
+        "score": -35,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "e48c8b6e-fe86-4a4a-9020-831e25c43f18",
+        "party_id": "6a9fb495-6f53-4359-a036-a6931c9bf60b",
+        "axis_id": "dd65c96b-ce44-41ee-bb4f-aa139e524073",
+        "score": -10,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "2f21fe5f-3662-4307-b0fe-0eb76e7b7726",
+        "party_id": "6a9fb495-6f53-4359-a036-a6931c9bf60b",
+        "axis_id": "316073b1-28d3-4f29-86a0-36193d2ae981",
+        "score": 50,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "6d162653-562f-475e-bd78-76200287301e",
+        "party_id": "6a9fb495-6f53-4359-a036-a6931c9bf60b",
+        "axis_id": "14047fc8-8776-48f8-ad39-bfb79388bac6",
+        "score": 10,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "3d37ab42-8cab-4dbf-95dd-dcb6b4e4672c",
+        "party_id": "6a9fb495-6f53-4359-a036-a6931c9bf60b",
+        "axis_id": "437da7b6-47c5-451c-a3a4-22f6e21ab03d",
+        "score": 10,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "f83789f6-a64b-49dc-9d6f-1e38f3c08523",
+        "party_id": "6a9fb495-6f53-4359-a036-a6931c9bf60b",
+        "axis_id": "72ceb1ea-1cb1-4807-bbed-2aa4e586fd72",
+        "score": 20,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "3caa4342-45dd-4efd-ac9a-5c8a5a1d1a18",
+        "party_id": "6a9fb495-6f53-4359-a036-a6931c9bf60b",
+        "axis_id": "244d53da-062e-4cab-bc8a-30c15e841333",
+        "score": 15,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "e6c41807-ab99-42b4-a318-b68bae0a6792",
+        "party_id": "6a9fb495-6f53-4359-a036-a6931c9bf60b",
+        "axis_id": "06ae759f-94cc-43c5-b1ba-43ccc01d6132",
+        "score": -10,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "2b1462f1-d525-48dc-a654-6ad8f7958423",
+        "party_id": "6a9fb495-6f53-4359-a036-a6931c9bf60b",
+        "axis_id": "2071ca9a-8429-478b-8765-9eca1822ac4c",
+        "score": -45,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "63cff883-3378-4b39-a728-f99799bf9bab",
+        "party_id": "6a9fb495-6f53-4359-a036-a6931c9bf60b",
+        "axis_id": "230ee83e-ac41-487f-a2eb-fb8dd313d581",
+        "score": -15,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "0926983e-ea3e-4a60-997e-86a4f322cee3",
+        "party_id": "99076b5a-11f2-482b-8a16-8608194d7f25",
+        "axis_id": "39817ef1-2568-484d-a709-20cbe76c785e",
+        "score": -20,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "ddf4d7bd-40bd-427d-b191-128fb9d634be",
+        "party_id": "99076b5a-11f2-482b-8a16-8608194d7f25",
+        "axis_id": "dd65c96b-ce44-41ee-bb4f-aa139e524073",
+        "score": 15,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "504215b7-16e7-4dab-b059-d29154a6e6dd",
+        "party_id": "99076b5a-11f2-482b-8a16-8608194d7f25",
+        "axis_id": "316073b1-28d3-4f29-86a0-36193d2ae981",
+        "score": 60,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "745555ab-13b8-40df-82bc-7b76f5f9f3e2",
+        "party_id": "99076b5a-11f2-482b-8a16-8608194d7f25",
+        "axis_id": "14047fc8-8776-48f8-ad39-bfb79388bac6",
+        "score": -20,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "1b1d0e87-a5c7-4d80-bca6-4e9f84b8ac65",
+        "party_id": "99076b5a-11f2-482b-8a16-8608194d7f25",
+        "axis_id": "437da7b6-47c5-451c-a3a4-22f6e21ab03d",
+        "score": -15,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "e2fd2439-4269-4264-85f7-9da650fd3ee4",
+        "party_id": "99076b5a-11f2-482b-8a16-8608194d7f25",
+        "axis_id": "72ceb1ea-1cb1-4807-bbed-2aa4e586fd72",
+        "score": -10,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "ead8f307-85fc-415e-9e34-72d08e17a980",
+        "party_id": "99076b5a-11f2-482b-8a16-8608194d7f25",
+        "axis_id": "244d53da-062e-4cab-bc8a-30c15e841333",
+        "score": -35,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "a41187ed-1315-46e9-ac56-9b9daec58f40",
+        "party_id": "99076b5a-11f2-482b-8a16-8608194d7f25",
+        "axis_id": "06ae759f-94cc-43c5-b1ba-43ccc01d6132",
+        "score": -50,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "d8214ac0-b309-4981-8d77-7f8ae7696c9f",
+        "party_id": "99076b5a-11f2-482b-8a16-8608194d7f25",
+        "axis_id": "2071ca9a-8429-478b-8765-9eca1822ac4c",
+        "score": 0,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "073ec083-f840-4a3f-ba62-6038f3f22a84",
+        "party_id": "99076b5a-11f2-482b-8a16-8608194d7f25",
+        "axis_id": "230ee83e-ac41-487f-a2eb-fb8dd313d581",
+        "score": -55,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "19322a71-1dda-448b-aa4a-6a029e750c04",
+        "party_id": "a12758fe-ac56-46cf-a35e-d7d564284e7b",
+        "axis_id": "39817ef1-2568-484d-a709-20cbe76c785e",
+        "score": 52,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "4117316b-471a-4f3c-84d0-cc95f40cf9ff",
+        "party_id": "a12758fe-ac56-46cf-a35e-d7d564284e7b",
+        "axis_id": "dd65c96b-ce44-41ee-bb4f-aa139e524073",
+        "score": 52,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "6d065fb4-c8af-43e5-9a40-df1a778dcaa5",
+        "party_id": "a12758fe-ac56-46cf-a35e-d7d564284e7b",
+        "axis_id": "316073b1-28d3-4f29-86a0-36193d2ae981",
+        "score": -21,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "e93e93e6-c290-419a-a10c-b1edf41f9257",
+        "party_id": "a12758fe-ac56-46cf-a35e-d7d564284e7b",
+        "axis_id": "14047fc8-8776-48f8-ad39-bfb79388bac6",
+        "score": 89,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "351338aa-f70d-4a95-acf5-299d9ff45a62",
+        "party_id": "a12758fe-ac56-46cf-a35e-d7d564284e7b",
+        "axis_id": "437da7b6-47c5-451c-a3a4-22f6e21ab03d",
+        "score": -21,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "6cb3c5b7-5672-409a-94b8-1a47edff015d",
+        "party_id": "a12758fe-ac56-46cf-a35e-d7d564284e7b",
+        "axis_id": "72ceb1ea-1cb1-4807-bbed-2aa4e586fd72",
+        "score": 20,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "a815138d-ee7c-4442-be23-693e5fc5cb56",
+        "party_id": "a12758fe-ac56-46cf-a35e-d7d564284e7b",
+        "axis_id": "244d53da-062e-4cab-bc8a-30c15e841333",
+        "score": -18,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "eb2484cb-26a0-49ca-a357-7d332b7af506",
+        "party_id": "a12758fe-ac56-46cf-a35e-d7d564284e7b",
+        "axis_id": "06ae759f-94cc-43c5-b1ba-43ccc01d6132",
+        "score": 79,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "82dca0f1-f1c3-424c-9d99-e4683cb99928",
+        "party_id": "a12758fe-ac56-46cf-a35e-d7d564284e7b",
+        "axis_id": "2071ca9a-8429-478b-8765-9eca1822ac4c",
+        "score": 82,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "d2240651-b956-4e23-9816-f07fa5f6a97d",
+        "party_id": "a12758fe-ac56-46cf-a35e-d7d564284e7b",
+        "axis_id": "230ee83e-ac41-487f-a2eb-fb8dd313d581",
+        "score": -86,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "460c340a-76d0-450f-9644-b72bdca54503",
+        "party_id": "a12faaca-31a3-4eec-9d60-81b52a0d9300",
+        "axis_id": "39817ef1-2568-484d-a709-20cbe76c785e",
+        "score": 55,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "0c90a361-6b2f-4834-bacb-8fb4fd93efdd",
+        "party_id": "a12faaca-31a3-4eec-9d60-81b52a0d9300",
+        "axis_id": "dd65c96b-ce44-41ee-bb4f-aa139e524073",
+        "score": 20,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "1660fcb8-43aa-41c9-8236-3eb65522b36c",
+        "party_id": "a12faaca-31a3-4eec-9d60-81b52a0d9300",
+        "axis_id": "316073b1-28d3-4f29-86a0-36193d2ae981",
+        "score": -45,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "060279da-a0ed-4c6b-b80f-4b8ac04e3c83",
+        "party_id": "a12faaca-31a3-4eec-9d60-81b52a0d9300",
+        "axis_id": "14047fc8-8776-48f8-ad39-bfb79388bac6",
+        "score": 60,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "d9dc9a9c-648e-42fb-b7d3-94f7d176f6c5",
+        "party_id": "a12faaca-31a3-4eec-9d60-81b52a0d9300",
+        "axis_id": "437da7b6-47c5-451c-a3a4-22f6e21ab03d",
+        "score": 55,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "30dd6eb6-5831-4707-ad49-3bff6b36d499",
+        "party_id": "a12faaca-31a3-4eec-9d60-81b52a0d9300",
+        "axis_id": "72ceb1ea-1cb1-4807-bbed-2aa4e586fd72",
+        "score": 40,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "bdbb964d-5bb4-4d99-b7de-e54b14d61ddf",
+        "party_id": "a12faaca-31a3-4eec-9d60-81b52a0d9300",
+        "axis_id": "244d53da-062e-4cab-bc8a-30c15e841333",
+        "score": 60,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "21f7ed34-8c85-4644-bd49-f7433bc40d90",
+        "party_id": "a12faaca-31a3-4eec-9d60-81b52a0d9300",
+        "axis_id": "06ae759f-94cc-43c5-b1ba-43ccc01d6132",
+        "score": 35,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "98ca5ef3-be45-4962-8f42-79d4034e5325",
+        "party_id": "a12faaca-31a3-4eec-9d60-81b52a0d9300",
+        "axis_id": "2071ca9a-8429-478b-8765-9eca1822ac4c",
+        "score": 35,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "3fde67da-7209-4552-87b7-c3ad0b7e327c",
+        "party_id": "a12faaca-31a3-4eec-9d60-81b52a0d9300",
+        "axis_id": "230ee83e-ac41-487f-a2eb-fb8dd313d581",
+        "score": 45,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "18abf6fb-8f47-4546-9c52-fbf25472516d",
+        "party_id": "b2ab0d64-9afe-4983-84a9-98f935e7ee29",
+        "axis_id": "39817ef1-2568-484d-a709-20cbe76c785e",
+        "score": 40,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "86490337-335b-4d99-98a4-fa8ae6250adb",
+        "party_id": "b2ab0d64-9afe-4983-84a9-98f935e7ee29",
+        "axis_id": "dd65c96b-ce44-41ee-bb4f-aa139e524073",
+        "score": 15,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "1db1ecab-a573-4b54-bb40-3b8412006fb8",
+        "party_id": "b2ab0d64-9afe-4983-84a9-98f935e7ee29",
+        "axis_id": "316073b1-28d3-4f29-86a0-36193d2ae981",
+        "score": -55,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "bd94c999-b78a-4fce-b1b2-67ec9333c1eb",
+        "party_id": "b2ab0d64-9afe-4983-84a9-98f935e7ee29",
+        "axis_id": "14047fc8-8776-48f8-ad39-bfb79388bac6",
+        "score": 75,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "93c3978b-504a-4195-8cae-0bfa0a0c64da",
+        "party_id": "b2ab0d64-9afe-4983-84a9-98f935e7ee29",
+        "axis_id": "437da7b6-47c5-451c-a3a4-22f6e21ab03d",
+        "score": 45,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "8b419353-4dd2-458c-8e30-683c93ed5d58",
+        "party_id": "b2ab0d64-9afe-4983-84a9-98f935e7ee29",
+        "axis_id": "72ceb1ea-1cb1-4807-bbed-2aa4e586fd72",
+        "score": 70,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "b12104e0-23e8-4cb5-9c93-c0accb7baaa5",
+        "party_id": "b2ab0d64-9afe-4983-84a9-98f935e7ee29",
+        "axis_id": "244d53da-062e-4cab-bc8a-30c15e841333",
+        "score": 55,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "43298c19-964a-460f-a5f8-b3883af446da",
+        "party_id": "b2ab0d64-9afe-4983-84a9-98f935e7ee29",
+        "axis_id": "06ae759f-94cc-43c5-b1ba-43ccc01d6132",
+        "score": 60,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "6ecd4a8a-8001-459d-ac84-4e4ee2f837cf",
+        "party_id": "b2ab0d64-9afe-4983-84a9-98f935e7ee29",
+        "axis_id": "2071ca9a-8429-478b-8765-9eca1822ac4c",
+        "score": 30,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "9020876e-b883-415e-94d5-c89df3eca28d",
+        "party_id": "b2ab0d64-9afe-4983-84a9-98f935e7ee29",
+        "axis_id": "230ee83e-ac41-487f-a2eb-fb8dd313d581",
+        "score": 25,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "e81c4750-0c9a-4f19-99a0-7a079ba110f2",
+        "party_id": "b38e8036-33ae-488e-af4a-be668d315c88",
+        "axis_id": "39817ef1-2568-484d-a709-20cbe76c785e",
+        "score": -34,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "dd3cc4c1-58fb-4ecc-8efe-3b912891772c",
+        "party_id": "b38e8036-33ae-488e-af4a-be668d315c88",
+        "axis_id": "dd65c96b-ce44-41ee-bb4f-aa139e524073",
+        "score": -80,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "2f14ca30-7e40-4b7e-91df-1fdebff1c6f2",
+        "party_id": "b38e8036-33ae-488e-af4a-be668d315c88",
+        "axis_id": "316073b1-28d3-4f29-86a0-36193d2ae981",
+        "score": -93,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "ad9cf50a-9a20-46fa-a7cf-8be5012ec5f4",
+        "party_id": "b38e8036-33ae-488e-af4a-be668d315c88",
+        "axis_id": "14047fc8-8776-48f8-ad39-bfb79388bac6",
+        "score": 72,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "80de2e24-647e-493c-be43-d79369767f39",
+        "party_id": "b38e8036-33ae-488e-af4a-be668d315c88",
+        "axis_id": "437da7b6-47c5-451c-a3a4-22f6e21ab03d",
+        "score": -93,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "9252fbbe-834d-4a67-8bd2-7a031be7c86c",
+        "party_id": "b38e8036-33ae-488e-af4a-be668d315c88",
+        "axis_id": "72ceb1ea-1cb1-4807-bbed-2aa4e586fd72",
+        "score": -80,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "a8f51453-6819-47ae-9756-0605183aa5f2",
+        "party_id": "b38e8036-33ae-488e-af4a-be668d315c88",
+        "axis_id": "244d53da-062e-4cab-bc8a-30c15e841333",
+        "score": -17,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "ff04ca7e-1b2c-4452-993e-88f96bf8c9c7",
+        "party_id": "b38e8036-33ae-488e-af4a-be668d315c88",
+        "axis_id": "06ae759f-94cc-43c5-b1ba-43ccc01d6132",
+        "score": -23,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "5c1ed52d-40d7-44ad-8e3e-3b03b4d8fc78",
+        "party_id": "b38e8036-33ae-488e-af4a-be668d315c88",
+        "axis_id": "2071ca9a-8429-478b-8765-9eca1822ac4c",
+        "score": 63,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "d2e90198-fe4a-4f98-b757-c7c09b08b1b0",
+        "party_id": "b38e8036-33ae-488e-af4a-be668d315c88",
+        "axis_id": "230ee83e-ac41-487f-a2eb-fb8dd313d581",
+        "score": -76,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "1080c8b3-aef8-44ff-82bc-4ef035838c05",
+        "party_id": "c53d4243-a742-4e23-be00-f48f3a2df35c",
+        "axis_id": "39817ef1-2568-484d-a709-20cbe76c785e",
+        "score": 25,
+        "created_at": "2026-07-25T16:42:54.020187+00:00",
+        "updated_at": "2026-07-25T16:42:54.020187+00:00"
+      },
+      {
+        "id": "5c1f1540-3a8b-490e-91c6-e78268d9470a",
+        "party_id": "c53d4243-a742-4e23-be00-f48f3a2df35c",
+        "axis_id": "dd65c96b-ce44-41ee-bb4f-aa139e524073",
+        "score": 65,
+        "created_at": "2026-07-25T16:42:54.020187+00:00",
+        "updated_at": "2026-07-25T16:42:54.020187+00:00"
+      },
+      {
+        "id": "c07b44c7-1cfd-471b-8006-05d9ae55360f",
+        "party_id": "c53d4243-a742-4e23-be00-f48f3a2df35c",
+        "axis_id": "316073b1-28d3-4f29-86a0-36193d2ae981",
+        "score": 75,
+        "created_at": "2026-07-25T16:42:54.020187+00:00",
+        "updated_at": "2026-07-25T16:42:54.020187+00:00"
+      },
+      {
+        "id": "d59c5895-b9fc-47f7-81a9-258582a852a3",
+        "party_id": "c53d4243-a742-4e23-be00-f48f3a2df35c",
+        "axis_id": "14047fc8-8776-48f8-ad39-bfb79388bac6",
+        "score": 5,
+        "created_at": "2026-07-25T16:42:54.020187+00:00",
+        "updated_at": "2026-07-25T16:42:54.020187+00:00"
+      },
+      {
+        "id": "fc6b1ad0-8fae-4d6e-a7af-b1af7faf7b2d",
+        "party_id": "c53d4243-a742-4e23-be00-f48f3a2df35c",
+        "axis_id": "437da7b6-47c5-451c-a3a4-22f6e21ab03d",
+        "score": -45,
+        "created_at": "2026-07-25T16:42:54.020187+00:00",
+        "updated_at": "2026-07-25T16:42:54.020187+00:00"
+      },
+      {
+        "id": "a00ae5c0-aeb8-414a-9bdb-393a80a7cfdd",
+        "party_id": "c53d4243-a742-4e23-be00-f48f3a2df35c",
+        "axis_id": "72ceb1ea-1cb1-4807-bbed-2aa4e586fd72",
+        "score": -25,
+        "created_at": "2026-07-25T16:42:54.020187+00:00",
+        "updated_at": "2026-07-25T16:42:54.020187+00:00"
+      },
+      {
+        "id": "80bf8d42-3c59-46f3-8428-228af1c2efc0",
+        "party_id": "c53d4243-a742-4e23-be00-f48f3a2df35c",
+        "axis_id": "244d53da-062e-4cab-bc8a-30c15e841333",
+        "score": -30,
+        "created_at": "2026-07-25T16:42:54.020187+00:00",
+        "updated_at": "2026-07-25T16:42:54.020187+00:00"
+      },
+      {
+        "id": "d5c9b0be-6efc-48e9-b19b-a5cf597d7525",
+        "party_id": "c53d4243-a742-4e23-be00-f48f3a2df35c",
+        "axis_id": "06ae759f-94cc-43c5-b1ba-43ccc01d6132",
+        "score": -60,
+        "created_at": "2026-07-25T16:42:54.020187+00:00",
+        "updated_at": "2026-07-25T16:42:54.020187+00:00"
+      },
+      {
+        "id": "bd1876bf-30fe-49c2-8bcf-25b3dc4435db",
+        "party_id": "c53d4243-a742-4e23-be00-f48f3a2df35c",
+        "axis_id": "2071ca9a-8429-478b-8765-9eca1822ac4c",
+        "score": -55,
+        "created_at": "2026-07-25T16:42:54.020187+00:00",
+        "updated_at": "2026-07-25T16:42:54.020187+00:00"
+      },
+      {
+        "id": "1359ab22-7469-48a5-b1e3-53f342488466",
+        "party_id": "c53d4243-a742-4e23-be00-f48f3a2df35c",
+        "axis_id": "230ee83e-ac41-487f-a2eb-fb8dd313d581",
+        "score": -45,
+        "created_at": "2026-07-25T16:42:54.020187+00:00",
+        "updated_at": "2026-07-25T16:42:54.020187+00:00"
+      },
+      {
+        "id": "55a89eee-cb2f-4e59-b383-16e7b00b8c5b",
+        "party_id": "d54c162e-aec8-4df7-bd79-4b182919d9ea",
+        "axis_id": "39817ef1-2568-484d-a709-20cbe76c785e",
+        "score": -25,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "f13cb11e-055d-42d7-ac1d-9e83d5f7fd2e",
+        "party_id": "d54c162e-aec8-4df7-bd79-4b182919d9ea",
+        "axis_id": "dd65c96b-ce44-41ee-bb4f-aa139e524073",
+        "score": 55,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "8fd25b62-aec2-49b6-8a7b-729228ae5713",
+        "party_id": "d54c162e-aec8-4df7-bd79-4b182919d9ea",
+        "axis_id": "316073b1-28d3-4f29-86a0-36193d2ae981",
+        "score": 55,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "eaf9e7d3-47f9-49bb-825e-1b3c558e569e",
+        "party_id": "d54c162e-aec8-4df7-bd79-4b182919d9ea",
+        "axis_id": "14047fc8-8776-48f8-ad39-bfb79388bac6",
+        "score": -15,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "bba1d57d-e437-4734-9340-d74b40c10a76",
+        "party_id": "d54c162e-aec8-4df7-bd79-4b182919d9ea",
+        "axis_id": "437da7b6-47c5-451c-a3a4-22f6e21ab03d",
+        "score": -35,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "ee1d5e52-c468-49e3-8f4d-47e79692ade1",
+        "party_id": "d54c162e-aec8-4df7-bd79-4b182919d9ea",
+        "axis_id": "72ceb1ea-1cb1-4807-bbed-2aa4e586fd72",
+        "score": -30,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "c0719fc6-15bc-4d68-a885-794895103c75",
+        "party_id": "d54c162e-aec8-4df7-bd79-4b182919d9ea",
+        "axis_id": "244d53da-062e-4cab-bc8a-30c15e841333",
+        "score": -25,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "209e8eb1-3e18-48d5-9e30-9f4085fbdd83",
+        "party_id": "d54c162e-aec8-4df7-bd79-4b182919d9ea",
+        "axis_id": "06ae759f-94cc-43c5-b1ba-43ccc01d6132",
+        "score": -55,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "e65c26db-8b9b-41e8-ac61-f41e12a2ac88",
+        "party_id": "d54c162e-aec8-4df7-bd79-4b182919d9ea",
+        "axis_id": "2071ca9a-8429-478b-8765-9eca1822ac4c",
+        "score": -40,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      },
+      {
+        "id": "414a7508-f574-47c4-9a7b-b20db920e4df",
+        "party_id": "d54c162e-aec8-4df7-bd79-4b182919d9ea",
+        "axis_id": "230ee83e-ac41-487f-a2eb-fb8dd313d581",
+        "score": -30,
+        "created_at": "2026-07-20T08:48:47.397712+00:00",
+        "updated_at": "2026-07-20T08:48:47.397712+00:00"
+      }
+    ],
+    "questions": [
+      {
+        "id": "0a9d560f-d1b6-4bce-afbb-ee910f2664c1",
+        "text": "Ekonomik kararların kim tarafından alınması gerektiğini düşünüyorsunuz?",
+        "type": "single_choice",
+        "description": "Ekonomik yönetim tercihinizi belirleyin",
+        "required": true,
+        "order_index": 1,
+        "created_at": "2026-07-20T08:48:47.548247+00:00",
+        "updated_at": "2026-07-20T08:48:47.548247+00:00"
+      },
+      {
+        "id": "a92271eb-55d6-4adc-afed-48e685dab755",
+        "text": "Hangi sosyal politikaları destekliyorsunuz? (Birden fazla seçebilirsiniz)",
+        "type": "multi_choice",
+        "description": "Desteklediğiniz sosyal politikaları seçin",
+        "required": true,
+        "order_index": 2,
+        "created_at": "2026-07-20T08:48:47.548247+00:00",
+        "updated_at": "2026-07-20T08:48:47.548247+00:00"
+      },
+      {
+        "id": "6bf7a957-2968-4ba5-91f3-76e54d6435fa",
+        "text": "Eğitim sisteminde hangi modeli tercih edersiniz?",
+        "type": "dropdown_single",
+        "description": "Eğitim modeli tercihinizi seçin",
+        "required": true,
+        "order_index": 3,
+        "created_at": "2026-07-20T08:48:47.548247+00:00",
+        "updated_at": "2026-07-20T08:48:47.548247+00:00"
+      },
+      {
+        "id": "4cca6ae5-503e-4b9d-bf2e-65285c32864b",
+        "text": "Dış politikada öncelik verdiğiniz alanlar nelerdir?",
+        "type": "dropdown_multi",
+        "description": "Öncelik verdiğiniz dış politika alanlarını seçin",
+        "required": false,
+        "order_index": 4,
+        "created_at": "2026-07-20T08:48:47.548247+00:00",
+        "updated_at": "2026-07-20T08:48:47.548247+00:00"
+      },
+      {
+        "id": "4ce6be2c-f368-4c67-b83a-0a269d1cf342",
+        "text": "Aşağıdaki konuları önem sırasına göre sıralayın:",
+        "type": "ranking",
+        "description": "Önem sırasını belirleyin",
+        "required": true,
+        "order_index": 5,
+        "created_at": "2026-07-20T08:48:47.548247+00:00",
+        "updated_at": "2026-07-20T08:48:47.548247+00:00"
+      },
+      {
+        "id": "50a568c8-73af-4a9c-bea0-110422627725",
+        "text": "Hangisini tercih edersiniz?",
+        "type": "forced_choice_pair",
+        "description": "İkiden birini seçin",
+        "required": true,
+        "order_index": 6,
+        "created_at": "2026-07-20T08:48:47.548247+00:00",
+        "updated_at": "2026-07-20T08:48:47.548247+00:00"
+      },
+      {
+        "id": "9a638140-b1d4-4551-99d0-7be5f4235322",
+        "text": "Aşağıdaki konularda ne kadar hemfikirsiniz?",
+        "type": "matrix_single",
+        "description": "Her konu için seçim yapın",
+        "required": true,
+        "order_index": 7,
+        "created_at": "2026-07-20T08:48:47.548247+00:00",
+        "updated_at": "2026-07-20T08:48:47.548247+00:00"
+      },
+      {
+        "id": "f9c5534d-2ff6-4e30-9e5a-1c024dd23e99",
+        "text": "Hangi önerileri destekliyorsunuz? (Birden fazla seçebilirsiniz)",
+        "type": "matrix_multi",
+        "description": "Her konu için seçim yapın",
+        "required": false,
+        "order_index": 8,
+        "created_at": "2026-07-20T08:48:47.548247+00:00",
+        "updated_at": "2026-07-20T08:48:47.548247+00:00"
+      },
+      {
+        "id": "132092b0-e6e3-4b38-b802-5840408292b0",
+        "text": "Devletin ekonomiye müdahalesi gerekli midir?",
+        "type": "likert_5",
+        "description": "5 noktalı Likert ölçeği",
+        "required": true,
+        "order_index": 9,
+        "created_at": "2026-07-20T08:48:47.548247+00:00",
+        "updated_at": "2026-07-20T08:48:47.548247+00:00"
+      },
+      {
+        "id": "68d5b9cf-f52e-40c0-9626-dafd7b263828",
+        "text": "Dini referansların yasama süreçlerinde yer alması ne kadar doğrudur?",
+        "type": "likert_7",
+        "description": "7 noktalı Likert ölçeği",
+        "required": true,
+        "order_index": 10,
+        "created_at": "2026-07-20T08:48:47.548247+00:00",
+        "updated_at": "2026-07-20T08:48:47.548247+00:00"
+      },
+      {
+        "id": "7cfe4cb7-a826-4d7b-9afb-0a282c46ea70",
+        "text": "Göç politikasında kısıtlama seviyesini belirleyin:",
+        "type": "slider_0_100",
+        "description": "0=Hiç kısıtlama yok, 100=Tam kısıtlama",
+        "required": true,
+        "order_index": 11,
+        "created_at": "2026-07-20T08:48:47.548247+00:00",
+        "updated_at": "2026-07-20T08:48:47.548247+00:00"
+      },
+      {
+        "id": "000571eb-6355-4f54-b83f-4152a6029770",
+        "text": "Gelir vergisinin üst sınırı ne kadar olmalıdır? (Yüzde olarak)",
+        "type": "numeric_input",
+        "description": "0-100 arası bir değer girin",
+        "required": true,
+        "order_index": 12,
+        "created_at": "2026-07-20T08:48:47.548247+00:00",
+        "updated_at": "2026-07-20T08:48:47.548247+00:00"
+      },
+      {
+        "id": "e24917f0-0d1a-4aed-8b66-7cf15b425f51",
+        "text": "Bütçe dağılımını yapın (Toplam 100 puan):",
+        "type": "allocation",
+        "description": "Toplam 100 puanı alanlara dağıtın",
+        "required": true,
+        "order_index": 13,
+        "created_at": "2026-07-20T08:48:47.548247+00:00",
+        "updated_at": "2026-07-20T08:48:47.548247+00:00"
+      },
+      {
+        "id": "c2d0d2d5-be6f-4d81-9ded-0e0bbd9fd18d",
+        "text": "Ekonomik kriz durumunda ne yapılmalıdır?",
+        "type": "scenario_single",
+        "description": "Senaryo tabanlı soru",
+        "required": true,
+        "order_index": 14,
+        "created_at": "2026-07-20T08:48:47.548247+00:00",
+        "updated_at": "2026-07-20T08:48:47.548247+00:00"
+      },
+      {
+        "id": "dbd72646-660f-4b90-8717-9428717f7af4",
+        "text": "Hangi önlemler alınmalıdır? (Birden fazla seçebilirsiniz)",
+        "type": "scenario_multi",
+        "description": "Senaryo tabanlı çoklu seçim",
+        "required": false,
+        "order_index": 15,
+        "created_at": "2026-07-20T08:48:47.548247+00:00",
+        "updated_at": "2026-07-20T08:48:47.548247+00:00"
+      },
+      {
+        "id": "dc1791fa-1497-4d9e-8654-e9b5427bece5",
+        "text": "Okuduğunuz durumu ne kadar doğru buluyorsunuz?",
+        "type": "vignette_likert",
+        "description": "Bir belediye, bütçe açığını kapatmak için toplu taşıma ücretlerine %30 zam yapmayı planlıyor. Aynı dönemde düşük gelirli hanelere aylık ulaşım desteği vereceğini açıklıyor.",
+        "required": true,
+        "order_index": 16,
+        "created_at": "2026-07-20T08:48:47.548247+00:00",
+        "updated_at": "2026-07-20T08:48:47.548247+00:00"
+      },
+      {
+        "id": "d6590671-d181-4d16-b4e8-8ac0dad3183e",
+        "text": "En önemli siyasi önceliğiniz nedir?",
+        "type": "open_text_short",
+        "description": "Kısa metin girişi",
+        "required": false,
+        "order_index": 17,
+        "created_at": "2026-07-20T08:48:47.548247+00:00",
+        "updated_at": "2026-07-20T08:48:47.548247+00:00"
+      },
+      {
+        "id": "228e729a-efc8-40c0-87f8-efed82068fdf",
+        "text": "Siyasi görüşlerinizi detaylı olarak açıklayın:",
+        "type": "open_text_long",
+        "description": "Uzun metin girişi",
+        "required": false,
+        "order_index": 18,
+        "created_at": "2026-07-20T08:48:47.548247+00:00",
+        "updated_at": "2026-07-20T08:48:47.548247+00:00"
+      },
+      {
+        "id": "00b98fa8-03f1-486e-b99e-18f89bd9ea87",
+        "text": "Hangi sembolü tercih edersiniz?",
+        "type": "image_choice_single",
+        "description": "Görsel seçim",
+        "required": true,
+        "order_index": 19,
+        "created_at": "2026-07-20T08:48:47.548247+00:00",
+        "updated_at": "2026-07-20T08:48:47.548247+00:00"
+      },
+      {
+        "id": "915a9e29-b022-459c-9689-4cbdcad1461d",
+        "text": "Hangi görselleri tanıyorsunuz? (Birden fazla seçebilirsiniz)",
+        "type": "image_choice_multi",
+        "description": "Görsel çoklu seçim",
+        "required": false,
+        "order_index": 20,
+        "created_at": "2026-07-20T08:48:47.548247+00:00",
+        "updated_at": "2026-07-20T08:48:47.548247+00:00"
+      },
+      {
+        "id": "7a9d7c1c-d26d-489c-a2cf-0b4f723f7ebe",
+        "text": "Fotoğraf yükleyin:",
+        "type": "file_upload",
+        "description": "Dosya yükleme",
+        "required": false,
+        "order_index": 21,
+        "created_at": "2026-07-20T08:48:47.548247+00:00",
+        "updated_at": "2026-07-20T08:48:47.548247+00:00"
+      },
+      {
+        "id": "912b6d29-aaa2-433f-937f-e57b0576ccd6",
+        "text": "Seçim tarihi ne olmalı?",
+        "type": "date_input",
+        "description": "Tarih seçimi",
+        "required": true,
+        "order_index": 22,
+        "created_at": "2026-07-20T08:48:47.548247+00:00",
+        "updated_at": "2026-07-20T08:48:47.548247+00:00"
+      },
+      {
+        "id": "75735c3a-19e4-49b7-ad75-836108d77340",
+        "text": "Aşağıdaki onayları işaretleyiniz:",
+        "type": "consent_checkbox_group",
+        "description": "Gerekli onaylar",
+        "required": true,
+        "order_index": 23,
+        "created_at": "2026-07-20T08:48:47.548247+00:00",
+        "updated_at": "2026-07-20T08:48:47.548247+00:00"
+      },
+      {
+        "id": "5c1ff55c-dfa8-4b19-b0b7-3df41ed8c160",
+        "text": "Dikkat kontrolü için \"Evet\"i seçin:",
+        "type": "attention_check",
+        "description": "Dikkat kontrolü",
+        "required": true,
+        "order_index": 24,
+        "created_at": "2026-07-20T08:48:47.548247+00:00",
+        "updated_at": "2026-07-20T08:48:47.548247+00:00"
+      },
+      {
+        "id": "6051699d-71c2-4286-8bd5-07464e680187",
+        "text": "Güvenlik kontrolü:",
+        "type": "captcha_placeholder",
+        "description": "CAPTCHA kontrolü",
+        "required": true,
+        "order_index": 25,
+        "created_at": "2026-07-20T08:48:47.548247+00:00",
+        "updated_at": "2026-07-20T08:48:47.548247+00:00"
+      }
+    ],
+    "question_options": [
+      {
+        "id": "8325dae9-da72-4466-9bf5-0bf799af6af7",
+        "question_id": "00b98fa8-03f1-486e-b99e-18f89bd9ea87",
+        "text": "Sembol A",
+        "value": "symbol_a",
+        "order_index": 1,
+        "created_at": "2026-07-20T13:36:40.973088+00:00"
+      },
+      {
+        "id": "48a5382b-f2ec-4be3-b298-b67765cc7253",
+        "question_id": "00b98fa8-03f1-486e-b99e-18f89bd9ea87",
+        "text": "Sembol B",
+        "value": "symbol_b",
+        "order_index": 2,
+        "created_at": "2026-07-20T13:36:40.973088+00:00"
+      },
+      {
+        "id": "83b78120-ff95-4834-b56f-157bc3ca7683",
+        "question_id": "00b98fa8-03f1-486e-b99e-18f89bd9ea87",
+        "text": "Sembol C",
+        "value": "symbol_c",
+        "order_index": 3,
+        "created_at": "2026-07-20T13:36:40.973088+00:00"
+      },
+      {
+        "id": "d71497d3-178c-4f11-a3a2-a2e63c8c6b0b",
+        "question_id": "0a9d560f-d1b6-4bce-afbb-ee910f2664c1",
+        "text": "Devlet müdahalesi",
+        "value": "state",
+        "order_index": 2,
+        "created_at": "2026-07-20T08:48:47.628996+00:00"
+      },
+      {
+        "id": "f3b68082-4773-4bd2-8a32-614e232b56b6",
+        "question_id": "0a9d560f-d1b6-4bce-afbb-ee910f2664c1",
+        "text": "Karma model",
+        "value": "mixed",
+        "order_index": 3,
+        "created_at": "2026-07-20T08:48:47.628996+00:00"
+      },
+      {
+        "id": "382df301-f5c0-42c8-ad73-1a0d7185c111",
+        "question_id": "0a9d560f-d1b6-4bce-afbb-ee910f2664c1",
+        "text": "Piyasa mekanizmaları",
+        "value": "market",
+        "order_index": 1,
+        "created_at": "2026-07-20T08:48:47.628996+00:00"
+      },
+      {
+        "id": "96a497af-f207-41ea-a030-8d038710f3c5",
+        "question_id": "132092b0-e6e3-4b38-b802-5840408292b0",
+        "text": "Kesinlikle katılıyorum",
+        "value": "strongly_agree",
+        "order_index": 5,
+        "created_at": "2026-07-20T08:48:47.628996+00:00"
+      },
+      {
+        "id": "c54d3c75-d59f-4451-9c4e-7869c2b253a2",
+        "question_id": "132092b0-e6e3-4b38-b802-5840408292b0",
+        "text": "Kesinlikle katılmıyorum",
+        "value": "strongly_disagree",
+        "order_index": 1,
+        "created_at": "2026-07-20T08:48:47.628996+00:00"
+      },
+      {
+        "id": "a7e935ad-48e3-48ad-9da0-a5c0ef09516b",
+        "question_id": "132092b0-e6e3-4b38-b802-5840408292b0",
+        "text": "Katılmıyorum",
+        "value": "disagree",
+        "order_index": 2,
+        "created_at": "2026-07-20T08:48:47.628996+00:00"
+      },
+      {
+        "id": "1db7d057-8a0d-40bf-ab8d-c7ef577cf08f",
+        "question_id": "132092b0-e6e3-4b38-b802-5840408292b0",
+        "text": "Kararsızım",
+        "value": "neutral",
+        "order_index": 3,
+        "created_at": "2026-07-20T08:48:47.628996+00:00"
+      },
+      {
+        "id": "4123002c-ecd0-41b2-8963-342c3143732f",
+        "question_id": "132092b0-e6e3-4b38-b802-5840408292b0",
+        "text": "Katılıyorum",
+        "value": "agree",
+        "order_index": 4,
+        "created_at": "2026-07-20T08:48:47.628996+00:00"
+      },
+      {
+        "id": "1737b55b-9205-4da8-a717-678184da910d",
+        "question_id": "4cca6ae5-503e-4b9d-bf2e-65285c32864b",
+        "text": "AB ile entegrasyon",
+        "value": "eu_integration",
+        "order_index": 1,
+        "created_at": "2026-07-20T13:36:40.973088+00:00"
+      },
+      {
+        "id": "94785faa-21ec-476b-b6a5-54997a86e987",
+        "question_id": "4cca6ae5-503e-4b9d-bf2e-65285c32864b",
+        "text": "Bölgesel ittifaklar",
+        "value": "regional_alliances",
+        "order_index": 2,
+        "created_at": "2026-07-20T13:36:40.973088+00:00"
+      },
+      {
+        "id": "e09bf5e1-08ed-4245-b65c-d7050f46937c",
+        "question_id": "4cca6ae5-503e-4b9d-bf2e-65285c32864b",
+        "text": "Ekonomik anlaşmalar",
+        "value": "economic_agreements",
+        "order_index": 3,
+        "created_at": "2026-07-20T13:36:40.973088+00:00"
+      },
+      {
+        "id": "6d78d1ba-8cb3-4f1b-aacd-7d5e7d00b1b5",
+        "question_id": "4cca6ae5-503e-4b9d-bf2e-65285c32864b",
+        "text": "Savunma işbirliği",
+        "value": "defense_cooperation",
+        "order_index": 4,
+        "created_at": "2026-07-20T13:36:40.973088+00:00"
+      },
+      {
+        "id": "49490e18-93d6-4065-9495-081239f43e3c",
+        "question_id": "4ce6be2c-f368-4c67-b83a-0a269d1cf342",
+        "text": "Çevre",
+        "value": "environment",
+        "order_index": 5,
+        "created_at": "2026-07-20T15:29:19.631901+00:00"
+      },
+      {
+        "id": "9b49929a-0731-40c7-9c31-630cb7b259a4",
+        "question_id": "4ce6be2c-f368-4c67-b83a-0a269d1cf342",
+        "text": "Eğitim",
+        "value": "education",
+        "order_index": 2,
+        "created_at": "2026-07-20T15:29:19.631901+00:00"
+      },
+      {
+        "id": "2bebeb6d-cb9b-48b2-9f7c-aaf611020f6c",
+        "question_id": "4ce6be2c-f368-4c67-b83a-0a269d1cf342",
+        "text": "Ekonomi",
+        "value": "economy",
+        "order_index": 1,
+        "created_at": "2026-07-20T15:29:19.631901+00:00"
+      },
+      {
+        "id": "261087d1-d309-4872-9b5c-2adf40340fa9",
+        "question_id": "4ce6be2c-f368-4c67-b83a-0a269d1cf342",
+        "text": "Sağlık",
+        "value": "health",
+        "order_index": 3,
+        "created_at": "2026-07-20T15:29:19.631901+00:00"
+      },
+      {
+        "id": "c6063c75-5661-4f77-b47b-c3f905a9acf4",
+        "question_id": "4ce6be2c-f368-4c67-b83a-0a269d1cf342",
+        "text": "Güvenlik",
+        "value": "security",
+        "order_index": 4,
+        "created_at": "2026-07-20T15:29:19.631901+00:00"
+      },
+      {
+        "id": "53b288a3-98a2-4dd3-ae0d-9dbf4ba0668b",
+        "question_id": "50a568c8-73af-4a9c-bea0-110422627725",
+        "text": "Bireysel özgürlük",
+        "value": "individual_freedom",
+        "order_index": 1,
+        "created_at": "2026-07-20T13:36:40.973088+00:00"
+      },
+      {
+        "id": "074f0871-45fc-4fe8-9737-dd5caf9c23bd",
+        "question_id": "50a568c8-73af-4a9c-bea0-110422627725",
+        "text": "Toplumsal düzen",
+        "value": "social_order",
+        "order_index": 2,
+        "created_at": "2026-07-20T13:36:40.973088+00:00"
+      },
+      {
+        "id": "67acf4e0-c69c-44f8-be14-6738a2207b4a",
+        "question_id": "5c1ff55c-dfa8-4b19-b0b7-3df41ed8c160",
+        "text": "Hayır",
+        "value": "no",
+        "order_index": 2,
+        "created_at": "2026-07-20T13:36:40.973088+00:00"
+      },
+      {
+        "id": "acecf086-e4a3-4404-8e99-210f5760e34d",
+        "question_id": "5c1ff55c-dfa8-4b19-b0b7-3df41ed8c160",
+        "text": "Evet",
+        "value": "yes",
+        "order_index": 1,
+        "created_at": "2026-07-20T13:36:40.973088+00:00"
+      },
+      {
+        "id": "db506557-78c5-44f1-a114-53850ccd0431",
+        "question_id": "68d5b9cf-f52e-40c0-9626-dafd7b263828",
+        "text": "Kısmen katılıyorum",
+        "value": "somewhat_agree",
+        "order_index": 5,
+        "created_at": "2026-07-20T13:36:40.973088+00:00"
+      },
+      {
+        "id": "b5044a1d-a4fb-4752-8a6a-4142ef13f53a",
+        "question_id": "68d5b9cf-f52e-40c0-9626-dafd7b263828",
+        "text": "Kesinlikle katılmıyorum",
+        "value": "strongly_disagree",
+        "order_index": 1,
+        "created_at": "2026-07-20T13:36:40.973088+00:00"
+      },
+      {
+        "id": "94beb00c-6229-46a5-b8f7-dcf511f360b1",
+        "question_id": "68d5b9cf-f52e-40c0-9626-dafd7b263828",
+        "text": "Katılmıyorum",
+        "value": "disagree",
+        "order_index": 2,
+        "created_at": "2026-07-20T13:36:40.973088+00:00"
+      },
+      {
+        "id": "f693f5ac-45af-4d79-a088-131543b4dfc9",
+        "question_id": "68d5b9cf-f52e-40c0-9626-dafd7b263828",
+        "text": "Katılıyorum",
+        "value": "agree",
+        "order_index": 6,
+        "created_at": "2026-07-20T13:36:40.973088+00:00"
+      },
+      {
+        "id": "f4c90a4a-7281-4dc3-a48a-35950bb13edd",
+        "question_id": "68d5b9cf-f52e-40c0-9626-dafd7b263828",
+        "text": "Kesinlikle katılıyorum",
+        "value": "strongly_agree",
+        "order_index": 7,
+        "created_at": "2026-07-20T13:36:40.973088+00:00"
+      },
+      {
+        "id": "3c6d365d-ff10-470a-9271-7db913b09a37",
+        "question_id": "68d5b9cf-f52e-40c0-9626-dafd7b263828",
+        "text": "Kararsızım",
+        "value": "neutral",
+        "order_index": 4,
+        "created_at": "2026-07-20T13:36:40.973088+00:00"
+      },
+      {
+        "id": "eb85aef2-1c6c-4a82-a809-cf19499aefb8",
+        "question_id": "68d5b9cf-f52e-40c0-9626-dafd7b263828",
+        "text": "Kısmen katılmıyorum",
+        "value": "somewhat_disagree",
+        "order_index": 3,
+        "created_at": "2026-07-20T13:36:40.973088+00:00"
+      },
+      {
+        "id": "c3740f44-e621-4c62-966f-ebc30610866e",
+        "question_id": "6bf7a957-2968-4ba5-91f3-76e54d6435fa",
+        "text": "Merkezi müfredat",
+        "value": "centralized",
+        "order_index": 1,
+        "created_at": "2026-07-20T13:36:40.973088+00:00"
+      },
+      {
+        "id": "a5677722-3aae-4dff-bc69-eefb7d5ad00f",
+        "question_id": "6bf7a957-2968-4ba5-91f3-76e54d6435fa",
+        "text": "Karma model",
+        "value": "mixed",
+        "order_index": 4,
+        "created_at": "2026-07-20T13:36:40.973088+00:00"
+      },
+      {
+        "id": "46f7d81a-89d6-417b-bac8-d2a8b6d9a882",
+        "question_id": "6bf7a957-2968-4ba5-91f3-76e54d6435fa",
+        "text": "Özel eğitim teşviki",
+        "value": "private_incentive",
+        "order_index": 3,
+        "created_at": "2026-07-20T13:36:40.973088+00:00"
+      },
+      {
+        "id": "6008dc85-bab4-45e4-bab8-4b977b20fa45",
+        "question_id": "6bf7a957-2968-4ba5-91f3-76e54d6435fa",
+        "text": "Yerel özerklik",
+        "value": "local_autonomy",
+        "order_index": 2,
+        "created_at": "2026-07-20T13:36:40.973088+00:00"
+      },
+      {
+        "id": "2e4010f9-22a0-4d13-99bc-2d07ca46d582",
+        "question_id": "75735c3a-19e4-49b7-ad75-836108d77340",
+        "text": "Kişisel verilerimin işlenmesini kabul ediyorum",
+        "value": "data_consent",
+        "order_index": 1,
+        "created_at": "2026-07-20T13:36:40.973088+00:00"
+      },
+      {
+        "id": "e70f65b6-d290-47c6-be56-576f9d7660a7",
+        "question_id": "75735c3a-19e4-49b7-ad75-836108d77340",
+        "text": "Katılım koşullarını kabul ediyorum",
+        "value": "terms_consent",
+        "order_index": 2,
+        "created_at": "2026-07-20T13:36:40.973088+00:00"
+      },
+      {
+        "id": "a842baab-718c-43aa-aeab-a5239362d5cb",
+        "question_id": "915a9e29-b022-459c-9689-4cbdcad1461d",
+        "text": "Görsel 3",
+        "value": "image_3",
+        "order_index": 3,
+        "created_at": "2026-07-20T13:36:40.973088+00:00"
+      },
+      {
+        "id": "da69a82f-0bed-4931-868d-ca1635e73a6e",
+        "question_id": "915a9e29-b022-459c-9689-4cbdcad1461d",
+        "text": "Görsel 1",
+        "value": "image_1",
+        "order_index": 1,
+        "created_at": "2026-07-20T13:36:40.973088+00:00"
+      },
+      {
+        "id": "074acde6-0822-4e0b-a1c9-32be41f46a72",
+        "question_id": "915a9e29-b022-459c-9689-4cbdcad1461d",
+        "text": "Görsel 2",
+        "value": "image_2",
+        "order_index": 2,
+        "created_at": "2026-07-20T13:36:40.973088+00:00"
+      },
+      {
+        "id": "4ffa5d98-066f-4a32-8004-b1145cff0b13",
+        "question_id": "9a638140-b1d4-4551-99d0-7be5f4235322",
+        "text": "Kamu kurumları özelleştirilmeli",
+        "value": "row:privatization",
+        "order_index": 2,
+        "created_at": "2026-07-29T11:42:46.943463+00:00"
+      },
+      {
+        "id": "c9e61b85-f120-4879-8366-5d36a5de6d0a",
+        "question_id": "9a638140-b1d4-4551-99d0-7be5f4235322",
+        "text": "Kararsızım",
+        "value": "col:neutral",
+        "order_index": 6,
+        "created_at": "2026-07-29T11:42:46.943463+00:00"
+      },
+      {
+        "id": "bd63dc76-18b8-4b14-a8f1-d0a98a315093",
+        "question_id": "9a638140-b1d4-4551-99d0-7be5f4235322",
+        "text": "Katılıyorum",
+        "value": "col:agree",
+        "order_index": 7,
+        "created_at": "2026-07-29T11:42:46.943463+00:00"
+      },
+      {
+        "id": "5fbb5e3f-725c-4643-bd3b-ac8a2b81cdcf",
+        "question_id": "9a638140-b1d4-4551-99d0-7be5f4235322",
+        "text": "Katılmıyorum",
+        "value": "col:disagree",
+        "order_index": 5,
+        "created_at": "2026-07-29T11:42:46.943463+00:00"
+      },
+      {
+        "id": "dacc273b-2578-471c-9646-efeb221185d4",
+        "question_id": "9a638140-b1d4-4551-99d0-7be5f4235322",
+        "text": "Asgari ücret devlet tarafından belirlenmeli",
+        "value": "row:min_wage",
+        "order_index": 1,
+        "created_at": "2026-07-29T11:42:46.943463+00:00"
+      },
+      {
+        "id": "ce00c350-433f-449a-91a6-ce0e7af8df26",
+        "question_id": "9a638140-b1d4-4551-99d0-7be5f4235322",
+        "text": "Çevre vergileri artırılmalı",
+        "value": "row:green_tax",
+        "order_index": 4,
+        "created_at": "2026-07-29T11:42:46.943463+00:00"
+      },
+      {
+        "id": "4fa5333a-fa8a-4a2d-8121-dafd51ac49be",
+        "question_id": "9a638140-b1d4-4551-99d0-7be5f4235322",
+        "text": "Yerel yönetimlere daha fazla yetki verilmeli",
+        "value": "row:local_authority",
+        "order_index": 3,
+        "created_at": "2026-07-29T11:42:46.943463+00:00"
+      },
+      {
+        "id": "955def8c-a2bb-49b4-a15a-3885cd974137",
+        "question_id": "a92271eb-55d6-4adc-afed-48e685dab755",
+        "text": "Evrensel eğitim hakkı",
+        "value": "universal_education",
+        "order_index": 2,
+        "created_at": "2026-07-20T08:48:47.628996+00:00"
+      },
+      {
+        "id": "282a45ff-be06-466a-9681-f6f6f3171b06",
+        "question_id": "a92271eb-55d6-4adc-afed-48e685dab755",
+        "text": "Asgari ücret artışı",
+        "value": "minimum_wage",
+        "order_index": 4,
+        "created_at": "2026-07-20T08:48:47.628996+00:00"
+      },
+      {
+        "id": "466dcd86-5801-4a45-82d1-15366f748e0b",
+        "question_id": "a92271eb-55d6-4adc-afed-48e685dab755",
+        "text": "Sosyal yardımların genişletilmesi",
+        "value": "social_welfare",
+        "order_index": 3,
+        "created_at": "2026-07-20T08:48:47.628996+00:00"
+      },
+      {
+        "id": "a8d6e32b-22c1-4e64-9e57-3b0b7fb55bd4",
+        "question_id": "a92271eb-55d6-4adc-afed-48e685dab755",
+        "text": "Ücretsiz sağlık hizmetleri",
+        "value": "free_healthcare",
+        "order_index": 1,
+        "created_at": "2026-07-20T08:48:47.628996+00:00"
+      },
+      {
+        "id": "dd39324c-3b0b-4bfc-8936-65493e6b4f7a",
+        "question_id": "c2d0d2d5-be6f-4d81-9ded-0e0bbd9fd18d",
+        "text": "Vergileri düşür",
+        "value": "lower_taxes",
+        "order_index": 2,
+        "created_at": "2026-07-20T13:36:40.973088+00:00"
+      },
+      {
+        "id": "4ca4cd9a-c597-4f7f-9a4f-2a30e99f3e1a",
+        "question_id": "c2d0d2d5-be6f-4d81-9ded-0e0bbd9fd18d",
+        "text": "Kamu harcamalarını artır",
+        "value": "increase_spending",
+        "order_index": 1,
+        "created_at": "2026-07-20T13:36:40.973088+00:00"
+      },
+      {
+        "id": "f60b5ff3-0c37-437b-b734-f76de5cd069d",
+        "question_id": "c2d0d2d5-be6f-4d81-9ded-0e0bbd9fd18d",
+        "text": "Faiz oranlarını yükselt",
+        "value": "raise_rates",
+        "order_index": 3,
+        "created_at": "2026-07-20T13:36:40.973088+00:00"
+      },
+      {
+        "id": "102b2e93-be3c-4df5-abd0-cdb14de89226",
+        "question_id": "c2d0d2d5-be6f-4d81-9ded-0e0bbd9fd18d",
+        "text": "Müdahale etme",
+        "value": "no_intervention",
+        "order_index": 4,
+        "created_at": "2026-07-20T13:36:40.973088+00:00"
+      },
+      {
+        "id": "7ac4ec33-7429-4cd6-a9ab-1158dc7db337",
+        "question_id": "dbd72646-660f-4b90-8717-9428717f7af4",
+        "text": "İşsizlik yardımını artır",
+        "value": "increase_benefits",
+        "order_index": 1,
+        "created_at": "2026-07-20T13:36:40.973088+00:00"
+      },
+      {
+        "id": "8648c903-6b72-47a4-b44f-c5fda8a66d7e",
+        "question_id": "dbd72646-660f-4b90-8717-9428717f7af4",
+        "text": "Ithalatı kısıtla",
+        "value": "import_restriction",
+        "order_index": 4,
+        "created_at": "2026-07-20T13:36:40.973088+00:00"
+      },
+      {
+        "id": "bca6a270-34aa-4cee-8189-0907cf0ddba8",
+        "question_id": "dbd72646-660f-4b90-8717-9428717f7af4",
+        "text": "Kamu istihdamı yarat",
+        "value": "public_jobs",
+        "order_index": 3,
+        "created_at": "2026-07-20T13:36:40.973088+00:00"
+      },
+      {
+        "id": "f3fc3ed9-7a44-4f0c-9601-92a725c706b2",
+        "question_id": "dbd72646-660f-4b90-8717-9428717f7af4",
+        "text": "Küçük işletmelere destek",
+        "value": "sme_support",
+        "order_index": 2,
+        "created_at": "2026-07-20T13:36:40.973088+00:00"
+      },
+      {
+        "id": "fae661ea-b3ea-4590-9a1c-536b6b87c558",
+        "question_id": "dc1791fa-1497-4d9e-8654-e9b5427bece5",
+        "text": "Kesinlikle doğru",
+        "value": "strongly_agree",
+        "order_index": 5,
+        "created_at": "2026-07-29T11:42:46.943463+00:00"
+      },
+      {
+        "id": "3e83afcc-854c-4a0f-abd9-9895f21c188e",
+        "question_id": "dc1791fa-1497-4d9e-8654-e9b5427bece5",
+        "text": "Kesinlikle doğru değil",
+        "value": "strongly_disagree",
+        "order_index": 1,
+        "created_at": "2026-07-29T11:42:46.943463+00:00"
+      },
+      {
+        "id": "8d40b91b-df95-4ed6-a6a7-0e102835ce91",
+        "question_id": "dc1791fa-1497-4d9e-8654-e9b5427bece5",
+        "text": "Doğru değil",
+        "value": "disagree",
+        "order_index": 2,
+        "created_at": "2026-07-29T11:42:46.943463+00:00"
+      },
+      {
+        "id": "5f9350b4-35d7-48c2-afce-5ad2c742c3db",
+        "question_id": "dc1791fa-1497-4d9e-8654-e9b5427bece5",
+        "text": "Kararsızım",
+        "value": "neutral",
+        "order_index": 3,
+        "created_at": "2026-07-29T11:42:46.943463+00:00"
+      },
+      {
+        "id": "703728dd-abb5-4303-92f4-162dec5959ca",
+        "question_id": "dc1791fa-1497-4d9e-8654-e9b5427bece5",
+        "text": "Doğru",
+        "value": "agree",
+        "order_index": 4,
+        "created_at": "2026-07-29T11:42:46.943463+00:00"
+      },
+      {
+        "id": "509dcc79-97b9-4db1-97a2-59226de5f32d",
+        "question_id": "e24917f0-0d1a-4aed-8b66-7cf15b425f51",
+        "text": "Eğitim",
+        "value": "education",
+        "order_index": 1,
+        "created_at": "2026-07-29T11:42:46.943463+00:00"
+      },
+      {
+        "id": "7b0a822c-9bd9-45c6-96e9-933b75be366f",
+        "question_id": "e24917f0-0d1a-4aed-8b66-7cf15b425f51",
+        "text": "Sağlık",
+        "value": "health",
+        "order_index": 2,
+        "created_at": "2026-07-29T11:42:46.943463+00:00"
+      },
+      {
+        "id": "4d7c4825-aba7-46f6-92ce-fc3c80612dde",
+        "question_id": "e24917f0-0d1a-4aed-8b66-7cf15b425f51",
+        "text": "Savunma",
+        "value": "defense",
+        "order_index": 3,
+        "created_at": "2026-07-29T11:42:46.943463+00:00"
+      },
+      {
+        "id": "b5f6e7e1-ca75-4e09-8684-659813342429",
+        "question_id": "e24917f0-0d1a-4aed-8b66-7cf15b425f51",
+        "text": "Sosyal yardımlar",
+        "value": "social_welfare",
+        "order_index": 4,
+        "created_at": "2026-07-29T11:42:46.943463+00:00"
+      },
+      {
+        "id": "23a13e3e-41e0-4868-bdb6-754a300b1c70",
+        "question_id": "e24917f0-0d1a-4aed-8b66-7cf15b425f51",
+        "text": "Altyapı ve ulaşım",
+        "value": "infrastructure",
+        "order_index": 5,
+        "created_at": "2026-07-29T11:42:46.943463+00:00"
+      },
+      {
+        "id": "4b68e1c5-10c4-4556-b5dc-b7e1c796b4d7",
+        "question_id": "f9c5534d-2ff6-4e30-9e5a-1c024dd23e99",
+        "text": "Yerel yönetime devir",
+        "value": "col:local_management",
+        "order_index": 6,
+        "created_at": "2026-07-29T11:42:46.943463+00:00"
+      },
+      {
+        "id": "7e8b8d86-7799-408e-8b20-9903035c5ba3",
+        "question_id": "f9c5534d-2ff6-4e30-9e5a-1c024dd23e99",
+        "text": "Özel sektör katılımı",
+        "value": "col:private_sector",
+        "order_index": 5,
+        "created_at": "2026-07-29T11:42:46.943463+00:00"
+      },
+      {
+        "id": "c1ca2f82-20c2-48e6-b69c-ab570057647d",
+        "question_id": "f9c5534d-2ff6-4e30-9e5a-1c024dd23e99",
+        "text": "Eğitim",
+        "value": "row:education",
+        "order_index": 1,
+        "created_at": "2026-07-29T11:42:46.943463+00:00"
+      },
+      {
+        "id": "fc1b19a6-6b94-429b-ac7f-61c7356d8013",
+        "question_id": "f9c5534d-2ff6-4e30-9e5a-1c024dd23e99",
+        "text": "Sağlık",
+        "value": "row:health",
+        "order_index": 2,
+        "created_at": "2026-07-29T11:42:46.943463+00:00"
+      },
+      {
+        "id": "79c4105a-083e-47df-a1e8-282bea9c962c",
+        "question_id": "f9c5534d-2ff6-4e30-9e5a-1c024dd23e99",
+        "text": "Ekonomi",
+        "value": "row:economy",
+        "order_index": 3,
+        "created_at": "2026-07-29T11:42:46.943463+00:00"
+      },
+      {
+        "id": "7f07b601-0603-4dff-bbb3-d7e6c81db4e5",
+        "question_id": "f9c5534d-2ff6-4e30-9e5a-1c024dd23e99",
+        "text": "Daha fazla kamu bütçesi",
+        "value": "col:more_budget",
+        "order_index": 4,
+        "created_at": "2026-07-29T11:42:46.943463+00:00"
+      }
+    ],
+    "scoring_rules": [
+      {
+        "id": "c0f93978-3f42-41f4-9d95-bbbbad93f1f8",
+        "question_id": "0a9d560f-d1b6-4bce-afbb-ee910f2664c1",
+        "answer_value": "market",
+        "axis_id": "39817ef1-2568-484d-a709-20cbe76c785e",
+        "score_modifier": 50,
+        "created_at": "2026-07-20T08:48:47.777468+00:00"
+      },
+      {
+        "id": "83afbf23-2135-421b-a6c6-b557e1d5b139",
+        "question_id": "0a9d560f-d1b6-4bce-afbb-ee910f2664c1",
+        "answer_value": "state",
+        "axis_id": "39817ef1-2568-484d-a709-20cbe76c785e",
+        "score_modifier": -50,
+        "created_at": "2026-07-20T08:48:47.777468+00:00"
+      },
+      {
+        "id": "b787a316-b062-4e7f-8c03-23b0a94024e9",
+        "question_id": "0a9d560f-d1b6-4bce-afbb-ee910f2664c1",
+        "answer_value": "mixed",
+        "axis_id": "39817ef1-2568-484d-a709-20cbe76c785e",
+        "score_modifier": 0,
+        "created_at": "2026-07-20T08:48:47.777468+00:00"
+      },
+      {
+        "id": "97ea8ae5-4328-4bcf-bc83-cec8b9f8f028",
+        "question_id": "132092b0-e6e3-4b38-b802-5840408292b0",
+        "answer_value": "strongly_disagree",
+        "axis_id": "39817ef1-2568-484d-a709-20cbe76c785e",
+        "score_modifier": 50,
+        "created_at": "2026-07-20T08:48:47.777468+00:00"
+      },
+      {
+        "id": "207c969c-279c-45c2-8288-c29bea75f212",
+        "question_id": "132092b0-e6e3-4b38-b802-5840408292b0",
+        "answer_value": "disagree",
+        "axis_id": "39817ef1-2568-484d-a709-20cbe76c785e",
+        "score_modifier": 25,
+        "created_at": "2026-07-20T08:48:47.777468+00:00"
+      },
+      {
+        "id": "9ad45c9e-b6e0-448f-a5dc-f2dc06b7a99a",
+        "question_id": "132092b0-e6e3-4b38-b802-5840408292b0",
+        "answer_value": "neutral",
+        "axis_id": "39817ef1-2568-484d-a709-20cbe76c785e",
+        "score_modifier": 0,
+        "created_at": "2026-07-20T08:48:47.777468+00:00"
+      },
+      {
+        "id": "9aebe768-1828-424e-892c-63f92c7517f5",
+        "question_id": "132092b0-e6e3-4b38-b802-5840408292b0",
+        "answer_value": "agree",
+        "axis_id": "39817ef1-2568-484d-a709-20cbe76c785e",
+        "score_modifier": -25,
+        "created_at": "2026-07-20T08:48:47.777468+00:00"
+      },
+      {
+        "id": "d37ade18-5dff-40a5-8af3-af52286f5b48",
+        "question_id": "132092b0-e6e3-4b38-b802-5840408292b0",
+        "answer_value": "strongly_agree",
+        "axis_id": "39817ef1-2568-484d-a709-20cbe76c785e",
+        "score_modifier": -50,
+        "created_at": "2026-07-20T08:48:47.777468+00:00"
+      },
+      {
+        "id": "a0d35ec4-6ce8-400a-8f6a-d7c60247d3cf",
+        "question_id": "a92271eb-55d6-4adc-afed-48e685dab755",
+        "answer_value": "free_healthcare",
+        "axis_id": "2071ca9a-8429-478b-8765-9eca1822ac4c",
+        "score_modifier": -30,
+        "created_at": "2026-07-20T08:48:47.777468+00:00"
+      },
+      {
+        "id": "09a6011a-c22b-4e03-bded-4139260599e6",
+        "question_id": "a92271eb-55d6-4adc-afed-48e685dab755",
+        "answer_value": "universal_education",
+        "axis_id": "2071ca9a-8429-478b-8765-9eca1822ac4c",
+        "score_modifier": -30,
+        "created_at": "2026-07-20T08:48:47.777468+00:00"
+      },
+      {
+        "id": "f36588e2-7485-4f28-8932-cc800ca2c72c",
+        "question_id": "a92271eb-55d6-4adc-afed-48e685dab755",
+        "answer_value": "social_welfare",
+        "axis_id": "2071ca9a-8429-478b-8765-9eca1822ac4c",
+        "score_modifier": -30,
+        "created_at": "2026-07-20T08:48:47.777468+00:00"
+      },
+      {
+        "id": "8e711830-271a-4b7d-9dce-da3c85519b00",
+        "question_id": "a92271eb-55d6-4adc-afed-48e685dab755",
+        "answer_value": "minimum_wage",
+        "axis_id": "2071ca9a-8429-478b-8765-9eca1822ac4c",
+        "score_modifier": -30,
+        "created_at": "2026-07-20T08:48:47.777468+00:00"
+      }
+    ]
+  }
+}

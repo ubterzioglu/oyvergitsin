@@ -1,36 +1,101 @@
-# Repository Guidelines
+# Agent Rules for oyvergitsin
 
-## Project Structure & Module Organization
-`app/` contains the Next.js 14 App Router code: public pages in `app/page.tsx`, `app/consent`, `app/survey`, results in `app/results/[sessionId]`, admin tooling in `app/admin`, and API handlers in `app/api/*`. Shared logic lives in `lib/`, mainly `lib/supabase/*` for client/server setup and `lib/scoring/engine.ts` for match calculation. Database assets live in `supabase/migrations/`, while operational scripts such as `scripts/seed.js` and migration helpers stay in `scripts/`. Deployment notes are documented in `docs/COOLIFY_DEPLOYMENT.md`.
+Bu dosya bu repoda çalışan ajanlar için bağlayıcı çalışma notudur. Amaç hızlı kod üretmek değil; mevcut Next.js + Supabase yapısını bozmadan, güvenli ve test edilebilir değişiklik yapmaktır.
 
-## Build, Test, and Development Commands
-Use `npm install` to sync dependencies. `npm run dev` starts the local app on port 3000. `npm run build` creates the production bundle, and `npm run start` serves that build. `npm run lint` runs the Next.js ESLint rules. For database work, use `npm run db:push` to apply Supabase schema changes, `npm run db:seed` to seed content, and `npm run db:reset` to rebuild the local database. For container checks, `docker compose up --build` mirrors the Coolify deployment path.
+## Proje Özeti
 
-## Coding Style & Naming Conventions
-Follow the existing TypeScript-first style with `strict` mode enabled. Use 2-space indentation, single quotes, and semicolon-free files to match the current codebase. Name React components and exported types in PascalCase, helper functions in camelCase, and route folders in lowercase (`app/api/health`, `app/admin/questions`). Prefer the `@/` path alias over long relative imports.
+`oyvergitsin.org`, Türkiye siyaseti için anonim siyasi eşleşme platformudur. Kullanıcı akışı:
 
-## Testing Guidelines
-`npm test` runs the Vitest suite (`vitest run`); tests are colocated next to the code they cover as `*.test.ts` / `*.test.tsx` and are currently limited to `lib/scoring/*`. The scoring core is deliberately free of Supabase and Next.js imports so it can be tested without a database — keep it that way and put data fetching in `lib/scoring/engine.ts`. `npm run lint` and `npm run build` remain required checks.
+- Ana sayfa -> açık rıza -> anket -> sonuçlar
+- Admin paneli -> eksenler, sorular, partiler, rıza metinleri, radar/haber kaynakları
+- API -> oturum, soru, cevap, tamamlama, sonuç ve admin/radar uçları
 
-`npm run test:e2e` runs the Playwright suite in `e2e/`, which starts its own dev server and drives a real browser: auto-advance, the importance toggle cancelling it, "Fikrim yok" sitting outside the Likert scale, and the full 25-item run through to the results page. Point it elsewhere with `BASE_URL=https://... npm run test:e2e` (it then skips starting a server). Note that E2E and smoke runs write real sessions and answers to whichever database the target is using.
+Teknik yapı:
 
-`npm run smoke` exercises the API chain directly — `/api/sessions` → `/api/questions` → `/api/answers` → `/api/complete` → `/api/results/[id]` — including the legacy-snapshot path.
+- Next.js App Router ve TypeScript
+- Supabase Postgres, Auth ve RLS
+- Tailwind CSS
+- Vitest scoring testleri
+- Playwright E2E survey akışı
 
-`npm run audit:rls` prints the row-level-security policies on the sensitive tables. The Next.js API layer's session-ownership check does **not** protect the Supabase REST endpoint, which is reachable with the public anon key — protection has to be in RLS.
+## Dosya Haritası
 
-## Axis Model Versions
-Survey content is versioned through `axis_models`. `v1` holds the original demo questions; `v2` holds the methodology question set derived from `resultdeepresearch.html`. Only the **active** model is served — `/api/questions` and the scoring engine both filter on it via `lib/scoring/active-model.ts`.
+- `app/`: Next.js sayfaları, layout'lar ve API route handler'ları
+- `components/`: UI, survey, admin, results, layout bileşenleri
+- `lib/scoring/`: eşleşme algoritması, tipler ve testler
+- `lib/supabase/`: client/server/route Supabase yardımcıları
+- `lib/radar/`: haber/radar kaynak işleme mantığı
+- `supabase/migrations/`: veritabanı şema değişiklikleri
+- `scripts/`: seed, migration, audit, smoke ve doğrulama komutları
+- `docs/`: operasyon, araştırma, tasarım ve metodoloji notları
+- `.next/`, `.logs/`, `.omc/`, `.superpowers/`: üretilmiş veya yerel çalışma çıktıları; görev açıkça istemedikçe dokunma
 
-- `npm run v2:seed` writes the v2 content (idempotent, leaves the model **inactive**)
-- `npm run v2:positions` derives party positions for the v2 axes (see `docs/party-positions-v2-derivation.md`)
-- `npm run v2:verify` checks expected row counts and invariants
-- `npm run v2:activate` flips the active model — do this last, and only after the blockers in the derivation doc are cleared
-- `PREVIEW_AXIS_MODEL_VERSION=v2 npm run dev` previews an inactive model locally without touching the live flag. Never set this in production.
+## Çalışma Kuralları
 
-Migrations apply with `npm run db:migrate <file.sql>` (uses `DBLINK` from `.env.local`; `supabase db push` prompts for a password and cannot run unattended).
+- Mevcut kod stilini takip et: TypeScript, 2 boşluk girinti, single quote, semicolon yok.
+- Uzun relative import yerine `@/` alias kullan.
+- UI değişikliklerinde mevcut bileşenleri (`Button`, `Card`, `Container`, survey bileşenleri) tercih et.
+- Scoring core'u framework bağımsız tut: `lib/scoring/core.ts` ve yakınındaki saf hesaplama dosyalarına Supabase veya Next.js import etme.
+- Veri çekme ve Supabase bağımlılığı `lib/scoring/engine.ts`, API route'ları veya uygun server helper içinde kalmalı.
+- Kullanıcıya ait veya yerel üretilmiş dosyaları temizleme, resetleme, formatlama ya da silme. Özellikle `.env*`, `.omc/`, `.logs/`, `.next/` dosyalarında dikkatli ol.
+- Gizli anahtarları commitlenecek dosyalara yazma. Örnek env dosyalarında sadece placeholder kullan.
 
-## Commit & Pull Request Guidelines
-Recent history favors short, imperative subjects such as `seo geo`, `tr check`, and focused fixes like `Fix Docker build: install all deps...`. Keep commits small, scoped, and descriptive; start with the area when useful, for example `admin: validate consent form`. PRs should include a brief summary, note any schema or env changes, link the issue if there is one, and attach screenshots for UI changes.
+## Supabase ve Güvenlik
 
-## Security & Configuration Tips
-Keep secrets in `.env.local` or platform-managed variables only; never commit Supabase keys. Validate changes touching `lib/supabase/`, API routes, or admin pages carefully, and re-check Docker or Coolify settings when editing `Dockerfile`, `docker-compose.yml`, or deployment env vars.
+- RLS güvenlik sınırıdır. API tarafında yapılan session ownership kontrolü Supabase REST endpoint'ini tek başına korumaz.
+- `lib/supabase/`, `app/api/*`, admin sayfaları ve migration değişikliklerinde RLS etkisini ayrıca düşün.
+- Public anon key ile erişilebilecek tablolar için policy kontrolü yapmadan güvenli varsayımda bulunma.
+- Eski sonuç snapshot'larını bozmamak için parti/eksen satırlarını silmek yerine lifecycle veya aktiflik alanlarını kullan.
+- `result_snapshots.result_payload` v2 sonrası sonuç gövdesini saklar; eski sonuçların sonradan değişmemesi gerekir.
+
+## Axis Model ve Scoring Notları
+
+- Aktif soru modeli `axis_models` üzerinden belirlenir.
+- `/api/questions` ve scoring engine yalnız aktif modeli kullanmalıdır.
+- `v1` demo, `v2` metodoloji soru setidir.
+- İnaktif modeli yerelde önizlemek için `PREVIEW_AXIS_MODEL_VERSION=v2 npm run dev` kullanılabilir; bunu prod ortamına taşıma.
+- Parti eşleşmesinde kapalı/inaktif partiler yeni hesaplamaya girmemeli, ancak eski snapshot'lar çözülebilmelidir.
+
+## Komutlar
+
+- Bağımlılık: `npm install`
+- Dev server: `npm run dev`
+- Build: `npm run build`
+- Lint: `npm run lint`
+- Unit test: `npm test`
+- E2E: `npm run test:e2e`
+- API smoke: `npm run smoke`
+- RLS audit: `npm run audit:rls`
+- Migration uygula: `npm run db:migrate <file.sql>`
+- Seed: `npm run db:seed`
+- v2 seed: `npm run v2:seed`
+- v2 party positions: `npm run v2:positions`
+- v2 doğrulama: `npm run v2:verify`
+- v2 aktivasyon: `npm run v2:activate`
+
+`supabase db push` etkileşimli parola isteyebilir; otomasyon için mevcut `npm run db:migrate <file.sql>` yolunu tercih et.
+
+## Test Stratejisi
+
+- Scoring değişikliklerinde ilgili `lib/scoring/*.test.ts` dosyalarını çalıştır veya güncelle.
+- Survey akışı, önem toggle'ı, "Fikrim yok", sonuç sayfası veya API zinciri değişirse Playwright veya smoke test çalıştır.
+- API route ve RLS etkisi olan değişikliklerde `npm run audit:rls` çıktısını dikkate al.
+- UI-only küçük değişikliklerde en azından `npm run lint` veya ilgili build kontrolünü çalıştır.
+
+## Kod İnceleme Kontrol Listesi
+
+- Aktif axis model filtresi korunuyor mu?
+- Eski snapshot'ların görüntülenmesi bozuluyor mu?
+- Public/admin ayrımı doğru Supabase client ile yapılıyor mu?
+- RLS politikasına ihtiyaç doğuran yeni tablo/endpoint var mı?
+- Hata mesajları kullanıcıya Türkçe ve anlaşılır dönüyor mu?
+- Yeni env değişkenleri `.env.local.example` veya ilgili dokümana eklendi mi?
+- Testler değişikliğin riskine uygun mu?
+
+## Yapılmaması Gerekenler
+
+- `.env`, `.env.local` veya gerçek secret içeren dosyaları paylaşma ya da commit'e hazırlama.
+- Generated build çıktısını (`.next/`, standalone node_modules, loglar) elle düzenleme.
+- Scoring algoritmasını UI ihtiyacı için doğrudan bükme; önce veri sözleşmesini netleştir.
+- RLS yerine yalnız middleware/API kontrolüne güvenme.
+- Büyük refactor'ı küçük bug fix ile karıştırma.

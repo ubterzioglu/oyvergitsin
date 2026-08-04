@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { ZodError } from 'zod'
 import { getAdminClient } from '@/lib/supabase/admin'
 import { requireAdmin } from '@/lib/radar/admin-auth'
-import { runSiyasetRadariScan } from '@/lib/siyaset-radari/scan'
+import { runLoggedSiyasetRadariScan } from '@/lib/siyaset-radari/scan'
 import { SiyasetRadariScanSchema } from '@/lib/validation/siyaset-radari'
 
 export async function POST(request: NextRequest) {
@@ -14,7 +14,7 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json().catch(() => ({}))
     const { source } = SiyasetRadariScanSchema.parse(body)
-    const summary = await runSiyasetRadariScan(getAdminClient(), source)
+    const summary = await runLoggedSiyasetRadariScan(getAdminClient(), source, 'admin')
     return NextResponse.json({ summary })
   } catch (error) {
     if (error instanceof ZodError) {

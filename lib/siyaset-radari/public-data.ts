@@ -58,6 +58,18 @@ export interface DashboardElectionResult {
   isStale: boolean
 }
 
+export interface DashboardFeedItem {
+  id: string
+  topic: string
+  title: string
+  description: string | null
+  sourceName: string
+  sourceUrl: string | null
+  articleUrl: string
+  publishedAt: string | null
+  discoveredAt: string
+}
+
 export interface PersonDetail extends DashboardPerson {
   bio: string | null
   politicalEvents: DashboardPoliticalEvent[]
@@ -141,9 +153,23 @@ function electionResultFromRow(row: any): DashboardElectionResult {
   }
 }
 
+function feedItemFromRow(row: any): DashboardFeedItem {
+  return {
+    id: row.id,
+    topic: row.topic,
+    title: row.title,
+    description: row.description,
+    sourceName: row.source_name,
+    sourceUrl: row.source_url,
+    articleUrl: row.article_url,
+    publishedAt: row.published_at,
+    discoveredAt: row.discovered_at,
+  }
+}
+
 export async function fetchSiyasetRadariDashboard() {
   const supabase = getPublicServerClient()
-  const [peopleResult, politicalResult, journalistsResult, electionResult] = await Promise.all([
+  const [peopleResult, politicalResult, journalistsResult, electionResult, feedResult] = await Promise.all([
     supabase
       .from('public_people')
       .select('id, slug, full_name, primary_role, province, x_handle, last_verified_at')
@@ -165,18 +191,26 @@ export async function fetchSiyasetRadariDashboard() {
       .select('id, election_year, election_type, area_level, area_name, province, party_name, vote_share, seat_count, source_name, source_url, last_verified_at')
       .order('seat_count', { ascending: false, nullsFirst: false })
       .limit(200),
+    supabase
+      .from('radar_feed_items')
+      .select('id, topic, title, description, source_name, source_url, article_url, published_at, discovered_at')
+      .order('published_at', { ascending: false, nullsFirst: false })
+      .order('discovered_at', { ascending: false })
+      .limit(60),
   ])
 
   if (peopleResult.error) console.error('Siyaset radari people error:', peopleResult.error)
   if (politicalResult.error) console.error('Siyaset radari political error:', politicalResult.error)
   if (journalistsResult.error) console.error('Siyaset radari journalists error:', journalistsResult.error)
   if (electionResult.error) console.error('Siyaset radari election error:', electionResult.error)
+  if (feedResult.error) console.error('Siyaset radari feed error:', feedResult.error)
 
   return {
     people: ((peopleResult.data ?? []) as any[]).map(personFromRow),
     politicalEvents: ((politicalResult.data ?? []) as any[]).map(politicalEventFromRow),
     journalistEvents: ((journalistsResult.data ?? []) as any[]).map(journalistEventFromRow),
     electionResults: ((electionResult.data ?? []) as any[]).map(electionResultFromRow),
+    feedItems: ((feedResult.data ?? []) as any[]).map(feedItemFromRow),
   }
 }
 
@@ -262,6 +296,11 @@ export async function fetchApprovedPoliticalEvents() {
 export async function fetchApprovedJournalistEvents() {
   const { journalistEvents } = await fetchSiyasetRadariDashboard()
   return journalistEvents
+}
+
+export async function fetchApprovedFeedItems() {
+  const { feedItems } = await fetchSiyasetRadariDashboard()
+  return feedItems
 }
 
 export async function fetchApprovedProvinceResults(params: { province?: string; electionType?: string }) {

@@ -1,7 +1,11 @@
 import { z } from 'zod'
 
 export const SiyasetRadariScanSchema = z.object({
-  source: z.enum(['all', 'tbmm', 'journalists']).default('all'),
+  source: z.enum(['all', 'tbmm', 'journalists', 'news', 'daily', 'weekly']).default('all'),
+})
+
+export const SiyasetRadariCronSchema = z.object({
+  cadence: z.enum(['daily', 'weekly']).default('daily'),
 })
 
 export const SiyasetRadariReviewSchema = z.object({
@@ -11,6 +15,7 @@ export const SiyasetRadariReviewSchema = z.object({
     'journalist_status_events',
     'public_data_evidence',
     'election_results_by_area',
+    'radar_feed_items',
   ]),
   subjectId: z.string().uuid(),
   action: z.enum(['approve', 'reject', 'archive']),

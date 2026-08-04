@@ -1,4 +1,5 @@
 import type { SupabaseClient } from '@supabase/supabase-js'
+import { scanGnewsFeed } from './gnews'
 import { parseTbmmSeatDistribution } from './parsers/tbmm-seat-distribution'
 import { parseTgsJournalists } from './parsers/tgs-journalists'
 import { confidenceForUrl } from './source-confidence'
@@ -8,7 +9,8 @@ import type { ParsedJournalistStatus, ScanOutcome, SiyasetRadariScanSummary } fr
 const TBMM_SEAT_DISTRIBUTION_URL = 'https://www.tbmm.gov.tr/sandalyedagilimi'
 const TGS_JOURNALISTS_URL = 'https://tgs.org.tr/cezaevindeki-gazeteciler/'
 
-export type SiyasetRadariScanSource = 'all' | 'tbmm' | 'journalists'
+export type SiyasetRadariScanSource = 'all' | 'tbmm' | 'journalists' | 'news' | 'daily' | 'weekly'
+export type SiyasetRadariScanTrigger = 'admin' | 'cron'
 
 async function fetchText(url: string): Promise<string> {
   const response = await fetch(url, {
@@ -260,18 +262,75 @@ export async function runSiyasetRadariScan(
   supabaseAdmin: SupabaseClient,
   source: SiyasetRadariScanSource
 ): Promise<SiyasetRadariScanSummary> {
-  const scanners = [
-    ...(source === 'all' || source === 'tbmm' ? [scanTbmmSeatDistribution] : []),
-    ...(source === 'all' || source === 'journalists' ? [scanTgsJournalists] : []),
-  ]
+  const scanners: Array<() => Promise<ScanOutcome>> = []
+
+  if (['all', 'tbmm', 'daily', 'weekly'].includes(source)) {
+    scanners.push(() => scanTbmmSeatDistribution(supabaseAdmin))
+  }
+  if (['all', 'journalists', 'weekly'].includes(source)) {
+    scanners.push(() => scanTgsJournalists(supabaseAdmin))
+  }
+  if (['all', 'news', 'daily', 'weekly'].includes(source)) {
+    const lookbackHours = source === 'weekly' ? 168 : undefined
+    scanners.push(() => scanGnewsFeed(supabaseAdmin, { lookbackHours }))
+  }
 
   const outcomes: ScanOutcome[] = []
   for (const scanner of scanners) {
-    outcomes.push(await scanner(supabaseAdmin))
+    outcomes.push(await scanner())
   }
 
   const failedCount = outcomes.filter((outcome) => outcome.failed).length
   const status = failedCount === 0 ? 'completed' : failedCount === outcomes.length ? 'failed' : 'partial'
 
   return { status, outcomes }
+}
+
+export async function runLoggedSiyasetRadariScan(
+  supabaseAdmin: SupabaseClient,
+  source: SiyasetRadariScanSource,
+  triggerSource: SiyasetRadariScanTrigger
+): Promise<SiyasetRadariScanSummary> {
+  const { data: run, error: createError } = await supabaseAdmin
+    .from('radar_scan_runs')
+    .insert({
+      requested_source: source,
+      trigger_source: triggerSource,
+      status: 'running',
+    })
+    .select('id')
+    .single()
+
+  if (createError || !run) {
+    throw new Error(createError?.message ?? 'Tarama kaydı oluşturulamadı.')
+  }
+
+  try {
+    const summary = await runSiyasetRadariScan(supabaseAdmin, source)
+    const { error: updateError } = await supabaseAdmin
+      .from('radar_scan_runs')
+      .update({
+        status: summary.status,
+        outcomes: summary.outcomes,
+        completed_at: new Date().toISOString(),
+      })
+      .eq('id', run.id)
+
+    if (updateError) {
+      throw new Error(updateError.message)
+    }
+
+    return summary
+  } catch (error) {
+    const message = error instanceof Error ? error.message : 'Bilinmeyen tarama hatası'
+    await supabaseAdmin
+      .from('radar_scan_runs')
+      .update({
+        status: 'failed',
+        error_message: message,
+        completed_at: new Date().toISOString(),
+      })
+      .eq('id', run.id)
+    throw error
+  }
 }

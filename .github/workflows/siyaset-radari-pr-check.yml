@@ -1,0 +1,35 @@
+name: Siyaset Radarı PR Check
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'app/admin/siyaset-radari/**'
+      - 'app/api/admin/siyaset-radari/**'
+      - 'app/api/cron/siyaset-radari/**'
+      - 'app/api/public/siyaset-radari/**'
+      - 'app/siyaset-radari/**'
+      - 'components/siyaset-radari/**'
+      - 'lib/siyaset-radari/**'
+      - 'lib/validation/siyaset-radari.ts'
+      - 'supabase/migrations/*siyaset_radari*'
+      - '.github/workflows/siyaset-radari-*.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npx tsc --noEmit

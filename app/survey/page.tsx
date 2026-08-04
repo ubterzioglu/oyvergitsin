@@ -566,35 +566,35 @@ export default function SurveyPage() {
           </div>
         </Card>
 
-        <div className="mt-3 flex w-full max-w-xl flex-wrap justify-center gap-1 sm:mt-4 sm:gap-1.5">
-          {questions.map((q, index) => {
-            const isActive = index === currentQuestion
-            const isAnswered = isSurveyAnswerFilled(q.type, answers[q.id])
-            return (
-              <button
-                key={q.id}
-                type="button"
-                onClick={() => goToQuestion(index)}
-                aria-label={`Soru ${index + 1}`}
-                aria-current={isActive}
-                className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-[11px] font-semibold text-white transition-colors duration-300 sm:h-7 sm:w-7 sm:text-xs ${
-                  isActive ? 'shadow-soft ring-2 ring-offset-1' : 'shadow-soft'
-                }`}
-                style={{
-                  backgroundColor: isActive
-                    ? RAINBOW_ACCENTS[index % RAINBOW_ACCENTS.length]
-                    : isAnswered
-                      ? '#3CB043'
-                      : '#E8385C',
-                  ['--tw-ring-color' as string]: isActive
-                    ? RAINBOW_ACCENTS[index % RAINBOW_ACCENTS.length]
-                    : undefined,
-                }}
-              >
-                {index + 1}
-              </button>
-            )
-          })}
+        <div className="mt-3 w-full max-w-xl sm:mt-4">
+          <div className="mx-auto flex w-fit max-w-full flex-wrap justify-center gap-1 rounded-2xl border border-white/80 bg-white/90 px-2 py-2 shadow-[0_12px_32px_rgba(15,23,42,0.10)] ring-1 ring-black/5 backdrop-blur sm:gap-1.5 sm:rounded-full sm:px-3">
+            {questions.map((q, index) => {
+              const isActive = index === currentQuestion
+              const isAnswered = isSurveyAnswerFilled(q.type, answers[q.id])
+              const stateClass = isActive
+                ? 'border-ink-primary bg-ink-primary text-white shadow-[0_6px_16px_rgba(15,23,42,0.22)] ring-2 ring-white'
+                : isAnswered
+                  ? 'border-emerald-200 bg-emerald-50 text-emerald-700 hover:border-emerald-300 hover:bg-emerald-100'
+                  : 'border-slate-200 bg-white text-slate-500 hover:border-slate-300 hover:bg-slate-50'
+              return (
+                <button
+                  key={q.id}
+                  type="button"
+                  onClick={() => goToQuestion(index)}
+                  aria-label={`Soru ${index + 1}${isAnswered ? ', cevaplandı' : ', cevaplanmadı'}`}
+                  aria-current={isActive}
+                  className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full border text-[11px] font-semibold transition-all duration-200 sm:h-7 sm:w-7 sm:text-xs ${stateClass}`}
+                  style={{
+                    boxShadow: isActive
+                      ? `0 0 0 2px ${RAINBOW_ACCENTS[index % RAINBOW_ACCENTS.length]}, 0 10px 22px rgba(15, 23, 42, 0.18)`
+                      : undefined,
+                  }}
+                >
+                  {index + 1}
+                </button>
+              )
+            })}
+          </div>
         </div>
       </Container>
 

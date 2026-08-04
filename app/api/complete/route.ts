@@ -1,6 +1,8 @@
 import { NextRequest } from 'next/server'
 import { getRouteClient } from '@/lib/supabase/route'
 import { calculateResults } from '@/lib/scoring/engine'
+import { getActiveAxisModelId } from '@/lib/scoring/active-model'
+import { validateSurveyCompletion } from '@/lib/survey/completion'
 import { CompleteSessionSchema } from '@/lib/validation/survey'
 import { assertSessionOwnership } from '@/lib/session-ownership'
 import { isRateLimited, getClientIp } from '@/lib/rate-limit'
@@ -28,6 +30,44 @@ export async function POST(request: NextRequest) {
     }
 
     const supabase = getRouteClient()
+    const axisModelId = await getActiveAxisModelId(supabase)
+    if (!axisModelId) {
+      return jsonError('Aktif eksen modeli bulunamadı.', 503)
+    }
+
+    const [questionsResult, answersResult] = await Promise.all([
+      supabase
+        .from('questions')
+        .select('id, type, expected_value')
+        .eq('axis_model_id', axisModelId),
+      supabase
+        .from('answers')
+        .select('question_id, answer_value')
+        .eq('session_id', sessionId),
+    ])
+
+    if (questionsResult.error) throw questionsResult.error
+    if (answersResult.error) throw answersResult.error
+
+    const completion = validateSurveyCompletion(
+      (questionsResult.data ?? []).map((question) => ({
+        id: question.id,
+        type: question.type,
+        expected_value: question.expected_value ?? null,
+      })),
+      (answersResult.data ?? []).map((answer) => ({
+        questionId: answer.question_id,
+        value: answer.answer_value,
+      }))
+    )
+
+    if (!completion.ok) {
+      return jsonError('Tüm soruları doğru cevaplamalısınız.', 400, {
+        firstInvalidQuestionId: completion.firstInvalidQuestionId,
+        missingQuestionCount: completion.missingQuestionIds.length,
+        failedAttentionQuestionCount: completion.failedAttentionQuestionIds.length,
+      })
+    }
 
     // Mark session as completed
     const { error: sessionError } = await supabase

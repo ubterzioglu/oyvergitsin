@@ -14,6 +14,10 @@ export function noStoreJson<T>(body: T, init?: ResponseInit): NextResponse<T> {
   })
 }
 
-export function jsonError(error: string, status: number): NextResponse<{ error: string }> {
-  return noStoreJson({ error }, { status })
+export function jsonError<T extends Record<string, unknown> = Record<string, never>>(
+  error: string,
+  status: number,
+  details?: T
+): NextResponse<{ error: string } & T> {
+  return noStoreJson({ error, ...(details ?? {}) } as { error: string } & T, { status })
 }

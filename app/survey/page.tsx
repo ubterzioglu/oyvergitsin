@@ -20,6 +20,7 @@ import { CaptchaPlaceholder } from '@/components/survey/CaptchaPlaceholder'
 import { ImageChoiceQuestion } from '@/components/survey/ImageChoiceQuestion'
 import { VignetteLikert } from '@/components/survey/VignetteLikert'
 import { ImportanceToggle } from '@/components/survey/ImportanceToggle'
+import { isSurveyAnswerFilled, validateSurveyCompletion } from '@/lib/survey/completion'
 
 const RAINBOW_ACCENTS = ['#F5C518', '#F5821F', '#E8385C', '#7B4FE0', '#1E9BE0', '#3CB043']
 
@@ -80,19 +81,9 @@ interface Question {
   required: boolean
   order_index: number
   vignette_text?: string | null
+  expected_value?: string | null
   question_options?: QuestionOption[]
 }
-
-const MULTI_VALUE_TYPES = new Set([
-  'matrix_single',
-  'matrix_multi',
-  'allocation',
-  'multi_choice',
-  'dropdown_multi',
-  'scenario_multi',
-  'image_choice_multi',
-  'consent_checkbox_group',
-])
 
 function parseJsonAnswer<T>(raw: string | undefined, fallback: T): T {
   if (!raw) return fallback
@@ -101,23 +92,6 @@ function parseJsonAnswer<T>(raw: string | undefined, fallback: T): T {
   } catch {
     return fallback
   }
-}
-
-function isAnswerFilled(questionType: string, raw: string | undefined): boolean {
-  if (!raw) return false
-  if (!MULTI_VALUE_TYPES.has(questionType)) return true
-
-  if (questionType === 'allocation') {
-    const parsed = parseJsonAnswer<Record<string, number>>(raw, {})
-    return Object.values(parsed).some((n) => n > 0)
-  }
-  if (questionType === 'matrix_single' || questionType === 'matrix_multi') {
-    const parsed = parseJsonAnswer<Record<string, string[]>>(raw, {})
-    return Object.keys(parsed).length > 0
-  }
-
-  const parsed = parseJsonAnswer<string[]>(raw, [])
-  return parsed.length > 0
 }
 
 export default function SurveyPage() {
@@ -129,6 +103,7 @@ export default function SurveyPage() {
   const [loading, setLoading] = useState(true)
   const [submitting, setSubmitting] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
+  const [completionMessage, setCompletionMessage] = useState<string | null>(null)
   const advanceTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   useEffect(() => {
@@ -241,6 +216,25 @@ export default function SurveyPage() {
   }
 
   const handleSubmit = async () => {
+    const completion = validateSurveyCompletion(
+      questions,
+      Object.entries(answers).map(([questionId, value]) => ({ questionId, value }))
+    )
+
+    if (!completion.ok) {
+      const firstInvalidIndex = questions.findIndex((question) => question.id === completion.firstInvalidQuestionId)
+      if (firstInvalidIndex >= 0) {
+        setCurrentQuestion(firstInvalidIndex)
+      }
+
+      setCompletionMessage(
+        completion.failedAttentionQuestionIds.length > 0
+          ? 'Tüm soruları doğru cevaplamalısınız. Dikkat kontrolü sorusunu yönergede belirtilen şekilde işaretleyin.'
+          : 'Tüm soruları doğru cevaplamalısınız. Eksik soru bırakmadan devam edin.'
+      )
+      return
+    }
+
     setSubmitting(true)
     try {
       const sessionId = localStorage.getItem('sessionId')
@@ -563,7 +557,7 @@ export default function SurveyPage() {
             </Button>
             <Button
               onClick={handleNext}
-              disabled={question.required && !isAnswerFilled(question.type, rawAnswer)}
+              disabled={question.required && !isSurveyAnswerFilled(question.type, rawAnswer)}
               variant="primary"
               className="px-5 py-2.5 text-sm sm:px-8 sm:py-3 sm:text-base"
             >
@@ -575,7 +569,7 @@ export default function SurveyPage() {
         <div className="mt-3 flex w-full max-w-xl flex-wrap justify-center gap-1 sm:mt-4 sm:gap-1.5">
           {questions.map((q, index) => {
             const isActive = index === currentQuestion
-            const isAnswered = isAnswerFilled(q.type, answers[q.id])
+            const isAnswered = isSurveyAnswerFilled(q.type, answers[q.id])
             return (
               <button
                 key={q.id}
@@ -603,6 +597,29 @@ export default function SurveyPage() {
           })}
         </div>
       </Container>
+
+      {completionMessage && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink-primary/40 px-4">
+          <div
+            role="alertdialog"
+            aria-modal="true"
+            aria-labelledby="completion-alert-title"
+            className="w-full max-w-sm rounded-lg border border-border bg-white p-5 shadow-elevated"
+          >
+            <h2 id="completion-alert-title" className="text-lg font-semibold text-ink-primary">
+              Anket tamamlanamadı
+            </h2>
+            <p className="mt-2 text-sm text-ink-secondary">{completionMessage}</p>
+            <button
+              type="button"
+              onClick={() => setCompletionMessage(null)}
+              className="mt-5 w-full rounded-button bg-rainbow-blue px-4 py-2.5 text-sm font-semibold text-white hover:bg-rainbow-blue-hover"
+            >
+              Tamam
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

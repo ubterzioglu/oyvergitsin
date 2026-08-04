@@ -17,7 +17,6 @@ interface GnewsSource {
 interface GnewsArticle {
   title?: string | null
   description?: string | null
-  content?: string | null
   url?: string | null
   image?: string | null
   publishedAt?: string | null
@@ -155,6 +154,8 @@ export async function scanGnewsFeed(
 
         const sourceUrl = validHttpUrl(article.source?.url)
         const sourceName = trimText(article.source?.name, 200) ?? new URL(articleUrl).hostname
+        const description = trimText(article.description, 1200)
+        const imageUrl = validHttpUrl(article.image)
         const publishedAt = article.publishedAt && !Number.isNaN(Date.parse(article.publishedAt))
           ? new Date(article.publishedAt).toISOString()
           : null
@@ -165,15 +166,25 @@ export async function scanGnewsFeed(
           provider_item_id: articleUrl,
           topic: topicQuery.topic,
           title,
-          description: trimText(article.description, 1200),
+          description,
           source_name: sourceName,
           source_url: sourceUrl,
-          image_url: validHttpUrl(article.image),
+          image_url: imageUrl,
           published_at: publishedAt,
           discovered_at: nowIso,
           search_query: topicQuery.query,
           source_confidence: confidenceForUrl(sourceUrl ?? articleUrl),
-          raw_payload: article,
+          raw_payload: {
+            title,
+            description,
+            url: articleUrl,
+            image: imageUrl,
+            publishedAt,
+            source: {
+              name: sourceName,
+              url: sourceUrl,
+            },
+          },
         }
 
         const { data: existing, error: selectError } = await supabaseAdmin

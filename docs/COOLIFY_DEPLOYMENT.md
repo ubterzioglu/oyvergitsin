@@ -127,6 +127,7 @@ docker run -p 3000:3000 \
   -e NEXT_PUBLIC_SUPABASE_URL=your_url \
   -e NEXT_PUBLIC_SUPABASE_ANON_KEY=your_key \
   -e SUPABASE_SERVICE_KEY=your_service_key \
+  -e SESSION_HASH_SECRET=your_32_plus_byte_secret \
   oyvergitsin
 
 # Test health check

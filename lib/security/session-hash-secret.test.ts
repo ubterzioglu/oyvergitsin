@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
-import { getSessionHashSecret } from './session-hash-secret'
+import { getSessionHashSecret, hasSessionHashSecret } from './session-hash-secret'
 
 const originalSessionHashSecret = process.env.SESSION_HASH_SECRET
 
@@ -13,6 +13,14 @@ afterEach(() => {
 })
 
 describe('getSessionHashSecret', () => {
+  it('reports whether SESSION_HASH_SECRET is configured', () => {
+    vi.stubEnv('SESSION_HASH_SECRET', ' configured-secret ')
+    expect(hasSessionHashSecret()).toBe(true)
+
+    vi.stubEnv('SESSION_HASH_SECRET', ' ')
+    expect(hasSessionHashSecret()).toBe(false)
+  })
+
   it('returns SESSION_HASH_SECRET when configured', () => {
     vi.stubEnv('SESSION_HASH_SECRET', 'configured-secret')
     vi.stubEnv('NODE_ENV', 'production')

@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { getPublicServerClient, hasServiceRoleKey } from '@/lib/supabase/route'
+import { hasSessionHashSecret } from '@/lib/security/session-hash-secret'
 
 export async function GET() {
   try {
@@ -9,19 +10,24 @@ export async function GET() {
       .select('id', { head: true, count: 'exact' })
 
     if (error) throw error
+    const serviceRoleConfigured = hasServiceRoleKey()
+    const sessionHashSecretConfigured = hasSessionHashSecret()
 
     return NextResponse.json(
       {
-        status: hasServiceRoleKey() ? 'healthy' : 'degraded',
+        status: serviceRoleConfigured && sessionHashSecretConfigured ? 'healthy' : 'degraded',
         timestamp: new Date().toISOString(),
         service: 'oyvergitsin',
         supabaseReachable: true,
-        serviceRoleConfigured: hasServiceRoleKey()
+        serviceRoleConfigured,
+        sessionHashSecretConfigured
       },
       { status: 200 }
     )
   } catch (error) {
     console.error('Health check error:', error)
+    const serviceRoleConfigured = hasServiceRoleKey()
+    const sessionHashSecretConfigured = hasSessionHashSecret()
 
     return NextResponse.json(
       {
@@ -29,7 +35,8 @@ export async function GET() {
         timestamp: new Date().toISOString(),
         service: 'oyvergitsin',
         supabaseReachable: false,
-        serviceRoleConfigured: hasServiceRoleKey()
+        serviceRoleConfigured,
+        sessionHashSecretConfigured
       },
       { status: 503 }
     )

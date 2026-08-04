@@ -119,25 +119,12 @@ Devam ederek yukarıdaki koşulları kabul etmiş sayılırsınız.`,
 
     if (partiesError) throw partiesError
 
-    // 6. Create dummy party positions
-    console.log('Creating party positions...')
-    const partyPositions = []
-    parties.forEach(party => {
-      axes.forEach(axis => {
-        partyPositions.push({
-          id: generateId(),
-          party_id: party.id,
-          axis_id: axis.id,
-          score: Math.floor(Math.random() * 201) - 100 // Random -100 to 100
-        })
-      })
-    })
-
-    const { error: positionsError } = await supabase
-      .from('party_positions')
-      .insert(partyPositions)
-
-    if (positionsError) throw positionsError
+    // 6. Party positions are intentionally not generated here.
+    //
+    // Production/demo installs must not assign random ideological coordinates:
+    // that would make identical answers produce different party rankings across
+    // environments. Use the researched v2 position pipeline instead.
+    console.log('Skipping party positions. Use npm run v2:positions for researched positions.')
 
     // 7. Create sample questions (one of each type)
     console.log('Creating questions...')

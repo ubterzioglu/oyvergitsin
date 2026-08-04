@@ -7,9 +7,11 @@ import { ReadOnlyNotice } from '@/components/admin/ReadOnlyNotice'
 interface Party {
   id: string
   name: string
-  short_name: string
+  short_name: string | null
   color: string
-  description: string
+  description: string | null
+  registry_status?: string | null
+  match_status?: string | null
 }
 
 interface Axis {
@@ -47,7 +49,7 @@ export default function PartiesPage() {
         const modelId = activeModel.data?.id
 
         const [partiesRes, axesRes] = await Promise.all([
-          supabase.from('parties').select('*').order('short_name', { ascending: true }),
+          supabase.from('parties').select('*').order('name', { ascending: true }),
           modelId
             ? supabase
                 .from('axes')
@@ -176,6 +178,11 @@ export default function PartiesPage() {
                 className="rounded-full border border-gray-300 px-3 py-1 text-xs text-gray-700"
               >
                 {party.name}
+                {party.match_status && (
+                  <span className="ml-2 rounded bg-gray-100 px-2 py-0.5 text-[10px] uppercase tracking-wide text-gray-500">
+                    {party.match_status}
+                  </span>
+                )}
               </li>
             ))}
           </ul>
@@ -190,14 +197,14 @@ export default function PartiesPage() {
                 className="flex h-10 w-10 items-center justify-center rounded-full text-xs font-bold text-white"
                 style={{ backgroundColor: party.color }}
               >
-                {party.short_name}
+                {party.short_name ?? party.name.slice(0, 3)}
               </div>
               <div>
                 <h3 className="font-semibold text-gray-900">{party.name}</h3>
-                <p className="text-xs text-gray-500">{party.short_name}</p>
+                <p className="text-xs text-gray-500">{party.short_name ?? 'Kısa ad yok'}</p>
               </div>
             </div>
-            <p className="text-sm text-gray-600">{party.description}</p>
+            <p className="text-sm text-gray-600">{party.description ?? 'Açıklama eklenmemiş.'}</p>
           </div>
         ))}
       </div>

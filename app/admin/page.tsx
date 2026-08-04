@@ -165,66 +165,170 @@ function AdminGuide() {
     <div className="rounded-lg bg-white p-6 shadow-md">
       <h2 className="mb-4 text-xl font-bold">Kullanım kılavuzu</h2>
 
-      <div className="space-y-6 text-sm text-gray-700">
+      <div className="space-y-6 text-sm leading-6 text-gray-700">
         <section>
-          <h3 className="mb-1 font-semibold text-gray-900">Site nedir?</h3>
+          <h3 className="mb-1 font-semibold text-gray-900">Platformun amacı</h3>
           <p>
-            &quot;oyvergitsin.org&quot;, ziyaretçinin politika görüşlerini ölçüp Türkiye&apos;deki
-            partilerin kayıtlı konumlarıyla ne kadar örtüştüğünü gösteren bir araçtır. Akış:{' '}
-            <strong>Ana sayfa → Onay → Anket → Sonuçlar</strong>. Sonuç bir oy verme tavsiyesi
-            değildir; yöntem <Link href="/metodoloji" className="text-blue-600 hover:underline">/metodoloji</Link>{' '}
-            sayfasında yayımlanır.
+            &quot;oyvergitsin.org&quot;, ziyaretçinin siyasi tercihlerini kişisel kimlik bilgisi almadan
+            ölçer ve bu tercihleri Türkiye&apos;deki partilerin kayıtlı politika konumlarıyla
+            karşılaştırır. Ziyaretçi akışı <strong>Ana sayfa → Açık rıza → Anket → Sonuçlar</strong>{' '}
+            şeklindedir. Sonuç ekranı oy verme talimatı değildir; yalnızca kullanıcının verdiği
+            cevaplar ile yayımlanmış parti konumları arasındaki benzerliği gösterir.
           </p>
+        </section>
+
+        <section>
+          <h3 className="mb-1 font-semibold text-gray-900">Günlük kontrol akışı</h3>
+          <ol className="list-inside list-decimal space-y-1">
+            <li>
+              <strong>Dashboard</strong> ekranında toplam oturum, tamamlanan oturum, puanlanan madde
+              ve konumlandırılmış parti sayılarını kontrol edin. Bu sayılar ani düşerse anket veya
+              Supabase bağlantısında sorun olabilir.
+            </li>
+            <li>
+              <strong>Cevaplar</strong> ekranında yeni tamamlanan oturumları örnekleyin. Çok kısa
+              sürede tamamlanan, bütün cevapları aynı olan veya eksik görünen oturumlar veri kalitesi
+              açısından işaretlenmelidir.
+            </li>
+            <li>
+              <strong>Sorular</strong>, <strong>Eksenler</strong> ve <strong>Partiler</strong>{' '}
+              ekranlarında aktif modelin beklenen veriyle geldiğini kontrol edin. Panel salt okunur
+              olduğu için beklenmeyen bir değer görürseniz değişiklik kod ve seed akışından yapılır.
+            </li>
+            <li>
+              <strong>Haberler</strong> veya siyaset radarı ekranlarında bekleyen kaynak, aday haber
+              ve tarama hatalarını gözden geçirin. Şüpheli, ilgisiz veya yanıltıcı içerikleri
+              yayımlamayın.
+            </li>
+          </ol>
         </section>
 
         <section>
           <h3 className="mb-1 font-semibold text-gray-900">Panel neden salt okunur?</h3>
           <p className="mb-2">
-            Eksenler, sorular, puanlama kuralları ve parti konumları birbirine bağlıdır. Panelden
-            yapılan tek bir elle düzenleme — bir eksenin kutbunu ters çevirmek, bir maddenin puanını
-            değiştirmek, bir parti skorunu güncellemek — puanlama kurallarını ve parti kanıt
-            kayıtlarını sessizce tutarsız hale getirir: sonuçlar bozulur ama hiçbir yerde hata
-            görünmez.
+            Eksenler, sorular, seçenekler, puanlama kuralları ve parti konumları aynı metodolojinin
+            parçalarıdır. Panelden yapılan tek bir elle düzenleme, örneğin bir eksenin yönünü
+            değiştirmek veya bir partinin skorunu güncellemek, sonuçları sessizce tutarsız hale
+            getirebilir. Bu yüzden metodoloji verisi admin panelinden serbestçe düzenlenmez.
           </p>
           <p>
-            Bu yüzden içerik kodda tutulur. Değişiklik akışı:{' '}
-            <code className="rounded bg-gray-100 px-1">scripts/data/*.js</code> düzenlenir → seed
-            komutu çalıştırılır → testler ve doğrulama koşar → deploy edilir. Sürüm geçmişi git&apos;te
-            kalır, geri alınabilir.
+            Değişiklik akışı kod üzerinden yürür: veri dosyası veya migration hazırlanır, seed
+            komutu çalıştırılır, scoring doğrulamaları yapılır, sonra deploy edilir. Böylece her
+            değişiklik git geçmişinde kalır, incelenebilir ve gerektiğinde geri alınabilir.
           </p>
         </section>
 
         <section>
-          <h3 className="mb-1 font-semibold text-gray-900">Eksen modeli sürümleri</h3>
-          <p>
-            Soru seti <strong>eksen modeline</strong> bağlıdır ve ankette yalnızca <em>aktif</em>{' '}
-            modelin soruları görünür. Yeni bir soru seti pasif olarak hazırlanır, doğrulanır, sonra
-            tek adımda devreye alınır. Eski sürümler arşiv olarak kalır; o dönemde alınmış sonuçlar
-            açılmaya devam eder.
-          </p>
-        </section>
-
-        <section>
-          <h3 className="mb-1 font-semibold text-gray-900">Veri görünürlüğü ve gizlilik</h3>
+          <h3 className="mb-1 font-semibold text-gray-900">Soru ve metodoloji değişikliği</h3>
           <ul className="list-inside list-disc space-y-1">
             <li>
-              <strong>Cevaplar ekranı</strong> oturum bazında hangi soruya ne cevap verildiğini
-              gösterir. Oturumlar anonimdir: ad, e-posta, telefon veya konum toplanmaz. IP ve cihaz
-              bilgisi yalnızca hash olarak saklanır ve panelde gösterilmez.
+              Aktif soru seti <strong>axis_models</strong> üzerinden belirlenir. Ziyaretçiye yalnızca
+              aktif modelin soruları gösterilir; eski modeller arşiv olarak korunur.
             </li>
             <li>
-              <strong>Ziyaretçi</strong> yalnızca kendi sonucunu görür. Başkasının sonuç linkini
-              bilse bile, tarayıcısında doğru oturum çerezi yoksa API isteği{' '}
-              <code className="rounded bg-gray-100 px-1">403</code> ile reddeder.
+              Yeni soru seti önce pasif model olarak hazırlanmalıdır. Yerelde önizleme gerekiyorsa{' '}
+              <code className="rounded bg-gray-100 px-1">PREVIEW_AXIS_MODEL_VERSION</code> kullanılabilir;
+              bu ayar production ortamına taşınmamalıdır.
             </li>
             <li>
-              <strong>Panele erişim</strong> middleware ile korunur; giriş yapılmamışsa veya hesap
-              admin yetkisine sahip değilse oturum kapatılır.
+              Soru, seçenek veya puanlama kuralı değişirse ilgili scoring testleri ve v2 doğrulama
+              komutları çalıştırılmalıdır. Sonuç üretimi değişiyorsa eski snapshot&apos;ların
+              görüntülenmesi ayrıca kontrol edilmelidir.
             </li>
             <li>
-              Siyasi görüş KVKK kapsamında özel nitelikli kişisel veridir. Cevap ekranını yalnızca
-              gerçekten gerekli olduğunda kullanın; toplu dışa aktarma özelliği bilinçli olarak
-              eklenmemiştir.
+              Parti kapatma veya pasifleştirme işlemleri silme ile yapılmamalıdır. Eski sonuçlar
+              geçmişteki parti bilgisini çözebilmeli, yeni hesaplamalar ise yalnız aktif partileri
+              dikkate almalıdır.
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h3 className="mb-1 font-semibold text-gray-900">Cevaplar ve sonuçlar ekranı</h3>
+          <p className="mb-2">
+            Cevaplar ekranı oturum bazında hangi soruya hangi değerin verildiğini gösterir. Oturumlar
+            anonimdir; ad, e-posta, telefon veya açık konum toplanmaz. IP ve cihaz bilgisi hash olarak
+            saklanır ve panelde gösterilmez.
+          </p>
+          <ul className="list-inside list-disc space-y-1">
+            <li>
+              Bir oturumun sonucu, tamamlanma anında üretilen snapshot üzerinden korunur. Sonradan
+              parti konumu veya soru seti değişse bile eski sonuçlar geriye dönük değişmemelidir.
+            </li>
+            <li>
+              Ziyaretçi yalnızca kendi sonuç linkini açabilmelidir. Doğru oturum çerezi yoksa sonuç
+              API&apos;si <code className="rounded bg-gray-100 px-1">403</code> döner.
+            </li>
+            <li>
+              Toplu dışa aktarma bilinçli olarak eklenmemiştir. Siyasi görüş verisi KVKK kapsamında
+              hassas kabul edilir; cevap ekranını yalnız gerekli olduğunda kullanın.
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h3 className="mb-1 font-semibold text-gray-900">Haber ve radar yönetimi</h3>
+          <ul className="list-inside list-disc space-y-1">
+            <li>
+              Kaynak eklerken yayın sahibini, dilini, ülkesini, güven düzeyini ve kullanım şartlarını
+              kontrol edin. Kaynak şartları belirsizse otomatik taramaya açmayın.
+            </li>
+            <li>
+              Tarama adayları otomatik olarak toplanır; yayımlama kararı editoryal kontrolden sonra
+              verilmelidir. Başlık, özet, kaynak URL&apos;si ve görsel kaynağı haberle tutarlı olmalıdır.
+            </li>
+            <li>
+              Aynı haber farklı kaynaklardan geldiyse tekrar yayınlamak yerine adayları mükerrer
+              olarak işaretleyin. Düşük alaka skorlu haberler siyasi bağlamı net değilse reddedilmelidir.
+            </li>
+            <li>
+              Admin aksiyonları kullanıcı id&apos;siyle loglanır. Onay, ret ve mükerrer işaretleme
+              kararlarında kısa ama açıklayıcı not bırakmak sonraki incelemeleri kolaylaştırır.
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h3 className="mb-1 font-semibold text-gray-900">Erişim ve güvenlik</h3>
+          <ul className="list-inside list-disc space-y-1">
+            <li>
+              Panele giriş Supabase Auth ile yapılır. Kullanıcı adı alanı, sunucu tarafında tanımlı
+              admin e-postasına eşlenir; şifre Supabase Auth üzerinde doğrulanır.
+            </li>
+            <li>
+              Admin yetkisi yalnız oturum açmakla bitmez. Middleware ve admin API uçları ayrıca{' '}
+              <code className="rounded bg-gray-100 px-1">is_admin()</code> RPC kontrolü yapar.
+            </li>
+            <li>
+              Production ortamında <code className="rounded bg-gray-100 px-1">SESSION_HASH_SECRET</code>{' '}
+              zorunludur. Eksikse oturum oluşturma güvenli şekilde kapanır ve üretim akışı bozulur.
+            </li>
+            <li>
+              Gerçek secret değerlerini repoya, dokümana veya issue yorumlarına yazmayın. Env
+              değişkenleri deploy panelinde saklanmalı, örnek dosyalarda yalnız placeholder kalmalıdır.
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h3 className="mb-1 font-semibold text-gray-900">Sorun giderme</h3>
+          <ul className="list-inside list-disc space-y-1">
+            <li>
+              Giriş başarısızsa önce kullanıcı adı, admin e-postası ve Supabase Auth şifresinin aynı
+              ortamda tanımlı olduğunu kontrol edin. Admin seed çalıştırıldıktan sonra mevcut kullanıcı
+              şifresi de env&apos;deki değerle güncellenir.
+            </li>
+            <li>
+              Panel açılıyor ama veriler boş geliyorsa aktif eksen modeli, RLS politikaları ve Supabase
+              anon key ayarlarını kontrol edin.
+            </li>
+            <li>
+              Anket veya sonuç akışı bozulursa önce localhost üzerinde smoke akışı çalıştırın. Remote
+              test yazımı yalnız ayrı test ortamında ve bilinçli olarak açılmalıdır.
+            </li>
+            <li>
+              Deploy sonrası beklenmeyen davranışta önce env farklarını, sonra migration/seed sırasını,
+              en son uygulama loglarını kontrol edin.
             </li>
           </ul>
         </section>

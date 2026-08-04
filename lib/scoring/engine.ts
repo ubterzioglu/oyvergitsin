@@ -72,10 +72,11 @@ interface AxisRow {
 interface PartyRow {
   id: string
   name: string
-  short_name: string
+  short_name: string | null
 }
 
 const EMPTY_QUALITY: QualityFlags = { attentionChecksTotal: 0, attentionChecksFailed: 0 }
+const MATCH_STATUS_FILTER_ENABLED = process.env.PARTY_MATCH_STATUS_FILTER_ENABLED === 'true'
 
 /**
  * Kaydedilmiş bir snapshot'ı isim bilgileriyle zenginleştirir.
@@ -144,7 +145,7 @@ export async function formatStoredResults(snapshot: StoredSnapshot): Promise<Cal
       .map((party) => ({
         partyId: party.id,
         partyName: party.name,
-        partyShortName: party.short_name,
+        partyShortName: party.short_name ?? '',
         similarity: partySimilarities[party.id] ?? null,
         axesUsed: 0,
         agreements: [],
@@ -162,6 +163,11 @@ export async function calculateResults(sessionId: string): Promise<CalculationRe
     throw new Error('Aktif eksen modeli bulunamadı')
   }
 
+  const partiesQuery = supabase.from('parties').select('id, name, short_name').eq('is_active', true)
+  if (MATCH_STATUS_FILTER_ENABLED) {
+    partiesQuery.eq('match_status', 'eligible')
+  }
+
   const [axesResult, questionsResult, answersResult, partiesResult] = await Promise.all([
     supabase
       .from('axes')
@@ -173,9 +179,9 @@ export async function calculateResults(sessionId: string): Promise<CalculationRe
       .select('id, type, is_scored, weight, max_contribution, expected_value')
       .eq('axis_model_id', axisModelId),
     supabase.from('answers').select('question_id, answer_value, is_important').eq('session_id', sessionId),
-    // Kapanmış partiler eşleşmeye girmez. Satır silinmiyor: eski sonuç
-    // anlık görüntüleri parti id'lerine atıf yapıyor.
-    supabase.from('parties').select('id, name, short_name').eq('is_active', true),
+    // Kapanmış partiler eşleşmeye girmez. Feature flag açıkken ayrıca
+    // araştırılmamış katalog partileri de sonuç sıralamasından çıkarılır.
+    partiesQuery,
   ])
 
   if (axesResult.error) throw axesResult.error
@@ -284,7 +290,7 @@ export async function calculateResults(sessionId: string): Promise<CalculationRe
         return {
           partyId: party.id,
           partyName: party.name,
-          partyShortName: party.short_name,
+          partyShortName: party.short_name ?? '',
           similarity: match?.similarity ?? null,
           axesUsed: match?.axesUsed ?? 0,
           agreements: (explanation?.agreements ?? []).map(withAxisName),

@@ -16,7 +16,7 @@ interface PositionRow {
   party_id: string
   axis_id: string
   score: number
-  parties: { name: string; short_name: string } | null
+  parties: { name: string; short_name: string | null } | null
   party_position_evidence: Array<{ source_type: string; rationale: string }> | null
 }
 

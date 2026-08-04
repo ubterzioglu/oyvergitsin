@@ -167,7 +167,7 @@ const TABLE_ORDER = [
   { table: 'roles', conflict: 'name', deps: [] },
   { table: 'consent_texts', conflict: 'version', deps: [] },
   { table: 'axis_models', conflict: 'id', deps: [] },
-  { table: 'parties', conflict: 'short_name', deps: [] },
+  { table: 'parties', conflict: 'id', deps: [] },
   { table: 'questions', conflict: 'id', deps: [] },
   { table: 'axes', conflict: 'id', deps: ['axis_models'] },
   { table: 'user_roles', conflict: 'id', deps: ['roles'] },

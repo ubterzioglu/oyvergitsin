@@ -133,30 +133,66 @@ export type Database = {
         Row: {
           id: string
           name: string
-          short_name: string
+          short_name: string | null
           color: string
           logo_url: string | null
-          description: string
+          description: string | null
+          registry_external_id: string | null
+          canonical_slug: string | null
+          official_name: string | null
+          display_name: string | null
+          registry_status: string
+          match_status: string
+          founded_on: string | null
+          dissolved_on: string | null
+          official_website_url: string | null
+          registry_checked_at: string | null
+          source_confidence: string
+          metadata: Record<string, any>
           created_at: string
           updated_at: string
         }
         Insert: {
           id?: string
           name: string
-          short_name: string
+          short_name?: string | null
           color: string
           logo_url?: string | null
-          description: string
+          description?: string | null
+          registry_external_id?: string | null
+          canonical_slug?: string | null
+          official_name?: string | null
+          display_name?: string | null
+          registry_status?: string
+          match_status?: string
+          founded_on?: string | null
+          dissolved_on?: string | null
+          official_website_url?: string | null
+          registry_checked_at?: string | null
+          source_confidence?: string
+          metadata?: Record<string, any>
           created_at?: string
           updated_at?: string
         }
         Update: {
           id?: string
           name?: string
-          short_name?: string
+          short_name?: string | null
           color?: string
           logo_url?: string | null
-          description?: string
+          description?: string | null
+          registry_external_id?: string | null
+          canonical_slug?: string | null
+          official_name?: string | null
+          display_name?: string | null
+          registry_status?: string
+          match_status?: string
+          founded_on?: string | null
+          dissolved_on?: string | null
+          official_website_url?: string | null
+          registry_checked_at?: string | null
+          source_confidence?: string
+          metadata?: Record<string, any>
           created_at?: string
           updated_at?: string
         }

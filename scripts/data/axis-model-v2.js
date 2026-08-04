@@ -1,8 +1,8 @@
 // Türkiye Siyasi Eksen Modeli v2 — içerik tanımı.
 //
 // Kaynak: resultdeepresearch.html §3 (boyut önerisi) ve §4 (kodlanabilir örnek
-// soru seti). Eksen adları, kutup tanımları ve soru metinleri rapordan birebir
-// alınmıştır; puanlama şeması rapordaki ±25 / ±12 / 0 Likert kalıbıdır.
+// soru seti). Eksen adları ve kutup tanımları rapordan alınmış; soru metinleri daha
+// anlaşılır günlük Türkçeyle yeniden yazılmıştır. Puanlama şeması rapordaki ±25 / ±12 / 0 Likert kalıbıdır.
 //
 // Bu dosya yalnızca veridir; DB'ye yazma işi scripts/seed-axis-model-v2.js'te.
 
@@ -118,145 +118,145 @@ const QUESTIONS = [
   {
     code: 'ekonomi_1',
     axis: 'ekonomi',
-    text: 'Büyük şirketler ve yüksek gelir grupları için vergi oranları artırılmalıdır.',
+    text: 'Çok kazananlardan ve büyük şirketlerden daha fazla vergi alınmalıdır.',
     reversed: false,
   },
   {
     code: 'ekonomi_2',
     axis: 'ekonomi',
-    text: 'Stratejik sektörlerde devlet mülkiyeti ve kamu yatırımı artırılmalıdır.',
+    text: 'Enerji, ulaşım gibi önemli alanlarda devlet daha çok yatırım yapmalı ve bazı işleri kendi yürütmelidir.',
     reversed: false,
   },
   {
     code: 'ekonomi_3',
     axis: 'ekonomi',
-    text: 'Asgari ücret artışları, enflasyonla mücadele gerekçesiyle daha sınırlı tutulmalıdır.',
+    text: 'Asgari ücret artışı, enflasyonu artırmamak için daha düşük tutulmalıdır.',
     reversed: true,
   },
   {
     code: 'demokrasi_1',
     axis: 'demokrasi',
-    text: 'Cumhurbaşkanının yetkileri azaltılarak Meclis ve yargı denetimi güçlendirilmelidir.',
+    text: 'Cumhurbaşkanının yetkileri azaltılmalı; Meclis ve mahkemeler daha güçlü denetim yapmalıdır.',
     reversed: false,
   },
   {
     code: 'demokrasi_2',
     axis: 'demokrasi',
-    text: 'Terörle mücadele gerekçesiyle ifade ve protesto özgürlüğüne daha geniş sınırlamalar getirilebilir.',
+    text: 'Terörle mücadele için konuşma, haber yapma ve protesto hakkı daha fazla sınırlandırılabilir.',
     reversed: true,
   },
   {
     code: 'demokrasi_3',
     axis: 'demokrasi',
-    text: 'Seçilmiş belediye başkanları, kesin yargı kararı olmadan görevden alınmamalıdır.',
+    text: 'Halkın seçtiği belediye başkanları, mahkeme kesin karar vermeden görevden alınmamalıdır.',
     reversed: false,
   },
   {
     code: 'sekulerizm_1',
     axis: 'sekulerizm',
-    text: 'Zorunlu din kültürü dersleri seçimlik hale getirilmelidir.',
+    text: 'Din kültürü dersi zorunlu olmamalı, isteyen öğrenci seçebilmelidir.',
     reversed: false,
   },
   {
     code: 'sekulerizm_2',
     axis: 'sekulerizm',
-    text: 'Diyanet’in kamu politikaları üzerindeki rolü genişletilmelidir.',
+    text: 'Diyanet, devletin kararlarında ve politikalarında daha etkili olmalıdır.',
     reversed: true,
   },
   {
     code: 'sekulerizm_3',
     axis: 'sekulerizm',
-    text: 'Kamuda kararlar dini referanslardan bağımsız, laik hukuk çerçevesinde alınmalıdır.',
+    text: 'Devlet kararları dini kurallara göre değil, laik hukuk kurallarına göre alınmalıdır.',
     reversed: false,
   },
   {
     code: 'kimlik_1',
     axis: 'kimlik',
-    text: 'Kamu hizmetlerinde Türkçeden başka dillerin kullanımına daha fazla imkân tanınmalıdır.',
+    text: 'Devlet hizmetlerinde Türkçe dışında dillerin kullanılmasına daha fazla izin verilmelidir.',
     reversed: false,
   },
   {
     code: 'kimlik_2',
     axis: 'kimlik',
-    text: 'Yerel yönetimlere daha fazla idari ve mali özerklik verilmelidir.',
+    text: 'Belediyeler ve yerel yönetimler daha fazla yetki ve bütçe sahibi olmalıdır.',
     reversed: false,
   },
   {
     code: 'kimlik_3',
     axis: 'kimlik',
-    text: 'Kimlik ve terör riski gerekçesiyle merkezî idarenin yerel yönetimler üzerindeki denetimi artırılmalıdır.',
+    text: 'Kimlik ve terör riski nedeniyle merkezi hükümet belediyeleri daha sıkı denetlemelidir.',
     reversed: true,
   },
   {
     code: 'goc_1',
     axis: 'goc',
-    text: 'Suriyelilerin ve diğer sığınmacıların hızlı geri dönüşü devlet politikası olmalıdır.',
+    text: 'Suriyeliler ve diğer sığınmacılar mümkün olan en kısa sürede ülkelerine gönderilmelidir.',
     reversed: true,
   },
   {
     code: 'goc_2',
     axis: 'goc',
-    text: 'Uzun süredir Türkiye’de yaşayan ve belirli koşulları sağlayan sığınmacılara kademeli kalıcı statü verilmelidir.',
+    text: 'Türkiye’de uzun süredir yaşayan ve belirli şartları karşılayan sığınmacılara aşamalı olarak kalıcı statü verilmelidir.',
     reversed: false,
   },
   {
     code: 'goc_3',
     axis: 'goc',
-    text: 'Belediyeler göçmenlere yönelik eğitim ve uyum hizmetlerine daha fazla kaynak ayırmalıdır.',
+    text: 'Belediyeler, göçmenlerin eğitim ve uyum hizmetleri için daha fazla bütçe ayırmalıdır.',
     reversed: false,
   },
   {
     code: 'sosyal_1',
     axis: 'sosyal',
-    text: 'Devlet kreşleri ve bakım hizmetleri ülke genelinde hızla yaygınlaştırılmalıdır.',
+    text: 'Devlet kreşleri ve bakım hizmetleri her yerde hızla artırılmalıdır.',
     reversed: false,
   },
   {
     code: 'sosyal_2',
     axis: 'sosyal',
-    text: 'Aile politikalarında kadının asli rolü annelik olarak görülmelidir.',
+    text: 'Aile politikalarında kadının en temel rolü annelik olarak görülmelidir.',
     reversed: true,
   },
   {
     code: 'sosyal_3',
     axis: 'sosyal',
-    text: 'Devlet okullarında bilimsel ve eleştirel düşünmeyi güçlendiren müfredat öncelik olmalıdır.',
+    text: 'Devlet okullarında bilimsel düşünme ve sorgulama becerisi öncelikli olmalıdır.',
     reversed: false,
   },
   {
     code: 'cevre_1',
     axis: 'cevre',
-    text: 'Maden ve enerji projelerinde çevresel itirazlar karşısında yatırım süreçleri hızlandırılmalıdır.',
+    text: 'Maden ve enerji yatırımları, çevre itirazları olsa bile daha hızlı ilerlemelidir.',
     reversed: true,
   },
   {
     code: 'cevre_2',
     axis: 'cevre',
-    text: 'İklim hedefleri için fosil yakıt teşvikleri kademeli olarak kaldırılmalıdır.',
+    text: 'Kömür, petrol ve doğal gaz gibi yakıtlara verilen destekler zamanla kaldırılmalıdır.',
     reversed: false,
   },
   {
     code: 'cevre_3',
     axis: 'cevre',
-    text: 'Su havzaları ve tarım arazileri, ekonomik büyüme pahasına da olsa daha sıkı korunmalıdır.',
+    text: 'Su kaynakları ve tarım arazileri, ekonomik büyüme yavaşlasa bile daha sıkı korunmalıdır.',
     reversed: false,
   },
   {
     code: 'dis_1',
     axis: 'dis',
-    text: 'Türkiye’nin AB ile üyelik ve uyum süreci yeniden stratejik öncelik haline getirilmelidir.',
+    text: 'Türkiye için Avrupa Birliği üyeliği ve AB kurallarına uyum yeniden öncelik olmalıdır.',
     reversed: false,
   },
   {
     code: 'dis_2',
     axis: 'dis',
-    text: 'Türkiye dış politikada Batı kurumlarından bağımsız, daha sert ve özerk bir çizgi izlemelidir.',
+    text: 'Türkiye dış politikada Batı’dan daha bağımsız ve daha sert bir yol izlemelidir.',
     reversed: true,
   },
   {
     code: 'dis_3',
     axis: 'dis',
-    text: 'NATO ve Avrupa kurumlarıyla güvenlik işbirliği Türkiye’nin güvenliği için vazgeçilmezdir.',
+    text: 'Türkiye’nin güvenliği için NATO ve Avrupa ülkeleriyle işbirliği çok önemlidir.',
     reversed: false,
   },
 ]
@@ -264,7 +264,7 @@ const QUESTIONS = [
 // Dikkat kontrolü (rapor §3: "1–2 adet"). Skor üretmez, yalnızca kalite bayrağı.
 const ATTENTION_CHECK = {
   code: 'dikkat_1',
-  text: 'Bu bir dikkat kontrolüdür. Lütfen "Katılmıyorum" seçeneğini işaretleyin.',
+  text: 'Bu soru dikkat kontrolü içindir. Lütfen "Katılmıyorum" seçeneğini işaretleyin.',
   description: 'Anketin dikkatle doldurulduğunu doğrulamak için kullanılır; sonucunuzu etkilemez.',
   expected_value: 'disagree',
 }

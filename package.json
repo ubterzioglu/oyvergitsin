@@ -20,6 +20,7 @@
     "v2:seed": "node scripts/seed-axis-model-v2.js",
     "v2:positions": "node scripts/derive-party-positions-v2.js",
     "v2:verify": "node scripts/verify-axis-model-v2.js",
+    "validate:party-catalog": "node scripts/validate-party-catalog.js",
     "v2:activate": "node scripts/seed-axis-model-v2.js --activate",
     "smoke": "node scripts/smoke-survey-flow.js",
     "audit:rls": "node scripts/audit-rls.js"

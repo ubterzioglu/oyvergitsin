@@ -540,21 +540,21 @@ export default function SurveyPage() {
   }
 
   return (
-    <div className="min-h-screen bg-surface px-4 py-4 sm:py-6">
-      <Container size="md" className="flex flex-col items-center">
-        <div className="mb-4 w-full max-w-xl sm:mb-5">
+    <div className="min-h-screen bg-surface px-2 py-2 sm:px-4 sm:py-6">
+      <Container size="md" className="flex flex-col items-center px-2 sm:px-4">
+        <div className="mb-3 w-full max-w-xl sm:mb-5">
           <ProgressBar progress={progress} label={`Soru ${currentQuestion + 1} / ${questions.length}`} />
         </div>
 
         <Card
           elevated
-          className="flex w-full max-w-xl min-h-[30rem] flex-col border-t-4"
+          className="flex w-full max-w-xl min-h-0 flex-col border-t-4 !p-4 sm:min-h-[30rem] sm:!p-8"
           style={{ borderTopColor: RAINBOW_ACCENTS[currentQuestion % RAINBOW_ACCENTS.length] }}
         >
           {question.description && question.type !== 'vignette_likert' && (
-            <p className="mb-3 text-ink-secondary">{question.description}</p>
+            <p className="mb-2 text-sm text-ink-secondary sm:mb-3 sm:text-base">{question.description}</p>
           )}
-          <h2 className="mb-5 font-heading text-2xl font-semibold text-ink-primary">
+          <h2 className="mb-4 font-heading text-xl font-semibold leading-snug text-ink-primary sm:mb-5 sm:text-2xl">
             {question.text}
           </h2>
 
@@ -567,21 +567,27 @@ export default function SurveyPage() {
             />
           )}
 
-          <div className="mt-auto flex justify-between pt-4">
-            <Button onClick={handlePrevious} disabled={currentQuestion === 0} variant="secondary">
+          <div className="mt-auto flex justify-between pt-3 sm:pt-4">
+            <Button
+              onClick={handlePrevious}
+              disabled={currentQuestion === 0}
+              variant="secondary"
+              className="px-5 py-2.5 text-sm sm:px-8 sm:py-3 sm:text-base"
+            >
               Önceki
             </Button>
             <Button
               onClick={handleNext}
               disabled={question.required && !isAnswerFilled(question.type, rawAnswer)}
               variant="primary"
+              className="px-5 py-2.5 text-sm sm:px-8 sm:py-3 sm:text-base"
             >
               {currentQuestion === questions.length - 1 ? 'Sonuçları Gör' : 'Sonraki'}
             </Button>
           </div>
         </Card>
 
-        <div className="mt-4 flex w-full max-w-xl flex-wrap justify-center gap-1.5">
+        <div className="mt-3 flex w-full max-w-xl flex-wrap justify-center gap-1 sm:mt-4 sm:gap-1.5">
           {questions.map((q, index) => {
             const isActive = index === currentQuestion
             const isAnswered = isAnswerFilled(q.type, answers[q.id])
@@ -592,7 +598,7 @@ export default function SurveyPage() {
                 onClick={() => goToQuestion(index)}
                 aria-label={`Soru ${index + 1}`}
                 aria-current={isActive}
-                className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs font-semibold text-white transition-colors duration-300 ${
+                className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-[11px] font-semibold text-white transition-colors duration-300 sm:h-7 sm:w-7 sm:text-xs ${
                   isActive ? 'shadow-soft ring-2 ring-offset-1' : 'shadow-soft'
                 }`}
                 style={{

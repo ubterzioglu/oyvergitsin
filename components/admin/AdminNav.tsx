@@ -11,6 +11,7 @@ const NAV_LINKS = [
   { href: '/admin/questions', label: 'Sorular' },
   { href: '/admin/parties', label: 'Partiler' },
   { href: '/admin/radar', label: 'Haberler' },
+  { href: '/admin/siyaset-radari', label: 'Siyaset Radarı' },
   { href: '/admin/consent', label: 'Onay Metinleri' },
   { href: '/admin/feedback', label: 'Geri Bildirimler' },
 ]

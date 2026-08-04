@@ -9,7 +9,18 @@
 require('dotenv').config({ path: '.env.local' })
 const { Client } = require('pg')
 
-const SENSITIVE = ['answers', 'sessions', 'result_snapshots', 'behavior_events']
+const SENSITIVE = [
+  'answers',
+  'sessions',
+  'result_snapshots',
+  'behavior_events',
+  'public_people',
+  'political_affiliation_events',
+  'journalist_status_events',
+  'public_data_evidence',
+  'public_data_review_logs',
+  'election_results_by_area',
+]
 
 async function main() {
   const client = new Client({ connectionString: process.env.DBLINK, ssl: { rejectUnauthorized: false } })

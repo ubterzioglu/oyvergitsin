@@ -16,12 +16,12 @@ interface NoOpinionButtonProps {
  */
 export function NoOpinionButton({ text, selected, onSelect }: NoOpinionButtonProps) {
   return (
-    <div className="mb-6 -mt-2 flex justify-center">
+    <div className="mb-4 -mt-1 flex justify-center sm:mb-6 sm:-mt-2">
       <button
         type="button"
         aria-pressed={selected}
         onClick={onSelect}
-        className={`rounded-full border px-4 py-2 text-xs transition-colors ${
+        className={`rounded-full border px-3.5 py-1.5 text-xs transition-colors sm:px-4 sm:py-2 ${
           selected
             ? 'border-ink-muted bg-surface-muted font-semibold text-ink-primary'
             : 'border-border text-ink-secondary hover:border-border-strong hover:text-ink-primary'

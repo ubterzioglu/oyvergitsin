@@ -18,7 +18,7 @@ export function ImportanceToggle({ checked, onChange }: ImportanceToggleProps) {
       role="switch"
       aria-checked={checked}
       onClick={() => onChange(!checked)}
-      className={`mt-4 flex w-full items-center gap-3 rounded-xl border px-4 py-3 text-left transition-colors ${
+      className={`mt-2 flex w-full items-center gap-2.5 rounded-lg border px-3 py-2.5 text-left transition-colors sm:mt-4 sm:gap-3 sm:rounded-xl sm:px-4 sm:py-3 ${
         checked
           ? 'border-rainbow-orange bg-rainbow-orange-tint'
           : 'border-border hover:border-border-strong'
@@ -42,11 +42,11 @@ export function ImportanceToggle({ checked, onChange }: ImportanceToggleProps) {
           </svg>
         )}
       </span>
-      <span className="text-sm">
+      <span className="text-xs sm:text-sm">
         <span className={checked ? 'font-semibold text-ink-primary' : 'text-ink-secondary'}>
           Bu konu benim için önemli
         </span>
-        <span className="block text-xs text-ink-muted">
+        <span className="block text-[11px] leading-snug text-ink-muted sm:text-xs">
           İşaretlerseniz bu konu eşleşmenizde daha ağır tartılır.
         </span>
       </span>

@@ -8,6 +8,7 @@ const REVIEWED_BY_TABLES = new Set([
   'public_people',
   'political_affiliation_events',
   'journalist_status_events',
+  'radar_feed_items',
 ])
 
 export async function PATCH(request: NextRequest) {

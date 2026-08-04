@@ -14,6 +14,15 @@ interface LikertScaleProps {
 
 export function LikertScale({ options, value, onChange }: LikertScaleProps) {
   const toneFor = (optionValue: string) => {
+    if (optionValue === 'no_opinion') {
+      return {
+        option: 'border-rainbow-purple/35 hover:border-rainbow-purple/70',
+        selectedOption: 'border-rainbow-purple shadow-soft',
+        control: 'border-rainbow-purple/50 group-hover:border-rainbow-purple',
+        selectedControl: 'border-rainbow-purple',
+        dot: 'bg-rainbow-purple',
+      }
+    }
     if (optionValue.includes('disagree')) {
       return {
         option: 'border-rainbow-red/35 hover:border-rainbow-red/70',

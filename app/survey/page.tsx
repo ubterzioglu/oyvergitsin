@@ -19,7 +19,6 @@ import { ConsentCheckboxGroup } from '@/components/survey/ConsentCheckboxGroup'
 import { CaptchaPlaceholder } from '@/components/survey/CaptchaPlaceholder'
 import { ImageChoiceQuestion } from '@/components/survey/ImageChoiceQuestion'
 import { VignetteLikert } from '@/components/survey/VignetteLikert'
-import { NoOpinionButton } from '@/components/survey/NoOpinionButton'
 import { ImportanceToggle } from '@/components/survey/ImportanceToggle'
 
 const RAINBOW_ACCENTS = ['#F5C518', '#F5821F', '#E8385C', '#7B4FE0', '#1E9BE0', '#3CB043']
@@ -363,37 +362,23 @@ export default function SurveyPage() {
       case 'likert_7': {
         const { scale, noOpinion } = splitNoOpinion(options)
         return (
-          <>
-            <LikertScale options={scale} value={rawAnswer ?? ''} onChange={handleSingleSelectAnswer} />
-            {noOpinion && (
-              <NoOpinionButton
-                text={noOpinion.text}
-                selected={rawAnswer === NO_OPINION_VALUE}
-                onSelect={() => handleSingleSelectAnswer(NO_OPINION_VALUE)}
-              />
-            )}
-          </>
+          <LikertScale
+            options={noOpinion ? [...scale, noOpinion] : scale}
+            value={rawAnswer ?? ''}
+            onChange={handleSingleSelectAnswer}
+          />
         )
       }
 
       case 'vignette_likert': {
         const { scale, noOpinion } = splitNoOpinion(options)
         return (
-          <>
-            <VignetteLikert
-              vignetteText={question.vignette_text ?? question.description ?? ''}
-              options={scale}
-              value={rawAnswer ?? ''}
-              onChange={handleSingleSelectAnswer}
-            />
-            {noOpinion && (
-              <NoOpinionButton
-                text={noOpinion.text}
-                selected={rawAnswer === NO_OPINION_VALUE}
-                onSelect={() => handleSingleSelectAnswer(NO_OPINION_VALUE)}
-              />
-            )}
-          </>
+          <VignetteLikert
+            vignetteText={question.vignette_text ?? question.description ?? ''}
+            options={noOpinion ? [...scale, noOpinion] : scale}
+            value={rawAnswer ?? ''}
+            onChange={handleSingleSelectAnswer}
+          />
         )
       }
 

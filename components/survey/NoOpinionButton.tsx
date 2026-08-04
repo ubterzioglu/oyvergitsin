@@ -7,7 +7,8 @@ interface NoOpinionButtonProps {
 }
 
 /**
- * "Fikrim yok" seçeneği ölçeğin İÇİNE bir kutu olarak konmaz.
+ * Eski ayrı "Fikrim yok" kontrolü. Aktif Likert akışı artık bu seçeneği
+ * LikertScale içinde aynı boyutta son seçenek olarak gösterir.
  *
  * Metodoloji raporu §1-03: "nötr" ile "fikrim yok" aynı seçenek olmamalıdır.
  * Kararsızım ölçek üzerinde gerçek bir 0 puandır; fikrim yok ise puanlamadan

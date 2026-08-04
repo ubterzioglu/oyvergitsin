@@ -75,6 +75,8 @@ Teknik yapı:
 
 `supabase db push` etkileşimli parola isteyebilir; otomasyon için mevcut `npm run db:migrate <file.sql>` yolunu tercih et.
 
+`npm run test:e2e` ve `npm run smoke` gerçek oturum ve cevap yazar. Varsayılan hedef localhost olmalı; remote hedef için yalnız ayrı test ortamında `ALLOW_REMOTE_TEST_WRITES=true` kullanılabilir.
+
 ## Test Stratejisi
 
 - Scoring değişikliklerinde ilgili `lib/scoring/*.test.ts` dosyalarını çalıştır veya güncelle.
@@ -98,4 +100,6 @@ Teknik yapı:
 - Generated build çıktısını (`.next/`, standalone node_modules, loglar) elle düzenleme.
 - Scoring algoritmasını UI ihtiyacı için doğrudan bükme; önce veri sözleşmesini netleştir.
 - RLS yerine yalnız middleware/API kontrolüne güvenme.
+- Production’da `SESSION_HASH_SECRET` olmadan session endpoint’inin çalışacağını varsayma.
+- Survey, results, consent, admin veya API route’larına üçüncü taraf analytics/session replay ekleme.
 - Büyük refactor'ı küçük bug fix ile karıştırma.

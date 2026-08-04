@@ -8,7 +8,10 @@
 
 require('dotenv').config({ path: '.env.local' })
 
+const { assertSafeTestTarget } = require('./test-write-guard')
+
 const BASE_URL = process.env.BASE_URL || 'http://localhost:3000'
+assertSafeTestTarget(BASE_URL)
 
 let cookieJar = ''
 

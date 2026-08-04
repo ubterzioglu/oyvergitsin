@@ -181,6 +181,307 @@
       ]
     }
   },
-  "hotPaths": [],
+  "hotPaths": [
+    {
+      "path": "app\\survey\\page.tsx",
+      "accessCount": 27,
+      "lastAccessed": 1785338724672,
+      "type": "file"
+    },
+    {
+      "path": "lib\\scoring\\engine.ts",
+      "accessCount": 12,
+      "lastAccessed": 1785353354347,
+      "type": "directory"
+    },
+    {
+      "path": "app\\results\\[sessionId]\\page.tsx",
+      "accessCount": 11,
+      "lastAccessed": 1785353513980,
+      "type": "file"
+    },
+    {
+      "path": "components\\survey\\LikertScale.tsx",
+      "accessCount": 9,
+      "lastAccessed": 1785332512341,
+      "type": "file"
+    },
+    {
+      "path": "scripts\\seed.js",
+      "accessCount": 8,
+      "lastAccessed": 1785337367173,
+      "type": "directory"
+    },
+    {
+      "path": "resultdeepresearch.html",
+      "accessCount": 6,
+      "lastAccessed": 1785332465718,
+      "type": "file"
+    },
+    {
+      "path": "app\\api\\results\\[sessionId]\\route.ts",
+      "accessCount": 6,
+      "lastAccessed": 1785337951034,
+      "type": "file"
+    },
+    {
+      "path": "package.json",
+      "accessCount": 6,
+      "lastAccessed": 1785352342039,
+      "type": "file"
+    },
+    {
+      "path": "",
+      "accessCount": 6,
+      "lastAccessed": 1785359564267,
+      "type": "directory"
+    },
+    {
+      "path": "scripts\\audit-questions.js",
+      "accessCount": 5,
+      "lastAccessed": 1785332266319,
+      "type": "file"
+    },
+    {
+      "path": "app\\api\\questions\\route.ts",
+      "accessCount": 5,
+      "lastAccessed": 1785337990347,
+      "type": "file"
+    },
+    {
+      "path": "lib\\validation\\survey.ts",
+      "accessCount": 5,
+      "lastAccessed": 1785338734369,
+      "type": "file"
+    },
+    {
+      "path": "app\\api\\complete\\route.ts",
+      "accessCount": 5,
+      "lastAccessed": 1785339538418,
+      "type": "file"
+    },
+    {
+      "path": "lib\\admin\\questionTypes.ts",
+      "accessCount": 4,
+      "lastAccessed": 1785332433177,
+      "type": "file"
+    },
+    {
+      "path": "app\\api\\answers\\route.ts",
+      "accessCount": 4,
+      "lastAccessed": 1785338750360,
+      "type": "file"
+    },
+    {
+      "path": "AGENTS.md",
+      "accessCount": 4,
+      "lastAccessed": 1785352354930,
+      "type": "file"
+    },
+    {
+      "path": "scripts\\_tmp-inspect.js",
+      "accessCount": 3,
+      "lastAccessed": 1785325101025,
+      "type": "file"
+    },
+    {
+      "path": "supabase\\migrations\\001_initial_schema.sql",
+      "accessCount": 3,
+      "lastAccessed": 1785332422926,
+      "type": "file"
+    },
+    {
+      "path": "tailwind.config.ts",
+      "accessCount": 3,
+      "lastAccessed": 1785338659531,
+      "type": "file"
+    },
+    {
+      "path": "app\\admin\\questions\\[id]\\page.tsx",
+      "accessCount": 3,
+      "lastAccessed": 1785342704719,
+      "type": "file"
+    },
+    {
+      "path": "app\\admin\\axes\\page.tsx",
+      "accessCount": 3,
+      "lastAccessed": 1785342729949,
+      "type": "file"
+    },
+    {
+      "path": "app\\admin\\parties\\page.tsx",
+      "accessCount": 3,
+      "lastAccessed": 1785342756640,
+      "type": "file"
+    },
+    {
+      "path": "app",
+      "accessCount": 3,
+      "lastAccessed": 1785343126736,
+      "type": "directory"
+    },
+    {
+      "path": "components\\survey\\RankingQuestion.tsx",
+      "accessCount": 2,
+      "lastAccessed": 1785325407401,
+      "type": "file"
+    },
+    {
+      "path": "supabase\\migrations\\007_feedback.sql",
+      "accessCount": 2,
+      "lastAccessed": 1785337321245,
+      "type": "file"
+    },
+    {
+      "path": "supabase\\migrations\\004_fix_roles_rls_recursion.sql",
+      "accessCount": 2,
+      "lastAccessed": 1785337324845,
+      "type": "file"
+    },
+    {
+      "path": "components\\survey\\MatrixQuestion.tsx",
+      "accessCount": 2,
+      "lastAccessed": 1785337580475,
+      "type": "file"
+    },
+    {
+      "path": "lib\\supabase\\route.ts",
+      "accessCount": 2,
+      "lastAccessed": 1785337881462,
+      "type": "file"
+    },
+    {
+      "path": "app\\admin",
+      "accessCount": 2,
+      "lastAccessed": 1785342279345,
+      "type": "directory"
+    },
+    {
+      "path": "supabase\\migrations\\002_public_survey_policies.sql",
+      "accessCount": 2,
+      "lastAccessed": 1785343068168,
+      "type": "file"
+    },
+    {
+      "path": "components\\survey\\SliderQuestion.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1785325004665,
+      "type": "file"
+    },
+    {
+      "path": "components\\survey\\NumericInput.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1785325004707,
+      "type": "file"
+    },
+    {
+      "path": "components\\survey\\AllocationQuestion.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1785325004742,
+      "type": "file"
+    },
+    {
+      "path": "scripts\\fix-missing-options.js",
+      "accessCount": 1,
+      "lastAccessed": 1785325018853,
+      "type": "file"
+    },
+    {
+      "path": "components\\survey\\VignetteLikert.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1785325154059,
+      "type": "file"
+    },
+    {
+      "path": "app\\globals.css",
+      "accessCount": 1,
+      "lastAccessed": 1785325237294,
+      "type": "file"
+    },
+    {
+      "path": "components\\ui\\Button.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1785325294253,
+      "type": "file"
+    },
+    {
+      "path": "scripts\\seed-missing-options.js",
+      "accessCount": 1,
+      "lastAccessed": 1785325345952,
+      "type": "file"
+    },
+    {
+      "path": "scripts\\_tmp-verify.js",
+      "accessCount": 1,
+      "lastAccessed": 1785325569449,
+      "type": "file"
+    },
+    {
+      "path": "app\\api\\sessions\\route.ts",
+      "accessCount": 1,
+      "lastAccessed": 1785325877176,
+      "type": "file"
+    },
+    {
+      "path": "app\\api\\results",
+      "accessCount": 1,
+      "lastAccessed": 1785325978183,
+      "type": "directory"
+    },
+    {
+      "path": "app\\api\\complete",
+      "accessCount": 1,
+      "lastAccessed": 1785328252456,
+      "type": "directory"
+    },
+    {
+      "path": "scripts\\_tmp-rules.js",
+      "accessCount": 1,
+      "lastAccessed": 1785328299892,
+      "type": "file"
+    },
+    {
+      "path": "app\\api\\answers",
+      "accessCount": 1,
+      "lastAccessed": 1785328465734,
+      "type": "directory"
+    },
+    {
+      "path": "scripts\\dump-survey-data.js",
+      "accessCount": 1,
+      "lastAccessed": 1785328584387,
+      "type": "file"
+    },
+    {
+      "path": "deep-research-prompt.md",
+      "accessCount": 1,
+      "lastAccessed": 1785332069594,
+      "type": "file"
+    },
+    {
+      "path": "supabase",
+      "accessCount": 1,
+      "lastAccessed": 1785332170214,
+      "type": "directory"
+    },
+    {
+      "path": "scripts\\update-party-positions.js",
+      "accessCount": 1,
+      "lastAccessed": 1785332266935,
+      "type": "file"
+    },
+    {
+      "path": "lib\\admin\\validation.ts",
+      "accessCount": 1,
+      "lastAccessed": 1785332273049,
+      "type": "file"
+    },
+    {
+      "path": "tsconfig.json",
+      "accessCount": 1,
+      "lastAccessed": 1785332493665,
+      "type": "file"
+    }
+  ],
   "userDirectives": []
 }

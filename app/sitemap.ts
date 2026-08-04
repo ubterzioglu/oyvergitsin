@@ -11,6 +11,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified,
       changeFrequency: 'weekly',
       priority: 1
+    },
+    {
+      url: `${siteUrl}/metodoloji`,
+      lastModified,
+      changeFrequency: 'weekly',
+      priority: 0.8
     }
   ]
 }

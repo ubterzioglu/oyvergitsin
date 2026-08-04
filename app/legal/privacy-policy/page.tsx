@@ -10,7 +10,7 @@ export default function PrivacyPolicyPage() {
       <h1 className="mb-6 font-heading text-3xl font-semibold text-ink-primary">
         Gizlilik Politikası
       </h1>
-      <p className="mb-4 text-sm text-ink-muted">Son güncelleme: 20 Temmuz 2026</p>
+      <p className="mb-4 text-sm text-ink-muted">Son güncelleme: 4 Ağustos 2026</p>
 
       <div className="space-y-6 text-ink-secondary">
         <p>
@@ -59,9 +59,10 @@ export default function PrivacyPolicyPage() {
             Analitik ve İzleme
           </h2>
           <p>
-            Site kullanımını anlamak amacıyla Microsoft Clarity analitik hizmeti
-            kullanılmaktadır. Bu hizmet, sayfa etkileşimlerinizi (tıklama, kaydırma vb.)
-            anonim şekilde kaydedebilir. Detaylar için{' '}
+            Anket, açık rıza, sonuç, yönetim ve hukuki metin sayfalarında üçüncü taraf
+            oturum kaydı veya davranış analitiği çalıştırılmaz. Bu sayfalardaki siyasi
+            cevaplarınız ve sonuçlarınız Microsoft Clarity gibi üçüncü taraf analitik
+            araçlarına gönderilmez. Detaylar için{' '}
             <a
               href="/legal/cookie-policy"
               className="text-rainbow-blue underline underline-offset-4 hover:text-rainbow-blue-hover"

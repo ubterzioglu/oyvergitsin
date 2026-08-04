@@ -1,20 +1,20 @@
 # oyvergitsin.org - Türkiye Siyasi Eşleşme Platformu
 
-Full MVP infrastructure for a production-ready political alignment platform using Next.js, Supabase, and TypeScript.
+Production-ready political alignment platform using Next.js, Supabase, and TypeScript.
 
 ## Features
 
 - **Public Survey Flow**: Landing page → Consent → Survey → Results
-- **10 Ideological Axes**: Economy, Security, Secularism, etc.
+- **Versioned Axis Models**: Survey content is served from the active `axis_models` version.
 - **Scoring Engine**: Calculate political alignment with parties
-- **Admin Panel**: Manage axes, questions, parties, and consent texts
+- **Read-only Admin Panel**: Review axes, questions, parties, responses, feedback, and radar data.
 - **Party Color Theming**: Turkish political party colors
 - **RBAC**: Admin and user roles
-- **25 Question Types**: From single choice to file upload
+- **Survey Model v2**: Current production survey is the active model; do not hard-code question or party counts without checking the database.
 
 ## Tech Stack
 
-- Next.js 14 (App Router, TypeScript)
+- Next.js 15 (App Router, TypeScript)
 - Supabase (Postgres, Auth, Storage)
 - Tailwind CSS
 - Recharts (Data visualization)
@@ -50,6 +50,9 @@ Edit `.env.local`:
 NEXT_PUBLIC_SITE_URL=https://oyvergitsin.org
 NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+SUPABASE_SERVICE_KEY=your_service_role_key
+SESSION_HASH_SECRET=your_32_plus_byte_secret
+ALLOW_REMOTE_TEST_WRITES=false
 ```
 
 5. Initialize Supabase locally:
@@ -62,9 +65,9 @@ npx supabase init
 npx supabase link --project-ref your_project_id
 ```
 
-7. Push the database schema:
+7. Apply database schema changes:
 ```bash
-npx supabase db push
+npm run db:migrate supabase/migrations/<migration-file>.sql
 ```
 
 8. Seed the database:
@@ -160,23 +163,16 @@ The platform uses Turkish political party colors:
 - Zafer: #00964C
 - Memleket: #FDD007
 
-## Question Types Supported
+## Tests and Safety
 
-All 25 question types from the spec are supported:
-- single_choice, multi_choice
-- dropdown_single, dropdown_multi
-- ranking, forced_choice_pair
-- matrix_single, matrix_multi
-- likert_5, likert_7
-- slider_0_100, numeric_input
-- allocation, scenario_single, scenario_multi
-- vignette_likert
-- open_text_short, open_text_long
-- image_choice_single, image_choice_multi
-- file_upload, date_input
-- consent_checkbox_group
-- attention_check
-- captcha_placeholder
+```bash
+npm run lint
+npm test
+npm run build
+npx tsc --noEmit
+```
+
+`npm run test:e2e` and `npm run smoke` write sessions and answers. They run against localhost by default and refuse remote targets unless `ALLOW_REMOTE_TEST_WRITES=true` is set for a dedicated non-production test environment.
 
 ## Security
 
@@ -185,6 +181,9 @@ All 25 question types from the spec are supported:
 - Device fingerprinting
 - Risk scoring per session
 - Admin-only access for system tables
+- `SESSION_HASH_SECRET` is required in production; service-role keys are not used as HMAC fallback secrets.
+- Survey, results, consent, legal, admin, and API routes are non-indexable; sensitive API responses use `no-store`.
+- Third-party analytics/session replay scripts are not loaded on sensitive routes.
 
 ## Future Enhancements
 
@@ -197,4 +196,4 @@ All 25 question types from the spec are supported:
 
 ## License
 
-MIT
+No license file is currently included. Do not assume MIT terms until a `LICENSE` file is added.

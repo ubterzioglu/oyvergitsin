@@ -10,7 +10,7 @@ export default function CookiePolicyPage() {
       <h1 className="mb-6 font-heading text-3xl font-semibold text-ink-primary">
         Çerez Politikası
       </h1>
-      <p className="mb-4 text-sm text-ink-muted">Son güncelleme: 20 Temmuz 2026</p>
+      <p className="mb-4 text-sm text-ink-muted">Son güncelleme: 4 Ağustos 2026</p>
 
       <div className="space-y-6 text-ink-secondary">
         <p>
@@ -30,9 +30,10 @@ export default function CookiePolicyPage() {
               dışı bırakılamaz.
             </li>
             <li>
-              <strong>Analitik (Microsoft Clarity):</strong> Site kullanımını
-              anlamak amacıyla sayfa etkileşimlerinizi (tıklama, kaydırma, gezinme)
-              anonim şekilde kaydeden bir analitik hizmeti kullanılır.
+              <strong>Analitik:</strong> Anket, açık rıza, sonuç, yönetim ve hukuki
+              metin sayfalarında üçüncü taraf analitik veya oturum kaydı scripti
+              yüklenmez. Bu davranış değiştirilirse politika ve teknik consent akışı
+              birlikte güncellenmelidir.
             </li>
           </ul>
         </section>

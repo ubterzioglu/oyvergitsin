@@ -5,17 +5,19 @@ import { createClient as createAuthClient } from '@/lib/supabase/server'
 import { CreateSessionSchema } from '@/lib/validation/survey'
 import { generateSessionToken, hashSessionToken, setSessionTokenCookie } from '@/lib/session-token'
 import { isRateLimited, getClientIp } from '@/lib/rate-limit'
+import { getSessionHashSecret } from '@/lib/security/session-hash-secret'
+import { jsonError, noStoreJson } from '@/lib/api/responses'
 
-function hashIp(ip: string): string {
-  const secret = process.env.SESSION_HASH_SECRET || process.env.SUPABASE_SERVICE_KEY || 'dev-only-fallback-secret'
+function hashIp(ip: string, secret: string): string {
   return createHmac('sha256', secret).update(ip).digest('hex').substring(0, 64)
 }
 
 export async function POST(request: NextRequest) {
   try {
+    const hashSecret = getSessionHashSecret()
     const clientIp = getClientIp(request)
     if (isRateLimited(`sessions:${clientIp}`, 10, 60 * 1000)) {
-      return NextResponse.json({ error: 'Çok fazla istek. Lütfen biraz sonra tekrar deneyin.' }, { status: 429 })
+      return jsonError('Çok fazla istek. Lütfen biraz sonra tekrar deneyin.', 429)
     }
 
     const supabase = getRouteClient()
@@ -23,7 +25,7 @@ export async function POST(request: NextRequest) {
     const parsed = CreateSessionSchema.safeParse(body)
 
     if (!parsed.success) {
-      return NextResponse.json({ error: 'Geçersiz istek.' }, { status: 400 })
+      return jsonError('Geçersiz istek.', 400)
     }
 
     const { isGuest } = parsed.data
@@ -36,10 +38,10 @@ export async function POST(request: NextRequest) {
     } = await authClient.auth.getUser()
     const userId = user?.id ?? null
 
-    const ipHash = hashIp(clientIp)
+    const ipHash = hashIp(clientIp, hashSecret)
 
     const userAgent = request.headers.get('user-agent') || ''
-    const deviceHash = createHmac('sha256', process.env.SESSION_HASH_SECRET || 'dev-only-fallback-secret')
+    const deviceHash = createHmac('sha256', hashSecret)
       .update(userAgent)
       .digest('hex')
       .substring(0, 64)
@@ -80,9 +82,9 @@ export async function POST(request: NextRequest) {
 
     await setSessionTokenCookie(token)
 
-    return NextResponse.json({ sessionId: session.id })
+    return noStoreJson({ sessionId: session.id })
   } catch (error) {
     console.error('Session creation error:', error)
-    return NextResponse.json({ error: 'Oturum oluşturulamadı. Lütfen tekrar deneyin.' }, { status: 500 })
+    return jsonError('Oturum oluşturulamadı. Lütfen tekrar deneyin.', 500)
   }
 }

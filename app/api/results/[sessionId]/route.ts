@@ -1,7 +1,7 @@
-import { NextResponse } from 'next/server'
 import { z } from 'zod'
 import { getRouteClient } from '@/lib/supabase/route'
 import { assertSessionOwnership } from '@/lib/session-ownership'
+import { jsonError, noStoreJson } from '@/lib/api/responses'
 
 const ParamsSchema = z.object({ sessionId: z.string().uuid() })
 
@@ -14,14 +14,14 @@ export async function GET(
     const parsed = ParamsSchema.safeParse(resolvedParams)
 
     if (!parsed.success) {
-      return NextResponse.json({ error: 'Geçersiz oturum kimliği.' }, { status: 400 })
+      return jsonError('Geçersiz oturum kimliği.', 400)
     }
 
     const { sessionId } = parsed.data
 
     const owns = await assertSessionOwnership(sessionId)
     if (!owns) {
-      return NextResponse.json({ error: 'Yetkisiz istek.' }, { status: 403 })
+      return jsonError('Yetkisiz istek.', 403)
     }
 
     const supabase = getRouteClient()
@@ -39,16 +39,16 @@ export async function GET(
       const { formatStoredResults } = await import('@/lib/scoring/engine')
       const storedResults = await formatStoredResults(snapshot)
 
-      return NextResponse.json(storedResults)
+      return noStoreJson(storedResults)
     }
 
     // If no snapshot, calculate on the fly
     const { calculateResults } = await import('@/lib/scoring/engine')
     const results = await calculateResults(sessionId)
 
-    return NextResponse.json(results)
+    return noStoreJson(results)
   } catch (error) {
     console.error('Results fetch error:', error)
-    return NextResponse.json({ error: 'Sonuçlar alınamadı. Lütfen tekrar deneyin.' }, { status: 500 })
+    return jsonError('Sonuçlar alınamadı. Lütfen tekrar deneyin.', 500)
   }
 }

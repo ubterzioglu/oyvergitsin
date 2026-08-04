@@ -18,6 +18,9 @@ NEXT_PUBLIC_SITE_URL=https://oyvergitsin.org
 NEXT_PUBLIC_SUPABASE_URL=https://your-project-ref.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 SUPABASE_SERVICE_KEY=your_supabase_service_role_key
+SESSION_HASH_SECRET=your_32_plus_byte_secret
+ALLOW_REMOTE_TEST_WRITES=false
+CRON_SECRET=your_cron_secret
 
 # Optional (if using Coolify's PostgreSQL instead of Supabase)
 # DATABASE_URL=postgresql://user:password@host:5432/database
@@ -75,9 +78,7 @@ Adjust based on your traffic and usage.
 
 ### Option B: Use Coolify's PostgreSQL
 
-1. Add a PostgreSQL database in Coolify
-2. Link it to your application
-3. Update the database configuration in your code
+This is not a drop-in replacement for the current Supabase contract. The app uses Supabase Auth, anon/service-role API keys, and RLS policies. Treat a move to Coolify PostgreSQL as a separate migration project.
 
 ## Continuous Deployment
 
@@ -152,6 +153,8 @@ docker ps
 3. Enable HTTPS (Coolify handles this automatically)
 4. Regularly update dependencies
 5. Use non-root user in Docker (already configured)
+6. Keep `SESSION_HASH_SECRET` distinct from `SUPABASE_SERVICE_KEY`
+7. Do not run E2E or smoke tests against production; they create sessions and answers
 
 ## Scaling
 
@@ -159,7 +162,9 @@ docker ps
 
 1. In Coolify, increase the replica count
 2. Ensure your database can handle connections
-3. Consider adding Redis for session management
+3. Replace the current in-memory rate limiter with a shared store before running multiple replicas
+
+The current rate limiter is process-local. Horizontal scaling without a shared limiter will under-limit abusive clients.
 
 ### Vertical Scaling
 

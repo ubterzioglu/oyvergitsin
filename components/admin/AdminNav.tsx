@@ -16,7 +16,6 @@ const NAV_LINKS = [
 ]
 
 const EXTERNAL_LINKS = [
-  { href: 'https://clarity.microsoft.com/projects/view/xpckj8ftyr/gettingstarted', label: 'Clarity' },
   {
     href: 'https://search.google.com/search-console/performance/search-analytics?resource_id=sc-domain%3Aoyvergitsin.org&hl=de',
     label: 'Search Console',

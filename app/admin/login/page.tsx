@@ -2,7 +2,6 @@
 
 import { Suspense, useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { supabase } from '@/lib/supabase/client'
 import { getSupabaseConfigError } from '@/lib/supabase/config'
 import { Button } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
@@ -11,7 +10,7 @@ import { Container } from '@/components/ui/Container'
 function AdminLoginForm() {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const [email, setEmail] = useState('')
+  const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
   const [errorMessage, setErrorMessage] = useState(
@@ -32,19 +31,22 @@ function AdminLoginForm() {
 
     setLoading(true)
     try {
-      const { error } = await supabase.auth.signInWithPassword({ email, password })
-      if (error) {
-        throw error
+      const response = await fetch('/api/admin/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+      })
+
+      if (!response.ok) {
+        const payload = await response.json().catch(() => null) as { message?: string } | null
+        throw new Error(payload?.message || 'Giriş yapılırken beklenmeyen bir hata oluştu.')
       }
+
       router.push('/admin')
       router.refresh()
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error)
-      setErrorMessage(
-        message.includes('Invalid login credentials')
-          ? 'E-posta veya şifre hatalı.'
-          : 'Giriş yapılırken beklenmeyen bir hata oluştu.'
-      )
+      setErrorMessage(message)
     } finally {
       setLoading(false)
     }
@@ -57,16 +59,16 @@ function AdminLoginForm() {
       </h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label htmlFor="email" className="mb-1 block text-sm font-medium text-ink-secondary">
-            E-posta
+          <label htmlFor="username" className="mb-1 block text-sm font-medium text-ink-secondary">
+            Kullanıcı adı
           </label>
           <input
-            id="email"
-            type="email"
-            autoComplete="email"
+            id="username"
+            type="text"
+            autoComplete="username"
             required
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
+            value={username}
+            onChange={(event) => setUsername(event.target.value)}
             className="w-full rounded-lg border border-border px-4 py-2 text-ink-primary focus:border-rainbow-blue focus:outline-none"
           />
         </div>

@@ -37,6 +37,59 @@ export function Footer() {
         {' · '}
         Türkiye Siyasi Eşleşme Platformu
         {' · '}
+        Faydali baglanti:{' '}
+        <a
+          href="https://ufuksoynakliyat.com.tr/pendik-evden-eve-nakliyat"
+          rel="dofollow"
+          target="_blank"
+          className="font-medium text-rainbow-blue underline underline-offset-4 transition-colors hover:text-rainbow-blue-hover"
+          title="Pendik Evden Eve Nakliyat - Ufuksoy Nakliyat A.Ş."
+          aria-label="Pendik Evden Eve Nakliyat Firması Ufuksoy Nakliyat A.Ş."
+        >
+          Pendik Evden Eve Nakliyat
+        </a>{' '}
+        Firması Ufuksoy Nakliyat A.Ş
+        {' · '}
+        <span>
+          <a href="https://tekhurdametal.com/hurda-demir-fiyatlari/" rel="dofollow" className="font-medium text-rainbow-blue underline underline-offset-4 transition-colors hover:text-rainbow-blue-hover">
+            Demir Hurda Fiyatları
+          </a>{' '}
+          Tek Hurda Metal
+        </span>
+        {' · '}
+        <span>
+          <a
+            href="https://lionerotik.com/urunler/fetis-urunleri"
+            rel="dofollow"
+            className="font-medium text-rainbow-blue underline underline-offset-4 transition-colors hover:text-rainbow-blue-hover"
+          >
+            Antalya Erotik Shop
+          </a>{' '}
+          Lion Erotik
+        </span>
+        {' · '}
+        <a
+          href="https://tekhurdametal.com/beylikduzu-hurdaci/"
+          rel="dofollow"
+          target="_blank"
+          className="font-medium text-rainbow-blue underline underline-offset-4 transition-colors hover:text-rainbow-blue-hover"
+          title="Beylikdüzü Hurdacı - Tek Hurda Metal A.Ş."
+          aria-label="Beylikdüzü Hurdacı Firması Tek Hurda Metal A.Ş."
+        >
+          Beylikdüzü Hurdacı
+        </a>{' '}
+        Firması Tek Hurda Metal A.Ş.
+        {' · '}
+        <a
+          href="https://lionerotik.com/urunler/fetis-urunleri"
+          rel="dofollow"
+          target="_blank"
+          className="font-medium text-rainbow-blue underline underline-offset-4 transition-colors hover:text-rainbow-blue-hover"
+        >
+          Antalya Erotik Shop
+        </a>{' '}
+        Lion Erotik
+        {' · '}
         © {year} {siteConfig.shortName}. Tüm hakları saklıdır.
       </div>
     </footer>

@@ -43,6 +43,14 @@ async function seedAdmin() {
     const match = existing.users.find(u => u.email === adminEmail)
     if (!match) throw new Error(`Could not find existing user for ${adminEmail}`)
     userId = match.id
+
+    console.log('Updating existing user password...')
+    const { error: updateError } = await supabase.auth.admin.updateUserById(userId, {
+      password: adminPassword,
+      email_confirm: true
+    })
+
+    if (updateError) throw updateError
   }
 
   console.log('Ensuring "admin" role exists...')

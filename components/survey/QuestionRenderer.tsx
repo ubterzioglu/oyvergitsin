@@ -122,6 +122,10 @@ export function QuestionRenderer({ question, value, onAnswer, onSingleSelectAnsw
       )
     }
 
+    // Dikkat kontrolü komşu Likert sorularıyla aynı ölçekle render edilir;
+    // puanlamaya girmez (is_scored: false, NON_SCORED_TYPES ve lib/scoring
+    // ayrıca ele alıyor) — bu kol yalnızca sunum katmanı.
+    case 'attention_check':
     case 'likert_5':
     case 'likert_7': {
       const { scale, noOpinion } = splitNoOpinion(options)

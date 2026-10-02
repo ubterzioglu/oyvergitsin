@@ -47,7 +47,6 @@ next-env.d.ts
 
 # supabase
 .supabase
-supabase.zip
 
 # Playwright
 test-results/
@@ -55,10 +54,23 @@ playwright-report/
 .prod-test.log
 .dev-check.log
 
-# local artifacts
-tsconfig.tsbuildinfo
+# IDE
 .idea/
-.omc/
+
+# local archives / dumps
+*.zip
+
+# dev server loglari ve gecici ciktilar
+# Kalip `.next-dev*` (yalnizca `.next-dev*.log` degil): .next-dev-job-id gibi
+# uzantisiz dosyalar da uretiliyor, dar kalip onlari kaciriyordu.
+tsconfig.tsbuildinfo
 .logs/
 .dev-*.log
-.next-dev*.log
+.next-dev*
+
+# Ajan durum dizini.
+# DIKKAT: Bu dizindeki dosyalar hala git'te TAKIPLI. .gitignore takipli
+# dosyayi takipten cikarmaz; `git rm -r --cached .omc` calistirilana kadar
+# mevcut dosyalar diff uretmeye devam eder. Takipsiz .omc dosyalari bir kez
+# `git pull`u da engellemisti.
+.omc/

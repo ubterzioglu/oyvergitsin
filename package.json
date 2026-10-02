@@ -24,7 +24,8 @@
     "v2:activate": "node scripts/seed-axis-model-v2.js --activate",
     "smoke": "node scripts/smoke-survey-flow.js",
     "audit:rls": "node scripts/audit-rls.js",
-    "radar:tbmm": "node scripts/refresh-tbmm-seats.js"
+    "radar:tbmm": "node scripts/refresh-tbmm-seats.js",
+    "geo:llms": "node scripts/generate-llms-txt.js"
   },
   "dependencies": {
     "@supabase/ssr": "^0.8.0",

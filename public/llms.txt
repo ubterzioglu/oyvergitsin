@@ -2,22 +2,49 @@
 
 > oyvergitsin.org, Türkiye'deki seçmenlerin siyasi görüşlerini kısa ve anonim bir anketle analiz ederek hangi siyasi partiye ne kadar yakın olduklarını gösteren tarafsız bir siyasi eşleşme platformudur.
 
-Kullanıcılar 10 ideolojik eksen (ekonomi, gelir dağılımı, sivil özgürlükler, güvenlik, sekülerizm, kimlik ve göç, dış politika, AB ilişkileri, eğitim ve sosyal politika, çevre ve kalkınma) üzerinden sorulara cevap verir. Sistem, kullanıcının eksen bazlı skorlarını Türkiye'deki siyasi partilerin pozisyonlarıyla karşılaştırarak bir benzerlik yüzdesi hesaplar. Anket tamamen anonimdir; kimlik veya iletişim bilgisi talep edilmez.
+Kullanıcılar 8 ideolojik eksen (ekonomik model ve yeniden dağıtım; demokratik kurumlar ve hukukun üstünlüğü; sekülerizm ve dinin kamusal rolü; kimlik, kürt meselesi ve yerel özerklik; göç ve sığınmacı politikası; refah, eğitim, toplumsal cinsiyet ve aile; çevre ve kalkınma; dış politika, güvenlik yönelimi ve avrupa) üzerinden 25 soruya cevap verir. Sistem, kullanıcının eksen bazlı skorlarını Türkiye'deki siyasi partilerin kayıtlı pozisyonlarıyla karşılaştırarak bir benzerlik yüzdesi hesaplar. Anket tamamen anonimdir; kimlik veya iletişim bilgisi talep edilmez.
 
 ## Temel Bilgiler
 
 - Platform: Web tabanlı, ücretsiz, üyelik gerektirmez
 - Dil: Türkçe
 - Kapsam: Türkiye siyaseti, 12 siyasi parti
-- Yöntem: 10 ideolojik eksende soru-cevap, sabit kurallı skorlama algoritması
+- Eksen modeli sürümü: v2
+- Yöntem: 8 ideolojik eksende 25 soru, sabit kurallı skorlama algoritması
 - Gizlilik: Anonim oturum, kişisel veri toplanmaz
+
+## Eksenler
+
+- **Ekonomik Model ve Yeniden Dağıtım**: Ekonomik kaynakların piyasa mı yoksa devlet eliyle mi yönlendirileceği ve vergi-transfer yoluyla yeniden dağıtımın kapsamı.
+- **Demokratik Kurumlar ve Hukukun Üstünlüğü**: Yürütme yetkisinin sınırları, yargı bağımsızlığı, kuvvetler ayrılığı ve temel hak ve özgürlüklerin güvencesi.
+- **Sekülerizm ve Dinin Kamusal Rolü**: Din ile devlet arasındaki ilişki; dini referansların kamu politikası ve eğitim üzerindeki etkisi.
+- **Kimlik, Kürt Meselesi ve Yerel Özerklik**: Etnik ve kültürel kimliklerin tanınması, anadil hakları ve merkezî idare ile yerel yönetimler arasındaki yetki dengesi.
+- **Göç ve Sığınmacı Politikası**: Sığınmacıların hukuki statüsü, geri dönüş politikaları ve uyum hizmetlerine ayrılan kaynak.
+- **Refah, Eğitim, Toplumsal Cinsiyet ve Aile**: Sosyal politikanın evrensel mi hedefli mi olacağı, eğitim müfredatının yönü ve toplumsal cinsiyet ile aile politikaları.
+- **Çevre ve Kalkınma**: Ekonomik büyüme ve yatırım öncelikleri ile ekolojik koruma ve iklim hedefleri arasındaki denge.
+- **Dış Politika, Güvenlik Yönelimi ve Avrupa**: Türkiye’nin Batı kurumlarıyla ilişkisi, AB süreci ve stratejik özerklik ile çok taraflı işbirliği arasındaki tercih.
+
+## Karşılaştırmaya Dahil Partiler
+
+AKP, CHP, DEVA, Gelecek, DEM, İYİ, MHP, Saadet, TİP, Vatan, YENİ PARTİ, Zafer
 
 ## Sayfalar
 
 - [Ana Sayfa](https://oyvergitsin.org/): Platformun tanıtımı ve anketi başlatma
+- [Metodoloji](https://oyvergitsin.org/metodoloji): Eksen tanımları, puanlama algoritması, parti konumlarının nasıl kodlandığı ve kaynaklar
+- [Siyaset Radarı](https://oyvergitsin.org/siyaset-radari): Parti geçişleri, TBMM sandalye dağılımı, il bazlı seçim sonuçları ve gazeteci özgürlüğü kayıtları — hepsi kaynaklı ve doğrulama tarihli
 - [Açık Rıza](https://oyvergitsin.org/consent): Anket öncesi onam metni
+
+## Yasal
+
+- [Gizlilik Politikası](https://oyvergitsin.org/legal/privacy-policy)
+- [KVKK Aydınlatma Metni](https://oyvergitsin.org/legal/kvkk-disclosure)
+- [Çerez Politikası](https://oyvergitsin.org/legal/cookie-policy)
+- [Kullanım Koşulları](https://oyvergitsin.org/legal/terms-of-use)
 
 ## Notlar
 
 - Sonuç sayfaları ve anket akışı oturuma özgüdür, indekslenmez.
+- Sonuç, oy verme tavsiyesi değildir; görüşlerin partilerin kayıtlı konumlarıyla örtüşme ölçüsüdür.
 - Skorlama metodolojisi ve parti pozisyonları tarafsızlık ilkesiyle, kaynak dayalı olarak güncellenir.
+- Bu dosya elle yazılmaz; `npm run geo:llms` ile aktif eksen modelinden üretilir.

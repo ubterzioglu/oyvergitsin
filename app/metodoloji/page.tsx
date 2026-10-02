@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { getSiteUrl, siteConfig } from '@/lib/site'
 import { getPublicServerClient } from '@/lib/supabase/route'
 import { getActiveAxisModelId } from '@/lib/scoring/active-model'
 import { Card } from '@/components/ui/Card'
@@ -106,9 +107,89 @@ async function fetchMethodology() {
   }
 }
 
+/**
+ * Metodoloji sayfasını makine-okunur hâle getirir.
+ *
+ * Bu sayfa platformun alıntılanabilir çekirdeği: üretken arama motorları
+ * (ChatGPT, Perplexity, AI Overviews) "bu test nasıl hesaplıyor" sorusuna
+ * buradan cevap verecek. JSON-LD sunucu tarafında render edilir — AI
+ * tarayıcıları JavaScript çalıştırmaz.
+ *
+ * Tüm değerler aktif modelden türetilir; sabit sayı yazılmaz, çünkü yanlış
+ * sayı üretilen yanıtlara olduğu gibi geçer.
+ */
+function buildMethodologyStructuredData(
+  siteUrl: string,
+  model: { name: string; version: string; created_at: string } | null,
+  axes: AxisRow[],
+  scoredQuestionCount: number
+) {
+  const pageUrl = `${siteUrl}/metodoloji`
+
+  const dataset = {
+    '@type': 'Dataset',
+    '@id': `${pageUrl}#dataset`,
+    name: 'oyvergitsin.org eksen modeli ve parti konumları',
+    description:
+      'Siyasi eşleşme hesabında kullanılan ideolojik eksenler, eksen kutupları, puanlanan soru seti ve partilerin bu eksenlerdeki kayıtlı konumları.',
+    url: pageUrl,
+    inLanguage: siteConfig.language,
+    isAccessibleForFree: true,
+    license: `${siteUrl}/legal/terms-of-use`,
+    creator: { '@id': `${siteUrl}/#organization` },
+    ...(model ? { version: model.version, dateModified: model.created_at } : {}),
+    variableMeasured: axes.map((axis) => ({
+      '@type': 'PropertyValue',
+      name: axis.name,
+      alternateName: axis.slug,
+      description: axis.description,
+      ...(axis.pole_negative && axis.pole_positive
+        ? { minValue: axis.pole_negative, maxValue: axis.pole_positive }
+        : {})
+    }))
+  }
+
+  const faq = {
+    '@type': 'FAQPage',
+    '@id': `${pageUrl}#faq`,
+    mainEntity: [
+      {
+        question: 'Eşleşme skoru nasıl hesaplanıyor?',
+        answer: `Cevaplarınızdan ${axes.length} ideolojik eksenin her biri için bir puan türetilir; bu puanlar partilerin aynı eksenlerdeki kayıtlı konumlarıyla karşılaştırılarak her parti için bir benzerlik yüzdesi hesaplanır. Algoritma sabit kurallıdır ve hiçbir partiye avantaj sağlamaz.`
+      },
+      {
+        question: 'Kaç soru puanlamaya giriyor?',
+        answer: `Aktif soru setinde puanlamaya giren ${scoredQuestionCount} soru vardır. Dikkat kontrolü gibi puanlanmayan sorular skoru etkilemez.`
+      },
+      {
+        question: 'Parti konumları nereden geliyor?',
+        answer:
+          'Parti konumları parti programları, seçim beyannameleri ve kayıtlı politika pozisyonları temel alınarak kodlanır; kodlama protokolü ve kaynaklar bu sayfada belgelenmiştir.'
+      },
+      {
+        question: 'Sonuç bir oy verme tavsiyesi mi?',
+        answer:
+          'Hayır. Araç, görüşlerinizin partilerin kayıtlı konumlarıyla ne kadar örtüştüğünü ölçer; kime oy verilmesi gerektiğini söylemez.'
+      }
+    ].map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: { '@type': 'Answer', text: item.answer }
+    }))
+  }
+
+  return { '@context': 'https://schema.org', '@graph': [dataset, faq] }
+}
+
 export default async function MethodologyPage() {
   const { model, axes, questions, scoredQuestionIds } = await loadMethodology()
   const scoredQuestions = questions.filter((question) => scoredQuestionIds.has(question.id))
+  const structuredData = buildMethodologyStructuredData(
+    getSiteUrl(),
+    model,
+    axes,
+    scoredQuestions.length
+  )
 
   // Kutup tanımı, bir eksen modelinin belgelenmiş olmasının işaretidir. Tanımı
   // olmayan bir model geliştirme içeriğidir ve "yayımlanmış yöntem" gibi
@@ -117,6 +198,10 @@ export default async function MethodologyPage() {
 
   return (
     <div className="min-h-screen bg-surface px-4 py-12">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
       <Container size="md">
         <h1 className="mb-3 font-heading text-4xl font-semibold text-ink-primary">Metodoloji</h1>
         <p className="mb-6 text-ink-secondary">

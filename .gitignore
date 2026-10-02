@@ -47,9 +47,18 @@ next-env.d.ts
 
 # supabase
 .supabase
+supabase.zip
 
 # Playwright
 test-results/
 playwright-report/
 .prod-test.log
 .dev-check.log
+
+# local artifacts
+tsconfig.tsbuildinfo
+.idea/
+.omc/
+.logs/
+.dev-*.log
+.next-dev*.log

@@ -369,3 +369,63 @@ aktif modelin 8 ekseniyle düzeltilmeli.
 
 **Onay kapısı:** Bu belge karar vermez. B10 (token katmanı), proje sahibi A/B/C'den birini
 açıkça seçmeden başlamaz. Seçim bildirildiğinde bu belgeye "Karar" bölümü eklenir.
+
+---
+
+## 7. KARAR — Yön A "Kamusal Ekran" (2026-10-02)
+
+Proje sahibi **Yön A**'yı seçti. B9 kapandı; B10 (token katmanı) başlayabilir.
+
+### Kararın dayandığı kanıt — bağımsız doğrulandı
+
+Belgedeki tarafsızlık analizi `lib/parties.ts` içindeki `PARTY_COLORS`
+sabitine karşı yeniden hesaplandı. Sonuç iddiayı doğruluyor, hatta kontrast
+üst sınırı belgedekinden biraz daha yüksek çıktı:
+
+| accent | en yakın parti | hue farkı | kontrast |
+|---|---|---|---|
+| yellow `#F5C518` | MHP `#F2B705` | 1.9° | 1.12 |
+| orange `#F5821F` | AKP `#F7941D` | 5.0° | 1.14 |
+| red `#E8385C` | Vatan `#D10F2F` | 2.4° | 1.35 |
+| purple `#7B4FE0` | DEVA `#7A3DB8` | 11.5° | 1.27 |
+| blue `#1E9BE0` | Gelecek `#1B6FB3` | 5.5° | 1.72 |
+| green `#3CB043` | YSP `#0F7A3A` | 20.5° | 1.94 |
+
+**6/6 accent, bir parti renginden ayırt edilemiyor** (hepsi 30° hue eşiğinin
+altında). Tarafsızlık iddia eden bir platformda kabuk renginin parti rengi
+gibi okunması yapısal bir sorun; A bunu kökten çözüyor.
+
+### B10 için düzeltilmiş kapsam — bu belgedeki envanteri EZER
+
+Bu belgedeki "76 kullanım / ~25 dosya" sayımı birleşme öncesi dalda yapılmış.
+`integration/2026-10-02` üzerinde (B1–B8 birleşmiş hâl) birinci elden sayım:
+
+- **100** adet `rainbow-*` sınıf kullanımı, **33** dosyada
+- `rainbow-gradient-border` yardımcı sınıfı 3 yerde
+- En yoğun dosya **`components/survey/LikertScale.tsx` (15)** — bu belgede ve
+  planın ilk hâlinde hiç geçmiyordu, B10'un asıl kaldıracı burası
+- Sonraki yoğunlar: `SiyasetRadariDashboard.tsx` (8), `Footer.tsx` (8),
+  `siyaset-radari/kisi/[slug]/page.tsx` (4)
+
+### B10'un atlamaması gereken şey
+
+`tailwind.config.ts`'i güncellemek YETMEZ. Token katmanını bypass eden iki
+hardcoded hex dizisi var:
+
+```
+app/page.tsx:44         const RAINBOW_ACCENTS = ['#F5C518','#F5821F','#E8385C','#7B4FE0','#1E9BE0','#3CB043']
+app/survey/page.tsx:14  const RAINBOW_ACCENTS = ['#F5C518','#F5821F','#E8385C','#7B4FE0','#1E9BE0','#3CB043']
+```
+
+Inline `style={{ borderTopColor }}` / `boxShadow` olarak uygulandıkları için
+Tailwind'den geçmiyorlar. Sadece config değişirse site yarı geçmiş kalır:
+ana sayfa kartları ve anket soru kartı eski rainbow renklerini göstermeye
+devam eder. Kullanım yerleri: `app/page.tsx:50,78,128`,
+`app/survey/page.tsx:256,321`.
+
+### Yön B'nin düşürülme gerekçesi
+
+B en düşük maliyetli yöndü (3–6 dosya) ve marka kaydındaki rainbow kararını
+sürdüren tek yöndü. Düşürüldü çünkü çakışan hue'ları yerinde bıraktığı için
+6/6 çakışmayı tam çözmüyor — yani sorunun kendisini değil görünürlüğünü
+azaltıyordu.

@@ -153,13 +153,17 @@ export default async function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqStructuredData) }}
       />
       <section className="relative overflow-hidden bg-ink-primary">
+        {/*
+          poster kaldırıldı: eski marka logosu (public/logo.png) siliniyor.
+          Video yüklenene kadar bölümün kendi bg-ink-primary arka planı
+          görünür, bu yüzden görsel boşluk oluşmuyor.
+        */}
         <video
           className="absolute inset-0 h-full w-full object-cover motion-reduce:hidden"
           autoPlay
           muted
           loop
           playsInline
-          poster="/logo.png"
           aria-hidden="true"
         >
           <source src="/videos/hero-bg.mp4" type="video/mp4" />

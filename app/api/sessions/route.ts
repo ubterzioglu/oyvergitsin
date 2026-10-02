@@ -4,9 +4,10 @@ import { getRouteClient } from '@/lib/supabase/route'
 import { createClient as createAuthClient } from '@/lib/supabase/server'
 import { CreateSessionSchema } from '@/lib/validation/survey'
 import { generateSessionToken, hashSessionToken, setSessionTokenCookie } from '@/lib/session-token'
-import { isRateLimited, getClientIp } from '@/lib/rate-limit'
+import { getClientIp } from '@/lib/rate-limit'
 import { getSessionHashSecret } from '@/lib/security/session-hash-secret'
-import { jsonError, noStoreJson } from '@/lib/api/responses'
+import { noStoreJson } from '@/lib/api/responses'
+import { enforceRateLimit, handleUnexpectedError, parseJsonBody } from '@/lib/api/route-helpers'
 
 function hashIp(ip: string, secret: string): string {
   return createHmac('sha256', secret).update(ip).digest('hex').substring(0, 64)
@@ -15,18 +16,19 @@ function hashIp(ip: string, secret: string): string {
 export async function POST(request: NextRequest) {
   try {
     const hashSecret = getSessionHashSecret()
+
+    const rateLimited = enforceRateLimit(request, {
+      bucket: 'sessions',
+      limit: 10,
+      windowMs: 60 * 1000
+    })
+    if (rateLimited) return rateLimited
+
     const clientIp = getClientIp(request)
-    if (isRateLimited(`sessions:${clientIp}`, 10, 60 * 1000)) {
-      return jsonError('Çok fazla istek. Lütfen biraz sonra tekrar deneyin.', 429)
-    }
-
     const supabase = getRouteClient()
-    const body = await request.json().catch(() => ({}))
-    const parsed = CreateSessionSchema.safeParse(body)
 
-    if (!parsed.success) {
-      return jsonError('Geçersiz istek.', 400)
-    }
+    const parsed = await parseJsonBody(request, CreateSessionSchema)
+    if (!parsed.ok) return parsed.response
 
     const { isGuest } = parsed.data
 
@@ -84,7 +86,10 @@ export async function POST(request: NextRequest) {
 
     return noStoreJson({ sessionId: session.id })
   } catch (error) {
-    console.error('Session creation error:', error)
-    return jsonError('Oturum oluşturulamadı. Lütfen tekrar deneyin.', 500)
+    return handleUnexpectedError(
+      'api/sessions',
+      error,
+      'Oturum oluşturulamadı. Lütfen tekrar deneyin.'
+    )
   }
 }

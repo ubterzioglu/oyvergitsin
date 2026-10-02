@@ -2,21 +2,19 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getRouteClient } from '@/lib/supabase/route'
 import { SubmitFeedbackSchema } from '@/lib/validation/feedback'
 import { sendFeedbackNotification } from '@/lib/email/sendFeedbackNotification'
-import { isRateLimited, getClientIp } from '@/lib/rate-limit'
+import { enforceRateLimit, handleUnexpectedError, parseJsonBody } from '@/lib/api/route-helpers'
 
 export async function POST(request: NextRequest) {
   try {
-    const clientIp = getClientIp(request)
-    if (isRateLimited(`feedback:${clientIp}`, 5, 10 * 60 * 1000)) {
-      return NextResponse.json({ error: 'Çok fazla istek. Lütfen biraz sonra tekrar deneyin.' }, { status: 429 })
-    }
+    const rateLimited = enforceRateLimit(request, {
+      bucket: 'feedback',
+      limit: 5,
+      windowMs: 10 * 60 * 1000
+    })
+    if (rateLimited) return rateLimited
 
-    const body = await request.json().catch(() => ({}))
-    const parsed = SubmitFeedbackSchema.safeParse(body)
-
-    if (!parsed.success) {
-      return NextResponse.json({ error: 'Geçersiz istek.' }, { status: 400 })
-    }
+    const parsed = await parseJsonBody(request, SubmitFeedbackSchema)
+    if (!parsed.ok) return parsed.response
 
     const { message } = parsed.data
 
@@ -29,7 +27,10 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ success: true })
   } catch (error) {
-    console.error('Feedback submission error:', error)
-    return NextResponse.json({ error: 'Geri bildirim kaydedilemedi. Lütfen tekrar deneyin.' }, { status: 500 })
+    return handleUnexpectedError(
+      'api/feedback',
+      error,
+      'Geri bildirim kaydedilemedi. Lütfen tekrar deneyin.'
+    )
   }
 }

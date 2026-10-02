@@ -5,34 +5,33 @@ import { getActiveAxisModelId } from '@/lib/scoring/active-model'
 import { validateSurveyCompletion } from '@/lib/survey/completion'
 import { CompleteSessionSchema } from '@/lib/validation/survey'
 import { assertSessionOwnership } from '@/lib/session-ownership'
-import { isRateLimited, getClientIp } from '@/lib/rate-limit'
+import { API_ERROR_CODES } from '@/lib/api/error-codes'
 import { jsonError, noStoreJson } from '@/lib/api/responses'
+import { enforceRateLimit, handleUnexpectedError, parseJsonBody } from '@/lib/api/route-helpers'
 
 export async function POST(request: NextRequest) {
   try {
-    const clientIp = getClientIp(request)
-    if (isRateLimited(`complete:${clientIp}`, 10, 60 * 1000)) {
-      return jsonError('Çok fazla istek. Lütfen biraz sonra tekrar deneyin.', 429)
-    }
+    const rateLimited = enforceRateLimit(request, {
+      bucket: 'complete',
+      limit: 10,
+      windowMs: 60 * 1000
+    })
+    if (rateLimited) return rateLimited
 
-    const body = await request.json().catch(() => ({}))
-    const parsed = CompleteSessionSchema.safeParse(body)
-
-    if (!parsed.success) {
-      return jsonError('Geçersiz istek.', 400)
-    }
+    const parsed = await parseJsonBody(request, CompleteSessionSchema)
+    if (!parsed.ok) return parsed.response
 
     const { sessionId } = parsed.data
 
     const owns = await assertSessionOwnership(sessionId)
     if (!owns) {
-      return jsonError('Yetkisiz istek.', 403)
+      return jsonError(API_ERROR_CODES.FORBIDDEN, 'Yetkisiz istek.')
     }
 
     const supabase = getRouteClient()
     const axisModelId = await getActiveAxisModelId(supabase)
     if (!axisModelId) {
-      return jsonError('Aktif eksen modeli bulunamadı.', 503)
+      return jsonError(API_ERROR_CODES.AXIS_MODEL_UNAVAILABLE, 'Aktif eksen modeli bulunamadı.')
     }
 
     const [questionsResult, answersResult] = await Promise.all([
@@ -62,7 +61,7 @@ export async function POST(request: NextRequest) {
     )
 
     if (!completion.ok) {
-      return jsonError('Tüm soruları doğru cevaplamalısınız.', 400, {
+      return jsonError(API_ERROR_CODES.SURVEY_INCOMPLETE, 'Tüm soruları doğru cevaplamalısınız.', {
         firstInvalidQuestionId: completion.firstInvalidQuestionId,
         missingQuestionCount: completion.missingQuestionIds.length,
         failedAttentionQuestionCount: completion.failedAttentionQuestionIds.length,
@@ -98,7 +97,10 @@ export async function POST(request: NextRequest) {
 
     return noStoreJson(results)
   } catch (error) {
-    console.error('Complete session error:', error)
-    return jsonError('Anket tamamlanamadı. Lütfen tekrar deneyin.', 500)
+    return handleUnexpectedError(
+      'api/complete',
+      error,
+      'Anket tamamlanamadı. Lütfen tekrar deneyin.'
+    )
   }
 }

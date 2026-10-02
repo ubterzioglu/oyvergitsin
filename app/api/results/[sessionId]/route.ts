@@ -1,7 +1,9 @@
 import { z } from 'zod'
 import { getRouteClient } from '@/lib/supabase/route'
 import { assertSessionOwnership } from '@/lib/session-ownership'
+import { API_ERROR_CODES } from '@/lib/api/error-codes'
 import { jsonError, noStoreJson } from '@/lib/api/responses'
+import { handleUnexpectedError } from '@/lib/api/route-helpers'
 
 const ParamsSchema = z.object({ sessionId: z.string().uuid() })
 
@@ -14,14 +16,14 @@ export async function GET(
     const parsed = ParamsSchema.safeParse(resolvedParams)
 
     if (!parsed.success) {
-      return jsonError('Geçersiz oturum kimliği.', 400)
+      return jsonError(API_ERROR_CODES.INVALID_REQUEST, 'Geçersiz oturum kimliği.')
     }
 
     const { sessionId } = parsed.data
 
     const owns = await assertSessionOwnership(sessionId)
     if (!owns) {
-      return jsonError('Yetkisiz istek.', 403)
+      return jsonError(API_ERROR_CODES.FORBIDDEN, 'Yetkisiz istek.')
     }
 
     const supabase = getRouteClient()
@@ -48,7 +50,10 @@ export async function GET(
 
     return noStoreJson(results)
   } catch (error) {
-    console.error('Results fetch error:', error)
-    return jsonError('Sonuçlar alınamadı. Lütfen tekrar deneyin.', 500)
+    return handleUnexpectedError(
+      'api/results',
+      error,
+      'Sonuçlar alınamadı. Lütfen tekrar deneyin.'
+    )
   }
 }

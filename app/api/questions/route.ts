@@ -1,6 +1,9 @@
 import { NextResponse } from 'next/server'
 import { getPublicServerClient } from '@/lib/supabase/route'
 import { getActiveAxisModelId } from '@/lib/scoring/active-model'
+import { API_ERROR_CODES } from '@/lib/api/error-codes'
+import { jsonError } from '@/lib/api/responses'
+import { handleUnexpectedError } from '@/lib/api/route-helpers'
 
 export async function GET() {
   try {
@@ -11,7 +14,7 @@ export async function GET() {
     const axisModelId = await getActiveAxisModelId(supabase)
 
     if (!axisModelId) {
-      return NextResponse.json({ error: 'Aktif eksen modeli bulunamadı.' }, { status: 503 })
+      return jsonError(API_ERROR_CODES.AXIS_MODEL_UNAVAILABLE, 'Aktif eksen modeli bulunamadı.')
     }
 
     const { data: questions, error } = await supabase
@@ -34,7 +37,10 @@ export async function GET() {
       }))
     })
   } catch (error) {
-    console.error('Questions fetch error:', error)
-    return NextResponse.json({ error: 'Sorular yüklenemedi. Lütfen tekrar deneyin.' }, { status: 500 })
+    return handleUnexpectedError(
+      'api/questions',
+      error,
+      'Sorular yüklenemedi. Lütfen tekrar deneyin.'
+    )
   }
 }

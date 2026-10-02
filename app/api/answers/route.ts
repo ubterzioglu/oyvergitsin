@@ -2,28 +2,27 @@ import { NextRequest } from 'next/server'
 import { getRouteClient } from '@/lib/supabase/route'
 import { SubmitAnswersSchema } from '@/lib/validation/survey'
 import { assertSessionOwnership } from '@/lib/session-ownership'
-import { isRateLimited, getClientIp } from '@/lib/rate-limit'
+import { API_ERROR_CODES } from '@/lib/api/error-codes'
 import { jsonError, noStoreJson } from '@/lib/api/responses'
+import { enforceRateLimit, handleUnexpectedError, parseJsonBody } from '@/lib/api/route-helpers'
 
 export async function POST(request: NextRequest) {
   try {
-    const clientIp = getClientIp(request)
-    if (isRateLimited(`answers:${clientIp}`, 30, 60 * 1000)) {
-      return jsonError('Çok fazla istek. Lütfen biraz sonra tekrar deneyin.', 429)
-    }
+    const rateLimited = enforceRateLimit(request, {
+      bucket: 'answers',
+      limit: 30,
+      windowMs: 60 * 1000
+    })
+    if (rateLimited) return rateLimited
 
-    const body = await request.json().catch(() => ({}))
-    const parsed = SubmitAnswersSchema.safeParse(body)
-
-    if (!parsed.success) {
-      return jsonError('Geçersiz istek.', 400)
-    }
+    const parsed = await parseJsonBody(request, SubmitAnswersSchema)
+    if (!parsed.ok) return parsed.response
 
     const { sessionId, answers } = parsed.data
 
     const owns = await assertSessionOwnership(sessionId)
     if (!owns) {
-      return jsonError('Yetkisiz istek.', 403)
+      return jsonError(API_ERROR_CODES.FORBIDDEN, 'Yetkisiz istek.')
     }
 
     const supabase = getRouteClient()
@@ -43,7 +42,10 @@ export async function POST(request: NextRequest) {
 
     return noStoreJson({ success: true, count: data.length })
   } catch (error) {
-    console.error('Answers submission error:', error)
-    return jsonError('Cevaplar kaydedilemedi. Lütfen tekrar deneyin.', 500)
+    return handleUnexpectedError(
+      'api/answers',
+      error,
+      'Cevaplar kaydedilemedi. Lütfen tekrar deneyin.'
+    )
   }
 }

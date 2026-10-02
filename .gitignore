@@ -53,3 +53,18 @@ test-results/
 playwright-report/
 .prod-test.log
 .dev-check.log
+
+# IDE
+.idea/
+
+# local archives / dumps
+supabase.zip
+*.zip
+
+# dev server logs
+.dev-err.log
+.dev-out.log
+.next-dev.log
+.next-dev.err.log
+.next-dev-job-id
+.logs/

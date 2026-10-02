@@ -34,3 +34,36 @@ export function getSiteUrl() {
 
   return normalizedUrl.replace(/\/+$/, '')
 }
+
+/**
+ * Herkese açık (indekslenebilir) rotalar. Sitemap ve canonical/hreflang
+ * üretimi tek bir listeden beslenir ki yeni bir public sayfa eklenince
+ * sitemap ile sayfa metadata'sı birbirinden kopmasın.
+ *
+ * Özel akışlar (/consent, /survey, /results/*) ve /admin/* burada YOKTUR;
+ * onlar kendi layout.tsx dosyalarında noindex taşır.
+ */
+export const PUBLIC_ROUTES = ['/', '/metodoloji', '/siyaset-radari'] as const
+
+export const LEGAL_ROUTES = [
+  '/legal/privacy-policy',
+  '/legal/kvkk-disclosure',
+  '/legal/cookie-policy',
+  '/legal/terms-of-use'
+] as const
+
+/**
+ * Sayfa metadata'sı icin canonical + hreflang ciftini uretir.
+ * Site tek dilli (tr-TR) oldugundan x-default de ayni URL'yi gosterir.
+ */
+export function buildAlternates(path: string) {
+  const normalizedPath = path === '/' ? '/' : `/${path.replace(/^\/+|\/+$/g, '')}`
+
+  return {
+    canonical: normalizedPath,
+    languages: {
+      [siteConfig.language]: normalizedPath,
+      'x-default': normalizedPath
+    }
+  }
+}

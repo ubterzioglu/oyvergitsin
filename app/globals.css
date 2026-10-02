@@ -5,11 +5,16 @@
 :root {
   --font-heading: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', system-ui, sans-serif;
   --font-body: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', system-ui, sans-serif;
+
+  /* Veri yazısı: yalnızca sayılar ve doğrulama damgaları için.
+     Sistem mono yığını — harici font indirilmiyor. */
+  --font-data: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas,
+    'Liberation Mono', monospace;
 }
 
 body {
-  color: #1A1D23;
-  background-color: #FAFBFC;
+  color: #191C1E;
+  background-color: #F7F8F8;
 }
 
 @layer utilities {
@@ -17,15 +22,27 @@ body {
     text-wrap: balance;
   }
 
+  /*
+    Sayı ve doğrulama damgalarını veri yazısına geçirir: soru sayacı,
+    benzerlik yüzdeleri, eksen numaraları, last_verified_at.
+    `tabular-nums` sayıların sütun halinde kaymasını engeller — yüzde
+    listelerinde ve sandalye tablolarında fark ediliyor.
+  */
+  .data-figure {
+    font-family: var(--font-data);
+    font-feature-settings: 'tnum' 1, 'zero' 1;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.01em;
+  }
+
+  /*
+    GEÇİCİ: .rainbow-gradient-border eski gökkuşağı şeridiydi (Header'da 3px).
+    Sınıf adı korunuyor çünkü hâlâ 3 yerde kullanılıyor ve bu commit'te
+    silinirse şerit kaybolur. Artık gökkuşağı değil, petrol→nötr tek yönlü
+    bir geçiş. B11/B12 şeridi kendi token'larıyla yeniden kurunca bu
+    yardımcı sınıf SİLİNECEK.
+  */
   .rainbow-gradient-border {
-    background-image: linear-gradient(
-      90deg,
-      #F5C518 0%,
-      #F5821F 20%,
-      #E8385C 40%,
-      #7B4FE0 60%,
-      #1E9BE0 80%,
-      #3CB043 100%
-    );
+    background-image: linear-gradient(90deg, #0E6E7D 0%, #3C8E99 55%, #C3CDCD 100%);
   }
 }

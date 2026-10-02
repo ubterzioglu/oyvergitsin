@@ -41,7 +41,16 @@ const STEPS = [
   },
 ]
 
-const RAINBOW_ACCENTS = ['#F5C518', '#F5821F', '#E8385C', '#7B4FE0', '#1E9BE0', '#3CB043']
+// B10 — kapsam istisnası, bilerek yapıldı.
+// Bu dosya B12'nin sahipliğinde ve yapısal düzenlemesi ona ait. Ancak buradaki
+// altı hex Tailwind'den geçmiyor (inline style olarak uygulanıyor), yani token
+// katmanı değiştirilse de olduğu gibi kalıyorlardı: build çıktısının JS
+// paketinde eski parti-çakışan renkler görünmeye devam ediyordu — ölçüldü.
+// Tarafsızlık düzeltmesi yarım kalmasın diye yalnızca DEĞERLER nötr rampaya
+// çevrildi; dizinin yapısı ve kullanım biçimi B12'ye bırakıldı.
+// B12: bu diziyi tamamen kaldır — Yön A tek accent kullanıyor, döngüsel
+// gökkuşağı accent kavramı artık yok.
+const RAINBOW_ACCENTS = ['#C6D2D3', '#9BB6B9', '#769DA2', '#55868E', '#38737C', '#1D616B']
 
 const TRUST_SIGNALS = [
   { title: 'Tamamen Anonim', description: 'Kimliğiniz veya iletişim bilgileriniz talep edilmez.', icon: '🕶️' },

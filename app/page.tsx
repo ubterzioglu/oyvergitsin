@@ -5,11 +5,18 @@ import { Button } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
 import { Container } from '@/components/ui/Container'
 import { LatestNews } from '@/components/home/LatestNews'
+import { getPlatformFacts, type PlatformAxis, type PlatformParty } from '@/lib/geo/platform-facts'
+
+// Eksen ve parti listeleri veritabanındaki AKTİF modelden okunur. Sayfa
+// tamamen statik üretilirse model değiştiğinde bayat kalır; saatlik yeniden
+// doğrulama bunu sınırlar. (Metodoloji sayfası aynı sebeple force-dynamic;
+// orada bayatlık doğrudan şeffaflık sorunu olduğu için daha katı.)
+export const revalidate = 3600
 
 export const metadata: Metadata = {
   title: 'Turkiye Siyasi Eslesme Testi',
   description:
-    'Turkiye\'de siyasi gorusunuzu 10 ideolojik eksende kisa bir anketle analiz edin; size en yakin partileri tarafsiz, anonim ve ucretsiz bir eslesme testiyle gorun.',
+    'Turkiye\'de siyasi gorusunuzu ideolojik eksenlerde kisa bir anketle analiz edin; size en yakin partileri tarafsiz, anonim ve ucretsiz bir eslesme testiyle gorun.',
   alternates: {
     canonical: '/'
   },
@@ -25,7 +32,7 @@ const STEPS = [
   {
     number: '02',
     title: 'Soruları Yanıtla',
-    description: '10 ideolojik eksen üzerinden kısa sorulara samimi cevaplar verin.',
+    description: 'İdeolojik eksenler üzerinden kısa sorulara samimi cevaplar verin.',
   },
   {
     number: '03',
@@ -42,20 +49,52 @@ const TRUST_SIGNALS = [
   { title: 'Açık Kaynak', description: 'Eşleşme mantığı ve veri kullanımı şeffaf bir şekilde belgelenmiştir.', icon: '🔓' },
 ].map((signal, index) => ({ ...signal, accent: RAINBOW_ACCENTS[index % RAINBOW_ACCENTS.length] }))
 
-const IDEOLOGICAL_AXES = [
-  { name: 'Ekonomi: Piyasa vs Devlet', description: 'Ekonomik kararların piyasa mekanizmaları mı yoksa devlet müdahalesi mi ile yönetilmesi gerektiği', icon: '📈' },
-  { name: 'Gelir Dağılımı', description: 'Gelir ve servetin dağılımı ile ilgili bakış açısı', icon: '⚖️' },
-  { name: 'Sivil Özgürlükler', description: 'Bireysel özgürlüklerin devlet otoritesi ile dengesi', icon: '🕊️' },
-  { name: 'Güvenlik ve Devlet', description: 'Milli güvenlik öncelikleri ve devletin rolü', icon: '🛡️' },
-  { name: 'Sekülerizm', description: 'Din ve devlet ilişkisi', icon: '🏛️' },
-  { name: 'Kimlik ve Göç', description: 'Ulusal kimlik ve göç politikaları', icon: '🌍' },
-  { name: 'Dış Politika', description: 'Uluslararası ilişkiler ve dış politika yaklaşımı', icon: '🤝' },
-  { name: 'AB İlişkileri', description: 'Avrupa Birliği ile ilişkiler ve uyum süreci', icon: '🇪🇺' },
-  { name: 'Eğitim ve Sosyal Politika', description: 'Eğitim sistemi ve sosyal politikalar', icon: '🎓' },
-  { name: 'Çevre ve Kalkınma', description: 'Çevre koruma ve ekonomik kalkınma dengesi', icon: '🌱' },
-].map((axis, index) => ({ ...axis, accent: RAINBOW_ACCENTS[index % RAINBOW_ACCENTS.length] }))
+// Eksen adları ve açıklamaları artık veritabanından geliyor; burada yalnızca
+// sunum katmanı (ikon) kalıyor. Önceden tüm liste sabit kodluydu ve aktif
+// model v2'ye geçtikten sonra ana sayfa hâlâ v1'in eksenlerini — "AB
+// İlişkileri", "Gelir Dağılımı" gibi artık var olmayanları — gösteriyordu.
+const AXIS_ICON_BY_SLUG: Record<string, string> = {
+  ekonomi: '📈',
+  demokrasi: '🏛️',
+  sekulerizm: '⚖️',
+  kimlik: '🌍',
+  goc: '🧭',
+  sosyal: '🎓',
+  cevre: '🌱',
+  dis: '🤝'
+}
 
-const FAQ_ITEMS = [
+const FALLBACK_AXIS_ICON = '🔎'
+
+interface DecoratedAxis extends PlatformAxis {
+  icon: string
+  accent: string
+}
+
+function decorateAxes(axes: PlatformAxis[]): DecoratedAxis[] {
+  return axes.map((axis, index) => ({
+    ...axis,
+    icon: AXIS_ICON_BY_SLUG[axis.slug] ?? FALLBACK_AXIS_ICON,
+    accent: RAINBOW_ACCENTS[index % RAINBOW_ACCENTS.length]
+  }))
+}
+
+function formatPartyList(parties: PlatformParty[]): string {
+  const labels = parties.map((party) => party.shortName || party.name)
+
+  if (labels.length === 0) {
+    return 'Türkiye\'deki başlıca partiler'
+  }
+
+  return labels.join(', ')
+}
+
+// SSS metinleri de aktif modelden besleniyor: eksen sayısı ve parti listesi
+// elle yazıldığı için bayatlamıştı ("12 parti", "Yeşil Sol Parti"). Yanlış
+// sayı FAQPage JSON-LD üzerinden üretken arama motorlarının yanıtlarına
+// olduğu gibi geçiyor.
+function buildFaqItems(axisCount: number, parties: PlatformParty[]) {
+  return [
   {
     question: 'oyvergitsin.org nedir?',
     answer:
@@ -65,7 +104,7 @@ const FAQ_ITEMS = [
   {
     question: 'Anket ne kadar sürer?',
     answer:
-      '10 ideolojik eksen üzerinden hazırlanmış kısa sorulardan oluşur ve birkaç dakika içinde tamamlanabilir.',
+      `${axisCount} ideolojik eksen üzerinden hazırlanmış kısa sorulardan oluşur ve birkaç dakika içinde tamamlanabilir.`,
     icon: '⏱️',
   },
   {
@@ -83,16 +122,21 @@ const FAQ_ITEMS = [
   {
     question: 'Hangi partiler karşılaştırmaya dahil?',
     answer:
-      'AKP, CHP, MHP, İYİ Parti, DEVA, Gelecek Partisi, Saadet Partisi, TİP, Vatan Partisi, Yeşil Sol Parti, Zafer Partisi ve Memleket Partisi dahil olmak üzere Türkiye\'deki başlıca partiler karşılaştırmaya dahildir.',
+      `Karşılaştırmaya şu partiler dahildir: ${formatPartyList(parties)}.`,
     icon: '🤝',
   },
-].map((item, index) => ({ ...item, accent: RAINBOW_ACCENTS[index % RAINBOW_ACCENTS.length] }))
+  ].map((item, index) => ({ ...item, accent: RAINBOW_ACCENTS[index % RAINBOW_ACCENTS.length] }))
+}
 
-export default function Home() {
+export default async function Home() {
+  const facts = await getPlatformFacts()
+  const ideologicalAxes = decorateAxes(facts.axes)
+  const faqItems = buildFaqItems(facts.axes.length, facts.parties)
+
   const faqStructuredData = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    mainEntity: FAQ_ITEMS.map((item) => ({
+    mainEntity: faqItems.map((item) => ({
       '@type': 'Question',
       name: item.question,
       acceptedAnswer: {
@@ -194,16 +238,17 @@ export default function Home() {
       <section className="bg-white py-20">
         <Container>
           <h2 className="text-center font-heading text-3xl font-semibold text-ink-primary">
-            10 İdeolojik Eksen
+            {ideologicalAxes.length} İdeolojik Eksen
           </h2>
           <p className="mx-auto mt-3 max-w-2xl text-center text-sm text-ink-secondary">
-            Anket, Türkiye siyasetini yansıtan 10 ideolojik eksende sorular içerir. Her eksende
-            verdiğiniz cevaplar, partilerin bu eksenlerdeki konumlarıyla karşılaştırılır.
+            Anket, Türkiye siyasetini yansıtan {ideologicalAxes.length} ideolojik eksende sorular
+            içerir. Her eksende verdiğiniz cevaplar, partilerin bu eksenlerdeki konumlarıyla
+            karşılaştırılır.
           </p>
           <div className="mt-12 grid gap-4 md:grid-cols-2">
-            {IDEOLOGICAL_AXES.map((axis) => (
+            {ideologicalAxes.map((axis) => (
               <Card
-                key={axis.name}
+                key={axis.slug}
                 className="group relative overflow-hidden border border-border transition-all duration-300 hover:-translate-y-0.5 hover:shadow-elevated"
                 style={{ borderTopColor: axis.accent, borderTopWidth: '3px' }}
               >
@@ -237,7 +282,7 @@ export default function Home() {
             Sıkça Sorulan Sorular
           </h2>
           <div className="mx-auto mt-12 max-w-3xl space-y-4">
-            {FAQ_ITEMS.map((item) => (
+            {faqItems.map((item) => (
               <Card
                 key={item.question}
                 className="group relative overflow-hidden border border-border transition-all duration-300 hover:-translate-y-0.5 hover:shadow-elevated"

@@ -23,7 +23,8 @@
     "validate:party-catalog": "node scripts/validate-party-catalog.js",
     "v2:activate": "node scripts/seed-axis-model-v2.js --activate",
     "smoke": "node scripts/smoke-survey-flow.js",
-    "audit:rls": "node scripts/audit-rls.js"
+    "audit:rls": "node scripts/audit-rls.js",
+    "geo:llms": "node scripts/generate-llms-txt.js"
   },
   "dependencies": {
     "@supabase/ssr": "^0.8.0",

@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Yön A — Kamusal Ekran · oyvergitsin.org</title>
+<style>
+  :root {
+    --paper: #F7F8F8;
+    --card: #FFFFFF;
+    --ink: #191C1E;
+    --ink-secondary: #566164;
+    --ink-muted: #828B8D;
+    --line: #DDE3E3;
+    --line-strong: #C3CDCD;
+    --accent: #0E6E7D;
+    --accent-hover: #0B5A66;
+    --accent-tint: #E1F0F2;
+    --radius-card: 10px;
+    --radius-control: 8px;
+    --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    --font-mono: ui-monospace, "SF Mono", "Cascadia Mono", Consolas, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--font-body); line-height: 1.55; }
+  .wrap { max-width: 1060px; margin: 0 auto; padding: 0 24px; }
+  .banner { background: var(--accent-tint); border-bottom: 1px solid var(--line); padding: 10px 0; }
+  .banner p { font-family: var(--font-mono); font-size: 12px; color: var(--accent-hover); }
+  header { border-bottom: 1px solid var(--line); background: var(--card); }
+  .nav { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; }
+  .wordmark { font-weight: 700; font-size: 18px; letter-spacing: -0.01em; }
+  .wordmark span { font-family: var(--font-mono); font-weight: 400; color: var(--accent); }
+  .navlinks { display: flex; gap: 24px; align-items: center; font-size: 14px; }
+  .navlinks a { color: var(--ink-secondary); text-decoration: none; }
+  .navlinks a:hover { color: var(--ink); }
+  .btn { display: inline-block; background: var(--accent); color: #fff; border: 1px solid var(--accent); border-radius: var(--radius-control); padding: 10px 22px; font-size: 15px; font-weight: 600; text-decoration: none; cursor: pointer; }
+  .btn:hover { background: var(--accent-hover); }
+  .btn-ghost { background: transparent; color: var(--ink); border: 1px solid var(--line-strong); }
+  .btn-ghost:hover { border-color: var(--ink); background: transparent; }
+  .hero { padding: 72px 0 64px; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 48px; align-items: end; }
+  .hero h1 { font-size: 44px; line-height: 1.12; letter-spacing: -0.02em; font-weight: 700; }
+  .hero .lede { margin-top: 18px; font-size: 18px; color: var(--ink-secondary); max-width: 46ch; }
+  .hero .cta { margin-top: 28px; display: flex; gap: 12px; }
+  .hero-meta { border-left: 2px solid var(--accent); padding-left: 20px; }
+  .hero-meta dl { display: grid; grid-template-columns: auto 1fr; gap: 6px 16px; font-size: 13px; }
+  .hero-meta dt { font-family: var(--font-mono); color: var(--ink-muted); }
+  .hero-meta dd { color: var(--ink); font-weight: 600; }
+  section { padding: 40px 0; }
+  .sec-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 22px; }
+  .sec-head h2 { font-size: 24px; letter-spacing: -0.01em; }
+  .sec-head .count { font-family: var(--font-mono); font-size: 12px; color: var(--ink-muted); }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius-card); padding: 22px; }
+  .card h3 { font-size: 16px; margin-bottom: 6px; }
+  .card p { font-size: 14px; color: var(--ink-secondary); }
+  .card .tag { font-family: var(--font-mono); font-size: 11px; color: var(--accent); display: block; margin-bottom: 10px; }
+  .survey { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius-card); padding: 28px; max-width: 640px; }
+  .qmeta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
+  .qmeta .step { font-family: var(--font-mono); font-size: 12px; color: var(--ink-muted); }
+  .progress { height: 4px; background: var(--line); border-radius: 2px; overflow: hidden; margin-bottom: 24px; }
+  .progress i { display: block; height: 100%; width: 4%; background: var(--accent); }
+  .survey h3 { font-size: 20px; line-height: 1.35; margin-bottom: 18px; }
+  .opt { display: flex; align-items: center; gap: 12px; border: 1px solid var(--line); border-radius: var(--radius-control); padding: 12px 14px; margin-bottom: 8px; font-size: 14px; cursor: pointer; background: var(--card); }
+  .opt .dot { width: 18px; height: 18px; border: 2px solid var(--line-strong); border-radius: 50%; flex-shrink: 0; }
+  .opt.sel { border-color: var(--accent); background: var(--accent-tint); font-weight: 600; }
+  .opt.sel .dot { border-color: var(--accent); background: radial-gradient(circle, var(--accent) 45%, transparent 50%); }
+  .opt.noop { margin-top: 18px; border-style: dashed; color: var(--ink-secondary); }
+  .importance { display: flex; align-items: center; gap: 10px; margin: 18px 0 6px; font-size: 13px; color: var(--ink-secondary); }
+  .switch { width: 34px; height: 20px; border-radius: 10px; background: var(--line-strong); position: relative; flex-shrink: 0; }
+  .switch i { position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; border-radius: 50%; background: #fff; }
+  .nav-btns { display: flex; justify-content: space-between; margin-top: 22px; }
+  .result { max-width: 640px; }
+  .bar-row { display: grid; grid-template-columns: 120px 1fr 56px; gap: 12px; align-items: center; margin-bottom: 10px; font-size: 14px; }
+  .bar { height: 12px; border-radius: 3px; }
+  .bar-row .pct { font-family: var(--font-mono); font-size: 13px; color: var(--ink-secondary); text-align: right; }
+  .note { font-size: 12px; color: var(--ink-muted); margin-top: 14px; }
+  footer { border-top: 1px solid var(--line); margin-top: 40px; padding: 28px 0; font-size: 13px; color: var(--ink-muted); }
+  @media (max-width: 800px) { .hero { grid-template-columns: 1fr; padding: 48px 0; } .grid2 { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+  <div class="banner"><div class="wrap"><p>YÖN A — "KAMUSAL EKRAN" · statik önizleme · oyvergitsin.org gerçek içeriği</p></div></div>
+  <header>
+    <div class="wrap nav">
+      <div class="wordmark">oyvergitsin<span>.org</span></div>
+      <nav class="navlinks">
+        <a href="#">Siyaset Radarı</a>
+        <a href="#">Metodoloji</a>
+        <a class="btn" href="#">Anketi Başlat</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <div class="hero">
+      <div>
+        <h1>Siyasi görüşünüzü partilerle eşleştirin.</h1>
+        <p class="lede">Anonim ve kısa bir anketle 8 ideolojik eksende duruşunuzu görün; tarafsız bir eşleşme mantığıyla size en yakın partileri keşfedin.</p>
+        <div class="cta">
+          <a class="btn" href="#">Anketi Başlat</a>
+          <a class="btn btn-ghost" href="#">Metodolojiyi İncele</a>
+        </div>
+      </div>
+      <div class="hero-meta">
+        <dl>
+          <dt>sorular</dt><dd>25 madde · ~4 dk</dd>
+          <dt>eksenler</dt><dd>8 ideolojik eksen</dd>
+          <dt>partiler</dt><dd>13 parti pozisyonu</dd>
+          <dt>kimlik</dt><dd>istenmez · anonim</dd>
+        </dl>
+      </div>
+    </div>
+
+    <section>
+      <div class="sec-head"><h2>Anketin kapsadığı eksenler</h2><span class="count">01—08 / aktif model v2</span></div>
+      <div class="grid2">
+        <div class="card">
+          <span class="tag">eksen 01</span>
+          <h3>Ekonomik Model ve Yeniden Dağıtım</h3>
+          <p>Ekonomik kararların piyasa mekanizmaları mı yoksa devlet müdahalesi mi ile yönetilmesi gerektiği; gelirin yeniden dağıtımı.</p>
+        </div>
+        <div class="card">
+          <span class="tag">eksen 02</span>
+          <h3>Demokratik Kurumlar ve Hukukun Üstünlüğü</h3>
+          <p>Cumhurbaşkanının yetkileri, Meclis ve mahkemelerin denetim gücü; sivil özgürlüklerin devlet otoritesiyle dengesi.</p>
+        </div>
+        <div class="card">
+          <span class="tag">eksen 03</span>
+          <h3>Sekülerizm ve Dinin Kamusal Rolü</h3>
+          <p>Din ve devlet ilişkisi; dini değerlerin kamusal politikalardaki yeri.</p>
+        </div>
+        <div class="card">
+          <span class="tag">eksen 04</span>
+          <h3>Kimlik, Kürt Meselesi ve Yerel Özerklik</h3>
+          <p>Ulusal kimlik, Kürt meselesi ve yerinden yönetim tartışmaları.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head"><h2>Anket deneyimi</h2><span class="count">soru kartı · likert_5</span></div>
+      <div class="survey">
+        <div class="qmeta"><span class="step">soru 01 / 25</span><span class="step">ekonomik model</span></div>
+        <div class="progress"><i></i></div>
+        <h3>Çok kazananlardan ve büyük şirketlerden daha fazla vergi alınmalıdır.</h3>
+        <div class="opt"><span class="dot"></span>Kesinlikle katılmıyorum</div>
+        <div class="opt sel"><span class="dot"></span>Katılmıyorum</div>
+        <div class="opt"><span class="dot"></span>Kararsızım</div>
+        <div class="opt"><span class="dot"></span>Katılıyorum</div>
+        <div class="opt"><span class="dot"></span>Kesinlikle katılıyorum</div>
+        <div class="opt noop"><span class="dot"></span>Fikrim yok</div>
+        <div class="importance"><span class="switch"><i></i></span> Bu soru benim için önemli — cevabım daha ağır tartılsın</div>
+        <div class="nav-btns">
+          <button class="btn btn-ghost">Önceki</button>
+          <button class="btn">Sonraki</button>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head"><h2>Sonuç ekranı</h2><span class="count">parti renkleri korunur</span></div>
+      <div class="card result">
+        <h3 style="margin-bottom:16px;">En Yüksek Örtüşme</h3>
+        <div class="bar-row"><span>CHP</span><div class="bar" style="background:#E30A17;width:78%"></div><span class="pct">%78</span></div>
+        <div class="bar-row"><span>AKP</span><div class="bar" style="background:#F7941D;width:64%"></div><span class="pct">%64</span></div>
+        <div class="bar-row"><span>MHP</span><div class="bar" style="background:#F2B705;width:51%"></div><span class="pct">%51</span></div>
+        <div class="bar-row"><span>DEM</span><div class="bar" style="background:#0F7A3A;width:43%"></div><span class="pct">%43</span></div>
+        <div class="bar-row"><span>İYİ</span><div class="bar" style="background:#0B1F3A;width:39%"></div><span class="pct">%39</span></div>
+        <p class="note">Örnek veri. Kabuk tamamen renksiz: tek renk (petrol) yalnızca etkileşimde. Sayfadaki tüm renkli öğeler parti verisi olduğu için kullanıcı "renk = parti" okumasını hiç kaybetmez.</p>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="wrap">oyvergitsin.org — tarafsız, anonim, ücretsiz siyasi eşleşme platformu. Önizleme: Yön A "Kamusal Ekran" (grafit kabuk + petrol vurgu, mono veri etiketleri).</div>
+  </footer>
+</body>
+</html>

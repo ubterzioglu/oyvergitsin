@@ -103,11 +103,14 @@ test.describe('uçtan uca akış', () => {
       const isLast = index === 24
 
       // İlk maddede "Fikrim yok", ikincide önem işareti denenir; kalanında
-      // tutarlı bir cevap verilir.
+      // tutarlı bir cevap verilir. Dikkat kontrolü maddesi yönergesi
+      // "Katılmıyorum" ister; başka cevap tamamlama doğrulamasını bloklar.
       if (index === 0) {
         await page.getByRole('button', { name: 'Fikrim yok', exact: true }).click()
       } else {
-        await page.getByRole('button', { name: 'Katılıyorum', exact: true }).click()
+        const questionText = (await page.getByRole('heading', { level: 2 }).textContent()) ?? ''
+        const label = questionText.includes('dikkat kontrolü') ? 'Katılmıyorum' : 'Katılıyorum'
+        await page.getByRole('button', { name: label, exact: true }).click()
         if (index === 1) {
           await page.getByRole('switch', { name: /önemli/i }).click()
         }

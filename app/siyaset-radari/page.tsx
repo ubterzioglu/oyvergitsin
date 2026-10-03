@@ -78,7 +78,7 @@ export default async function SiyasetRadariPage() {
   )
 
   return (
-    <main className="bg-white">
+    <main className="bg-surface">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
@@ -86,7 +86,11 @@ export default async function SiyasetRadariPage() {
       <section className="border-b border-border bg-surface-muted py-12">
         <Container>
           <div className="max-w-3xl">
-            <h1 className="font-heading text-4xl font-semibold text-ink-primary">Siyaset Radarı</h1>
+            {/* Tek accent, tek yerde: sayfanın ne olduğunu söyleyen üst etiket. */}
+            <p className="data-figure text-xs font-semibold uppercase tracking-[0.14em] text-accent">
+              Kaynaklı · Doğrulama tarihli
+            </p>
+            <h1 className="mt-3 font-heading text-4xl font-semibold text-ink-primary">Siyaset Radarı</h1>
             <p className="mt-4 text-base text-ink-secondary">
               Güncel siyasi içerikler, parti değiştiren siyasetçiler, il bazlı dağılımlar ve
               gazetecilere ilişkin özgürlük durumu kayıtları yalnız kaynaklı ve editoryal onaydan

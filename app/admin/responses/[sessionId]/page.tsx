@@ -127,11 +127,11 @@ export default function ResponseDetailPage() {
     if (sessionId) fetchAll()
   }, [sessionId, fetchAll])
 
-  if (loading) return <div className="text-gray-600">Yükleniyor...</div>
+  if (loading) return <div className="text-ink-secondary">Yükleniyor...</div>
 
   if (errorMessage || !session) {
     return (
-      <div className="rounded border border-red-200 bg-red-50 p-4 text-sm text-red-700">
+      <div className="rounded-badge border border-border-strong border-l-4 border-l-ink-primary bg-surface-muted p-4 text-sm text-ink-primary">
         {errorMessage || 'Oturum bulunamadı.'}
       </div>
     )
@@ -147,14 +147,14 @@ export default function ResponseDetailPage() {
 
   return (
     <div>
-      <Link href="/admin/responses" className="text-sm text-blue-600 hover:underline">
+      <Link href="/admin/responses" className="text-sm text-accent hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2">
         ← Cevaplar
       </Link>
 
-      <h1 className="mb-1 mt-2 text-3xl font-bold text-gray-900">Oturum</h1>
-      <p className="mb-6 font-mono text-xs text-gray-500">{session.id}</p>
+      <h1 className="mb-1 mt-2 text-3xl font-bold text-ink-primary">Oturum</h1>
+      <p className="mb-6 data-figure text-xs text-ink-secondary">{session.id}</p>
 
-      <section className="mb-6 rounded-lg bg-white p-6 shadow-md">
+      <section className="mb-6 rounded-lg bg-surface-card p-6 border border-border">
         <dl className="grid gap-3 text-sm sm:grid-cols-4">
           <Field label="Başlangıç" value={new Date(session.created_at).toLocaleString('tr-TR')} />
           <Field
@@ -177,47 +177,47 @@ export default function ResponseDetailPage() {
         </dl>
       </section>
 
-      <section className="mb-6 rounded-lg bg-white p-6 shadow-md">
-        <h2 className="mb-4 text-lg font-semibold text-gray-900">Verilen cevaplar</h2>
+      <section className="mb-6 rounded-lg bg-surface-card p-6 border border-border">
+        <h2 className="mb-4 text-lg font-semibold text-ink-primary">Verilen cevaplar</h2>
         <div className="overflow-x-auto">
           <table className="min-w-full">
-            <thead className="bg-gray-50">
+            <thead className="bg-surface">
               <tr>
-                <th className="px-3 py-2 text-left text-xs font-medium uppercase text-gray-500">#</th>
-                <th className="px-3 py-2 text-left text-xs font-medium uppercase text-gray-500">Soru</th>
-                <th className="px-3 py-2 text-left text-xs font-medium uppercase text-gray-500">Cevap</th>
-                <th className="px-3 py-2 text-left text-xs font-medium uppercase text-gray-500">Önem</th>
+                <th scope="col" className="px-3 py-2 text-left text-xs font-medium uppercase text-ink-secondary">#</th>
+                <th scope="col" className="px-3 py-2 text-left text-xs font-medium uppercase text-ink-secondary">Soru</th>
+                <th scope="col" className="px-3 py-2 text-left text-xs font-medium uppercase text-ink-secondary">Cevap</th>
+                <th scope="col" className="px-3 py-2 text-left text-xs font-medium uppercase text-ink-secondary">Önem</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-200">
+            <tbody className="divide-y divide-border">
               {questions.map((question) => {
                 const answer = answerByQuestion.get(question.id)
                 if (!answer) return null
 
                 return (
                   <tr key={question.id}>
-                    <td className="px-3 py-2 text-sm text-gray-500">{question.order_index}</td>
-                    <td className="max-w-md px-3 py-2 text-sm text-gray-900">
+                    <td className="px-3 py-2 text-sm text-ink-secondary">{question.order_index}</td>
+                    <td className="max-w-md px-3 py-2 text-sm text-ink-primary">
                       {question.text}
                       {!question.is_scored && (
-                        <span className="ml-2 rounded bg-gray-100 px-1.5 py-0.5 text-[11px] text-gray-500">
+                        <span className="ml-2 rounded-badge bg-surface-muted px-1.5 py-0.5 text-[11px] text-ink-secondary">
                           puanlanmaz
                         </span>
                       )}
                     </td>
-                    <td className="px-3 py-2 text-sm text-gray-700">
+                    <td className="px-3 py-2 text-sm text-ink-primary">
                       {optionLabel(question.id, answer.answer_value)}
-                      <span className="ml-2 font-mono text-[11px] text-gray-400">
+                      <span className="ml-2 data-figure text-[11px] text-ink-muted">
                         {answer.answer_value}
                       </span>
                     </td>
                     <td className="px-3 py-2 text-sm">
                       {answer.is_important ? (
-                        <span className="rounded bg-orange-100 px-2 py-0.5 text-xs text-orange-800">
+                        <span className="rounded-badge bg-accent-tint px-2 py-0.5 text-xs text-accent-hover">
                           önemli
                         </span>
                       ) : (
-                        <span className="text-gray-300">—</span>
+                        <span className="text-ink-muted">—</span>
                       )}
                     </td>
                   </tr>
@@ -227,23 +227,23 @@ export default function ResponseDetailPage() {
           </table>
         </div>
 
-        {answers.length === 0 && <p className="py-4 text-sm text-gray-500">Bu oturumda cevap yok.</p>}
+        {answers.length === 0 && <p className="py-4 text-sm text-ink-secondary">Bu oturumda cevap yok.</p>}
       </section>
 
       {snapshot && (
         <div className="grid gap-6 md:grid-cols-2">
-          <section className="rounded-lg bg-white p-6 shadow-md">
-            <h2 className="mb-4 text-lg font-semibold text-gray-900">Eksen skorları</h2>
+          <section className="rounded-lg bg-surface-card p-6 border border-border">
+            <h2 className="mb-4 text-lg font-semibold text-ink-primary">Eksen skorları</h2>
             <ul className="space-y-2 text-sm">
               {Object.entries(snapshot.axis_scores ?? {}).map(([axisId, score]) => (
                 <li key={axisId} className="flex items-center justify-between gap-3">
-                  <span className="text-gray-700">{axisNames[axisId] ?? axisId}</span>
+                  <span className="text-ink-primary">{axisNames[axisId] ?? axisId}</span>
                   <span className="flex items-center gap-2">
-                    <span className="font-semibold tabular-nums text-gray-900">
+                    <span className="font-semibold data-figure text-ink-primary">
                       {score === null ? 'veri yok' : score}
                     </span>
                     {snapshot.axis_coverage?.[axisId] !== undefined && (
-                      <span className="text-xs text-gray-400">
+                      <span className="data-figure text-xs text-ink-muted">
                         %{Math.round(snapshot.axis_coverage[axisId] * 100)} kapsama
                       </span>
                     )}
@@ -253,13 +253,13 @@ export default function ResponseDetailPage() {
             </ul>
           </section>
 
-          <section className="rounded-lg bg-white p-6 shadow-md">
-            <h2 className="mb-4 text-lg font-semibold text-gray-900">Parti eşleşmeleri</h2>
+          <section className="rounded-lg bg-surface-card p-6 border border-border">
+            <h2 className="mb-4 text-lg font-semibold text-ink-primary">Parti eşleşmeleri</h2>
             <ul className="space-y-2 text-sm">
               {sortedParties.map(([partyId, similarity]) => (
                 <li key={partyId} className="flex items-center justify-between gap-3">
-                  <span className="text-gray-700">{partyNames[partyId] ?? partyId}</span>
-                  <span className="font-semibold tabular-nums text-gray-900">
+                  <span className="text-ink-primary">{partyNames[partyId] ?? partyId}</span>
+                  <span className="font-semibold data-figure text-ink-primary">
                     {similarity === null ? 'konum yok' : `%${similarity}`}
                   </span>
                 </li>
@@ -270,7 +270,7 @@ export default function ResponseDetailPage() {
       )}
 
       {!snapshot && (
-        <p className="rounded-lg bg-white p-6 text-sm text-gray-500 shadow-md">
+        <p className="rounded-lg bg-surface-card p-6 text-sm text-ink-secondary border border-border">
           Bu oturum tamamlanmadığı için sonuç hesaplanmadı.
         </p>
       )}
@@ -281,8 +281,8 @@ export default function ResponseDetailPage() {
 function Field({ label, value }: { label: string; value: string }) {
   return (
     <div>
-      <dt className="text-xs uppercase text-gray-500">{label}</dt>
-      <dd className="text-gray-900">{value}</dd>
+      <dt className="text-xs uppercase text-ink-secondary">{label}</dt>
+      <dd className="text-ink-primary">{value}</dd>
     </div>
   )
 }

@@ -234,8 +234,8 @@ export default function AdminSiyasetRadariPage() {
     <div>
       <div className="mb-6 flex items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Siyaset Radarı</h1>
-          <p className="mt-1 text-sm text-gray-600">
+          <h1 className="text-3xl font-bold text-ink-primary">Siyaset Radarı</h1>
+          <p className="mt-1 text-sm text-ink-secondary">
             Kamu verisi adayları yayınlanmadan önce burada onaylanır.
           </p>
         </div>
@@ -243,21 +243,21 @@ export default function AdminSiyasetRadariPage() {
           <button
             onClick={() => runScan('tbmm')}
             disabled={scanning}
-            className="rounded-lg bg-gray-200 px-4 py-2 text-gray-800 hover:bg-gray-300 disabled:opacity-50"
+            className="rounded-lg bg-border px-4 py-2 text-ink-primary hover:bg-border-strong disabled:cursor-not-allowed disabled:bg-surface-muted disabled:text-ink-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
           >
             TBMM Tara
           </button>
           <button
             onClick={() => runScan('journalists')}
             disabled={scanning}
-            className="rounded-lg bg-gray-200 px-4 py-2 text-gray-800 hover:bg-gray-300 disabled:opacity-50"
+            className="rounded-lg bg-border px-4 py-2 text-ink-primary hover:bg-border-strong disabled:cursor-not-allowed disabled:bg-surface-muted disabled:text-ink-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
           >
             Gazeteci Tara
           </button>
           <button
             onClick={() => runScan('all')}
             disabled={scanning}
-            className="rounded-lg bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 disabled:opacity-50"
+            className="rounded-lg bg-accent px-4 py-2 text-white hover:bg-accent-hover disabled:cursor-not-allowed disabled:bg-surface-muted disabled:text-ink-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
           >
             {scanning ? 'Taranıyor...' : 'Tümünü Tara'}
           </button>
@@ -265,123 +265,123 @@ export default function AdminSiyasetRadariPage() {
       </div>
 
       {message && (
-        <div className="mb-6 rounded-lg border border-blue-200 bg-blue-50 px-4 py-3 text-sm text-blue-800">
+        <div className="mb-6 rounded-lg border-l-4 border-accent bg-accent-tint px-4 py-3 text-sm text-accent-hover">
           {message}
         </div>
       )}
 
-      <form onSubmit={submitManualPoliticalEvent} className="mb-8 rounded-lg bg-white p-6 shadow-md">
-        <h2 className="text-xl font-bold text-gray-900">Parti Geçişi Adayı Ekle</h2>
+      <form onSubmit={submitManualPoliticalEvent} className="mb-8 rounded-lg bg-surface-card p-6 border border-border">
+        <h2 className="text-xl font-bold text-ink-primary">Parti Geçişi Adayı Ekle</h2>
         <div className="mt-4 grid gap-4 md:grid-cols-2">
-          <label className="text-sm font-medium text-gray-700">
+          <label className="text-sm font-medium text-ink-primary">
             Ad Soyad
             <input
               value={manualForm.fullName}
               onChange={(event) => setManualForm((prev) => ({ ...prev, fullName: event.target.value }))}
               required
-              className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2"
+              className="mt-1 w-full rounded-lg border border-border-strong px-3 py-2 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent"
             />
           </label>
-          <label className="text-sm font-medium text-gray-700">
+          <label className="text-sm font-medium text-ink-primary">
             İl
             <input
               value={manualForm.province}
               onChange={(event) => setManualForm((prev) => ({ ...prev, province: event.target.value }))}
-              className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2"
+              className="mt-1 w-full rounded-lg border border-border-strong px-3 py-2 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent"
             />
           </label>
-          <label className="text-sm font-medium text-gray-700">
+          <label className="text-sm font-medium text-ink-primary">
             Önceki Parti
             <input
               value={manualForm.fromPartyName}
               onChange={(event) => setManualForm((prev) => ({ ...prev, fromPartyName: event.target.value }))}
-              className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2"
+              className="mt-1 w-full rounded-lg border border-border-strong px-3 py-2 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent"
             />
           </label>
-          <label className="text-sm font-medium text-gray-700">
+          <label className="text-sm font-medium text-ink-primary">
             Yeni Parti / Bağımsız
             <input
               value={manualForm.toPartyName}
               onChange={(event) => setManualForm((prev) => ({ ...prev, toPartyName: event.target.value }))}
-              className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2"
+              className="mt-1 w-full rounded-lg border border-border-strong px-3 py-2 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent"
             />
           </label>
-          <label className="text-sm font-medium text-gray-700">
+          <label className="text-sm font-medium text-ink-primary">
             Tarih
             <input
               type="date"
               value={manualForm.happenedOn}
               onChange={(event) => setManualForm((prev) => ({ ...prev, happenedOn: event.target.value }))}
-              className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2"
+              className="mt-1 w-full rounded-lg border border-border-strong px-3 py-2 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent"
             />
           </label>
-          <label className="text-sm font-medium text-gray-700">
+          <label className="text-sm font-medium text-ink-primary">
             X Handle
             <input
               value={manualForm.xHandle}
               onChange={(event) => setManualForm((prev) => ({ ...prev, xHandle: event.target.value }))}
               placeholder="@kullanici"
-              className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2"
+              className="mt-1 w-full rounded-lg border border-border-strong px-3 py-2 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent"
             />
           </label>
-          <label className="text-sm font-medium text-gray-700">
+          <label className="text-sm font-medium text-ink-primary">
             Kaynak Adı
             <input
               value={manualForm.sourceName}
               onChange={(event) => setManualForm((prev) => ({ ...prev, sourceName: event.target.value }))}
               required
-              className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2"
+              className="mt-1 w-full rounded-lg border border-border-strong px-3 py-2 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent"
             />
           </label>
-          <label className="text-sm font-medium text-gray-700">
+          <label className="text-sm font-medium text-ink-primary">
             Kaynak URL
             <input
               type="url"
               value={manualForm.sourceUrl}
               onChange={(event) => setManualForm((prev) => ({ ...prev, sourceUrl: event.target.value }))}
               required
-              className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2"
+              className="mt-1 w-full rounded-lg border border-border-strong px-3 py-2 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent"
             />
           </label>
-          <label className="text-sm font-medium text-gray-700 md:col-span-2">
+          <label className="text-sm font-medium text-ink-primary md:col-span-2">
             Özet
             <textarea
               value={manualForm.summary}
               onChange={(event) => setManualForm((prev) => ({ ...prev, summary: event.target.value }))}
               rows={3}
-              className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2"
+              className="mt-1 w-full rounded-lg border border-border-strong px-3 py-2 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent"
             />
           </label>
         </div>
-        <button type="submit" className="mt-4 rounded-lg bg-blue-600 px-4 py-2 font-semibold text-white hover:bg-blue-700">
+        <button type="submit" className="mt-4 rounded-lg bg-accent px-4 py-2 font-semibold text-white hover:bg-accent-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2">
           Adayı Kuyruğa Ekle
         </button>
       </form>
 
       {loading ? (
-        <div className="text-gray-600">Yükleniyor...</div>
+        <div className="text-ink-secondary">Yükleniyor...</div>
       ) : items.length === 0 ? (
-        <div className="rounded-lg bg-white px-6 py-10 text-center text-gray-500 shadow-md">
+        <div className="rounded-lg bg-surface-card px-6 py-10 text-center text-ink-secondary border border-border">
           Onay bekleyen kayıt yok.
         </div>
       ) : (
         <div className="space-y-4">
           {items.map((item) => (
-            <div key={`${item.table}-${item.id}`} className="rounded-lg bg-white p-6 shadow-md">
+            <div key={`${item.table}-${item.id}`} className="rounded-lg bg-surface-card p-6 border border-border">
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <div className="text-xs font-semibold uppercase tracking-wide text-gray-500">
+                  <div className="text-xs font-semibold uppercase tracking-wide text-ink-secondary">
                     {item.table}
                   </div>
-                  <h2 className="mt-1 text-lg font-semibold text-gray-900">{item.title}</h2>
-                  <p className="mt-1 text-sm text-gray-600">{item.subtitle}</p>
-                  <p className="mt-2 text-xs text-gray-500">{formatDate(item.createdAt)}</p>
+                  <h2 className="mt-1 text-lg font-semibold text-ink-primary">{item.title}</h2>
+                  <p className="mt-1 text-sm text-ink-secondary">{item.subtitle}</p>
+                  <p className="mt-2 text-xs text-ink-secondary data-figure">{formatDate(item.createdAt)}</p>
                   {item.sourceUrl && (
                     <a
                       href={item.sourceUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="mt-2 inline-block text-sm text-blue-700 hover:text-blue-900"
+                      className="mt-2 inline-block text-sm text-accent-hover hover:text-accent-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
                     >
                       Kaynağı aç
                     </a>
@@ -391,14 +391,14 @@ export default function AdminSiyasetRadariPage() {
                   <button
                     onClick={() => review(item, 'approve')}
                     disabled={busyId === item.id}
-                    className="rounded-lg bg-green-600 px-4 py-2 text-white hover:bg-green-700 disabled:opacity-50"
+                    className="rounded-lg bg-accent px-4 py-2 text-white hover:bg-accent-hover disabled:cursor-not-allowed disabled:bg-surface-muted disabled:text-ink-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
                   >
                     Onayla
                   </button>
                   <button
                     onClick={() => review(item, 'reject')}
                     disabled={busyId === item.id}
-                    className="rounded-lg bg-red-600 px-4 py-2 text-white hover:bg-red-700 disabled:opacity-50"
+                    className="rounded-lg bg-ink-primary px-4 py-2 text-white hover:bg-scale-6 disabled:cursor-not-allowed disabled:bg-surface-muted disabled:text-ink-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
                   >
                     Reddet
                   </button>

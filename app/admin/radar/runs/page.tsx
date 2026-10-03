@@ -26,10 +26,10 @@ function formatDate(value: string | null): string {
 }
 
 const STATUS_CLASSES: Record<string, string> = {
-  completed: 'bg-green-100 text-green-800',
-  partial: 'bg-yellow-100 text-yellow-800',
-  failed: 'bg-red-100 text-red-800',
-  running: 'bg-blue-100 text-blue-800'
+  completed: 'bg-accent-tint text-accent-hover',
+  partial: 'bg-surface-muted text-ink-primary',
+  failed: 'bg-surface-muted text-ink-primary',
+  running: 'bg-accent-tint text-accent-hover'
 }
 
 export default function RadarRunsPage() {
@@ -57,54 +57,54 @@ export default function RadarRunsPage() {
   }, [])
 
   if (loading) {
-    return <div className="text-gray-600">Yükleniyor...</div>
+    return <div className="text-ink-secondary">Yükleniyor...</div>
   }
 
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold text-gray-900">Tarama Geçmişi</h1>
+        <h1 className="text-3xl font-bold text-ink-primary">Tarama Geçmişi</h1>
         <a
           href="/admin/radar"
-          className="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300"
+          className="px-4 py-2 bg-border text-ink-primary rounded-lg hover:bg-border-strong focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
         >
           Adaylar
         </a>
       </div>
 
-      <div className="bg-white rounded-lg shadow-md overflow-hidden">
+      <div className="bg-surface-card rounded-lg border border-border overflow-hidden">
         <table className="min-w-full">
-          <thead className="bg-gray-50">
+          <thead className="bg-surface">
             <tr>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Başlangıç</th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tetik</th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Durum</th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Kaynak</th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Bulundu</th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Eklendi</th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tekrar</th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Elendi</th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Hatalı Kaynak</th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Hata</th>
+              <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-ink-secondary uppercase tracking-wider">Başlangıç</th>
+              <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-ink-secondary uppercase tracking-wider">Tetik</th>
+              <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-ink-secondary uppercase tracking-wider">Durum</th>
+              <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-ink-secondary uppercase tracking-wider">Kaynak</th>
+              <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-ink-secondary uppercase tracking-wider">Bulundu</th>
+              <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-ink-secondary uppercase tracking-wider">Eklendi</th>
+              <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-ink-secondary uppercase tracking-wider">Tekrar</th>
+              <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-ink-secondary uppercase tracking-wider">Elendi</th>
+              <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-ink-secondary uppercase tracking-wider">Hatalı Kaynak</th>
+              <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-ink-secondary uppercase tracking-wider">Hata</th>
             </tr>
           </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
+          <tbody className="bg-surface-card divide-y divide-border">
             {runs.map((run) => (
               <tr key={run.id}>
-                <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-900">{formatDate(run.started_at)}</td>
-                <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-500">{run.trigger_type}</td>
+                <td className="data-figure px-4 py-3 whitespace-nowrap text-sm text-ink-primary">{formatDate(run.started_at)}</td>
+                <td className="data-figure px-4 py-3 whitespace-nowrap text-sm text-ink-secondary">{run.trigger_type}</td>
                 <td className="px-4 py-3 whitespace-nowrap text-sm">
-                  <span className={`px-2 py-1 rounded text-xs font-semibold ${STATUS_CLASSES[run.status] || 'bg-gray-100 text-gray-600'}`}>
+                  <span className={`px-2 py-1 rounded-badge text-xs font-semibold ${STATUS_CLASSES[run.status] || 'bg-surface-muted text-ink-secondary'}`}>
                     {run.status}
                   </span>
                 </td>
-                <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-500">{run.source_count}</td>
-                <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-500">{run.fetched_count}</td>
-                <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-500">{run.inserted_count}</td>
-                <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-500">{run.duplicate_count}</td>
-                <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-500">{run.filtered_count}</td>
-                <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-500">{run.failed_source_count}</td>
-                <td className="px-4 py-3 text-sm text-red-600 max-w-xs truncate">{run.error_message || '—'}</td>
+                <td className="data-figure px-4 py-3 whitespace-nowrap text-sm text-ink-secondary">{run.source_count}</td>
+                <td className="data-figure px-4 py-3 whitespace-nowrap text-sm text-ink-secondary">{run.fetched_count}</td>
+                <td className="data-figure px-4 py-3 whitespace-nowrap text-sm text-ink-secondary">{run.inserted_count}</td>
+                <td className="data-figure px-4 py-3 whitespace-nowrap text-sm text-ink-secondary">{run.duplicate_count}</td>
+                <td className="data-figure px-4 py-3 whitespace-nowrap text-sm text-ink-secondary">{run.filtered_count}</td>
+                <td className="data-figure px-4 py-3 whitespace-nowrap text-sm text-ink-secondary">{run.failed_source_count}</td>
+                <td className="px-4 py-3 text-sm text-ink-primary max-w-xs truncate">{run.error_message || '—'}</td>
               </tr>
             ))}
           </tbody>

@@ -144,48 +144,45 @@ export default function AdminDashboard() {
 
   return (
     <div>
-      <h1 className="mb-8 text-3xl font-bold text-gray-900">Dashboard</h1>
+      <h1 className="mb-8 text-3xl font-bold text-ink-primary">Dashboard</h1>
 
       {loading ? (
-        <div className="text-gray-600">Yükleniyor...</div>
+        <div className="text-ink-secondary">Yükleniyor...</div>
       ) : (
         <>
           <div className="mb-6 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-            <Stat value={stats.totalSessions} label="Toplam Oturum" color="text-blue-600" />
-            <Stat value={stats.completedSessions} label="Tamamlanan Oturum" color="text-green-600" />
-            <Stat value={stats.scoredQuestions} label="Puanlanan Madde" color="text-purple-600" />
-            <Stat value={stats.positionedParties} label="Konumlandırılmış Parti" color="text-orange-600" />
+            <Stat value={stats.totalSessions} label="Toplam Oturum" />
+            <Stat value={stats.completedSessions} label="Tamamlanan Oturum" />
+            <Stat value={stats.scoredQuestions} label="Puanlanan Madde" />
+            <Stat value={stats.positionedParties} label="Konumlandırılmış Parti" />
           </div>
 
-          <div className="mb-8 rounded-lg bg-white p-4 shadow-md">
-            <span className="text-sm text-gray-500">Aktif eksen modeli</span>
-            <p className="font-semibold text-gray-900">{stats.activeModel}</p>
+          <div className="mb-8 rounded-lg bg-surface-card p-4 border border-border">
+            <span className="text-sm text-ink-secondary">Aktif eksen modeli</span>
+            <p className="font-semibold text-ink-primary">{stats.activeModel}</p>
           </div>
         </>
       )}
 
       <UpdatesSection />
 
-      <div className="mb-8 rounded-lg bg-white p-6 shadow-md">
+      <div className="mb-8 rounded-lg bg-surface-card p-6 border border-border">
         <h2 className="mb-4 text-xl font-bold">Hızlı erişim</h2>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
           <QuickLink
             href="/admin/responses"
             title="Cevapları incele"
             description="Kim hangi soruya ne cevap verdi"
-            className="bg-blue-50 text-blue-900 hover:bg-blue-100"
           />
           <QuickLink
             href="/admin/questions"
             title="Soru setini gör"
             description="Maddeler, seçenekler, puanlama kuralları"
-            className="bg-green-50 text-green-900 hover:bg-green-100"
           />
           <QuickLink
             href="/metodoloji"
             title="Yayımlanan metodoloji"
             description="Ziyaretçiye gösterilen şeffaflık sayfası"
-            className="bg-purple-50 text-purple-900 hover:bg-purple-100"
           />
         </div>
       </div>
@@ -197,24 +194,24 @@ export default function AdminDashboard() {
 
 function UpdatesSection() {
   return (
-    <section className="mb-8 rounded-lg bg-white p-6 shadow-md">
+    <section className="mb-8 rounded-lg bg-surface-card p-6 border border-border">
       <div className="mb-5">
-        <h2 className="text-xl font-bold text-gray-900">Güncellemeler</h2>
-        <p className="mt-1 text-sm text-gray-600">
+        <h2 className="text-xl font-bold text-ink-primary">Güncellemeler</h2>
+        <p className="mt-1 text-sm text-ink-secondary">
           Son 1 haftada yapılan işleri teknik commit diliyle değil, günlük kullanım açısından özetledik.
         </p>
       </div>
 
       <div className="space-y-5">
         {WEEKLY_UPDATES.map((update) => (
-          <article key={`${update.date}-${update.title}`} className="border-t border-gray-200 pt-5 first:border-t-0 first:pt-0">
+          <article key={`${update.date}-${update.title}`} className="border-t border-border pt-5 first:border-t-0 first:pt-0">
             <div className="mb-2 flex flex-wrap items-baseline gap-x-3 gap-y-1">
-              <span className="rounded bg-blue-50 px-2 py-1 text-xs font-semibold text-blue-800">
+              <span className="data-figure rounded-badge bg-accent-tint px-2 py-1 text-xs font-semibold text-accent-hover">
                 {update.date}
               </span>
-              <h3 className="text-base font-semibold text-gray-900">{update.title}</h3>
+              <h3 className="text-base font-semibold text-ink-primary">{update.title}</h3>
             </div>
-            <ul className="list-inside list-disc space-y-1 text-sm leading-6 text-gray-700">
+            <ul className="list-inside list-disc space-y-1 text-sm leading-6 text-ink-primary">
               {update.items.map((item) => (
                 <li key={item}>{item}</li>
               ))}
@@ -226,42 +223,48 @@ function UpdatesSection() {
   )
 }
 
-function Stat({ value, label, color }: { value: number; label: string; color: string }) {
+// Yön A tek accent kullanır; stat kartlarında renk çeşitliliği yerine mono
+// veri rakamı (.data-figure) + nötr etiket var. Sayı bilginin kendisi.
+function Stat({ value, label }: { value: number; label: string }) {
   return (
-    <div className="rounded-lg bg-white p-6 shadow-md">
-      <div className={`text-3xl font-bold ${color}`}>{value}</div>
-      <div className="text-gray-600">{label}</div>
+    <div className="rounded-card border border-border bg-surface-card p-6">
+      <div className="data-figure text-3xl font-bold text-ink-primary">{value}</div>
+      <div className="text-ink-secondary">{label}</div>
     </div>
   )
 }
 
+// Açıklama metni eskiden opacity-80 ile soluklaştırılıyordu; opaklıkla renk
+// ifadesi ölçülemez kontrast üretir → ink-secondary token (accent-tint üstünde
+// 5.46, AA).
 function QuickLink({
   href,
   title,
   description,
-  className,
 }: {
   href: string
   title: string
   description: string
-  className: string
 }) {
   return (
-    <Link href={href} className={`block rounded-lg p-4 transition-all ${className}`}>
+    <Link
+      href={href}
+      className="block rounded-card bg-accent-tint p-4 text-ink-primary transition-all hover:bg-scale-1 hover:shadow-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+    >
       <h3 className="font-semibold">{title}</h3>
-      <p className="text-sm opacity-80">{description}</p>
+      <p className="text-sm text-ink-secondary">{description}</p>
     </Link>
   )
 }
 
 function AdminGuide() {
   return (
-    <div className="rounded-lg bg-white p-6 shadow-md">
+    <div className="rounded-lg bg-surface-card p-6 border border-border">
       <h2 className="mb-4 text-xl font-bold">Kullanım kılavuzu</h2>
 
-      <div className="space-y-6 text-sm leading-6 text-gray-700">
+      <div className="space-y-6 text-sm leading-6 text-ink-primary">
         <section>
-          <h3 className="mb-1 font-semibold text-gray-900">Platformun amacı</h3>
+          <h3 className="mb-1 font-semibold text-ink-primary">Platformun amacı</h3>
           <p>
             &quot;oyvergitsin.org&quot;, ziyaretçinin siyasi tercihlerini kişisel kimlik bilgisi almadan
             ölçer ve bu tercihleri Türkiye&apos;deki partilerin kayıtlı politika konumlarıyla
@@ -272,7 +275,7 @@ function AdminGuide() {
         </section>
 
         <section>
-          <h3 className="mb-1 font-semibold text-gray-900">Günlük kontrol akışı</h3>
+          <h3 className="mb-1 font-semibold text-ink-primary">Günlük kontrol akışı</h3>
           <ol className="list-inside list-decimal space-y-1">
             <li>
               <strong>Dashboard</strong> ekranında toplam oturum, tamamlanan oturum, puanlanan madde
@@ -298,7 +301,7 @@ function AdminGuide() {
         </section>
 
         <section>
-          <h3 className="mb-1 font-semibold text-gray-900">Panel neden salt okunur?</h3>
+          <h3 className="mb-1 font-semibold text-ink-primary">Panel neden salt okunur?</h3>
           <p className="mb-2">
             Eksenler, sorular, seçenekler, puanlama kuralları ve parti konumları aynı metodolojinin
             parçalarıdır. Panelden yapılan tek bir elle düzenleme, örneğin bir eksenin yönünü
@@ -313,7 +316,7 @@ function AdminGuide() {
         </section>
 
         <section>
-          <h3 className="mb-1 font-semibold text-gray-900">Soru ve metodoloji değişikliği</h3>
+          <h3 className="mb-1 font-semibold text-ink-primary">Soru ve metodoloji değişikliği</h3>
           <ul className="list-inside list-disc space-y-1">
             <li>
               Aktif soru seti <strong>axis_models</strong> üzerinden belirlenir. Ziyaretçiye yalnızca
@@ -321,7 +324,7 @@ function AdminGuide() {
             </li>
             <li>
               Yeni soru seti önce pasif model olarak hazırlanmalıdır. Yerelde önizleme gerekiyorsa{' '}
-              <code className="rounded bg-gray-100 px-1">PREVIEW_AXIS_MODEL_VERSION</code> kullanılabilir;
+              <code className="rounded-badge bg-surface-muted px-1">PREVIEW_AXIS_MODEL_VERSION</code> kullanılabilir;
               bu ayar production ortamına taşınmamalıdır.
             </li>
             <li>
@@ -338,7 +341,7 @@ function AdminGuide() {
         </section>
 
         <section>
-          <h3 className="mb-1 font-semibold text-gray-900">Cevaplar ve sonuçlar ekranı</h3>
+          <h3 className="mb-1 font-semibold text-ink-primary">Cevaplar ve sonuçlar ekranı</h3>
           <p className="mb-2">
             Cevaplar ekranı oturum bazında hangi soruya hangi değerin verildiğini gösterir. Oturumlar
             anonimdir; ad, e-posta, telefon veya açık konum toplanmaz. IP ve cihaz bilgisi hash olarak
@@ -351,7 +354,7 @@ function AdminGuide() {
             </li>
             <li>
               Ziyaretçi yalnızca kendi sonuç linkini açabilmelidir. Doğru oturum çerezi yoksa sonuç
-              API&apos;si <code className="rounded bg-gray-100 px-1">403</code> döner.
+              API&apos;si <code className="rounded-badge bg-surface-muted px-1">403</code> döner.
             </li>
             <li>
               Toplu dışa aktarma bilinçli olarak eklenmemiştir. Siyasi görüş verisi KVKK kapsamında
@@ -361,7 +364,7 @@ function AdminGuide() {
         </section>
 
         <section>
-          <h3 className="mb-1 font-semibold text-gray-900">Haber ve radar yönetimi</h3>
+          <h3 className="mb-1 font-semibold text-ink-primary">Haber ve radar yönetimi</h3>
           <ul className="list-inside list-disc space-y-1">
             <li>
               Kaynak eklerken yayın sahibini, dilini, ülkesini, güven düzeyini ve kullanım şartlarını
@@ -383,7 +386,7 @@ function AdminGuide() {
         </section>
 
         <section>
-          <h3 className="mb-1 font-semibold text-gray-900">Erişim ve güvenlik</h3>
+          <h3 className="mb-1 font-semibold text-ink-primary">Erişim ve güvenlik</h3>
           <ul className="list-inside list-disc space-y-1">
             <li>
               Panele giriş Supabase Auth ile yapılır. Kullanıcı adı alanı, sunucu tarafında tanımlı
@@ -391,10 +394,10 @@ function AdminGuide() {
             </li>
             <li>
               Admin yetkisi yalnız oturum açmakla bitmez. Middleware ve admin API uçları ayrıca{' '}
-              <code className="rounded bg-gray-100 px-1">is_admin()</code> RPC kontrolü yapar.
+              <code className="rounded-badge bg-surface-muted px-1">is_admin()</code> RPC kontrolü yapar.
             </li>
             <li>
-              Production ortamında <code className="rounded bg-gray-100 px-1">SESSION_HASH_SECRET</code>{' '}
+              Production ortamında <code className="rounded-badge bg-surface-muted px-1">SESSION_HASH_SECRET</code>{' '}
               zorunludur. Eksikse oturum oluşturma güvenli şekilde kapanır ve üretim akışı bozulur.
             </li>
             <li>
@@ -405,7 +408,7 @@ function AdminGuide() {
         </section>
 
         <section>
-          <h3 className="mb-1 font-semibold text-gray-900">Sorun giderme</h3>
+          <h3 className="mb-1 font-semibold text-ink-primary">Sorun giderme</h3>
           <ul className="list-inside list-disc space-y-1">
             <li>
               Giriş başarısızsa önce kullanıcı adı, admin e-postası ve Supabase Auth şifresinin aynı

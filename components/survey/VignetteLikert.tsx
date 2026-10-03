@@ -18,7 +18,7 @@ interface VignetteLikertProps {
 export function VignetteLikert({ vignetteText, options, value, onChange }: VignetteLikertProps) {
   return (
     <div className="mb-2">
-      <div className="mb-5 rounded-lg bg-surface-muted p-4 text-sm italic text-ink-secondary">
+      <div className="mb-5 rounded-card border border-border bg-surface-muted p-4 text-sm italic text-ink-secondary">
         {vignetteText}
       </div>
       <LikertScale options={options} value={value} onChange={onChange} />

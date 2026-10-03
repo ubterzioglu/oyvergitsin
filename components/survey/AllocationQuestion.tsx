@@ -24,11 +24,20 @@ export function AllocationQuestion({ items, total = 100, value, onChange }: Allo
 
   return (
     <div className="mb-8 space-y-3">
-      <p className={`text-sm font-medium ${remaining < 0 ? 'text-red-600' : 'text-ink-secondary'}`}>
-        Kalan puan: {remaining} / {total}
+      {/* Aşım durumu renkle değil vurguyla bildirilir (kabukta tek accent
+          var, kırmızı dolgu parti rengiyle çakışma riski demek); negatif
+          sayının kendisi de ink-primary'ye koyulaşıyor. Sayılar mono. */}
+      <p className={`text-sm ${remaining < 0 ? 'font-semibold text-ink-primary' : 'font-medium text-ink-secondary'}`}>
+        Kalan puan:{' '}
+        <span className="data-figure">
+          {remaining} / {total}
+        </span>
       </p>
       {items.map((item) => (
-        <div key={item.id} className="flex items-center gap-3 rounded-lg border-2 border-border p-4">
+        <div
+          key={item.id}
+          className="flex items-center gap-3 rounded-button border-2 border-border bg-surface-card p-4 transition-colors hover:border-border-strong"
+        >
           <span className="flex-1 text-ink-primary">{item.text}</span>
           <input
             type="number"
@@ -36,7 +45,7 @@ export function AllocationQuestion({ items, total = 100, value, onChange }: Allo
             max={total}
             value={value[item.value] ?? 0}
             onChange={(e) => setItemValue(item.value, Number(e.target.value))}
-            className="w-20 rounded-lg border border-border p-2 text-right text-ink-primary focus:border-rainbow-blue focus:outline-none"
+            className="data-figure w-20 rounded-button border border-border-strong bg-surface-card p-2 text-right text-ink-primary focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent"
           />
         </div>
       ))}

@@ -34,9 +34,12 @@ export function ImageChoiceQuestion({ options, multi = false, value, onChange }:
           <button
             key={option.id}
             type="button"
+            aria-pressed={selected}
             onClick={() => toggle(option.value)}
-            className={`flex flex-col items-center gap-2 rounded-lg border-2 p-3 transition-all ${
-              selected ? 'border-rainbow-blue bg-surface-muted' : 'border-border hover:border-border-strong'
+            className={`flex flex-col items-center gap-2 rounded-button border-2 p-3 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 ${
+              selected
+                ? 'border-accent bg-accent-tint'
+                : 'border-border bg-surface-card hover:border-border-strong hover:shadow-soft'
             }`}
           >
             {option.imageUrl ? (

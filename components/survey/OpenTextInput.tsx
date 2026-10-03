@@ -16,7 +16,7 @@ export function OpenTextInput({ value, long = false, maxLength = 500, onChange }
           maxLength={maxLength}
           onChange={(e) => onChange(e.target.value)}
           rows={6}
-          className="w-full rounded-lg border-2 border-border p-4 text-ink-primary focus:border-rainbow-blue focus:outline-none"
+          className="w-full rounded-button border-2 border-border bg-surface-card p-4 text-ink-primary focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent"
         />
       ) : (
         <input
@@ -24,10 +24,10 @@ export function OpenTextInput({ value, long = false, maxLength = 500, onChange }
           value={value}
           maxLength={maxLength}
           onChange={(e) => onChange(e.target.value)}
-          className="w-full rounded-lg border-2 border-border p-4 text-ink-primary focus:border-rainbow-blue focus:outline-none"
+          className="w-full rounded-button border-2 border-border bg-surface-card p-4 text-ink-primary focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent"
         />
       )}
-      <p className="mt-1 text-right text-xs text-ink-secondary">
+      <p className="data-figure mt-1 text-right text-xs text-ink-secondary">
         {value.length} / {maxLength}
       </p>
     </div>

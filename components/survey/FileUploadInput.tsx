@@ -8,13 +8,16 @@ interface FileUploadInputProps {
 export function FileUploadInput({ fileName, onChange }: FileUploadInputProps) {
   return (
     <div className="mb-8">
-      <label className="flex cursor-pointer flex-col items-center gap-2 rounded-lg border-2 border-dashed border-border p-8 text-center hover:border-border-strong">
+      {/* `hidden` input klavye odağından tamamen çıkıyordu; sr-only ile
+          odaklanabilir kaldı ve odak halkası has-[:focus-visible] ile
+          çerçeveye yansıyor. */}
+      <label className="flex cursor-pointer flex-col items-center gap-2 rounded-button border-2 border-dashed border-border bg-surface-card p-8 text-center transition-all hover:border-border-strong hover:shadow-soft has-[:focus-visible]:border-accent has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-accent">
         <span className="text-sm text-ink-secondary">
           {fileName || 'Dosya seçmek için tıklayın'}
         </span>
         <input
           type="file"
-          className="hidden"
+          className="sr-only"
           onChange={(e) => onChange(e.target.files?.[0]?.name ?? '')}
         />
       </label>

@@ -54,14 +54,21 @@ export function MatrixQuestion({ rows, columns, multi = false, value, onChange }
                 const selected = (value[row.value] || []).includes(column.value)
                 return (
                   <td key={column.id} className="px-2 text-center">
+                    {/* Seçili: dolu petrol daire (accent/kart 5.92, UI eşiği
+                        3:1 üstü). İşaretsiz: ink-muted halka (4.79) — eski
+                        border-border 1.30 ile 3:1 altındaydı. Durum yalnız
+                        renkle taşınmıyor: dolu/boş şekil farkı + aria-checked
+                        ikinci ayırt edici. */}
                     <button
                       type="button"
                       role={multi ? 'checkbox' : 'radio'}
                       aria-checked={selected}
                       aria-label={`${row.text} - ${column.text}`}
                       onClick={() => toggle(row.value, column.value)}
-                      className={`h-6 w-6 rounded-full border-2 transition-colors ${
-                        selected ? 'border-rainbow-blue bg-rainbow-blue' : 'border-border hover:border-border-strong'
+                      className={`h-6 w-6 rounded-full border-2 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 ${
+                        selected
+                          ? 'border-accent bg-accent'
+                          : 'border-ink-muted bg-surface-card hover:border-accent'
                       }`}
                     />
                   </td>

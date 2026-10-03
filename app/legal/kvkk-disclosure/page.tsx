@@ -10,9 +10,11 @@ export default function KvkkDisclosurePage() {
       <h1 className="mb-6 font-heading text-3xl font-semibold text-ink-primary">
         KVKK Aydınlatma Metni
       </h1>
-      <p className="mb-4 text-sm text-ink-muted">Son güncelleme: 20 Temmuz 2026</p>
+      <p className="mb-4 text-sm text-ink-muted">
+        Son güncelleme: <span className="data-figure">20 Temmuz 2026</span>
+      </p>
 
-      <div className="space-y-6 text-ink-secondary">
+      <div className="max-w-prose space-y-6 leading-relaxed text-ink-secondary">
         <p>
           İşbu Aydınlatma Metni, 6698 sayılı Kişisel Verilerin Korunması Kanunu
           (&quot;KVKK&quot;) m.10 uyarınca, oyvergitsin.org (&quot;Site&quot;) üzerinden kişisel
@@ -29,7 +31,7 @@ export default function KvkkDisclosurePage() {
             sıfatıyla Site&apos;yi işleten kişidir. İletişim için:{' '}
             <a
               href="mailto:supabase@oyvergitsin.org"
-              className="text-rainbow-blue underline underline-offset-4 hover:text-rainbow-blue-hover"
+              className="rounded-sm text-accent underline underline-offset-4 hover:text-accent-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
             >
               supabase@oyvergitsin.org
             </a>
@@ -105,7 +107,7 @@ export default function KvkkDisclosurePage() {
             haklarına sahipsiniz. Bu haklarınızı kullanmak için{' '}
             <a
               href="mailto:supabase@oyvergitsin.org"
-              className="text-rainbow-blue underline underline-offset-4 hover:text-rainbow-blue-hover"
+              className="rounded-sm text-accent underline underline-offset-4 hover:text-accent-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
             >
               supabase@oyvergitsin.org
             </a>{' '}

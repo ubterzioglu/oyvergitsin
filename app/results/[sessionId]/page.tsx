@@ -4,17 +4,22 @@ import { useEffect, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { PolarAngleAxis, PolarGrid, PolarRadiusAxis, Radar, RadarChart, ResponsiveContainer } from 'recharts'
-import { getPartyColor } from '@/lib/parties'
 import { Button } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
 import { Container } from '@/components/ui/Container'
 import { CoverageBadge } from '@/components/results/CoverageBadge'
 import { MatchReasons } from '@/components/results/MatchReasons'
+import { PartyBadge } from '@/components/results/PartyBadge'
 import type { CoverageTier } from '@/lib/scoring/types'
 
 // Metodoloji raporu §9: ilk sonuçlar birbirine bu kadar yakınsa tek bir
 // "kazanan" göstermek sahte kesinlik yaratır.
 const CLOSE_MATCH_MARGIN = 3
+
+// <Link> içine sarılı <Button> için odak halkası; halkayı odağı gerçekten
+// alan <a> öğesine taşır.
+const LINK_BUTTON_FOCUS =
+  'inline-flex rounded-button focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2'
 
 interface AxisComparison {
   axisId: string
@@ -95,17 +100,26 @@ export default function ResultsPage() {
 
   if (loading) {
     return (
-      <div className="flex min-h-screen items-center justify-center">
-        <div className="text-ink-secondary">Sonuçlar yükleniyor...</div>
+      <div className="flex min-h-screen items-center justify-center bg-surface">
+        <div role="status" className="text-ink-secondary">
+          Sonuçlar yükleniyor...
+        </div>
       </div>
     )
   }
 
   if (!result || errorMessage) {
+    // Hata kutusu ham Tailwind paletini kullanıyordu (red-50/200/700) — tasarım
+    // sisteminin dışında kalan tek yerdi ve "Kamusal Ekran" grafit kabuğunda
+    // yabancı duruyordu. Token'lara alındı; hata bilgisi renkle değil
+    // role="alert" ve metnin kendisiyle taşınıyor.
     return (
-      <div className="flex min-h-screen items-center justify-center px-4">
-        <div className="w-full max-w-xl rounded-lg border border-red-200 bg-red-50 p-6 text-center">
-          <p className="text-sm text-red-700">{errorMessage || 'Sonuç bulunamadı.'}</p>
+      <div className="flex min-h-screen items-center justify-center bg-surface px-4">
+        <div
+          role="alert"
+          className="w-full max-w-xl rounded-card border border-border-strong bg-surface-card p-6 text-center shadow-soft"
+        >
+          <p className="text-sm text-ink-primary">{errorMessage || 'Sonuç bulunamadı.'}</p>
         </div>
       </div>
     )
@@ -152,7 +166,7 @@ export default function ResultsPage() {
         </p>
 
         {isLegacy && (
-          <Card className="mb-8 border-l-4 border-l-rainbow-orange">
+          <Card className="mb-8 border-l-4 border-l-border-strong">
             <p className="text-sm text-ink-secondary">
               Bu sonuç önceki metodoloji sürümüyle hesaplandı ve yeni soru setiyle karşılaştırılamaz.
               Güncel sonucunuz için anketi yeniden doldurabilirsiniz.
@@ -166,23 +180,25 @@ export default function ResultsPage() {
               En Yüksek Örtüşme
             </h2>
             <div className="flex flex-col items-start gap-6 sm:flex-row sm:items-center">
-              <div
-                className="flex h-24 w-24 shrink-0 items-center justify-center rounded-full text-2xl font-bold text-white"
-                style={{ backgroundColor: getPartyColor(topMatch.partyShortName) }}
-              >
-                {topMatch.partyShortName}
-              </div>
+              <PartyBadge shortName={topMatch.partyShortName} size="lg" />
               <div className="flex-1">
                 <h3 className="text-2xl font-bold text-ink-primary">{topMatch.partyName}</h3>
                 <p className="text-sm text-ink-secondary">
-                  {topMatch.axesUsed} eksen üzerinden hesaplandı.
+                  <span className="data-figure">{topMatch.axesUsed}</span> eksen üzerinden
+                  hesaplandı.
                 </p>
               </div>
+              {/*
+                Yüzde rakamı eskiden parti renginde yazılıyordu. İki sorun vardı:
+                (1) Okunabilirlik — parti rengi beyaz kartın üstünde AKP 2.28,
+                    MHP 1.82, Memleket 1.48 veriyordu; 3:1'in bile altı.
+                (2) Anlam — bu rakam kullanıcının kendi hesaplanmış skoru, parti
+                    verisi değil. Yön kararı rengi yalnızca parti verisine
+                    bırakıyor. Parti kimliği zaten rozette taşınıyor.
+                ink-primary ile kontrast 17.13.
+              */}
               <div className="text-right">
-                <div
-                  className="text-4xl font-bold"
-                  style={{ color: getPartyColor(topMatch.partyShortName) }}
-                >
+                <div className="data-figure text-4xl font-bold text-ink-primary">
                   %{topMatch.similarity}
                 </div>
                 <div className="text-sm text-ink-secondary">politika görüşü benzerliği</div>
@@ -190,7 +206,7 @@ export default function ResultsPage() {
             </div>
 
             {isClose && (
-              <p className="mt-6 rounded-lg bg-rainbow-yellow-tint px-4 py-3 text-sm text-ink-primary">
+              <p className="mt-6 rounded-card border border-border bg-accent-tint px-4 py-3 text-sm text-ink-primary">
                 İlk sıradaki sonuçlar birbirine çok yakın. Aradaki fark, soru setindeki küçük
                 değişikliklerle yer değiştirebilecek kadar küçüktür; tek bir parti seçimi olarak
                 okumayın.
@@ -229,7 +245,9 @@ export default function ResultsPage() {
                 <li key={axis.axisId} className="flex items-center justify-between gap-3 text-sm">
                   <span className="text-ink-secondary">{axis.axisName}</span>
                   <span className="flex shrink-0 items-center gap-2">
-                    <span className="font-semibold text-ink-primary">
+                    <span
+                      className={`font-semibold text-ink-primary ${axis.score === null ? '' : 'data-figure'}`}
+                    >
                       {axis.score === null ? 'veri yok' : axis.score}
                     </span>
                     <CoverageBadge
@@ -258,22 +276,17 @@ export default function ResultsPage() {
               {ranked.map((party, index) => (
                 <div
                   key={party.partyId}
-                  className="flex items-center justify-between rounded-lg border-2 border-border p-4"
+                  className="flex items-center justify-between gap-3 rounded-card border border-border p-4 transition-all duration-300 hover:border-border-strong hover:shadow-soft"
                 >
                   <div className="flex items-center gap-3">
-                    <div className="text-lg font-bold text-ink-muted">#{index + 1}</div>
-                    <div
-                      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-bold text-white"
-                      style={{ backgroundColor: getPartyColor(party.partyShortName) }}
-                    >
-                      {party.partyShortName}
+                    {/* Sıra numarası ve yüzde veri: mono + tabular, satırlar hizalanır. */}
+                    <div className="data-figure text-lg font-bold text-ink-muted">
+                      #{index + 1}
                     </div>
+                    <PartyBadge shortName={party.partyShortName} size="sm" />
                     <span className="font-medium text-ink-primary">{party.partyName}</span>
                   </div>
-                  <div
-                    className="text-xl font-bold"
-                    style={{ color: getPartyColor(party.partyShortName) }}
-                  >
+                  <div className="data-figure shrink-0 text-xl font-bold text-ink-primary">
                     %{party.similarity}
                   </div>
                 </div>
@@ -299,7 +312,10 @@ export default function ResultsPage() {
                       {party.partyName}
                       {party.axesUsed > 0 && (
                         <span className="ml-1 text-ink-muted">
-                          ({party.axesUsed}/{axes.length} eksen)
+                          (<span className="data-figure">
+                            {party.axesUsed}/{axes.length}
+                          </span>{' '}
+                          eksen)
                         </span>
                       )}
                     </li>
@@ -314,12 +330,26 @@ export default function ResultsPage() {
           <MatchReasons party={topMatch} className="mb-8" />
         )}
 
+        {/*
+          Odak halkası düzeltmesi (devir belgesi §6.2): Tab odağı dıştaki <a>
+          öğesine gidiyor ama halka <button> üzerinde tanımlıydı — klavye
+          kullanıcısı odağın nerede olduğunu göremiyordu. Halka odağı gerçekten
+          alan öğeye taşındı, buton odak sırasından çıkarıldı.
+        */}
         <div className="flex justify-center gap-4">
-          <Link href="/">
-            <Button variant="primary">Ana Sayfa</Button>
+          <Link href="/" className={LINK_BUTTON_FOCUS}>
+            <Button variant="primary" tabIndex={-1}>
+              Ana Sayfa
+            </Button>
           </Link>
-          <Link href="/survey" onClick={() => localStorage.removeItem('sessionId')}>
-            <Button variant="secondary">Yeni Anket</Button>
+          <Link
+            href="/survey"
+            onClick={() => localStorage.removeItem('sessionId')}
+            className={LINK_BUTTON_FOCUS}
+          >
+            <Button variant="secondary" tabIndex={-1}>
+              Yeni Anket
+            </Button>
           </Link>
         </div>
       </Container>

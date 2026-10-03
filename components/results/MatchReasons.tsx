@@ -36,15 +36,21 @@ export function MatchReasons({ party, className = '' }: MatchReasonsProps) {
         {party.partyName} ile en çok örtüştüğünüz ve en çok ayrıştığınız konular.
       </p>
 
+      {/*
+        Örtüşme/ayrışma ayrımı renge bırakılmıyor: her listenin kendi başlığı
+        var ve şerit yalnızca ikincil bir işaret. Eski hâlinde yeşil/kırmızı
+        şeritler tek ayırt ediciydi; B10 ikisini de nötre bağlayınca ayrım
+        tamamen kaybolmuştu.
+      */}
       <div className="grid gap-6 sm:grid-cols-2">
         <ComparisonList
           title="En çok örtüşen konular"
-          accent="border-l-rainbow-green"
+          accent="border-l-accent"
           items={party.agreements}
         />
         <ComparisonList
           title="En çok ayrışan konular"
-          accent="border-l-rainbow-red"
+          accent="border-l-ink-muted"
           items={party.disagreements}
         />
       </div>
@@ -68,15 +74,21 @@ function ComparisonList({
       <h3 className="mb-3 text-sm font-semibold text-ink-primary">{title}</h3>
       <ul className="space-y-2">
         {items.map((item) => (
-          <li key={item.axisId} className={`border-l-4 ${accent} rounded-r bg-surface-muted px-3 py-2`}>
+          <li
+            key={item.axisId}
+            className={`border-l-4 ${accent} rounded-r-badge bg-surface-muted px-3 py-2`}
+          >
             <div className="flex items-baseline justify-between gap-2">
               <span className="text-sm text-ink-primary">{item.axisName}</span>
               {item.weight > 1 && (
-                <span className="shrink-0 text-[11px] text-ink-muted">sizin için önemli</span>
+                // ink-muted idi: surface-muted üzerinde 4.22, 11px metinde AA altı.
+                <span className="shrink-0 text-[11px] text-ink-secondary">sizin için önemli</span>
               )}
             </div>
+            {/* Eksen skorları veri: mono + tabular, sütunlar arasında hizalanır. */}
             <div className="mt-1 text-xs text-ink-secondary">
-              siz {item.userScore} · parti {item.partyScore}
+              siz <span className="data-figure text-ink-primary">{item.userScore}</span> · parti{' '}
+              <span className="data-figure text-ink-primary">{item.partyScore}</span>
             </div>
           </li>
         ))}

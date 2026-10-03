@@ -19,7 +19,7 @@ export function Header() {
           </Link>
         </nav>
       </div>
-      <div className="rainbow-gradient-border h-[3px] w-full" aria-hidden="true" />
+      <div className="bg-gradient-to-r from-accent via-scale-4 to-border-strong h-[3px] w-full" aria-hidden="true" />
     </header>
   )
 }

@@ -8,6 +8,11 @@ export const PARTY_COLORS: Record<string, string> = {
   Saadet: '#6A1BB3',
   'TİP': '#333333',
   Vatan: '#D10F2F',
+  // Yeşil Sol Parti Aralık 2023'te DEM Parti'ye dönüştü; migration 010 DB
+  // satırını yerinde güncelledi (short_name 'DEM', parties.color '#0F7A3A').
+  DEM: '#0F7A3A',
+  // YSP anahtarı bilinçli olarak duruyor: result_snapshots'ta 'YSP'
+  // shortName'iyle donmuş payload'lar var ve eski sonuçlar değişmemeli.
   YSP: '#0F7A3A',
   Zafer: '#00964C',
   Memleket: '#FDD007',

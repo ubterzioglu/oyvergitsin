@@ -204,18 +204,18 @@ export default async function MethodologyPage() {
       />
       <Container size="md">
         <h1 className="mb-3 font-heading text-4xl font-semibold text-ink-primary">Metodoloji</h1>
-        <p className="mb-6 text-ink-secondary">
+        <p className="mb-6 max-w-prose text-base leading-relaxed text-ink-secondary">
           Bu araç, politika görüşlerinizin partilerin kayıtlı konumlarıyla ne kadar örtüştüğünü ölçer.
           Bir oy verme tavsiyesi değildir. Aşağıda soru setinin, puanlama algoritmasının ve parti
           konumlandırmasının nasıl belirlendiği, kaynaklarıyla birlikte açıklanmıştır.
         </p>
 
         {!isDocumented && (
-          <Card className="mb-8 border-l-4 border-l-rainbow-orange">
+          <Card className="mb-8 border-l-4 border-l-accent">
             <h2 className="mb-2 font-heading text-lg font-semibold text-ink-primary">
               Yayına hazırlanan yöntem henüz devrede değil
             </h2>
-            <p className="text-sm text-ink-secondary">
+            <p className="max-w-prose text-base leading-relaxed text-ink-secondary">
               Şu anda ankette kullanılan soru seti bir <strong>geliştirme setidir</strong>: soru
               tiplerini denemek için yazılmıştır, ampirik olarak doğrulanmış bir ölçüm aracı
               değildir ve eksen uçları tanımlanmamıştır. Bu sayfa aşağıda o setin gerçek içeriğini
@@ -229,11 +229,12 @@ export default async function MethodologyPage() {
           {model ? (
             <dl className="grid gap-2 text-sm sm:grid-cols-2">
               <Term label="Eksen modeli" value={`${model.name} (${model.version})`} />
-              <Term label="Eksen sayısı" value={String(axes.length)} />
-              <Term label="Puanlanan madde" value={String(scoredQuestions.length)} />
+              <Term label="Eksen sayısı" value={String(axes.length)} data />
+              <Term label="Puanlanan madde" value={String(scoredQuestions.length)} data />
               <Term
                 label="Yayın tarihi"
                 value={new Date(model.created_at).toLocaleDateString('tr-TR')}
+                data
               />
             </dl>
           ) : (
@@ -241,17 +242,20 @@ export default async function MethodologyPage() {
           )}
         </Card>
 
+
         <Card elevated className="mb-8">
           <h2 className="mb-2 font-heading text-2xl font-semibold text-ink-primary">Eksenler</h2>
-          <p className="mb-6 text-sm text-ink-secondary">
+          <p className="mb-6 max-w-prose text-base leading-relaxed text-ink-secondary">
             Her eksen −100 ile +100 arasında bir skala. Uç tanımları betimleyicidir; bir uç
             diğerinden daha doğru ya da daha iyi değildir.
           </p>
           <div className="space-y-5">
             {axes.map((axis) => (
-              <section key={axis.id} className="border-l-4 border-l-rainbow-blue pl-4">
-                <h3 className="font-semibold text-ink-primary">{axis.name}</h3>
-                <p className="mt-1 text-sm text-ink-secondary">{axis.description}</p>
+              <section key={axis.id} className="border-l-2 border-l-scale-3 pl-4">
+                <h3 className="font-heading text-lg font-semibold text-ink-primary">{axis.name}</h3>
+                <p className="mt-1 max-w-prose text-sm leading-relaxed text-ink-secondary">
+                  {axis.description}
+                </p>
                 <div className="mt-3 grid gap-2 sm:grid-cols-2">
                   <Pole label="−100" text={axis.pole_negative} />
                   <Pole label="+100" text={axis.pole_positive} />
@@ -263,7 +267,7 @@ export default async function MethodologyPage() {
 
         <Card elevated className="mb-8">
           <h2 className="mb-2 font-heading text-2xl font-semibold text-ink-primary">Soru seti</h2>
-          <p className="mb-6 text-sm text-ink-secondary">
+          <p className="mb-6 max-w-prose text-base leading-relaxed text-ink-secondary">
             {isDocumented ? (
               <>
                 Tüm maddeler politika önermesi biçimindedir. Her eksende hem olumlu hem olumsuz
@@ -279,12 +283,14 @@ export default async function MethodologyPage() {
           </p>
           <ol className="space-y-2">
             {questions.map((question) => (
-              <li key={question.id} className="flex gap-3 text-sm">
-                <span className="w-6 shrink-0 text-right text-ink-muted">{question.order_index}</span>
-                <span className="text-ink-secondary">
+              <li key={question.id} className="flex gap-3 text-sm leading-relaxed">
+                <span className="data-figure w-6 shrink-0 text-right text-ink-muted">
+                  {question.order_index}
+                </span>
+                <span className="max-w-prose text-ink-secondary">
                   {question.text}
                   {!scoredQuestionIds.has(question.id) && (
-                    <span className="ml-2 rounded bg-surface-muted px-1.5 py-0.5 text-[11px] text-ink-muted">
+                    <span className="ml-2 rounded-badge border border-border-strong bg-surface-muted px-1.5 py-0.5 text-[11px] text-ink-secondary">
                       puanlanmaz
                     </span>
                   )}
@@ -297,8 +303,8 @@ export default async function MethodologyPage() {
         <Card elevated className="mb-8">
           <h2 className="mb-4 font-heading text-2xl font-semibold text-ink-primary">Puanlama</h2>
 
-          <h3 className="mb-2 font-semibold text-ink-primary">Eksen skoru</h3>
-          <p className="mb-3 text-sm text-ink-secondary">
+          <h3 className="mb-2 font-heading text-lg font-semibold text-ink-primary">Eksen skoru</h3>
+          <p className="mb-3 max-w-prose text-base leading-relaxed text-ink-secondary">
             Bir eksenin skoru, o eksende <strong>yanıtladığınız</strong> maddelerin ulaşılabilir
             maksimum puanına göre normalize edilir. Ham toplamı kesip atmak yerine oranlamak, farklı
             sayıda maddeye sahip eksenlerin karşılaştırılabilir kalmasını sağlar.
@@ -306,7 +312,7 @@ export default async function MethodologyPage() {
           <Formula>
             {`skor = 100 × Σ(ağırlık × cevap puanı) / Σ(ağırlık × maddenin maksimumu)`}
           </Formula>
-          <ul className="mb-6 mt-3 list-disc space-y-1 pl-5 text-sm text-ink-secondary">
+          <ul className="mb-6 mt-3 list-disc space-y-1 pl-5 text-sm leading-relaxed text-ink-secondary">
             <li>
               <strong>Kararsızım</strong> gerçek bir sıfır puandır ve paydaya girer.
             </li>
@@ -320,8 +326,8 @@ export default async function MethodologyPage() {
             </li>
           </ul>
 
-          <h3 className="mb-2 font-semibold text-ink-primary">Parti benzerliği</h3>
-          <p className="mb-3 text-sm text-ink-secondary">
+          <h3 className="mb-2 font-heading text-lg font-semibold text-ink-primary">Parti benzerliği</h3>
+          <p className="mb-3 max-w-prose text-base leading-relaxed text-ink-secondary">
             Ağırlıklı Manhattan (şehir bloku) uzaklığı kullanılır. Yalnızca sizin skor ürettiğiniz ve
             partinin konumlandığı eksenler hesaba girer.
           </p>
@@ -329,7 +335,7 @@ export default async function MethodologyPage() {
             {`uzaklık = Σ(önem × |sizin skorunuz − parti skoru|)
 benzerlik = 100 × (1 − uzaklık / (200 × Σönem))`}
           </Formula>
-          <p className="mt-3 text-sm text-ink-secondary">
+          <p className="mt-3 max-w-prose text-base leading-relaxed text-ink-secondary">
             Bir konuyu &ldquo;benim için önemli&rdquo; işaretlerseniz o eksenin ağırlığı 1 yerine 1,5 olur. İki
             kat ağırlık, tek bir konunun sonucu gereğinden fazla belirlemesine yol açtığı için
             tercih edilmedi.
@@ -342,7 +348,7 @@ benzerlik = 100 × (1 − uzaklık / (200 × Σönem))`}
           <h2 className="mb-4 font-heading text-2xl font-semibold text-ink-primary">
             Bilinen sınırlamalar
           </h2>
-          <ul className="list-disc space-y-2 pl-5 text-sm text-ink-secondary">
+          <ul className="max-w-prose list-disc space-y-2 pl-5 text-base leading-relaxed text-ink-secondary">
             <li>
               Yüzde bir olasılık değildir. İlk sıralardaki sonuçlar birbirine yakınsa, soru
               setindeki küçük değişiklikler sıralamayı değiştirebilir; sonuç ekranı bu durumda uyarı
@@ -380,13 +386,13 @@ benzerlik = 100 × (1 − uzaklık / (200 × Σönem))`}
           <h2 className="mb-2 font-heading text-2xl font-semibold text-ink-primary">
             Kaynaklar ve düzeltme talebi
           </h2>
-          <p className="mb-4 text-sm text-ink-secondary">
+          <p className="mb-4 max-w-prose text-base leading-relaxed text-ink-secondary">
             Parti konumları aşağıdaki kaynak türlerinden, bu sırayla kodlanır: güncel seçim
             beyannamesi, resmî parti programı, resmî parti açıklaması, yasama davranışı, akademik
             uzman veri setleri. Her parti-eksen konumu için kullanılan kaynak ve kodlama gerekçesi
             kayıt altındadır.
           </p>
-          <p className="text-sm text-ink-secondary">
+          <p className="max-w-prose text-base leading-relaxed text-ink-secondary">
             Bir partinin konumunun yanlış kodlandığını düşünüyorsanız — özellikle bir parti
             temsilcisiyseniz — sayfanın altındaki geri bildirim düğmesinden iletin. Yeni kaynak
             gösteren bildirimler değerlendirilir; değişiklik yapıldığında eski ve yeni değer
@@ -397,7 +403,7 @@ benzerlik = 100 × (1 − uzaklık / (200 × Σönem))`}
         <div className="text-sm">
           <Link
             href="/"
-            className="text-rainbow-blue underline underline-offset-4 hover:text-rainbow-blue-hover"
+            className="rounded-badge font-medium text-accent underline underline-offset-4 hover:text-accent-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
           >
             Ana sayfaya dön
           </Link>
@@ -407,27 +413,29 @@ benzerlik = 100 × (1 − uzaklık / (200 × Σönem))`}
   )
 }
 
-function Term({ label, value }: { label: string; value: string }) {
+function Term({ label, value, data = false }: { label: string; value: string; data?: boolean }) {
   return (
     <div>
       <dt className="text-ink-muted">{label}</dt>
-      <dd className="font-medium text-ink-primary">{value}</dd>
+      <dd className={`font-medium text-ink-primary ${data ? 'data-figure' : ''}`}>{value}</dd>
     </div>
   )
 }
 
 function Pole({ label, text }: { label: string; text: string | null }) {
   return (
-    <div className="rounded-lg bg-surface-muted px-3 py-2">
-      <span className="block text-xs font-semibold text-ink-muted">{label}</span>
-      <span className="text-sm text-ink-secondary">{text ?? '—'}</span>
+    <div className="rounded-card border border-border bg-surface-muted px-3 py-2">
+      {/* ink-muted, surface-muted üzerinde 4.22 veriyor (AA altı) — etiket bu
+          yüzden ink-secondary (5.63). */}
+      <span className="data-figure block text-xs font-semibold text-ink-secondary">{label}</span>
+      <span className="text-sm leading-relaxed text-ink-secondary">{text ?? '—'}</span>
     </div>
   )
 }
 
 function Formula({ children }: { children: string }) {
   return (
-    <pre className="overflow-x-auto rounded-lg bg-ink-primary px-4 py-3 text-xs leading-relaxed text-white">
+    <pre className="data-figure overflow-x-auto rounded-card bg-ink-primary px-4 py-3 text-sm leading-relaxed text-white">
       {children}
     </pre>
   )

@@ -11,12 +11,10 @@ import type { Question } from '@/components/survey/QuestionRenderer'
 import { ImportanceToggle } from '@/components/survey/ImportanceToggle'
 import { isSurveyAnswerFilled, validateSurveyCompletion } from '@/lib/survey/completion'
 
-// B10 — kapsam istisnası, bilerek yapıldı. Gerekçesi app/page.tsx'teki
-// aynı dizinin başında. Özeti: bu hex'ler inline style olarak uygulandığı
-// için Tailwind token değişiminden etkilenmiyorlardı ve eski parti-çakışan
-// renkler JS paketinde kalmaya devam ediyordu.
-// B14: bu diziyi tamamen kaldır — Yön A tek accent kullanıyor.
-const RAINBOW_ACCENTS = ['#C6D2D3', '#9BB6B9', '#769DA2', '#55868E', '#38737C', '#1D616B']
+// B14: RAINBOW_ACCENTS dizisi tamamen kaldırıldı (devir belgesi §6.2).
+// Yön A tek accent kullanıyor; döngüsel accent kavramı yok. Soru kartı artık
+// renkli üst kenar taşımıyor — kartlar 1px kenarlıkla ayrışıyor, renk yalnızca
+// etkileşim/selection durumlarında (petrol accent).
 
 // Tek seçimle tamamlanan sorularda kullanıcı şıkkı işaretledikten sonra
 // seçimin vurgulandığını görebilsin diye kısa bir gecikmeyle ilerlenir.
@@ -77,13 +75,13 @@ export default function SurveyPage() {
       const payload = await response.json()
 
       if (!response.ok) {
-        throw new Error(payload.error || 'Sorular yuklenemedi')
+        throw new Error(payload.error || 'Sorular yüklenemedi')
       }
 
       setQuestions(payload.questions || [])
     } catch (error) {
       console.error('Error fetching questions:', error)
-      setErrorMessage('Anket sorulari yuklenemedi. Lutfen biraz sonra tekrar deneyin.')
+      setErrorMessage('Anket soruları yüklenemedi. Lütfen biraz sonra tekrar deneyin.')
     } finally {
       setLoading(false)
     }
@@ -221,14 +219,11 @@ export default function SurveyPage() {
   if (errorMessage) {
     return (
       <div className="flex min-h-screen items-center justify-center px-4">
-        <div className="w-full max-w-xl rounded-lg border border-red-200 bg-red-50 p-6 text-center">
-          <p className="text-sm text-red-700">{errorMessage}</p>
-          <button
-            onClick={fetchQuestions}
-            className="mt-4 rounded-lg bg-red-600 px-4 py-2 text-white hover:bg-red-700"
-          >
+        <div className="w-full max-w-xl rounded-card border border-border-strong bg-surface-card p-6 text-center">
+          <p className="text-sm text-ink-primary">{errorMessage}</p>
+          <Button onClick={fetchQuestions} variant="primary" className="mt-4 px-4 py-2 text-sm">
             Tekrar Dene
-          </button>
+          </Button>
         </div>
       </div>
     )
@@ -237,8 +232,8 @@ export default function SurveyPage() {
   if (questions.length === 0) {
     return (
       <div className="flex min-h-screen items-center justify-center px-4">
-        <div className="w-full max-w-xl rounded-lg border border-border bg-surface-card p-6 text-center">
-          <p className="text-sm text-ink-secondary">Gosterilecek soru bulunamadi.</p>
+        <div className="w-full max-w-xl rounded-card border border-border bg-surface-card p-6 text-center">
+          <p className="text-sm text-ink-secondary">Gösterilecek soru bulunamadı.</p>
         </div>
       </div>
     )
@@ -252,14 +247,20 @@ export default function SurveyPage() {
     <div className="min-h-screen bg-surface px-2 py-2 sm:px-4 sm:py-6">
       <Container size="md" className="flex flex-col items-center px-2 sm:px-4">
         <div className="mb-3 w-full max-w-xl sm:mb-5">
-          <ProgressBar progress={progress} label={`Soru ${currentQuestion + 1} / ${questions.length}`} />
+          {/* Sayaçlar veri yazısında (mono + tabular): "doğrulanmış kamu
+            verisi" hissi. ink-secondary/surface 6.00 — AA. */}
+          <div className="mb-1.5 flex items-baseline justify-between sm:mb-2">
+            <p className="data-figure text-sm text-ink-secondary sm:text-base">
+              {`Soru ${currentQuestion + 1} / ${questions.length}`}
+            </p>
+            <p className="data-figure text-xs text-ink-secondary sm:text-sm">
+              {`%${Math.round(progress)}`}
+            </p>
+          </div>
+          <ProgressBar progress={progress} />
         </div>
 
-        <Card
-          elevated
-          className="flex w-full max-w-xl min-h-0 flex-col border-t-4 !p-4 sm:min-h-[30rem] sm:!p-8"
-          style={{ borderTopColor: RAINBOW_ACCENTS[currentQuestion % RAINBOW_ACCENTS.length] }}
-        >
+        <Card className="flex w-full max-w-xl min-h-0 flex-col !p-4 sm:min-h-[30rem] sm:!p-8">
           {question.description && question.type !== 'vignette_likert' && (
             <p className="mb-2 text-sm text-ink-secondary sm:mb-3 sm:text-base">{question.description}</p>
           )}
@@ -303,16 +304,21 @@ export default function SurveyPage() {
           </div>
         </Card>
 
+        {/* Soru atlayıcı: cam efektli (backdrop-blur + yarı saydam beyaz)
+            tepsi ve döngüsel rainbow halkası kaldırıldı — opak kart zemini +
+            1px kenarlık. Durumlar: aktif = dolu petrol (beyaz/sayı 5.92),
+            cevaplandı = accent-tint zemin + accent sayı (5.06), boş = kart
+            zemini + ink-secondary sayı (6.38). Hepsi AA; sayı mono. */}
         <div className="mt-3 w-full max-w-xl sm:mt-4">
-          <div className="mx-auto flex w-fit max-w-full flex-wrap justify-center gap-1 rounded-2xl border border-white/80 bg-white/90 px-2 py-2 shadow-[0_12px_32px_rgba(15,23,42,0.10)] ring-1 ring-black/5 backdrop-blur sm:gap-1.5 sm:rounded-full sm:px-3">
+          <div className="mx-auto flex w-fit max-w-full flex-wrap justify-center gap-1 rounded-card border border-border bg-surface-card px-2 py-2 sm:gap-1.5 sm:px-3">
             {questions.map((q, index) => {
               const isActive = index === currentQuestion
               const isAnswered = isSurveyAnswerFilled(q.type, answers[q.id])
               const stateClass = isActive
-                ? 'border-ink-primary bg-ink-primary text-white shadow-[0_6px_16px_rgba(15,23,42,0.22)] ring-2 ring-white'
+                ? 'border-accent bg-accent text-white'
                 : isAnswered
-                  ? 'border-emerald-200 bg-emerald-50 text-emerald-700 hover:border-emerald-300 hover:bg-emerald-100'
-                  : 'border-slate-200 bg-white text-slate-500 hover:border-slate-300 hover:bg-slate-50'
+                  ? 'border-accent bg-accent-tint text-accent hover:bg-surface-muted'
+                  : 'border-border-strong bg-surface-card text-ink-secondary hover:border-ink-muted hover:bg-surface-muted'
               return (
                 <button
                   key={q.id}
@@ -320,12 +326,7 @@ export default function SurveyPage() {
                   onClick={() => goToQuestion(index)}
                   aria-label={`Soru ${index + 1}${isAnswered ? ', cevaplandı' : ', cevaplanmadı'}`}
                   aria-current={isActive}
-                  className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full border text-[11px] font-semibold transition-all duration-200 sm:h-7 sm:w-7 sm:text-xs ${stateClass}`}
-                  style={{
-                    boxShadow: isActive
-                      ? `0 0 0 2px ${RAINBOW_ACCENTS[index % RAINBOW_ACCENTS.length]}, 0 10px 22px rgba(15, 23, 42, 0.18)`
-                      : undefined,
-                  }}
+                  className={`data-figure flex h-6 w-6 shrink-0 items-center justify-center rounded-full border text-[11px] font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 sm:h-7 sm:w-7 sm:text-xs ${stateClass}`}
                 >
                   {index + 1}
                 </button>
@@ -341,19 +342,21 @@ export default function SurveyPage() {
             role="alertdialog"
             aria-modal="true"
             aria-labelledby="completion-alert-title"
-            className="w-full max-w-sm rounded-lg border border-border bg-white p-5 shadow-elevated"
+            className="w-full max-w-sm rounded-card border border-border-strong bg-surface-card p-5 shadow-elevated"
           >
             <h2 id="completion-alert-title" className="text-lg font-semibold text-ink-primary">
               Anket tamamlanamadı
             </h2>
             <p className="mt-2 text-sm text-ink-secondary">{completionMessage}</p>
-            <button
+            <Button
               type="button"
+              autoFocus
               onClick={() => setCompletionMessage(null)}
-              className="mt-5 w-full rounded-button bg-rainbow-blue px-4 py-2.5 text-sm font-semibold text-white hover:bg-rainbow-blue-hover"
+              variant="primary"
+              className="mt-5 w-full px-4 py-2.5 text-sm"
             >
               Tamam
-            </button>
+            </Button>
           </div>
         </div>
       )}

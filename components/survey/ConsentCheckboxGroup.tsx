@@ -25,13 +25,13 @@ export function ConsentCheckboxGroup({ options, value, onChange }: ConsentCheckb
       {options.map((option) => (
         <label
           key={option.id}
-          className="flex cursor-pointer items-center gap-3 rounded-lg border-2 border-border p-4 hover:border-border-strong"
+          className="flex cursor-pointer items-center gap-3 rounded-button border-2 border-border bg-surface-card p-4 transition-colors hover:border-border-strong"
         >
           <input
             type="checkbox"
             checked={value.includes(option.value)}
             onChange={() => toggle(option.value)}
-            className="h-5 w-5 accent-rainbow-blue"
+            className="h-5 w-5 accent-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
           />
           <span className="text-ink-primary">{option.text}</span>
         </label>

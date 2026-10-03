@@ -234,14 +234,17 @@ export function QuestionRenderer({ question, value, onAnswer, onSingleSelectAnsw
               <button
                 key={option.id}
                 type="button"
+                aria-pressed={selected}
                 onClick={() => {
                   const next = selected
                     ? multiValue.filter((v) => v !== option.value)
                     : [...multiValue, option.value]
                   handleAnswer(JSON.stringify(next))
                 }}
-                className={`w-full rounded-lg border-2 p-4 text-left transition-all ${
-                  selected ? 'border-rainbow-blue bg-surface-muted' : 'border-border hover:border-border-strong'
+                className={`w-full rounded-button border-2 p-4 text-left text-ink-primary transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 ${
+                  selected
+                    ? 'border-accent bg-accent-tint font-medium'
+                    : 'border-border bg-surface-card hover:border-border-strong hover:shadow-soft'
                 }`}
               >
                 {option.text}
@@ -257,7 +260,7 @@ export function QuestionRenderer({ question, value, onAnswer, onSingleSelectAnsw
         <select
           value={rawAnswer ?? ''}
           onChange={(e) => handleSingleSelectAnswer(e.target.value)}
-          className="mb-8 w-full rounded-lg border-2 border-border p-4 text-ink-primary focus:border-rainbow-blue focus:outline-none"
+          className="mb-8 w-full rounded-button border-2 border-border bg-surface-card p-4 text-ink-primary focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent"
         >
           <option value="" disabled>
             Seçiniz
@@ -273,20 +276,24 @@ export function QuestionRenderer({ question, value, onAnswer, onSingleSelectAnsw
     default:
       return (
         <div className="mb-8 space-y-3">
-          {options.map((option) => (
-            <button
-              key={option.id}
-              type="button"
-              onClick={() => handleSingleSelectAnswer(option.value)}
-              className={`w-full rounded-lg border-2 p-4 text-left transition-all ${
-                rawAnswer === option.value
-                  ? 'border-rainbow-blue bg-surface-muted'
-                  : 'border-border hover:border-border-strong'
-              }`}
-            >
-              {option.text}
-            </button>
-          ))}
+          {options.map((option) => {
+            const selected = rawAnswer === option.value
+            return (
+              <button
+                key={option.id}
+                type="button"
+                aria-pressed={selected}
+                onClick={() => handleSingleSelectAnswer(option.value)}
+                className={`w-full rounded-button border-2 p-4 text-left text-ink-primary transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 ${
+                  selected
+                    ? 'border-accent bg-accent-tint font-medium'
+                    : 'border-border bg-surface-card hover:border-border-strong hover:shadow-soft'
+                }`}
+              >
+                {option.text}
+              </button>
+            )
+          })}
         </div>
       )
   }

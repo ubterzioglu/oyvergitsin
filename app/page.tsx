@@ -1,10 +1,10 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
 import { siteConfig } from '@/lib/site'
-import { Button } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
 import { Container } from '@/components/ui/Container'
 import { LatestNews } from '@/components/home/LatestNews'
+import { FeatureCard } from '@/components/home/FeatureCard'
+import { StartSurveyLink } from '@/components/home/StartSurveyLink'
 import { getPlatformFacts, type PlatformAxis, type PlatformParty } from '@/lib/geo/platform-facts'
 
 // Eksen ve parti listeleri veritabanındaki AKTİF modelden okunur. Sayfa
@@ -41,22 +41,15 @@ const STEPS = [
   },
 ]
 
-// B10 — kapsam istisnası, bilerek yapıldı.
-// Bu dosya B12'nin sahipliğinde ve yapısal düzenlemesi ona ait. Ancak buradaki
-// altı hex Tailwind'den geçmiyor (inline style olarak uygulanıyor), yani token
-// katmanı değiştirilse de olduğu gibi kalıyorlardı: build çıktısının JS
-// paketinde eski parti-çakışan renkler görünmeye devam ediyordu — ölçüldü.
-// Tarafsızlık düzeltmesi yarım kalmasın diye yalnızca DEĞERLER nötr rampaya
-// çevrildi; dizinin yapısı ve kullanım biçimi B12'ye bırakıldı.
-// B12: bu diziyi tamamen kaldır — Yön A tek accent kullanıyor, döngüsel
-// gökkuşağı accent kavramı artık yok.
-const RAINBOW_ACCENTS = ['#C6D2D3', '#9BB6B9', '#769DA2', '#55868E', '#38737C', '#1D616B']
+// B10'un geçici olarak nötrlediği `RAINBOW_ACCENTS` dizisi burada kaldırıldı.
+// Yön A tek vurgu rengi kullanıyor: kartlara sırayla renk dağıtan döngüsel
+// accent kavramı artık yok. Renk yalnızca parti verisinde anlam taşır.
 
 const TRUST_SIGNALS = [
   { title: 'Tamamen Anonim', description: 'Kimliğiniz veya iletişim bilgileriniz talep edilmez.', icon: '🕶️' },
   { title: 'Tarafsız Algoritma', description: 'Skorlama, herhangi bir partiye avantaj sağlamayan sabit kurallarla çalışır.', icon: '⚖️' },
   { title: 'Açık Kaynak', description: 'Eşleşme mantığı ve veri kullanımı şeffaf bir şekilde belgelenmiştir.', icon: '🔓' },
-].map((signal, index) => ({ ...signal, accent: RAINBOW_ACCENTS[index % RAINBOW_ACCENTS.length] }))
+]
 
 // Eksen adları ve açıklamaları artık veritabanından geliyor; burada yalnızca
 // sunum katmanı (ikon) kalıyor. Önceden tüm liste sabit kodluydu ve aktif
@@ -77,14 +70,12 @@ const FALLBACK_AXIS_ICON = '🔎'
 
 interface DecoratedAxis extends PlatformAxis {
   icon: string
-  accent: string
 }
 
 function decorateAxes(axes: PlatformAxis[]): DecoratedAxis[] {
-  return axes.map((axis, index) => ({
+  return axes.map((axis) => ({
     ...axis,
-    icon: AXIS_ICON_BY_SLUG[axis.slug] ?? FALLBACK_AXIS_ICON,
-    accent: RAINBOW_ACCENTS[index % RAINBOW_ACCENTS.length]
+    icon: AXIS_ICON_BY_SLUG[axis.slug] ?? FALLBACK_AXIS_ICON
   }))
 }
 
@@ -134,7 +125,7 @@ function buildFaqItems(axisCount: number, parties: PlatformParty[]) {
       `Karşılaştırmaya şu partiler dahildir: ${formatPartyList(parties)}.`,
     icon: '🤝',
   },
-  ].map((item, index) => ({ ...item, accent: RAINBOW_ACCENTS[index % RAINBOW_ACCENTS.length] }))
+  ]
 }
 
 export default async function Home() {
@@ -178,35 +169,45 @@ export default async function Home() {
           <source src="/videos/hero-bg.mp4" type="video/mp4" />
         </video>
         <Container className="relative py-24 md:py-32">
-          <div className="mx-auto max-w-2xl rounded-[1.75rem] border border-white/50 bg-gradient-to-b from-white/80 to-white/60 p-8 text-center shadow-[0_8px_32px_rgba(0,0,0,0.25)] ring-1 ring-inset ring-white/20 backdrop-blur-xl backdrop-saturate-150 md:p-14">
+          {/*
+            Panel eskiden yarı saydamdı (from-white/80 to-white/60 + blur) ve
+            metin ink-primary/80 ile /65 opaklıkta yazılıyordu. Arkasında oynayan
+            video olduğu için metnin gerçek zemini kare kare değişiyordu: kontrast
+            ölçülemez, dolayısıyla AA garanti edilemezdi. Panel opak yüzey
+            token'ına alındı, metin opaklık yerine ink token'larıyla ifade edildi —
+            artık ölçülebilir: 17.13 ve 6.38.
+          */}
+          <div className="mx-auto max-w-2xl rounded-card border border-border bg-surface-card p-8 text-center shadow-elevated md:p-14">
             <h1 className="font-heading text-5xl font-semibold text-ink-primary md:text-6xl">
               oyvergitsin.org
             </h1>
-            <p className="mt-6 text-xl text-ink-primary/80">
+            <p className="mt-6 text-xl text-ink-primary">
               Türkiye Siyasi Eşleşme Platformu
             </p>
-            <p className="mt-4 text-xl text-ink-primary/65">
+            <p className="mt-4 text-lg text-ink-secondary">
               Siyasi görüşlerinizi anonim ve kısa bir anketle analiz edin; tarafsız bir
               eşleşme mantığıyla size en yakın partileri keşfedin.
             </p>
             <div className="mt-10 flex justify-center gap-4">
-              <Link href="/consent">
-                <Button variant="primary">Anketi Başlat</Button>
-              </Link>
+              <StartSurveyLink />
             </div>
           </div>
         </Container>
       </section>
 
-      <section className="bg-white py-20">
+      <section className="bg-surface py-20">
         <Container>
           <h2 className="text-center font-heading text-3xl font-semibold text-ink-primary">
             Nasıl Çalışır?
           </h2>
           <div className="mx-auto mt-12 grid max-w-4xl gap-6">
             {STEPS.map((step) => (
-              <Card key={step.number}>
-                <span className="font-heading text-3xl font-semibold text-rainbow-blue">
+              <Card
+                key={step.number}
+                className="transition-all duration-300 hover:border-border-strong hover:shadow-elevated"
+              >
+                {/* Adım numarası bir veri etiketi: mono + tabular. */}
+                <span className="data-figure text-3xl font-semibold text-accent">
                   {step.number}
                 </span>
                 <h3 className="mt-4 text-lg font-semibold text-ink-primary">{step.title}</h3>
@@ -221,34 +222,18 @@ export default async function Home() {
         <Container>
           <div className="mx-auto grid max-w-4xl grid-cols-1 gap-6 md:grid-cols-3">
             {TRUST_SIGNALS.map((signal) => (
-              <Card
+              <FeatureCard
                 key={signal.title}
-                className="group relative overflow-hidden border border-border transition-all duration-300 hover:-translate-y-0.5 hover:shadow-elevated"
-                style={{ borderTopColor: signal.accent, borderTopWidth: '3px' }}
-              >
-                <div
-                  className="pointer-events-none absolute -right-6 -top-6 h-24 w-24 rounded-full opacity-10 transition-opacity duration-300 group-hover:opacity-20"
-                  style={{ backgroundColor: signal.accent }}
-                />
-                <div className="relative flex items-start gap-4">
-                  <span
-                    className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-lg"
-                    style={{ backgroundColor: `${signal.accent}1A` }}
-                  >
-                    {signal.icon}
-                  </span>
-                  <div>
-                    <h3 className="text-base font-semibold text-ink-primary">{signal.title}</h3>
-                    <p className="mt-1 text-sm text-ink-secondary">{signal.description}</p>
-                  </div>
-                </div>
-              </Card>
+                icon={signal.icon}
+                title={signal.title}
+                body={signal.description}
+              />
             ))}
           </div>
         </Container>
       </section>
 
-      <section className="bg-white py-20">
+      <section className="bg-surface py-20">
         <Container>
           <h2 className="text-center font-heading text-3xl font-semibold text-ink-primary">
             {ideologicalAxes.length} İdeolojik Eksen
@@ -260,28 +245,12 @@ export default async function Home() {
           </p>
           <div className="mt-12 grid gap-4 md:grid-cols-2">
             {ideologicalAxes.map((axis) => (
-              <Card
+              <FeatureCard
                 key={axis.slug}
-                className="group relative overflow-hidden border border-border transition-all duration-300 hover:-translate-y-0.5 hover:shadow-elevated"
-                style={{ borderTopColor: axis.accent, borderTopWidth: '3px' }}
-              >
-                <div
-                  className="pointer-events-none absolute -right-6 -top-6 h-24 w-24 rounded-full opacity-10 transition-opacity duration-300 group-hover:opacity-20"
-                  style={{ backgroundColor: axis.accent }}
-                />
-                <div className="relative flex items-start gap-4">
-                  <span
-                    className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-lg"
-                    style={{ backgroundColor: `${axis.accent}1A` }}
-                  >
-                    {axis.icon}
-                  </span>
-                  <div>
-                    <h3 className="text-base font-semibold text-ink-primary">{axis.name}</h3>
-                    <p className="mt-1 text-sm text-ink-secondary">{axis.description}</p>
-                  </div>
-                </div>
-              </Card>
+                icon={axis.icon}
+                title={axis.name}
+                body={axis.description}
+              />
             ))}
           </div>
         </Container>
@@ -296,28 +265,12 @@ export default async function Home() {
           </h2>
           <div className="mx-auto mt-12 max-w-3xl space-y-4">
             {faqItems.map((item) => (
-              <Card
+              <FeatureCard
                 key={item.question}
-                className="group relative overflow-hidden border border-border transition-all duration-300 hover:-translate-y-0.5 hover:shadow-elevated"
-                style={{ borderTopColor: item.accent, borderTopWidth: '3px' }}
-              >
-                <div
-                  className="pointer-events-none absolute -right-6 -top-6 h-24 w-24 rounded-full opacity-10 transition-opacity duration-300 group-hover:opacity-20"
-                  style={{ backgroundColor: item.accent }}
-                />
-                <div className="relative flex items-start gap-4">
-                  <span
-                    className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-lg"
-                    style={{ backgroundColor: `${item.accent}1A` }}
-                  >
-                    {item.icon}
-                  </span>
-                  <div>
-                    <h3 className="text-base font-semibold text-ink-primary">{item.question}</h3>
-                    <p className="mt-2 text-sm text-ink-secondary">{item.answer}</p>
-                  </div>
-                </div>
-              </Card>
+                icon={item.icon}
+                title={item.question}
+                body={item.answer}
+              />
             ))}
           </div>
         </Container>
@@ -329,9 +282,7 @@ export default async function Home() {
             Siyasi duruşunuzu birkaç dakikada keşfedin
           </h2>
           <div className="mt-8">
-            <Link href="/consent">
-              <Button variant="primary">Anketi Başlat</Button>
-            </Link>
+            <StartSurveyLink />
           </div>
         </Container>
       </section>

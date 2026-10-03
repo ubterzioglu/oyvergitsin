@@ -10,9 +10,11 @@ export default function PrivacyPolicyPage() {
       <h1 className="mb-6 font-heading text-3xl font-semibold text-ink-primary">
         Gizlilik Politikası
       </h1>
-      <p className="mb-4 text-sm text-ink-muted">Son güncelleme: 4 Ağustos 2026</p>
+      <p className="mb-4 text-sm text-ink-muted">
+        Son güncelleme: <span className="data-figure">4 Ağustos 2026</span>
+      </p>
 
-      <div className="space-y-6 text-ink-secondary">
+      <div className="max-w-prose space-y-6 leading-relaxed text-ink-secondary">
         <p>
           oyvergitsin.org (&quot;Site&quot;), bağımsız/kişisel bir proje olarak yürütülmektedir; Site&apos;nin
           arkasında ticari bir şirket bulunmamaktadır. Bu Gizlilik Politikası, Site&apos;yi kullanırken
@@ -65,7 +67,7 @@ export default function PrivacyPolicyPage() {
             araçlarına gönderilmez. Detaylar için{' '}
             <a
               href="/legal/cookie-policy"
-              className="text-rainbow-blue underline underline-offset-4 hover:text-rainbow-blue-hover"
+              className="rounded-sm text-accent underline underline-offset-4 hover:text-accent-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
             >
               Çerez Politikası
             </a>{' '}
@@ -93,7 +95,7 @@ export default function PrivacyPolicyPage() {
             Gizlilikle ilgili sorularınız için{' '}
             <a
               href="mailto:supabase@oyvergitsin.org"
-              className="text-rainbow-blue underline underline-offset-4 hover:text-rainbow-blue-hover"
+              className="rounded-sm text-accent underline underline-offset-4 hover:text-accent-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
             >
               supabase@oyvergitsin.org
             </a>{' '}

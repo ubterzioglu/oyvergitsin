@@ -66,21 +66,25 @@ export async function LatestNews() {
         </h2>
         <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {posts.map((post) => (
-            <Card key={post.id} className="flex flex-col">
+            <Card
+              key={post.id}
+              className="flex flex-col transition-all duration-300 hover:border-border-strong hover:shadow-elevated"
+            >
               <a
                 href={post.original_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-base font-semibold text-ink-primary hover:text-rainbow-blue"
+                className="rounded-badge text-base font-semibold text-ink-primary hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
               >
                 {post.title}
               </a>
               {post.summary && (
                 <p className="mt-2 text-sm text-ink-secondary">{truncate(post.summary)}</p>
               )}
-              <div className="mt-4 flex items-center justify-between text-xs text-ink-muted">
+              <div className="mt-4 flex items-center justify-between gap-2 text-xs text-ink-muted">
                 <span>{post.source_name}</span>
-                <span>{formatDate(post.published_at)}</span>
+                {/* Yayın tarihi bir veri etiketi: mono + tabular hizalanır. */}
+                <span className="data-figure shrink-0">{formatDate(post.published_at)}</span>
               </div>
             </Card>
           ))}

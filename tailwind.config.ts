@@ -1,5 +1,14 @@
 import type { Config } from 'tailwindcss'
 
+/**
+ * Tasarım yönü: "Kamusal Ekran" (B9 kararı, docs/design-direction-options.md §2, §7).
+ *
+ * Grafit kabuk + tek vurgu rengi (petrol #0E6E7D) + veri etiketlerinde mono.
+ * Rainbow paleti bırakıldı: eski 6 accent'in 6'sı da bir parti renginden
+ * ayırt edilemiyordu (hue farkı 1.9°–20.5°, hepsi 30° eşiğinin altında).
+ * Tarafsızlık iddia eden bir platformda kabuk hiçbir partiyle aynı renkte
+ * konuşamaz. Renk bundan sonra yalnızca parti verisinde anlam taşır.
+ */
 const config: Config = {
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
@@ -9,48 +18,115 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        rainbow: {
-          yellow: '#F5C518',
-          'yellow-tint': '#FDF6DC',
-          orange: '#F5821F',
-          'orange-tint': '#FDEBDA',
-          red: '#E8385C',
-          'red-tint': '#FBDEE4',
-          purple: '#7B4FE0',
-          'purple-tint': '#EBE3FA',
-          blue: '#1E9BE0',
-          'blue-tint': '#DDF0FB',
-          'blue-hover': '#1580BD',
-          green: '#3CB043',
-          'green-tint': '#DFF3E0',
-        },
         surface: {
-          DEFAULT: '#FAFBFC',
+          DEFAULT: '#F7F8F8',
           card: '#FFFFFF',
-          muted: '#F1F3F6',
+          muted: '#EFF1F1',
         },
+        // Üçü de küçük metinde WCAG AA geçer (beyaz kart üzerinde 17.13 /
+        // 6.38 / 4.79). Tasarım belgesindeki ink-muted #828B8D idi ama
+        // beyazda 3.48 veriyor — "yardımcı etiket" küçük metin demek, bu
+        // oran AA'yı geçmiyordu. #6B7476'ya koyulaştırıldı.
         ink: {
-          primary: '#1A1D23',
-          secondary: '#5A6270',
-          muted: '#8B919A',
+          primary: '#191C1E',
+          secondary: '#566164',
+          muted: '#6B7476',
         },
         border: {
-          DEFAULT: '#E2E5EA',
-          strong: '#CBD0D7',
+          DEFAULT: '#DDE3E3',
+          strong: '#C3CDCD',
+        },
+        accent: {
+          DEFAULT: '#0E6E7D',
+          hover: '#0B5A66',
+          tint: '#E1F0F2',
+        },
+
+        /**
+         * Sıralı (ordinal) ölçekler için rampa.
+         *
+         * Likert ölçeği ve kapsama rozeti gibi yerlerde renk bilgi taşıyor;
+         * adımların ayırt edilebilmesi gerekiyor. Hepsini tek accent'e
+         * indirmek bu bilgiyi yok ederdi. Rampa açık nötrden petrole uzanır.
+         *
+         * Adımlar parlaklığa göre ARALIKLANDIRILDI, göz kararı seçilmedi:
+         * komşu adımların birbirine kontrastı 1.32–1.39, uçtan uca 4.56.
+         * (İlk denemede adımlar 1.03'e kadar sıkışıyordu — yani scale-4 ile
+         * scale-5 pratikte aynı renkti.)
+         *
+         * DOLGU ÜZERİNE METİN — hangi adımda ne kullanılacağı:
+         *   scale-1 #C6D2D3  ink 11.06  → ink
+         *   scale-2 #9BB6B9  ink  7.98  → ink
+         *   scale-3 #769DA2  ink  5.80  → ink
+         *   scale-4 #55868E  ink 4.23 / beyaz 4.05 → KÜÇÜK METİN KOYMA
+         *   scale-5 #38737C  beyaz 5.37 → beyaz
+         *   scale-6 #1D616B  beyaz 7.06 → beyaz
+         *
+         * Komşu adımlar 1.3 civarında, yani YAKIN. Sıralı bilgi RENGE TEK
+         * BAŞINA bırakılmamalı; B11 ve sonrası etiket/konum/ikon gibi ikinci
+         * bir ayırt edici eklemek zorunda (planın erişilebilirlik kuralı:
+         * "grafiklerde renk tek ayırt edici olmasın").
+         */
+        scale: {
+          1: '#C6D2D3',
+          2: '#9BB6B9',
+          3: '#769DA2',
+          4: '#55868E',
+          5: '#38737C',
+          6: '#1D616B',
+        },
+
+        /**
+         * @deprecated GEÇİCİ ALIAS — B11 ve B12–B18 bitince SİLİNECEK.
+         *
+         * Neden duruyorlar: 33 dosyada 100 adet `rainbow-*` sınıf kullanımı
+         * var. Token'ları bu commit'te silseydim Tailwind o sınıfları hiç
+         * üretmezdi; build yeşil kalır ama sayfalar renklerini kaybederdi.
+         * Repo main'den dağıtıldığı için bu ara durum kabul edilemez.
+         *
+         * Alias'lar eski adları korur, YENİ nötr değerlere bağlar: site bu
+         * commit'ten itibaren parti renkleriyle çakışmayı bırakır, görsel
+         * olarak da bozulmaz. Sonraki batch'ler sınıfları dosya dosya
+         * accent-* / ink-* / scale-* karşılıklarıyla değiştirecek.
+         *
+         * YENİ KOD BU TOKEN'LARI KULLANMASIN.
+         */
+        rainbow: {
+          // Metin olarak da kullanıldıkları için hepsi AA geçen tonlara
+          // bağlandı; eski #828B8D gibi değerler küçük metinde kalıyordu.
+          yellow: '#6B7476',
+          'yellow-tint': '#F0F2F2',
+          orange: '#6E7779',
+          'orange-tint': '#EDEFEF',
+          red: '#566164',
+          'red-tint': '#E9ECEC',
+          purple: '#38737C',
+          'purple-tint': '#E7F1F3',
+          blue: '#1D616B',
+          'blue-tint': '#E4F0F2',
+          'blue-hover': '#0B5A66',
+          green: '#0E6E7D',
+          'green-tint': '#E1F0F2',
         },
       },
       fontFamily: {
         heading: ['var(--font-heading)'],
         body: ['var(--font-body)'],
+        // Yalnızca veri için: soru sayacı, yüzdeler, eksen numaraları,
+        // last_verified_at. "Doğrulanmış kamu verisi" hissi buradan geliyor.
+        // Harici font yok — next/font gerekmiyor, sıfır ağ maliyeti.
+        data: ['var(--font-data)'],
       },
       borderRadius: {
-        card: '1rem',
-        button: '0.625rem',
-        badge: '0.375rem',
+        card: '0.625rem',
+        button: '0.5rem',
+        badge: '0.25rem',
       },
       boxShadow: {
-        soft: '0 1px 3px rgba(0,0,0,0.06), 0 6px 16px rgba(0,0,0,0.04)',
-        elevated: '0 2px 8px rgba(0,0,0,0.08), 0 12px 32px rgba(0,0,0,0.06)',
+        // Kartlar gölgeyle değil 1px kenarlıkla ayrılıyor; gölge yalnızca
+        // hover'da devreye giriyor.
+        soft: '0 1px 2px rgba(25,28,30,0.05)',
+        elevated: '0 2px 6px rgba(25,28,30,0.08), 0 8px 24px rgba(25,28,30,0.05)',
       },
     },
   },

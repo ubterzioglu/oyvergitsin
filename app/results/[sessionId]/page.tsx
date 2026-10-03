@@ -211,7 +211,11 @@ export default function ResultsPage() {
                   <PolarGrid />
                   <PolarAngleAxis dataKey="axis" tick={{ fontSize: 11 }} />
                   <PolarRadiusAxis domain={[-100, 100]} tick={{ fontSize: 10 }} />
-                  <Radar name="Skor" dataKey="score" stroke="#1E9BE0" fill="#1E9BE0" fillOpacity={0.5} />
+                  {/* B10 — kapsam istisnası; yalnızca renk değeri nötrleştirildi
+                      (eski #1E9BE0 Gelecek Partisi mavisinden 5.5° uzaktaydı).
+                      Bu kullanıcının kendi skoru, bir parti verisi değil —
+                      bu yüzden accent petrol doğru seçim. Yapı B15'e ait. */}
+                  <Radar name="Skor" dataKey="score" stroke="#0E6E7D" fill="#0E6E7D" fillOpacity={0.45} />
                 </RadarChart>
               </ResponsiveContainer>
             ) : (

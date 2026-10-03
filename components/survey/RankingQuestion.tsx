@@ -12,7 +12,12 @@ interface RankingQuestionProps {
   onChange: (order: string[]) => void
 }
 
-const RANK_ACCENTS = ['#F5C518', '#F5821F', '#E8385C', '#7B4FE0', '#1E9BE0', '#3CB043']
+// B10 — kapsam istisnası; yalnızca değerler nötrleştirildi, yapı B11/B14'e ait.
+// Sıralama rozetleri zaten sıralı (ordinal) bir bilgi taşıyor, bu yüzden nötr
+// rampa buraya kavramsal olarak da daha uygun: açıktan koyuya gidiyor.
+// Not: komşu adımlar birbirine yakın (kontrast ~1.35), bu yüzden sıra numarası
+// metni renge ek ayırt edici olarak KALMALI — renge tek başına güvenilmemeli.
+const RANK_ACCENTS = ['#C6D2D3', '#9BB6B9', '#769DA2', '#55868E', '#38737C', '#1D616B']
 
 function Chevron({ direction }: { direction: 'up' | 'down' }) {
   return (

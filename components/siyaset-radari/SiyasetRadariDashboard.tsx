@@ -21,7 +21,18 @@ import type {
   DashboardPoliticalEvent,
 } from '@/lib/siyaset-radari/public-data'
 
-const COLORS = ['#1E9BE0', '#E8385C', '#3CB043', '#F5C518', '#7B4FE0', '#F5821F', '#0F172A']
+// B10 — kapsam istisnası. Bu dosya B13'ün sahipliğinde; yalnızca renk
+// DEĞERLERİ nötrleştirildi, yapı B13'e bırakıldı.
+//
+// Bu dizi TBMM sandalye dağılımı pasta grafiğinde PARTİ dilimlerini
+// renklendiriyordu — eski gökkuşağı değerleriyle. Yani bir partinin dilimi
+// başka bir partinin rengiyle boyanıyordu (örn. AKP dilimi mavi, CHP dilimi
+// pembe). Tarafsızlık açısından en kötü örnek buydu.
+//
+// B13: BURAYA NÖTR RAMPA DEĞİL, lib/parties.ts içindeki PARTY_COLORS
+// gelmeli. Parti verisi tek yer ki gerçek parti rengi kullanılmalı; nötr
+// rampa burada geçici bir dolgu.
+const COLORS = ['#1D616B', '#38737C', '#55868E', '#769DA2', '#9BB6B9', '#C6D2D3', '#191C1E']
 const TABS = [
   { id: 'switches', label: 'Parti Geçişleri' },
   { id: 'journalists', label: 'Tutuklu Gazeteciler' },

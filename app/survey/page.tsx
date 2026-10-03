@@ -11,7 +11,12 @@ import type { Question } from '@/components/survey/QuestionRenderer'
 import { ImportanceToggle } from '@/components/survey/ImportanceToggle'
 import { isSurveyAnswerFilled, validateSurveyCompletion } from '@/lib/survey/completion'
 
-const RAINBOW_ACCENTS = ['#F5C518', '#F5821F', '#E8385C', '#7B4FE0', '#1E9BE0', '#3CB043']
+// B10 — kapsam istisnası, bilerek yapıldı. Gerekçesi app/page.tsx'teki
+// aynı dizinin başında. Özeti: bu hex'ler inline style olarak uygulandığı
+// için Tailwind token değişiminden etkilenmiyorlardı ve eski parti-çakışan
+// renkler JS paketinde kalmaya devam ediyordu.
+// B14: bu diziyi tamamen kaldır — Yön A tek accent kullanıyor.
+const RAINBOW_ACCENTS = ['#C6D2D3', '#9BB6B9', '#769DA2', '#55868E', '#38737C', '#1D616B']
 
 // Tek seçimle tamamlanan sorularda kullanıcı şıkkı işaretledikten sonra
 // seçimin vurgulandığını görebilsin diye kısa bir gecikmeyle ilerlenir.

@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Yön C — Oy Pusulası · oyvergitsin.org</title>
+<style>
+  :root {
+    --paper: #FAF9F5;
+    --card: #FFFFFF;
+    --ink: #17181A;
+    --ink-secondary: #5C5D5E;
+    --ink-muted: #8B8C8D;
+    --rule: #D8D6CE;
+    --rule-strong: #17181A;
+    --radius: 4px;
+    --serif: Georgia, "Times New Roman", "Liberation Serif", serif;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans); line-height: 1.6; }
+  .wrap { max-width: 1020px; margin: 0 auto; padding: 0 24px; }
+  .banner { background: var(--ink); color: var(--paper); padding: 10px 0; }
+  .banner p { font-size: 12px; }
+  header { border-bottom: 3px double var(--rule-strong); background: var(--paper); }
+  .nav { display: flex; align-items: center; justify-content: space-between; padding: 18px 0; }
+  .wordmark { font-family: var(--serif); font-weight: 700; font-size: 21px; }
+  .navlinks { display: flex; gap: 26px; align-items: center; font-size: 14px; }
+  .navlinks a { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+  .navlinks a.btn { text-decoration: none; }
+  .btn { display: inline-block; background: var(--ink); color: var(--paper); border: 1px solid var(--ink); border-radius: var(--radius); padding: 10px 22px; font-size: 15px; font-weight: 600; text-decoration: none; cursor: pointer; font-family: var(--sans); }
+  .btn:hover { background: #000; }
+  .btn-ghost { background: transparent; color: var(--ink); border: 1px solid var(--ink); }
+  .btn-ghost:hover { background: var(--ink); color: var(--paper); }
+  .hero { padding: 76px 0 60px; text-align: center; }
+  .hero .kicker { font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-secondary); }
+  .hero h1 { font-family: var(--serif); font-size: 48px; line-height: 1.15; font-weight: 700; margin-top: 14px; }
+  .hero .lede { margin: 20px auto 0; font-size: 18px; color: var(--ink-secondary); max-width: 54ch; }
+  .hero .cta { margin-top: 30px; display: flex; gap: 12px; justify-content: center; }
+  .ballot-strip { display: flex; justify-content: center; gap: 6px; margin-top: 34px; }
+  .ballot-strip i { width: 26px; height: 26px; border: 1.5px solid var(--ink); border-radius: 2px; display: inline-block; }
+  .ballot-strip i.fill { background: var(--ink); }
+  section { padding: 38px 0; }
+  .sec-head { text-align: center; margin-bottom: 26px; }
+  .sec-head h2 { font-family: var(--serif); font-size: 27px; }
+  .sec-head .count { font-size: 12.5px; color: var(--ink-muted); display: block; margin-top: 6px; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1.5px solid var(--ink); border-radius: var(--radius); overflow: hidden; background: var(--card); }
+  .cell { padding: 22px 24px; border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+  .cell:nth-child(2n) { border-right: none; }
+  .cell:nth-last-child(-n+2) { border-bottom: none; }
+  .cell .no { font-family: var(--serif); font-size: 13px; color: var(--ink-muted); }
+  .cell h3 { font-family: var(--serif); font-size: 17.5px; margin: 6px 0 6px; }
+  .cell p { font-size: 14px; color: var(--ink-secondary); }
+  .survey { background: var(--card); border: 1.5px solid var(--ink); border-radius: var(--radius); padding: 30px; max-width: 640px; margin: 0 auto; position: relative; }
+  .survey::before { content: ""; position: absolute; inset: 5px; border: 1px solid var(--rule); border-radius: 2px; pointer-events: none; }
+  .qmeta { display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 12.5px; color: var(--ink-secondary); position: relative; }
+  .progress { height: 3px; background: var(--rule); margin-bottom: 26px; position: relative; }
+  .progress i { display: block; height: 100%; width: 4%; background: var(--ink); }
+  .survey h3 { font-family: var(--serif); font-size: 21px; line-height: 1.4; margin-bottom: 20px; position: relative; }
+  .boxes { display: grid; gap: 8px; position: relative; }
+  .box { display: flex; align-items: center; gap: 14px; border: 1.5px solid var(--ink); border-radius: 2px; padding: 11px 14px; font-size: 14.5px; cursor: pointer; background: var(--card); }
+  .box .stamp { width: 22px; height: 22px; border: 1.5px solid var(--ink); border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+  .box.sel { background: var(--ink); color: var(--paper); font-weight: 600; }
+  .box.sel .stamp { border-color: var(--paper); background: var(--paper); }
+  .box.sel .stamp::after { content: ""; width: 10px; height: 10px; background: var(--ink); border-radius: 50%; }
+  .box.noop { margin-top: 16px; border-style: dashed; color: var(--ink-secondary); }
+  .importance { display: flex; align-items: center; gap: 10px; margin: 20px 0 4px; font-size: 13.5px; color: var(--ink-secondary); position: relative; }
+  .cbox { width: 18px; height: 18px; border: 1.5px solid var(--ink); border-radius: 2px; flex-shrink: 0; }
+  .nav-btns { display: flex; justify-content: space-between; margin-top: 24px; position: relative; }
+  .result { max-width: 640px; margin: 0 auto; background: var(--card); border: 1.5px solid var(--ink); border-radius: var(--radius); padding: 26px; }
+  .result h3 { font-family: var(--serif); font-size: 19px; margin-bottom: 18px; }
+  .bar-row { display: grid; grid-template-columns: 120px 1fr 56px; gap: 12px; align-items: center; margin-bottom: 10px; font-size: 14px; }
+  .bar { height: 14px; border: 1px solid rgba(0,0,0,0.15); }
+  .bar-row .pct { font-size: 13px; color: var(--ink-secondary); text-align: right; font-variant-numeric: tabular-nums; }
+  .note { font-size: 12.5px; color: var(--ink-muted); margin-top: 16px; border-top: 1px solid var(--rule); padding-top: 12px; }
+  footer { border-top: 3px double var(--rule-strong); margin-top: 44px; padding: 28px 0; font-size: 13px; color: var(--ink-secondary); text-align: center; }
+  @media (max-width: 800px) { .hero h1 { font-size: 36px; } .grid2 { grid-template-columns: 1fr; } .cell { border-right: none; } .cell:nth-last-child(-n+2) { border-bottom: 1px solid var(--rule); } .cell:last-child { border-bottom: none; } }
+</style>
+</head>
+<body>
+  <div class="banner"><div class="wrap"><p>YÖN C — "OY PUSULASI" · statik önizleme · oyvergitsin.org gerçek içeriği</p></div></div>
+  <header>
+    <div class="wrap nav">
+      <div class="wordmark">oyvergitsin.org</div>
+      <nav class="navlinks">
+        <a href="#">Siyaset Radarı</a>
+        <a href="#">Metodoloji</a>
+        <a class="btn" href="#">Anketi Başlat</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <div class="hero">
+      <span class="kicker">Türkiye Siyasi Eşleşme Platformu</span>
+      <h1>Söz sırası sizde.</h1>
+      <p class="lede">Anonim ve kısa bir anketle 8 ideolojik eksende duruşunuzu görün; tarafsız bir eşleşme mantığıyla size en yakın partileri keşfedin. Pusula gibi: kim olduğunuz değil, işaretlediğiniz önemli.</p>
+      <div class="cta">
+        <a class="btn" href="#">Anketi Başlat</a>
+        <a class="btn btn-ghost" href="#">Metodolojiyi İncele</a>
+      </div>
+      <div class="ballot-strip" aria-hidden="true">
+        <i></i><i class="fill"></i><i></i><i></i><i class="fill"></i><i></i><i></i><i></i>
+      </div>
+    </div>
+
+    <section>
+      <div class="sec-head">
+        <h2>Anketin kapsadığı eksenler</h2>
+        <span class="count">8 ideolojik eksen · aktif model v2</span>
+      </div>
+      <div class="grid2">
+        <div class="cell">
+          <span class="no">Eksen 1</span>
+          <h3>Ekonomik Model ve Yeniden Dağıtım</h3>
+          <p>Ekonomik kararların piyasa mekanizmaları mı yoksa devlet müdahalesi mi ile yönetilmesi gerektiği; gelirin yeniden dağıtımı.</p>
+        </div>
+        <div class="cell">
+          <span class="no">Eksen 2</span>
+          <h3>Demokratik Kurumlar ve Hukukun Üstünlüğü</h3>
+          <p>Cumhurbaşkanının yetkileri, Meclis ve mahkemelerin denetim gücü; sivil özgürlüklerin devlet otoritesiyle dengesi.</p>
+        </div>
+        <div class="cell">
+          <span class="no">Eksen 3</span>
+          <h3>Sekülerizm ve Dinin Kamusal Rolü</h3>
+          <p>Din ve devlet ilişkisi; dini değerlerin kamusal politikalardaki yeri.</p>
+        </div>
+        <div class="cell">
+          <span class="no">Eksen 4</span>
+          <h3>Kimlik, Kürt Meselesi ve Yerel Özerklik</h3>
+          <p>Ulusal kimlik, Kürt meselesi ve yerinden yönetim tartışmaları.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head">
+        <h2>Anket deneyimi</h2>
+        <span class="count">soru kartı · pusula kutusu motifi · renk yok, mühür var</span>
+      </div>
+      <div class="survey">
+        <div class="qmeta"><span>Soru 1 / 25</span><span>Ekonomik Model</span></div>
+        <div class="progress"><i></i></div>
+        <h3>Çok kazananlardan ve büyük şirketlerden daha fazla vergi alınmalıdır.</h3>
+        <div class="boxes">
+          <div class="box"><span class="stamp"></span>Kesinlikle katılmıyorum</div>
+          <div class="box sel"><span class="stamp"></span>Katılmıyorum</div>
+          <div class="box"><span class="stamp"></span>Kararsızım</div>
+          <div class="box"><span class="stamp"></span>Katılıyorum</div>
+          <div class="box"><span class="stamp"></span>Kesinlikle katılıyorum</div>
+          <div class="box noop"><span class="stamp"></span>Fikrim yok</div>
+        </div>
+        <div class="importance"><span class="cbox"></span> Bu soru benim için önemli — cevabım daha ağır tartılsın</div>
+        <div class="nav-btns">
+          <button class="btn btn-ghost">Önceki</button>
+          <button class="btn">Sonraki</button>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head">
+        <h2>Sonuç ekranı</h2>
+        <span class="count">renk yalnızca burada: parti verisi</span>
+      </div>
+      <div class="result">
+        <h3>En Yüksek Örtüşme</h3>
+        <div class="bar-row"><span>CHP</span><div class="bar" style="background:#E30A17;width:78%"></div><span class="pct">%78</span></div>
+        <div class="bar-row"><span>AKP</span><div class="bar" style="background:#F7941D;width:64%"></div><span class="pct">%64</span></div>
+        <div class="bar-row"><span>MHP</span><div class="bar" style="background:#F2B705;width:51%"></div><span class="pct">%51</span></div>
+        <div class="bar-row"><span>DEM</span><div class="bar" style="background:#0F7A3A;width:43%"></div><span class="pct">%43</span></div>
+        <div class="bar-row"><span>İYİ</span><div class="bar" style="background:#0B1F3A;width:39%"></div><span class="pct">%39</span></div>
+        <p class="note">Örnek veri. Kabukta tek bir renkli piksel bile yok — sitede renk yalnızca parti verisini taşır. "Renk = parti bilgisi" ilkesi mutlaklaşır; tarafsızlık görsel olarak kanıtlanır.</p>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="wrap">oyvergitsin.org — tarafsız, anonim, ücretsiz siyasi eşleşme platformu. Önizleme: Yön C "Oy Pusulası" (tam monokrom, serif başlık, pusula kutusu motifi).</div>
+  </footer>
+</body>
+</html>

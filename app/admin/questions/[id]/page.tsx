@@ -84,12 +84,12 @@ export default function QuestionDetailPage() {
   }, [questionId, fetchAll])
 
   if (loading) {
-    return <div className="text-gray-600">Yükleniyor...</div>
+    return <div className="text-ink-secondary">Yükleniyor...</div>
   }
 
   if (errorMessage || !question) {
     return (
-      <div className="rounded border border-red-200 bg-red-50 p-4 text-sm text-red-700">
+      <div className="rounded-badge border border-border-strong border-l-4 border-l-ink-primary bg-surface-muted p-4 text-sm text-ink-primary">
         {errorMessage || 'Soru bulunamadı.'}
       </div>
     )
@@ -106,19 +106,19 @@ export default function QuestionDetailPage() {
 
   return (
     <div>
-      <Link href="/admin/questions" className="text-sm text-blue-600 hover:underline">
+      <Link href="/admin/questions" className="text-sm text-accent hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2">
         ← Sorular
       </Link>
 
-      <h1 className="mb-1 mt-2 text-3xl font-bold text-gray-900">Soru {question.order_index}</h1>
-      {question.code && <p className="mb-6 font-mono text-sm text-gray-500">{question.code}</p>}
+      <h1 className="mb-1 mt-2 text-3xl font-bold text-ink-primary">Soru {question.order_index}</h1>
+      {question.code && <p className="mb-6 data-figure text-sm text-ink-secondary">{question.code}</p>}
 
       <ReadOnlyNotice source="scripts/data/axis-model-v2.js" command="npm run v2:seed" />
 
-      <section className="mb-6 rounded-lg bg-white p-6 shadow-md">
-        <h2 className="mb-4 text-lg font-semibold text-gray-900">Madde</h2>
-        <p className="mb-4 text-gray-900">{question.text}</p>
-        {question.description && <p className="mb-4 text-sm text-gray-600">{question.description}</p>}
+      <section className="mb-6 rounded-lg bg-surface-card p-6 border border-border">
+        <h2 className="mb-4 text-lg font-semibold text-ink-primary">Madde</h2>
+        <p className="mb-4 text-ink-primary">{question.text}</p>
+        {question.description && <p className="mb-4 text-sm text-ink-secondary">{question.description}</p>}
 
         <dl className="grid gap-3 text-sm sm:grid-cols-3">
           <Field label="Tip" value={question.type} />
@@ -137,9 +137,9 @@ export default function QuestionDetailPage() {
         </dl>
       </section>
 
-      <section className="mb-6 rounded-lg bg-white p-6 shadow-md">
-        <h2 className="mb-2 text-lg font-semibold text-gray-900">Seçenekler ve puanlama</h2>
-        <p className="mb-4 text-sm text-gray-600">
+      <section className="mb-6 rounded-lg bg-surface-card p-6 border border-border">
+        <h2 className="mb-2 text-lg font-semibold text-ink-primary">Seçenekler ve puanlama</h2>
+        <p className="mb-4 text-sm text-ink-secondary">
           Puanlama kuralı olmayan bir seçenek (örneğin &quot;Fikrim yok&quot;) skora hiç girmez: o
           madde hem paydan hem paydadan düşer. &quot;Kararsızım&quot; ise 0 puanlı gerçek bir
           cevaptır ve paydada kalır.
@@ -147,31 +147,31 @@ export default function QuestionDetailPage() {
 
         <div className="overflow-x-auto">
           <table className="min-w-full">
-            <thead className="bg-gray-50">
+            <thead className="bg-surface">
               <tr>
-                <th className="px-3 py-2 text-left text-xs font-medium uppercase text-gray-500">
+                <th scope="col" className="px-3 py-2 text-left text-xs font-medium uppercase text-ink-secondary">
                   Seçenek
                 </th>
-                <th className="px-3 py-2 text-left text-xs font-medium uppercase text-gray-500">Değer</th>
-                <th className="px-3 py-2 text-left text-xs font-medium uppercase text-gray-500">Etki</th>
+                <th scope="col" className="px-3 py-2 text-left text-xs font-medium uppercase text-ink-secondary">Değer</th>
+                <th scope="col" className="px-3 py-2 text-left text-xs font-medium uppercase text-ink-secondary">Etki</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-200">
+            <tbody className="divide-y divide-border">
               {options.map((option) => {
                 const optionRules = rulesByValue.get(option.value) ?? []
                 return (
                   <tr key={option.id}>
-                    <td className="px-3 py-2 text-sm text-gray-900">{option.text}</td>
-                    <td className="px-3 py-2 font-mono text-xs text-gray-600">{option.value}</td>
-                    <td className="px-3 py-2 text-sm text-gray-600">
+                    <td className="px-3 py-2 text-sm text-ink-primary">{option.text}</td>
+                    <td className="px-3 py-2 data-figure text-xs text-ink-secondary">{option.value}</td>
+                    <td className="px-3 py-2 text-sm text-ink-secondary">
                       {optionRules.length === 0 ? (
-                        <span className="text-gray-400">puanlamaya girmez</span>
+                        <span className="text-ink-muted">puanlamaya girmez</span>
                       ) : (
                         optionRules.map((rule) => (
                           <div key={rule.id}>
                             {axisName(rule.axis_id)}{' '}
                             <span
-                              className={rule.score_modifier < 0 ? 'text-red-600' : 'text-green-700'}
+                              className={rule.score_modifier < 0 ? 'data-figure text-ink-primary' : 'data-figure text-accent-hover'}
                             >
                               {rule.score_modifier > 0 ? '+' : ''}
                               {rule.score_modifier}
@@ -188,7 +188,7 @@ export default function QuestionDetailPage() {
         </div>
 
         {options.length === 0 && (
-          <p className="py-4 text-sm text-gray-500">Bu soru tipinde seçenek tanımlanmaz.</p>
+          <p className="py-4 text-sm text-ink-secondary">Bu soru tipinde seçenek tanımlanmaz.</p>
         )}
       </section>
     </div>
@@ -198,8 +198,8 @@ export default function QuestionDetailPage() {
 function Field({ label, value }: { label: string; value: string }) {
   return (
     <div>
-      <dt className="text-xs uppercase text-gray-500">{label}</dt>
-      <dd className="text-gray-900">{value}</dd>
+      <dt className="text-xs uppercase text-ink-secondary">{label}</dt>
+      <dd className="text-ink-primary">{value}</dd>
     </div>
   )
 }

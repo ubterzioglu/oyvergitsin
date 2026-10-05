@@ -69,7 +69,7 @@ function AdminLoginForm() {
             required
             value={username}
             onChange={(event) => setUsername(event.target.value)}
-            className="w-full rounded-lg border border-border px-4 py-2 text-ink-primary focus:border-rainbow-blue focus:outline-none"
+            className="w-full rounded-lg border border-border px-4 py-2 text-ink-primary focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent"
           />
         </div>
         <div>
@@ -83,11 +83,11 @@ function AdminLoginForm() {
             required
             value={password}
             onChange={(event) => setPassword(event.target.value)}
-            className="w-full rounded-lg border border-border px-4 py-2 text-ink-primary focus:border-rainbow-blue focus:outline-none"
+            className="w-full rounded-lg border border-border px-4 py-2 text-ink-primary focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent"
           />
         </div>
         {errorMessage ? (
-          <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+          <div className="rounded-lg border border-border-strong border-l-4 border-l-ink-primary bg-surface-muted px-4 py-3 text-sm text-ink-primary">
             {errorMessage}
           </div>
         ) : null}

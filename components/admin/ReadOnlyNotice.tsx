@@ -20,19 +20,22 @@ interface ReadOnlyNoticeProps {
  */
 export function ReadOnlyNotice({ source, command }: ReadOnlyNoticeProps) {
   return (
-    <div className="mb-6 rounded-lg border-l-4 border-amber-400 bg-amber-50 p-4">
-      <p className="text-sm font-medium text-amber-900">Bu sayfa salt okunurdur.</p>
-      <p className="mt-1 text-sm text-amber-800">
-        İçerik koddan yönetilir: <code className="rounded bg-amber-100 px-1">{source}</code>
+    <div className="mb-6 rounded-card border-l-4 border-border-strong bg-surface-muted p-4">
+      <p className="text-sm font-medium text-ink-primary">Bu sayfa salt okunurdur.</p>
+      <p className="mt-1 text-sm text-ink-secondary">
+        İçerik koddan yönetilir: <code className="data-figure rounded-badge bg-border px-1 text-ink-primary">{source}</code>
         {command && (
           <>
             {' '}
-            — değişiklik sonrası <code className="rounded bg-amber-100 px-1">{command}</code>
+            — değişiklik sonrası <code className="data-figure rounded-badge bg-border px-1 text-ink-primary">{command}</code>
           </>
         )}
         . Elle düzenleme, puanlama kuralları ile parti kanıt kayıtlarını birbirinden ayırıp
         sonuçları sessizce bozabileceği için kapatıldı.{' '}
-        <Link href="/admin" className="underline">
+        <Link
+          href="/admin"
+          className="rounded-sm text-accent underline underline-offset-4 hover:text-accent-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+        >
           Ayrıntı
         </Link>
       </p>

@@ -63,7 +63,7 @@ export function FeedbackModal({ onClose }: FeedbackModalProps) {
               rows={5}
               placeholder="Görüş, öneri veya sorununuzu yazın..."
               disabled={loading}
-              className="w-full rounded-button border border-border bg-white px-3 py-2 text-sm text-ink-primary focus:border-rainbow-blue focus:outline-none disabled:opacity-50"
+              className="w-full rounded-button border border-border bg-white px-3 py-2 text-sm text-ink-primary focus:border-accent focus:outline-none disabled:opacity-50"
             />
             {error && <p className="mt-2 text-sm text-red-600">{error}</p>}
             <div className="mt-6 flex justify-end gap-3">

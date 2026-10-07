@@ -35,14 +35,5 @@ body {
     letter-spacing: -0.01em;
   }
 
-  /*
-    GEÇİCİ: .rainbow-gradient-border eski gökkuşağı şeridiydi (Header'da 3px).
-    Sınıf adı korunuyor çünkü hâlâ 3 yerde kullanılıyor ve bu commit'te
-    silinirse şerit kaybolur. Artık gökkuşağı değil, petrol→nötr tek yönlü
-    bir geçiş. B11/B12 şeridi kendi token'larıyla yeniden kurunca bu
-    yardımcı sınıf SİLİNECEK.
-  */
-  .rainbow-gradient-border {
-    background-image: linear-gradient(90deg, #0E6E7D 0%, #3C8E99 55%, #C3CDCD 100%);
-  }
+
 }

@@ -177,11 +177,11 @@ export default async function Home() {
             token'ına alındı, metin opaklık yerine ink token'larıyla ifade edildi —
             artık ölçülebilir: 17.13 ve 6.38.
           */}
-          <div className="mx-auto max-w-2xl rounded-[2rem] border border-white/20 bg-white/70 backdrop-blur-xl p-8 text-center shadow-[0_8px_32px_rgba(0,0,0,0.1)] dark:bg-black/40 dark:border-white/10 md:p-14">
-            <h1 className="font-heading text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-ink-primary to-accent md:text-6xl drop-shadow-sm">
+          <div className="mx-auto max-w-2xl rounded-card border border-border bg-surface-card p-8 text-center shadow-elevated md:p-14">
+            <h1 className="font-heading text-5xl font-semibold text-ink-primary md:text-6xl">
               oyvergitsin.org
             </h1>
-            <p className="mt-6 text-xl font-medium text-ink-primary">
+            <p className="mt-6 text-xl text-ink-primary">
               Türkiye Siyasi Eşleşme Platformu
             </p>
             <p className="mt-4 text-lg text-ink-secondary">

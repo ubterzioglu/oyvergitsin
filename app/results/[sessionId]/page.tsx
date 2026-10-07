@@ -396,12 +396,24 @@ export default function ResultsPage() {
           alan öğeye taşındı, buton odak sırasından çıkarıldı.
         */}
         <div className="flex flex-col items-center gap-4">
-          <div className="flex justify-center gap-4">
+          <div className="flex flex-wrap justify-center gap-4">
             <Link href="/" className={LINK_BUTTON_FOCUS}>
               <Button variant="primary" tabIndex={-1}>
                 Ana Sayfa
               </Button>
             </Link>
+            <button
+              type="button"
+              onClick={() => window.print()}
+              className="inline-flex items-center gap-2 rounded-button border border-border bg-surface-card px-8 py-3 font-semibold text-ink-primary transition-all hover:bg-surface-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            >
+              <svg viewBox="0 0 24 24" className="h-4 w-4 fill-none stroke-currentColor" strokeWidth={2}>
+                <polyline points="6 9 6 2 18 2 18 9" />
+                <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
+                <rect x="6" y="14" width="12" height="8" />
+              </svg>
+              PDF / Yazdır
+            </button>
             <Link
               href="/survey"
               onClick={() => localStorage.removeItem('sessionId')}

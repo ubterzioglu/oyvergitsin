@@ -34,6 +34,22 @@ body {
     font-variant-numeric: tabular-nums;
     letter-spacing: -0.01em;
   }
-
-
 }
+
+@media print {
+  header, footer, nav, button, a[href^="/"], .no-print {
+    display: none !important;
+  }
+
+  body {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  .card, [class*="rounded-card"] {
+    box-shadow: none !important;
+    border: 1px solid #cccccc !important;
+    break-inside: avoid;
+  }
+}
+

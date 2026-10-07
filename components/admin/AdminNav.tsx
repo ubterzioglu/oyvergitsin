@@ -50,23 +50,30 @@ export function AdminNav() {
           <div className="h-5 w-[1px] shrink-0 bg-white/20" aria-hidden="true" />
 
           {/* Menü Linkleri (Tek satır, dikey ayraçlı) */}
-          <div className="flex items-center overflow-x-auto py-1 scrollbar-none [scrollbar-width:none]">
+          <div className="flex min-w-0 flex-1 items-center overflow-x-auto py-1.5 pr-2 scrollbar-thin scrollbar-thumb-white/20 hover:scrollbar-thumb-white/40">
             <div className="flex items-center text-xs sm:text-sm font-medium text-border-strong">
-              {NAV_LINKS.map((link, idx) => (
-                <div key={link.href} className="flex items-center">
-                  {idx > 0 && (
-                    <span className="mx-2 text-white/20 select-none" aria-hidden="true">
-                      |
-                    </span>
-                  )}
-                  <Link
-                    href={link.href}
-                    className="whitespace-nowrap transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-1 focus-visible:ring-offset-ink-primary"
-                  >
-                    {link.label}
-                  </Link>
-                </div>
-              ))}
+              {NAV_LINKS.map((link, idx) => {
+                const isActive = link.href === '/admin' ? pathname === '/admin' : pathname.startsWith(link.href)
+                return (
+                  <div key={link.href} className="flex items-center">
+                    {idx > 0 && (
+                      <span className="mx-2 text-white/20 select-none" aria-hidden="true">
+                        |
+                      </span>
+                    )}
+                    <Link
+                      href={link.href}
+                      className={`whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-1 focus-visible:ring-offset-ink-primary ${
+                        isActive
+                          ? 'font-semibold text-white underline decoration-accent decoration-2 underline-offset-4'
+                          : 'hover:text-white'
+                      }`}
+                    >
+                      {link.label}
+                    </Link>
+                  </div>
+                )
+              })}
 
               {EXTERNAL_LINKS.map((link) => (
                 <div key={link.href} className="flex items-center">

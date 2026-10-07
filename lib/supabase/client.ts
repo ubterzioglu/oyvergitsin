@@ -1,4 +1,4 @@
-import { createClient } from '@supabase/supabase-js'
+import { createBrowserClient } from '@supabase/ssr'
 import { getSupabaseConfigError } from '@/lib/supabase/config'
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || ''
@@ -9,7 +9,7 @@ if (configError && process.env.NODE_ENV !== 'production') {
   console.warn(`[Supabase config] ${configError}`)
 }
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey)
+export const supabase = createBrowserClient(supabaseUrl, supabaseAnonKey)
 
 export type Database = {
   public: {

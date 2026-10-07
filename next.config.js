@@ -11,6 +11,7 @@ const isDev = process.env.NODE_ENV !== 'production'
 const scriptSrc = [
   "'self'",
   "'unsafe-inline'",
+  'https://www.googletagmanager.com',
   isDev ? "'unsafe-eval'" : null,
 ]
   .filter(Boolean)
@@ -64,9 +65,9 @@ const nextConfig = {
               "default-src 'self'",
               `script-src ${scriptSrc}`,
               "style-src 'self' 'unsafe-inline'",
-              "img-src 'self' data: https:",
+              "img-src 'self' data: https: https://*.google-analytics.com https://*.googletagmanager.com",
               "font-src 'self' data:",
-              "connect-src 'self' https://*.supabase.co",
+              "connect-src 'self' https://*.supabase.co https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com",
               "frame-ancestors 'none'",
             ].join('; '),
           },

@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import Script from 'next/script'
+import { GoogleAnalytics } from '@/components/analytics/GoogleAnalytics'
 import { getSiteUrl, siteConfig } from '@/lib/site'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
@@ -137,22 +137,7 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
-        {gaId && (
-          <>
-            <Script
-              src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
-              strategy="afterInteractive"
-            />
-            <Script id="google-analytics" strategy="afterInteractive">
-              {`
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', '${gaId}');
-              `}
-            </Script>
-          </>
-        )}
+        <GoogleAnalytics gaId={gaId} />
         <div className="flex min-h-screen flex-col">
           <Header />
           <div className="flex-1">{children}</div>

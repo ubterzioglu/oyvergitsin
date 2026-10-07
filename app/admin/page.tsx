@@ -14,6 +14,29 @@ interface Stats {
 
 const WEEKLY_UPDATES = [
   {
+    date: '7 Ekim 2026',
+    title: 'Landing tasarımı, bot koruması, KVKK silme ve paylaşım özellikleri tamamlandı',
+    items: [
+      'Ana sayfa (Landing Page) teknolojik ve sade bir arayüzle baştan tasarlandı; altına en son haberleri akıcı sunan Haber Radarı bandı (slideshow) eklendi.',
+      'Sonuç ekranına X, WhatsApp, Telegram tek tıkla paylaşım ve kişiselleştirilmiş skor linki kopyalama butonları yerleştirildi; açılışa hafif konfeti animasyonu eklendi.',
+      'Kullanıcılar artık sonuç ekranında sadece birinci sıradaki partiyi değil, listedeki herhangi bir partiye tıklayarak o partiyle örtüşen ve ayrışan detayları inceleyebiliyor.',
+      'Parti pozisyonları için kaynak beyan linkleri (source_url) veritabanına işlendi ve sonuç kartlarına ℹ️ kaynak ikonu eklendi.',
+      'Bot ve suistimal koruması: Görünmez honeypot tuzağı, 15 saniyeden hızlı tamamlayanlara hız puanı cezası ve straightlining (düz cevaplama) tespitiyle risk skorlaması devreye alındı.',
+      'KVKK Kapsamında Veri Silme: Kullanıcının sonuç ekranında dilerse oturumunu ve verdiği tüm cevapları kalıcı olarak silebilmesi ("Beni Unut") sağlandı.',
+      'Admin Paneli: Oturumlar tablosunda Risk Skoru sütunu ve filtreleri gösterildi, tüm cevaplar için tek tıkla CSV dışa aktarma özelliği eklendi.',
+    ],
+  },
+  {
+    date: '5 Ekim 2026',
+    title: 'Tasarım sistemi "Kamusal Ekran" yönüne taşındı ve erişilebilirlik güçlendirildi',
+    items: [
+      'Gökkuşağı (rainbow) renk paleti terk edilerek kamu kurumları ve bağımsız platform standartlarına uygun, tek accent (petrol) odaklı "Kamusal Ekran" tasarım sistemine geçildi.',
+      'Tüm sayfalarda WCAG AA kontrast standartları (metin ve arayüz elemanlarında 4.5:1 ve 3:1 eşikleri) sağlandı.',
+      'Siyaset Radarı, metodoloji ve anket kabuk bileşenleri yeni token yapısına uyarlandı.',
+      'Soru render mimarisi sadeleştirildi; API hata gövdelerine makine tarafından okunabilir hata kodları entegre edildi.',
+    ],
+  },
+  {
     date: '4 Ağustos 2026',
     title: 'Anket akışı daha güvenli ve daha anlaşılır hale geldi',
     items: [

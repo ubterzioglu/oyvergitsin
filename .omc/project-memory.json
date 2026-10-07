@@ -1,0 +1,486 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1791398768859,
+  "projectRoot": "c:\\temp_private\\oyvergitsin",
+  "techStack": {
+    "languages": [
+      {
+        "name": "JavaScript/TypeScript",
+        "version": null,
+        "confidence": "high",
+        "markers": [
+          "package.json"
+        ]
+      },
+      {
+        "name": "TypeScript",
+        "version": null,
+        "confidence": "high",
+        "markers": [
+          "tsconfig.json"
+        ]
+      }
+    ],
+    "frameworks": [
+      {
+        "name": "next",
+        "version": "15.5.20",
+        "category": "fullstack"
+      },
+      {
+        "name": "react",
+        "version": "18.2.0",
+        "category": "frontend"
+      },
+      {
+        "name": "react-dom",
+        "version": "18.2.0",
+        "category": "frontend"
+      },
+      {
+        "name": "@playwright/test",
+        "version": "1.62.0",
+        "category": "testing"
+      },
+      {
+        "name": "vitest",
+        "version": "3.2.7",
+        "category": "testing"
+      }
+    ],
+    "packageManager": "npm",
+    "runtime": null
+  },
+  "build": {
+    "buildCommand": "npm run build",
+    "testCommand": "npm test",
+    "lintCommand": "npm run lint",
+    "devCommand": "npm run dev",
+    "scripts": {
+      "dev": "next dev",
+      "build": "next build",
+      "start": "next start",
+      "lint": "next lint",
+      "test": "vitest run",
+      "test:watch": "vitest",
+      "test:e2e": "playwright test",
+      "db:push": "supabase db push",
+      "db:sql": "node scripts/build-manual-sql.js",
+      "db:sql:print": "node scripts/direct-migrate.js",
+      "db:migrate": "node scripts/apply-migration.js",
+      "db:seed": "node scripts/seed.js",
+      "db:seed:admin": "node scripts/seed-admin.js",
+      "db:reset": "supabase db reset",
+      "v2:seed": "node scripts/seed-axis-model-v2.js",
+      "v2:positions": "node scripts/derive-party-positions-v2.js",
+      "v2:verify": "node scripts/verify-axis-model-v2.js",
+      "validate:party-catalog": "node scripts/validate-party-catalog.js",
+      "v2:activate": "node scripts/seed-axis-model-v2.js --activate",
+      "smoke": "node scripts/smoke-survey-flow.js",
+      "audit:rls": "node scripts/audit-rls.js",
+      "radar:tbmm": "node scripts/refresh-tbmm-seats.js",
+      "geo:llms": "node scripts/generate-llms-txt.js"
+    }
+  },
+  "conventions": {
+    "namingStyle": "camelCase",
+    "importStyle": null,
+    "testPattern": null,
+    "fileOrganization": null
+  },
+  "structure": {
+    "isMonorepo": false,
+    "workspaces": [],
+    "mainDirectories": [
+      "app",
+      "components",
+      "docs",
+      "lib",
+      "public",
+      "scripts"
+    ],
+    "gitBranches": {
+      "defaultBranch": "main",
+      "branchingStrategy": null
+    }
+  },
+  "customNotes": [],
+  "directoryMap": {
+    "app": {
+      "path": "app",
+      "purpose": "Application code",
+      "fileCount": 10,
+      "lastAccessed": 1791398768737,
+      "keyFiles": [
+        "apple-icon.png",
+        "globals.css",
+        "icon.png",
+        "layout.tsx",
+        "manifest.ts"
+      ]
+    },
+    "components": {
+      "path": "components",
+      "purpose": "UI components",
+      "fileCount": 0,
+      "lastAccessed": 1791398768771,
+      "keyFiles": []
+    },
+    "docs": {
+      "path": "docs",
+      "purpose": "Documentation",
+      "fileCount": 11,
+      "lastAccessed": 1791398768772,
+      "keyFiles": [
+        "COOLIFY_DEPLOYMENT.md",
+        "devam-2026-10-03.md",
+        "kalan-promptlar-2026-10-03.md",
+        "new-party-2026-research.md",
+        "party-positions-2026-update.md"
+      ]
+    },
+    "e2e": {
+      "path": "e2e",
+      "purpose": null,
+      "fileCount": 1,
+      "lastAccessed": 1791398768773,
+      "keyFiles": [
+        "survey-flow.spec.ts"
+      ]
+    },
+    "lib": {
+      "path": "lib",
+      "purpose": "Library code",
+      "fileCount": 5,
+      "lastAccessed": 1791398768774,
+      "keyFiles": [
+        "parties.ts",
+        "rate-limit.ts",
+        "session-ownership.ts",
+        "session-token.ts",
+        "site.ts"
+      ]
+    },
+    "oyvergitsin-admin": {
+      "path": "oyvergitsin-admin",
+      "purpose": null,
+      "fileCount": 23,
+      "lastAccessed": 1791398768775,
+      "keyFiles": [
+        "AGENTS.md",
+        "docker-compose.yml",
+        "Dockerfile",
+        "Dockerfile.kaniko",
+        "middleware.ts"
+      ]
+    },
+    "oyvergitsin-api": {
+      "path": "oyvergitsin-api",
+      "purpose": null,
+      "fileCount": 34,
+      "lastAccessed": 1791398768776,
+      "keyFiles": [
+        "AGENTS.md",
+        "check.md",
+        "deep-research-prompt.md",
+        "docker-compose.yml",
+        "Dockerfile"
+      ]
+    },
+    "oyvergitsin-design": {
+      "path": "oyvergitsin-design",
+      "purpose": null,
+      "fileCount": 33,
+      "lastAccessed": 1791398768776,
+      "keyFiles": [
+        "AGENTS.md",
+        "check.md",
+        "deep-research-prompt.md",
+        "docker-compose.yml",
+        "Dockerfile"
+      ]
+    },
+    "oyvergitsin-geo": {
+      "path": "oyvergitsin-geo",
+      "purpose": null,
+      "fileCount": 34,
+      "lastAccessed": 1791398768777,
+      "keyFiles": [
+        "AGENTS.md",
+        "check.md",
+        "deep-research-prompt.md",
+        "docker-compose.yml",
+        "Dockerfile"
+      ]
+    },
+    "oyvergitsin-home": {
+      "path": "oyvergitsin-home",
+      "purpose": null,
+      "fileCount": 23,
+      "lastAccessed": 1791398768778,
+      "keyFiles": [
+        "AGENTS.md",
+        "docker-compose.yml",
+        "Dockerfile",
+        "Dockerfile.kaniko",
+        "middleware.ts"
+      ]
+    },
+    "oyvergitsin-int": {
+      "path": "oyvergitsin-int",
+      "purpose": null,
+      "fileCount": 24,
+      "lastAccessed": 1791398768779,
+      "keyFiles": [
+        "AGENTS.md",
+        "docker-compose.yml",
+        "Dockerfile",
+        "Dockerfile.kaniko",
+        "middleware.ts"
+      ]
+    },
+    "oyvergitsin-legal": {
+      "path": "oyvergitsin-legal",
+      "purpose": null,
+      "fileCount": 23,
+      "lastAccessed": 1791398768779,
+      "keyFiles": [
+        "AGENTS.md",
+        "docker-compose.yml",
+        "Dockerfile",
+        "Dockerfile.kaniko",
+        "middleware.ts"
+      ]
+    },
+    "oyvergitsin-logo": {
+      "path": "oyvergitsin-logo",
+      "purpose": null,
+      "fileCount": 34,
+      "lastAccessed": 1791398768780,
+      "keyFiles": [
+        "AGENTS.md",
+        "check.md",
+        "deep-research-prompt.md",
+        "docker-compose.yml",
+        "Dockerfile"
+      ]
+    },
+    "oyvergitsin-method": {
+      "path": "oyvergitsin-method",
+      "purpose": null,
+      "fileCount": 23,
+      "lastAccessed": 1791398768781,
+      "keyFiles": [
+        "AGENTS.md",
+        "docker-compose.yml",
+        "Dockerfile",
+        "Dockerfile.kaniko",
+        "middleware.ts"
+      ]
+    },
+    "oyvergitsin-radar": {
+      "path": "oyvergitsin-radar",
+      "purpose": null,
+      "fileCount": 25,
+      "lastAccessed": 1791398768781,
+      "keyFiles": [
+        "AGENTS.md",
+        "docker-compose.yml",
+        "Dockerfile",
+        "Dockerfile.kaniko",
+        "middleware.ts"
+      ]
+    },
+    "oyvergitsin-radar-v2": {
+      "path": "oyvergitsin-radar-v2",
+      "purpose": null,
+      "fileCount": 22,
+      "lastAccessed": 1791398768782,
+      "keyFiles": [
+        "AGENTS.md",
+        "docker-compose.yml",
+        "Dockerfile",
+        "Dockerfile.kaniko",
+        "middleware.ts"
+      ]
+    },
+    "oyvergitsin-results": {
+      "path": "oyvergitsin-results",
+      "purpose": null,
+      "fileCount": 23,
+      "lastAccessed": 1791398768783,
+      "keyFiles": [
+        "AGENTS.md",
+        "docker-compose.yml",
+        "Dockerfile",
+        "Dockerfile.kaniko",
+        "middleware.ts"
+      ]
+    },
+    "oyvergitsin-seo": {
+      "path": "oyvergitsin-seo",
+      "purpose": null,
+      "fileCount": 33,
+      "lastAccessed": 1791398768783,
+      "keyFiles": [
+        "AGENTS.md",
+        "check.md",
+        "deep-research-prompt.md",
+        "docker-compose.yml",
+        "Dockerfile"
+      ]
+    },
+    "oyvergitsin-shell": {
+      "path": "oyvergitsin-shell",
+      "purpose": null,
+      "fileCount": 23,
+      "lastAccessed": 1791398768784,
+      "keyFiles": [
+        "AGENTS.md",
+        "docker-compose.yml",
+        "Dockerfile",
+        "Dockerfile.kaniko",
+        "middleware.ts"
+      ]
+    },
+    "oyvergitsin-survey": {
+      "path": "oyvergitsin-survey",
+      "purpose": null,
+      "fileCount": 23,
+      "lastAccessed": 1791398768785,
+      "keyFiles": [
+        "AGENTS.md",
+        "docker-compose.yml",
+        "Dockerfile",
+        "Dockerfile.kaniko",
+        "middleware.ts"
+      ]
+    },
+    "oyvergitsin-tokens": {
+      "path": "oyvergitsin-tokens",
+      "purpose": null,
+      "fileCount": 24,
+      "lastAccessed": 1791398768785,
+      "keyFiles": [
+        "AGENTS.md",
+        "docker-compose.yml",
+        "Dockerfile",
+        "Dockerfile.kaniko",
+        "middleware.ts"
+      ]
+    },
+    "oyvergitsin-ui": {
+      "path": "oyvergitsin-ui",
+      "purpose": null,
+      "fileCount": 24,
+      "lastAccessed": 1791398768786,
+      "keyFiles": [
+        "AGENTS.md",
+        "docker-compose.yml",
+        "Dockerfile",
+        "Dockerfile.kaniko",
+        "middleware.ts"
+      ]
+    },
+    "public": {
+      "path": "public",
+      "purpose": "Public files",
+      "fileCount": 2,
+      "lastAccessed": 1791398768787,
+      "keyFiles": [
+        "llms.txt",
+        "logo.png"
+      ]
+    },
+    "scripts": {
+      "path": "scripts",
+      "purpose": "Build/utility scripts",
+      "fileCount": 26,
+      "lastAccessed": 1791398768787,
+      "keyFiles": [
+        "apply-migration.js",
+        "audit-questions.js",
+        "audit-rls.js",
+        "build-manual-sql.js",
+        "check-admin-access.js"
+      ]
+    },
+    "supabase": {
+      "path": "supabase",
+      "purpose": null,
+      "fileCount": 2,
+      "lastAccessed": 1791398768788,
+      "keyFiles": [
+        "config.toml",
+        "manual-apply.sql"
+      ]
+    },
+    "test-results": {
+      "path": "test-results",
+      "purpose": null,
+      "fileCount": 1,
+      "lastAccessed": 1791398768788,
+      "keyFiles": []
+    },
+    "app\\api": {
+      "path": "app\\api",
+      "purpose": "API routes",
+      "fileCount": 0,
+      "lastAccessed": 1791398768789,
+      "keyFiles": []
+    },
+    "lib\\api": {
+      "path": "lib\\api",
+      "purpose": "API routes",
+      "fileCount": 4,
+      "lastAccessed": 1791398768792,
+      "keyFiles": [
+        "error-codes.test.ts",
+        "error-codes.ts",
+        "responses.ts"
+      ]
+    },
+    "scripts\\data": {
+      "path": "scripts\\data",
+      "purpose": "Data files",
+      "fileCount": 2,
+      "lastAccessed": 1791398768800,
+      "keyFiles": [
+        "axis-model-v2.js",
+        "party-positions-v2.js"
+      ]
+    },
+    "supabase\\migrations": {
+      "path": "supabase\\migrations",
+      "purpose": "Database migrations",
+      "fileCount": 13,
+      "lastAccessed": 1791398768800,
+      "keyFiles": [
+        "001_initial_schema.sql",
+        "002_public_survey_policies.sql",
+        "003_public_session_select.sql"
+      ]
+    }
+  },
+  "hotPaths": [
+    {
+      "path": "docs\\devam-2026-10-03.md",
+      "accessCount": 1,
+      "lastAccessed": 1791011379851,
+      "type": "file"
+    },
+    {
+      "path": "docs/plan-2026-10-02-bakim-tbmm-seo-tasarim.md",
+      "accessCount": 1,
+      "lastAccessed": 1791213414570,
+      "type": "file"
+    },
+    {
+      "path": "docs/kalan-promptlar-2026-10-03.md",
+      "accessCount": 1,
+      "lastAccessed": 1791213542184,
+      "type": "file"
+    }
+  ],
+  "userDirectives": []
+}

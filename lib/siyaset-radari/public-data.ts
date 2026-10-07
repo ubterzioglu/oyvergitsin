@@ -86,84 +86,84 @@ export interface PersonDetail extends DashboardPerson {
   }>
 }
 
-function personFromRow(row: any): DashboardPerson {
+function personFromRow(row: Record<string, unknown>): DashboardPerson {
   return {
-    id: row.id,
-    slug: row.slug,
-    fullName: row.full_name,
-    primaryRole: row.primary_role,
-    province: row.province,
-    xHandle: row.x_handle,
-    lastVerifiedAt: row.last_verified_at,
+    id: row.id as string,
+    slug: row.slug as string,
+    fullName: row.full_name as string,
+    primaryRole: row.primary_role as string,
+    province: row.province as string | null,
+    xHandle: row.x_handle as string | null,
+    lastVerifiedAt: row.last_verified_at as string | null,
   }
 }
 
-function politicalEventFromRow(row: any): DashboardPoliticalEvent {
-  const person = row.public_people ?? {}
+function politicalEventFromRow(row: Record<string, unknown>): DashboardPoliticalEvent {
+  const person = (row.public_people ?? {}) as Record<string, unknown>
   return {
-    id: row.id,
-    personId: row.person_id,
-    personSlug: person.slug ?? '',
-    fullName: person.full_name ?? 'Bilinmeyen kişi',
-    eventType: row.event_type,
-    fromPartyName: row.from_party_name,
-    toPartyName: row.to_party_name,
-    province: row.province,
-    happenedOn: row.happened_on,
-    summary: row.summary,
-    sourceName: row.source_name,
-    sourceUrl: row.source_url,
-    lastVerifiedAt: row.last_verified_at,
+    id: row.id as string,
+    personId: row.person_id as string,
+    personSlug: (person.slug as string) ?? '',
+    fullName: (person.full_name as string) ?? 'Bilinmeyen kişi',
+    eventType: row.event_type as string,
+    fromPartyName: row.from_party_name as string | null,
+    toPartyName: row.to_party_name as string | null,
+    province: row.province as string | null,
+    happenedOn: row.happened_on as string | null,
+    summary: row.summary as string | null,
+    sourceName: row.source_name as string,
+    sourceUrl: row.source_url as string,
+    lastVerifiedAt: row.last_verified_at as string | null,
   }
 }
 
-function journalistEventFromRow(row: any): DashboardJournalistEvent {
-  const person = row.public_people ?? {}
+function journalistEventFromRow(row: Record<string, unknown>): DashboardJournalistEvent {
+  const person = (row.public_people ?? {}) as Record<string, unknown>
   return {
-    id: row.id,
-    personId: row.person_id,
-    personSlug: person.slug ?? '',
-    fullName: person.full_name ?? 'Bilinmeyen kişi',
-    outlet: row.outlet,
-    jobTitle: row.job_title,
-    status: row.status,
-    statusLabel: row.status_label,
-    sourceName: row.source_name,
-    sourceUrl: row.source_url,
-    lastVerifiedAt: row.last_verified_at,
-    isStale: isJournalistStatusStale(row.last_verified_at),
+    id: row.id as string,
+    personId: row.person_id as string,
+    personSlug: (person.slug as string) ?? '',
+    fullName: (person.full_name as string) ?? 'Bilinmeyen kişi',
+    outlet: row.outlet as string | null,
+    jobTitle: row.job_title as string | null,
+    status: row.status as string,
+    statusLabel: row.status_label as string,
+    sourceName: row.source_name as string,
+    sourceUrl: row.source_url as string,
+    lastVerifiedAt: row.last_verified_at as string | null,
+    isStale: isJournalistStatusStale(row.last_verified_at as string | null),
   }
 }
 
-function electionResultFromRow(row: any): DashboardElectionResult {
+function electionResultFromRow(row: Record<string, unknown>): DashboardElectionResult {
   return {
-    id: row.id,
-    electionYear: row.election_year,
-    electionType: row.election_type,
-    areaLevel: row.area_level,
-    areaName: row.area_name,
-    province: row.province,
-    partyName: row.party_name,
+    id: row.id as string,
+    electionYear: row.election_year as number,
+    electionType: row.election_type as string,
+    areaLevel: row.area_level as string,
+    areaName: row.area_name as string,
+    province: row.province as string | null,
+    partyName: row.party_name as string,
     voteShare: row.vote_share === null ? null : Number(row.vote_share),
-    seatCount: row.seat_count,
-    sourceName: row.source_name,
-    sourceUrl: row.source_url,
-    lastVerifiedAt: row.last_verified_at,
-    isStale: isParliamentSnapshotStale(row.last_verified_at),
+    seatCount: row.seat_count as number | null,
+    sourceName: row.source_name as string,
+    sourceUrl: row.source_url as string,
+    lastVerifiedAt: row.last_verified_at as string | null,
+    isStale: isParliamentSnapshotStale(row.last_verified_at as string | null),
   }
 }
 
-function feedItemFromRow(row: any): DashboardFeedItem {
+function feedItemFromRow(row: Record<string, unknown>): DashboardFeedItem {
   return {
-    id: row.id,
-    topic: row.topic,
-    title: row.title,
-    description: row.description,
-    sourceName: row.source_name,
-    sourceUrl: row.source_url,
-    articleUrl: row.article_url,
-    publishedAt: row.published_at,
-    discoveredAt: row.discovered_at,
+    id: row.id as string,
+    topic: row.topic as string,
+    title: row.title as string,
+    description: row.description as string | null,
+    sourceName: row.source_name as string,
+    sourceUrl: row.source_url as string | null,
+    articleUrl: row.article_url as string,
+    publishedAt: row.published_at as string | null,
+    discoveredAt: row.discovered_at as string,
   }
 }
 
@@ -206,11 +206,11 @@ export async function fetchSiyasetRadariDashboard() {
   if (feedResult.error) console.error('Siyaset radari feed error:', feedResult.error)
 
   return {
-    people: ((peopleResult.data ?? []) as any[]).map(personFromRow),
-    politicalEvents: ((politicalResult.data ?? []) as any[]).map(politicalEventFromRow),
-    journalistEvents: ((journalistsResult.data ?? []) as any[]).map(journalistEventFromRow),
-    electionResults: ((electionResult.data ?? []) as any[]).map(electionResultFromRow),
-    feedItems: ((feedResult.data ?? []) as any[]).map(feedItemFromRow),
+    people: ((peopleResult.data ?? []) as Record<string, unknown>[]).map(personFromRow),
+    politicalEvents: ((politicalResult.data ?? []) as Record<string, unknown>[]).map(politicalEventFromRow),
+    journalistEvents: ((journalistsResult.data ?? []) as Record<string, unknown>[]).map(journalistEventFromRow),
+    electionResults: ((electionResult.data ?? []) as Record<string, unknown>[]).map(electionResultFromRow),
+    feedItems: ((feedResult.data ?? []) as Record<string, unknown>[]).map(feedItemFromRow),
   }
 }
 
@@ -236,7 +236,7 @@ export async function fetchPublicPeople(params: { role?: string; province?: stri
   if (error) {
     throw error
   }
-  return ((data ?? []) as any[]).map(personFromRow)
+  return ((data ?? []) as Record<string, unknown>[]).map(personFromRow)
 }
 
 export async function fetchPersonDetail(slug: string): Promise<PersonDetail | null> {
@@ -271,19 +271,19 @@ export async function fetchPersonDetail(slug: string): Promise<PersonDetail | nu
   ])
 
   return {
-    ...personFromRow(person),
-    bio: person.bio,
-    politicalEvents: ((politicalResult.data ?? []) as any[]).map(politicalEventFromRow),
-    journalistEvents: ((journalistResult.data ?? []) as any[]).map(journalistEventFromRow),
-    evidence: ((evidenceResult.data ?? []) as any[]).map((row) => ({
-      id: row.id,
-      sourceType: row.source_type,
-      sourceName: row.source_name,
-      sourceUrl: row.source_url,
-      title: row.title,
-      excerpt: row.excerpt,
-      publishedAt: row.published_at,
-      capturedAt: row.captured_at,
+    ...personFromRow(person as Record<string, unknown>),
+    bio: person.bio as string | null,
+    politicalEvents: ((politicalResult.data ?? []) as Record<string, unknown>[]).map(politicalEventFromRow),
+    journalistEvents: ((journalistResult.data ?? []) as Record<string, unknown>[]).map(journalistEventFromRow),
+    evidence: ((evidenceResult.data ?? []) as Record<string, unknown>[]).map((row) => ({
+      id: row.id as string,
+      sourceType: row.source_type as string,
+      sourceName: row.source_name as string,
+      sourceUrl: row.source_url as string,
+      title: row.title as string | null,
+      excerpt: row.excerpt as string | null,
+      publishedAt: row.published_at as string | null,
+      capturedAt: row.captured_at as string,
     })),
   }
 }
@@ -321,5 +321,5 @@ export async function fetchApprovedProvinceResults(params: { province?: string; 
   if (error) {
     throw error
   }
-  return ((data ?? []) as any[]).map(electionResultFromRow)
+  return ((data ?? []) as Record<string, unknown>[]).map(electionResultFromRow)
 }

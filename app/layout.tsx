@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next'
+import Script from 'next/script'
 import { getSiteUrl, siteConfig } from '@/lib/site'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
@@ -127,6 +128,8 @@ export default function RootLayout({
     ]
   }
 
+  const gaId = process.env.NEXT_PUBLIC_GA_ID
+
   return (
     <html lang="tr">
       <body className="font-body">
@@ -134,6 +137,22 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
+        {gaId && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
+              strategy="afterInteractive"
+            />
+            <Script id="google-analytics" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${gaId}');
+              `}
+            </Script>
+          </>
+        )}
         <div className="flex min-h-screen flex-col">
           <Header />
           <div className="flex-1">{children}</div>

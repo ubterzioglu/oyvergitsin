@@ -69,11 +69,9 @@ async function loadFacts() {
 }
 
 function render(facts) {
-  // Ayırıcı noktalı virgül: eksen adlarının bir kısmı zaten virgül içeriyor
-  // ("Kimlik, Kürt Meselesi ve Yerel Özerklik"), virgülle birleştirince
-  // 8 eksen 11 ayrı maddeymiş gibi okunuyordu.
   const axisNames = facts.axes.map((axis) => axis.name.toLowerCase()).join('; ')
   const partyLabels = facts.parties.map((party) => party.short_name || party.name).join(', ')
+  const generatedAt = new Date().toISOString().split('T')[0]
 
   return `# oyvergitsin.org
 
@@ -89,6 +87,7 @@ Kullanıcılar ${facts.axes.length} ideolojik eksen (${axisNames}) üzerinden ${
 - Eksen modeli sürümü: ${facts.version}
 - Yöntem: ${facts.axes.length} ideolojik eksende ${facts.questionCount} soru, sabit kurallı skorlama algoritması
 - Gizlilik: Anonim oturum, kişisel veri toplanmaz
+- Son güncelleme: ${generatedAt}
 
 ## Eksenler
 

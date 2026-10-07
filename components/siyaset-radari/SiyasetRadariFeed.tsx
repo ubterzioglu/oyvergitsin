@@ -36,27 +36,20 @@ export function SiyasetRadariFeed({ items }: { items: DashboardFeedItem[] }) {
             Otomatik bulunan içerikler kaynak kontrolünden ve editoryal onaydan sonra yayınlanır.
           </p>
         </div>
-        <span className="data-figure text-xs text-ink-muted">Günlük tarama · Haftalık kapsamlı kontrol</span>
+        <span className="text-xs text-ink-muted">Günlük tarama · Haftalık kapsamlı kontrol</span>
       </div>
 
       {items.length === 0 ? (
-        <div className="mt-5 rounded-card border border-dashed border-border-strong bg-surface-muted px-6 py-12 text-center">
-          <p className="text-sm font-medium text-ink-primary">Onaylanmış güncel akış kaydı henüz yok.</p>
-          <p className="mx-auto mt-2 max-w-md text-sm text-ink-secondary">
-            Otomatik tarama bulduğu içerikleri editoryal onaya düşürür; onaylanan kayıtlar burada
-            kaynağı ve yayın tarihiyle görünür.
-          </p>
+        <div className="mt-5 rounded-lg border border-dashed border-border bg-white px-6 py-12 text-center text-sm text-ink-secondary">
+          Onaylanmış güncel akış kaydı henüz yok.
         </div>
       ) : (
         <div className="mt-5 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {items.map((item) => (
-            <article
-              key={item.id}
-              className="flex h-full flex-col rounded-card border border-border bg-surface-card p-5 transition-shadow hover:shadow-elevated"
-            >
+            <article key={item.id} className="flex h-full flex-col rounded-lg border border-border bg-white p-5 shadow-soft">
               <div className="flex items-center justify-between gap-3">
                 <Badge>{TOPIC_LABELS[item.topic] ?? 'Siyaset'}</Badge>
-                <span className="data-figure text-xs text-ink-muted">{formatDate(item.publishedAt)}</span>
+                <span className="text-xs text-ink-muted">{formatDate(item.publishedAt)}</span>
               </div>
               <h3 className="mt-4 text-lg font-semibold leading-6 text-ink-primary">{item.title}</h3>
               {item.description && (
@@ -68,7 +61,7 @@ export function SiyasetRadariFeed({ items }: { items: DashboardFeedItem[] }) {
                   href={item.articleUrl}
                   target="_blank"
                   rel="noopener noreferrer nofollow"
-                  className="shrink-0 rounded-badge font-semibold text-accent underline-offset-2 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+                  className="shrink-0 font-semibold text-accent hover:underline"
                 >
                   Kaynağa git
                 </a>

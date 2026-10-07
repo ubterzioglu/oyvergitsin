@@ -76,38 +76,7 @@ const config: Config = {
           6: '#1D616B',
         },
 
-        /**
-         * @deprecated GEÇİCİ ALIAS — B11 ve B12–B18 bitince SİLİNECEK.
-         *
-         * Neden duruyorlar: 33 dosyada 100 adet `rainbow-*` sınıf kullanımı
-         * var. Token'ları bu commit'te silseydim Tailwind o sınıfları hiç
-         * üretmezdi; build yeşil kalır ama sayfalar renklerini kaybederdi.
-         * Repo main'den dağıtıldığı için bu ara durum kabul edilemez.
-         *
-         * Alias'lar eski adları korur, YENİ nötr değerlere bağlar: site bu
-         * commit'ten itibaren parti renkleriyle çakışmayı bırakır, görsel
-         * olarak da bozulmaz. Sonraki batch'ler sınıfları dosya dosya
-         * accent-* / ink-* / scale-* karşılıklarıyla değiştirecek.
-         *
-         * YENİ KOD BU TOKEN'LARI KULLANMASIN.
-         */
-        rainbow: {
-          // Metin olarak da kullanıldıkları için hepsi AA geçen tonlara
-          // bağlandı; eski #828B8D gibi değerler küçük metinde kalıyordu.
-          yellow: '#6B7476',
-          'yellow-tint': '#F0F2F2',
-          orange: '#6E7779',
-          'orange-tint': '#EDEFEF',
-          red: '#566164',
-          'red-tint': '#E9ECEC',
-          purple: '#38737C',
-          'purple-tint': '#E7F1F3',
-          blue: '#1D616B',
-          'blue-tint': '#E4F0F2',
-          'blue-hover': '#0B5A66',
-          green: '#0E6E7D',
-          'green-tint': '#E1F0F2',
-        },
+
       },
       fontFamily: {
         heading: ['var(--font-heading)'],

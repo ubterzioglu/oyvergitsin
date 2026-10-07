@@ -35,48 +35,71 @@ export function AdminNav() {
   // üretir; token kullanılır: border-strong grafitte 10.55 (AA), hover beyaz
   // 17.13. Odak halkası koyu zeminde beyaz + grafit offset.
   return (
-    <nav className="bg-ink-primary shadow-elevated">
-      <div className="mx-auto max-w-7xl px-4">
-        <div className="flex h-16 justify-between">
-          <div className="flex">
-            <div className="flex items-center px-4">
-              <Link
-                href="/admin"
-                className="rounded-sm font-heading text-xl font-semibold text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-ink-primary"
-              >
-                Yönetim Paneli
-              </Link>
-            </div>
-            <div className="flex items-center space-x-4">
-              {NAV_LINKS.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="rounded-sm text-border-strong hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-ink-primary"
-                >
-                  {link.label}
-                </Link>
+    <nav className="border-b border-border-strong/20 bg-ink-primary shadow-elevated">
+      <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-3 sm:px-6">
+        <div className="flex min-w-0 flex-1 items-center gap-3 sm:gap-4">
+          {/* Logo / Başlık */}
+          <Link
+            href="/admin"
+            className="shrink-0 whitespace-nowrap font-heading text-base font-semibold text-white transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-ink-primary sm:text-lg"
+          >
+            Yönetim Paneli
+          </Link>
+
+          {/* Dikey ayraç */}
+          <div className="h-5 w-[1px] shrink-0 bg-white/20" aria-hidden="true" />
+
+          {/* Menü Linkleri (Tek satır, dikey ayraçlı) */}
+          <div className="flex items-center overflow-x-auto py-1 scrollbar-none [scrollbar-width:none]">
+            <div className="flex items-center text-xs sm:text-sm font-medium text-border-strong">
+              {NAV_LINKS.map((link, idx) => (
+                <div key={link.href} className="flex items-center">
+                  {idx > 0 && (
+                    <span className="mx-2 text-white/20 select-none" aria-hidden="true">
+                      |
+                    </span>
+                  )}
+                  <Link
+                    href={link.href}
+                    className="whitespace-nowrap transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-1 focus-visible:ring-offset-ink-primary"
+                  >
+                    {link.label}
+                  </Link>
+                </div>
               ))}
+
               {EXTERNAL_LINKS.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="rounded-sm text-border-strong hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-ink-primary"
-                >
-                  {link.label}
-                </a>
+                <div key={link.href} className="flex items-center">
+                  <span className="mx-2 text-white/20 select-none" aria-hidden="true">
+                    |
+                  </span>
+                  <a
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="whitespace-nowrap transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-1 focus-visible:ring-offset-ink-primary"
+                  >
+                    {link.label}
+                  </a>
+                </div>
               ))}
             </div>
           </div>
-          <div className="flex items-center space-x-4">
-            <Link
-              href="/"
-              className="rounded-sm text-border-strong hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-ink-primary"
-            >
-              Ana Sayfa
-            </Link>
+        </div>
+
+        {/* Sağ Taraf: Ana Sayfa & Çıkış */}
+        <div className="ml-3 flex shrink-0 items-center text-xs sm:text-sm font-medium text-border-strong">
+          <div className="mr-3 h-5 w-[1px] bg-white/20" aria-hidden="true" />
+          <Link
+            href="/"
+            className="whitespace-nowrap transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-1 focus-visible:ring-offset-ink-primary"
+          >
+            Ana Sayfa
+          </Link>
+          <span className="mx-2 text-white/20 select-none" aria-hidden="true">
+            |
+          </span>
+          <div className="whitespace-nowrap">
             <LogoutButton />
           </div>
         </div>

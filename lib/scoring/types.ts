@@ -47,6 +47,7 @@ export interface PartyPosition {
   partyId: string
   axisId: string
   score: number
+  sourceUrl?: string | null
 }
 
 /** Bir eksende kaç maddenin yanıtlandığına dayalı güven etiketi (rapor §5.4). */
@@ -81,6 +82,7 @@ export interface AxisComparison {
   /** lambda_a * |U_a - P_pa| */
   impact: number
   weight: number
+  sourceUrl?: string | null
 }
 
 export interface MatchExplanation {

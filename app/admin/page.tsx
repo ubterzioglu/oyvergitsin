@@ -142,6 +142,10 @@ export default function AdminDashboard() {
     fetchStats()
   }, [])
 
+  const completionRate = stats.totalSessions > 0
+    ? Math.round((stats.completedSessions / stats.totalSessions) * 100)
+    : 0
+
   return (
     <div>
       <h1 className="mb-8 text-3xl font-bold text-ink-primary">Dashboard</h1>
@@ -150,9 +154,10 @@ export default function AdminDashboard() {
         <div className="text-ink-secondary">Yükleniyor...</div>
       ) : (
         <>
-          <div className="mb-6 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+          <div className="mb-6 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-5">
             <Stat value={stats.totalSessions} label="Toplam Oturum" />
             <Stat value={stats.completedSessions} label="Tamamlanan Oturum" />
+            <Stat value={`${completionRate}%`} label="Tamamlanma Oranı" />
             <Stat value={stats.scoredQuestions} label="Puanlanan Madde" />
             <Stat value={stats.positionedParties} label="Konumlandırılmış Parti" />
           </div>
@@ -225,7 +230,7 @@ function UpdatesSection() {
 
 // Yön A tek accent kullanır; stat kartlarında renk çeşitliliği yerine mono
 // veri rakamı (.data-figure) + nötr etiket var. Sayı bilginin kendisi.
-function Stat({ value, label }: { value: number; label: string }) {
+function Stat({ value, label }: { value: number | string; label: string }) {
   return (
     <div className="rounded-card border border-border bg-surface-card p-6">
       <div className="data-figure text-3xl font-bold text-ink-primary">{value}</div>

@@ -10,6 +10,7 @@ interface SessionRow {
   completed_at: string | null
   is_guest: boolean
   consent_version: number
+  risk_score?: number
 }
 
 const PAGE_SIZE = 50
@@ -29,7 +30,7 @@ export default function ResponsesPage() {
 
         let query = supabase
           .from('sessions')
-          .select('id, created_at, completed_at, is_guest, consent_version')
+          .select('id, created_at, completed_at, is_guest, consent_version, risk_score')
           .order('created_at', { ascending: false })
           .limit(PAGE_SIZE)
 
@@ -74,14 +75,55 @@ export default function ResponsesPage() {
     fetchSessions()
   }, [onlyCompleted])
 
+  const handleExportCsv = () => {
+    if (sessions.length === 0) return
+
+    const headers = ['Oturum ID', 'Baslangic', 'Tamamlanma', 'Cevap Sayisi', 'Risk Skoru', 'Onay Surumu']
+    const rows = sessions.map((s) => [
+      s.id,
+      `"${new Date(s.created_at).toISOString()}"`,
+      s.completed_at ? `"${new Date(s.completed_at).toISOString()}"` : '""',
+      answerCounts[s.id] ?? 0,
+      s.risk_score ?? 0,
+      `"v${s.consent_version}"`
+    ])
+
+    const csvContent = [headers.join(','), ...rows.map((r) => r.join(','))].join('\n')
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' })
+    const url = URL.createObjectURL(blob)
+    const link = document.createElement('a')
+    link.href = url
+    link.setAttribute('download', `oyvergitsin_oturumlar_${new Date().toISOString().slice(0, 10)}.csv`)
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+    URL.revokeObjectURL(url)
+  }
+
   return (
     <div>
-      <h1 className="mb-2 text-3xl font-bold text-ink-primary">Cevaplar</h1>
-      <p className="mb-6 text-sm text-ink-secondary">
-        Anketi dolduran oturumlar ve verdikleri cevaplar. Oturumlar anonimdir: kimlik, e-posta veya
-        konum bilgisi toplanmaz; IP ve cihaz bilgisi yalnızca hash olarak saklanır ve burada
-        gösterilmez.
-      </p>
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4">
+        <div>
+          <h1 className="mb-2 text-3xl font-bold text-ink-primary">Cevaplar</h1>
+          <p className="text-sm text-ink-secondary">
+            Anketi dolduran oturumlar ve verdikleri cevaplar. Oturumlar anonimdir: kimlik, e-posta veya
+            konum bilgisi toplanmaz; IP ve cihaz bilgisi yalnızca hash olarak saklanır.
+          </p>
+        </div>
+        <button
+          type="button"
+          onClick={handleExportCsv}
+          disabled={sessions.length === 0}
+          className="mt-4 sm:mt-0 shrink-0 inline-flex items-center gap-2 rounded-button bg-surface-muted border border-border px-4 py-2 text-sm font-semibold text-ink-primary hover:bg-border transition-colors disabled:opacity-50"
+        >
+          <svg viewBox="0 0 24 24" className="h-4 w-4 fill-none stroke-currentColor" strokeWidth={2}>
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <polyline points="7 10 12 15 17 10" />
+            <line x1="12" y1="15" x2="12" y2="3" />
+          </svg>
+          CSV İndir
+        </button>
+      </div>
 
       <div className="mb-4 flex items-center gap-3">
         <label className="flex items-center gap-2 text-sm text-ink-primary">
@@ -114,6 +156,7 @@ export default function ResponsesPage() {
                 </th>
                 <th scope="col" className="px-4 py-3 text-left text-xs font-medium uppercase text-ink-secondary">Durum</th>
                 <th scope="col" className="px-4 py-3 text-left text-xs font-medium uppercase text-ink-secondary">Cevap</th>
+                <th scope="col" className="px-4 py-3 text-left text-xs font-medium uppercase text-ink-secondary">Risk Skoru</th>
                 <th scope="col" className="px-4 py-3 text-left text-xs font-medium uppercase text-ink-secondary">
                   Onay sürümü
                 </th>
@@ -138,6 +181,19 @@ export default function ResponsesPage() {
                     )}
                   </td>
                   <td className="data-figure px-4 py-3 text-sm text-ink-primary">{answerCounts[session.id] ?? 0}</td>
+                  <td className="px-4 py-3 text-sm">
+                    {(session.risk_score ?? 0) >= 50 ? (
+                      <span className="rounded-badge bg-red-100 px-2 py-0.5 text-xs font-semibold text-red-800">
+                        {session.risk_score} (yüksek)
+                      </span>
+                    ) : (session.risk_score ?? 0) > 0 ? (
+                      <span className="rounded-badge bg-yellow-100 px-2 py-0.5 text-xs font-semibold text-yellow-800">
+                        {session.risk_score} (orta)
+                      </span>
+                    ) : (
+                      <span className="data-figure text-xs text-ink-secondary">0</span>
+                    )}
+                  </td>
                   <td className="data-figure px-4 py-3 text-sm text-ink-secondary">v{session.consent_version}</td>
                   <td className="px-4 py-3 text-sm">
                     <Link

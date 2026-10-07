@@ -24,6 +24,17 @@ export async function setSessionTokenCookie(token: string): Promise<void> {
   })
 }
 
+export async function clearSessionTokenCookie(): Promise<void> {
+  const cookieStore = await cookies()
+  cookieStore.set(COOKIE_NAME, '', {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'strict',
+    path: '/',
+    maxAge: 0
+  })
+}
+
 export async function getSessionTokenFromCookie(): Promise<string | null> {
   const cookieStore = await cookies()
   return cookieStore.get(COOKIE_NAME)?.value ?? null

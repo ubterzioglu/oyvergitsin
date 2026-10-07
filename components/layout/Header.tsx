@@ -10,7 +10,16 @@ export function Header() {
             {siteConfig.shortName}
           </span>
         </Link>
-        <nav className="flex items-center gap-6 text-sm font-medium text-ink-secondary">
+        <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-ink-secondary">
+          <Link href="/#nasil-calisir" className="transition-colors hover:text-ink-primary">
+            Nasıl Çalışır
+          </Link>
+          <Link href="/#eksenler" className="transition-colors hover:text-ink-primary">
+            İdeolojik Eksenler
+          </Link>
+          <Link href="/metodoloji" className="transition-colors hover:text-ink-primary">
+            Metodoloji
+          </Link>
           <Link href="/siyaset-radari" className="transition-colors hover:text-ink-primary">
             Siyaset Radarı
           </Link>

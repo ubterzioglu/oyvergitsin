@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { siteConfig } from '@/lib/site'
 import { Card } from '@/components/ui/Card'
 import { Container } from '@/components/ui/Container'
-import { LatestNews } from '@/components/home/LatestNews'
+import { NewsRadarSlideshow } from '@/components/home/NewsRadarSlideshow'
 import { FeatureCard } from '@/components/home/FeatureCard'
 import { StartSurveyLink } from '@/components/home/StartSurveyLink'
 import { getPlatformFacts, type PlatformAxis, type PlatformParty } from '@/lib/geo/platform-facts'
@@ -177,11 +177,11 @@ export default async function Home() {
             token'ına alındı, metin opaklık yerine ink token'larıyla ifade edildi —
             artık ölçülebilir: 17.13 ve 6.38.
           */}
-          <div className="mx-auto max-w-2xl rounded-card border border-border bg-surface-card p-8 text-center shadow-elevated md:p-14">
-            <h1 className="font-heading text-5xl font-semibold text-ink-primary md:text-6xl">
+          <div className="mx-auto max-w-2xl rounded-[2rem] border border-white/20 bg-white/70 backdrop-blur-xl p-8 text-center shadow-[0_8px_32px_rgba(0,0,0,0.1)] dark:bg-black/40 dark:border-white/10 md:p-14">
+            <h1 className="font-heading text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-ink-primary to-accent md:text-6xl drop-shadow-sm">
               oyvergitsin.org
             </h1>
-            <p className="mt-6 text-xl text-ink-primary">
+            <p className="mt-6 text-xl font-medium text-ink-primary">
               Türkiye Siyasi Eşleşme Platformu
             </p>
             <p className="mt-4 text-lg text-ink-secondary">
@@ -195,8 +195,14 @@ export default async function Home() {
         </Container>
       </section>
 
-      <section className="bg-surface py-20">
-        <Container>
+      {/* Hero under-section Slider */}
+      <NewsRadarSlideshow />
+
+      <section id="nasil-calisir" className="bg-surface py-24 relative overflow-hidden">
+        {/* Subtle decorative gradient */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-32 bg-accent/5 blur-[100px] pointer-events-none rounded-full" />
+        
+        <Container className="relative z-10">
           <h2 className="text-center font-heading text-3xl font-semibold text-ink-primary">
             Nasıl Çalışır?
           </h2>
@@ -233,7 +239,7 @@ export default async function Home() {
         </Container>
       </section>
 
-      <section className="bg-surface py-20">
+      <section id="eksenler" className="bg-surface py-24 relative">
         <Container>
           <h2 className="text-center font-heading text-3xl font-semibold text-ink-primary">
             {ideologicalAxes.length} İdeolojik Eksen
@@ -256,10 +262,9 @@ export default async function Home() {
         </Container>
       </section>
 
-      <LatestNews />
-
-      <section className="bg-white py-20">
-        <Container>
+      <section className="bg-white py-24 relative border-t border-border">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-surface to-white opacity-50" />
+        <Container className="relative z-10">
           <h2 className="text-center font-heading text-3xl font-semibold text-ink-primary">
             Sıkça Sorulan Sorular
           </h2>

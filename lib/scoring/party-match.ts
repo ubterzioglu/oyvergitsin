@@ -9,11 +9,16 @@ function comparableAxisCount(axes: AxisResult[]): number {
   return axes.filter((axis) => axis.score !== null && !axis.excludedFromMatching).length
 }
 
+interface PositionInfo {
+  score: number
+  sourceUrl?: string | null
+}
+
 /** Bir partinin karşılaştırılabildiği eksenler ve her birindeki fark. */
 function comparisonsFor(
   partyId: string,
   axes: AxisResult[],
-  positionsByParty: Map<string, Map<string, number>>
+  positionsByParty: Map<string, Map<string, PositionInfo>>
 ): AxisComparison[] {
   const positions = positionsByParty.get(partyId)
   if (!positions) return []
@@ -23,27 +28,28 @@ function comparisonsFor(
   for (const axis of axes) {
     if (axis.score === null || axis.excludedFromMatching) continue
 
-    const partyScore = positions.get(axis.axisId)
-    if (partyScore === undefined) continue
+    const partyPos = positions.get(axis.axisId)
+    if (partyPos === undefined) continue
 
     comparisons.push({
       axisId: axis.axisId,
       userScore: axis.score,
-      partyScore,
-      impact: axis.weight * Math.abs(axis.score - partyScore),
+      partyScore: partyPos.score,
+      impact: axis.weight * Math.abs(axis.score - partyPos.score),
       weight: axis.weight,
+      sourceUrl: partyPos.sourceUrl,
     })
   }
 
   return comparisons
 }
 
-function groupPositions(positions: PartyPosition[]): Map<string, Map<string, number>> {
-  const byParty = new Map<string, Map<string, number>>()
+function groupPositions(positions: PartyPosition[]): Map<string, Map<string, PositionInfo>> {
+  const byParty = new Map<string, Map<string, PositionInfo>>()
 
   for (const position of positions) {
-    const axes = byParty.get(position.partyId) ?? new Map<string, number>()
-    axes.set(position.axisId, position.score)
+    const axes = byParty.get(position.partyId) ?? new Map<string, PositionInfo>()
+    axes.set(position.axisId, { score: position.score, sourceUrl: position.sourceUrl })
     byParty.set(position.partyId, axes)
   }
 

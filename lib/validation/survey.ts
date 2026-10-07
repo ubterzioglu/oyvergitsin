@@ -21,5 +21,7 @@ export const SubmitAnswersSchema = z.object({
 })
 
 export const CompleteSessionSchema = z.object({
-  sessionId: z.string().uuid()
+  sessionId: z.string().uuid(),
+  // Invisible honeypot field. Legitimate humans will not see or fill this.
+  hp_website: z.string().optional()
 })

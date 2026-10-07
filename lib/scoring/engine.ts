@@ -203,7 +203,7 @@ export async function calculateResults(sessionId: string): Promise<CalculationRe
           .in('question_id', questionIds)
       : Promise.resolve({ data: [], error: null }),
     axisIds.length > 0
-      ? supabase.from('party_positions').select('party_id, axis_id, score').in('axis_id', axisIds)
+      ? supabase.from('party_positions').select('party_id, axis_id, score, source_url').in('axis_id', axisIds)
       : Promise.resolve({ data: [], error: null }),
   ])
 
@@ -241,6 +241,7 @@ export async function calculateResults(sessionId: string): Promise<CalculationRe
     partyId: position.party_id,
     axisId: position.axis_id,
     score: position.score,
+    sourceUrl: position.source_url,
   }))
 
   const result = calculate({

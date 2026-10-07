@@ -10,6 +10,7 @@ interface SessionRow {
   created_at: string
   completed_at: string | null
   consent_version: number
+  risk_score?: number
 }
 
 interface AnswerRow {
@@ -62,7 +63,7 @@ export default function ResponseDetailPage() {
       const [sessionRes, answersRes, snapshotRes] = await Promise.all([
         supabase
           .from('sessions')
-          .select('id, created_at, completed_at, consent_version')
+          .select('id, created_at, completed_at, consent_version, risk_score')
           .eq('id', sessionId)
           .single(),
         supabase
@@ -163,6 +164,16 @@ export default function ResponseDetailPage() {
           />
           <Field label="Cevap sayısı" value={String(answers.length)} />
           <Field label="Onay sürümü" value={`v${session.consent_version}`} />
+          <Field
+            label="Risk Skoru"
+            value={
+              (session.risk_score ?? 0) >= 50
+                ? `${session.risk_score} (Yüksek / Bot şüphesi)`
+                : (session.risk_score ?? 0) > 0
+                ? `${session.risk_score} (Orta)`
+                : '0 (Normal)'
+            }
+          />
           {snapshot && <Field label="Algoritma" value={`v${snapshot.algorithm_version}`} />}
           {snapshot?.quality_flags && (
             <Field

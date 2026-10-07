@@ -57,3 +57,43 @@ export async function GET(
     )
   }
 }
+
+export async function DELETE(
+  request: Request,
+  { params }: { params: Promise<{ sessionId: string }> }
+) {
+  try {
+    const resolvedParams = await params
+    const parsed = ParamsSchema.safeParse(resolvedParams)
+
+    if (!parsed.success) {
+      return jsonError(API_ERROR_CODES.INVALID_REQUEST, 'Geçersiz oturum kimliği.')
+    }
+
+    const { sessionId } = parsed.data
+
+    const owns = await assertSessionOwnership(sessionId)
+    if (!owns) {
+      return jsonError(API_ERROR_CODES.FORBIDDEN, 'Yetkisiz istek.')
+    }
+
+    const { getAdminClient } = await import('@/lib/supabase/admin')
+    const { clearSessionTokenCookie } = await import('@/lib/session-token')
+
+    const admin = getAdminClient()
+    const { error } = await admin.from('sessions').delete().eq('id', sessionId)
+
+    if (error) throw error
+
+    await clearSessionTokenCookie()
+
+    return noStoreJson({ success: true, message: 'Verileriniz başarıyla silindi.' })
+  } catch (error) {
+    return handleUnexpectedError(
+      'api/results:delete',
+      error,
+      'Veriler silinemedi. Lütfen tekrar deneyin.'
+    )
+  }
+}
+

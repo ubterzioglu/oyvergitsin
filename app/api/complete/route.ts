@@ -21,7 +21,12 @@ export async function POST(request: NextRequest) {
     const parsed = await parseJsonBody(request, CompleteSessionSchema)
     if (!parsed.ok) return parsed.response
 
-    const { sessionId } = parsed.data
+    const { sessionId, hp_website } = parsed.data
+
+    // Invisible Honeypot check: Bots filling hidden fields are immediately rejected or flagged
+    if (hp_website && hp_website.trim().length > 0) {
+      return jsonError(API_ERROR_CODES.INVALID_REQUEST, 'Geçersiz istek.')
+    }
 
     const owns = await assertSessionOwnership(sessionId)
     if (!owns) {
@@ -68,10 +73,41 @@ export async function POST(request: NextRequest) {
       })
     }
 
+    // Fetch session start time to detect bot speeders
+    const { data: sessionData } = await supabase
+      .from('sessions')
+      .select('created_at, risk_score')
+      .eq('id', sessionId)
+      .single()
+
+    let calculatedRisk = sessionData?.risk_score ?? 0
+    if (sessionData?.created_at) {
+      const elapsedSeconds = (Date.now() - new Date(sessionData.created_at).getTime()) / 1000
+      // 25 soruluk bir anketi 15 saniyenin altında tamamlamak insan davranışı olamaz (bot / script)
+      if (elapsedSeconds < 15) {
+        calculatedRisk += 50
+      } else if (elapsedSeconds < 30) {
+        calculatedRisk += 25
+      }
+    }
+
+    // Straightlining (bütün sorulara tıpatıp aynı cevabı verme) tespiti
+    const answerValues = (answersResult.data ?? []).map((a) => a.answer_value)
+    if (answerValues.length >= 15) {
+      const uniqueAnswers = new Set(answerValues)
+      if (uniqueAnswers.size === 1) {
+        // Her soruya birebir aynı cevap verilmiş
+        calculatedRisk += 30
+      }
+    }
+
     // Mark session as completed
     const { error: sessionError } = await supabase
       .from('sessions')
-      .update({ completed_at: new Date().toISOString() })
+      .update({
+        completed_at: new Date().toISOString(),
+        risk_score: calculatedRisk
+      })
       .eq('id', sessionId)
 
     if (sessionError) throw sessionError

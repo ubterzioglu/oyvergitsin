@@ -10,7 +10,9 @@ import { Container } from '@/components/ui/Container'
 import { CoverageBadge } from '@/components/results/CoverageBadge'
 import { MatchReasons } from '@/components/results/MatchReasons'
 import { PartyBadge } from '@/components/results/PartyBadge'
+import { ShareButtons } from '@/components/results/ShareButtons'
 import type { CoverageTier } from '@/lib/scoring/types'
+import confetti from 'canvas-confetti'
 
 // Metodoloji raporu §9: ilk sonuçlar birbirine bu kadar yakınsa tek bir
 // "kazanan" göstermek sahte kesinlik yaratır.
@@ -28,6 +30,7 @@ interface AxisComparison {
   partyScore: number
   impact: number
   weight: number
+  sourceUrl?: string | null
 }
 
 interface ResultAxis {
@@ -68,7 +71,30 @@ export default function ResultsPage() {
   const [result, setResult] = useState<Result | null>(null)
   const [loading, setLoading] = useState(true)
   const [errorMessage, setErrorMessage] = useState('')
+  const [deletingData, setDeletingData] = useState(false)
+  const [selectedPartyId, setSelectedPartyId] = useState<string | null>(null)
   const sessionId = String(params.sessionId ?? '')
+
+  const handleDeleteData = async () => {
+    if (!window.confirm('Bu ankete verdiğiniz tüm cevaplar ve sonuçlarınız kalıcı olarak silinecektir. Devam etmek istiyor musunuz?')) {
+      return
+    }
+
+    try {
+      setDeletingData(true)
+      const res = await fetch(`/api/results/${sessionId}`, { method: 'DELETE' })
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}))
+        throw new Error(data.error || 'Silme işlemi başarısız oldu.')
+      }
+      localStorage.removeItem('sessionId')
+      alert('Tüm verileriniz başarıyla silindi.')
+      router.push('/')
+    } catch (err) {
+      alert(err instanceof Error ? err.message : 'Silme işlemi sırasında hata oluştu.')
+      setDeletingData(false)
+    }
+  }
 
   useEffect(() => {
     const fetchResults = async () => {
@@ -97,6 +123,16 @@ export default function ResultsPage() {
       router.push('/consent')
     }
   }, [router, sessionId])
+
+  useEffect(() => {
+    if (result && !loading && !errorMessage) {
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 }
+      })
+    }
+  }, [result, loading, errorMessage])
 
   if (loading) {
     return (
@@ -273,24 +309,39 @@ export default function ResultsPage() {
               Parti Eşleşmeleri
             </h2>
             <div className="space-y-3">
-              {ranked.map((party, index) => (
-                <div
-                  key={party.partyId}
-                  className="flex items-center justify-between gap-3 rounded-card border border-border p-4 transition-all duration-300 hover:border-border-strong hover:shadow-soft"
-                >
-                  <div className="flex items-center gap-3">
-                    {/* Sıra numarası ve yüzde veri: mono + tabular, satırlar hizalanır. */}
-                    <div className="data-figure text-lg font-bold text-ink-muted">
-                      #{index + 1}
+              {ranked.map((party, index) => {
+                const isSelected = (selectedPartyId ?? topMatch?.partyId) === party.partyId
+                return (
+                  <button
+                    key={party.partyId}
+                    type="button"
+                    onClick={() => setSelectedPartyId(party.partyId)}
+                    className={`flex w-full items-center justify-between gap-3 rounded-card border p-4 text-left transition-all duration-300 ${
+                      isSelected
+                        ? 'border-accent bg-accent-tint shadow-soft'
+                        : 'border-border bg-surface-card hover:border-border-strong hover:shadow-soft'
+                    }`}
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="data-figure text-lg font-bold text-ink-muted">
+                        #{index + 1}
+                      </div>
+                      <PartyBadge shortName={party.partyShortName} size="sm" />
+                      <div>
+                        <span className="font-medium text-ink-primary">{party.partyName}</span>
+                        {isSelected && (
+                          <span className="ml-2 rounded-badge bg-surface-card px-1.5 py-0.5 text-[11px] font-semibold text-accent">
+                            seçili
+                          </span>
+                        )}
+                      </div>
                     </div>
-                    <PartyBadge shortName={party.partyShortName} size="sm" />
-                    <span className="font-medium text-ink-primary">{party.partyName}</span>
-                  </div>
-                  <div className="data-figure shrink-0 text-xl font-bold text-ink-primary">
-                    %{party.similarity}
-                  </div>
-                </div>
-              ))}
+                    <div className="data-figure shrink-0 text-xl font-bold text-ink-primary">
+                      %{party.similarity}
+                    </div>
+                  </button>
+                )
+              })}
             </div>
 
             {unpositioned.length > 0 && (
@@ -326,9 +377,17 @@ export default function ResultsPage() {
           </Card>
         </div>
 
-        {topMatch && (topMatch.agreements.length > 0 || topMatch.disagreements.length > 0) && (
-          <MatchReasons party={topMatch} className="mb-8" />
-        )}
+        {(() => {
+          const inspectedParty = ranked.find((p) => p.partyId === (selectedPartyId ?? topMatch?.partyId)) ?? topMatch
+          return inspectedParty && (inspectedParty.agreements.length > 0 || inspectedParty.disagreements.length > 0) ? (
+            <MatchReasons party={inspectedParty} className="mb-8" />
+          ) : null
+        })()}
+
+        <ShareButtons
+          topPartyName={topMatch?.partyName}
+          topSimilarity={topMatch?.similarity}
+        />
 
         {/*
           Odak halkası düzeltmesi (devir belgesi §6.2): Tab odağı dıştaki <a>
@@ -336,21 +395,34 @@ export default function ResultsPage() {
           kullanıcısı odağın nerede olduğunu göremiyordu. Halka odağı gerçekten
           alan öğeye taşındı, buton odak sırasından çıkarıldı.
         */}
-        <div className="flex justify-center gap-4">
-          <Link href="/" className={LINK_BUTTON_FOCUS}>
-            <Button variant="primary" tabIndex={-1}>
-              Ana Sayfa
-            </Button>
-          </Link>
-          <Link
-            href="/survey"
-            onClick={() => localStorage.removeItem('sessionId')}
-            className={LINK_BUTTON_FOCUS}
-          >
-            <Button variant="secondary" tabIndex={-1}>
-              Yeni Anket
-            </Button>
-          </Link>
+        <div className="flex flex-col items-center gap-4">
+          <div className="flex justify-center gap-4">
+            <Link href="/" className={LINK_BUTTON_FOCUS}>
+              <Button variant="primary" tabIndex={-1}>
+                Ana Sayfa
+              </Button>
+            </Link>
+            <Link
+              href="/survey"
+              onClick={() => localStorage.removeItem('sessionId')}
+              className={LINK_BUTTON_FOCUS}
+            >
+              <Button variant="secondary" tabIndex={-1}>
+                Yeni Anket
+              </Button>
+            </Link>
+          </div>
+
+          <div className="mt-6 border-t border-border pt-4 text-center">
+            <button
+              type="button"
+              disabled={deletingData}
+              onClick={handleDeleteData}
+              className="text-xs text-ink-muted underline hover:text-ink-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            >
+              {deletingData ? 'Verileriniz siliniyor...' : 'KVKK Kapsamında Verilerimi Kalıcı Olarak Sil'}
+            </button>
+          </div>
         </div>
       </Container>
     </div>

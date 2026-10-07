@@ -194,10 +194,13 @@ export default function SurveyPage() {
         body: JSON.stringify({ sessionId, answers: answerArray })
       })
 
+      const hpInput = document.getElementById('hp_website') as HTMLInputElement | null
+      const hpWebsite = hpInput?.value || undefined
+
       await fetch('/api/complete', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ sessionId })
+        body: JSON.stringify({ sessionId, hp_website: hpWebsite })
       })
 
       router.push(`/results/${sessionId}`)
@@ -267,6 +270,18 @@ export default function SurveyPage() {
           <h2 className="mb-4 font-heading text-xl font-semibold leading-snug text-ink-primary sm:mb-5 sm:text-2xl">
             {question.text}
           </h2>
+
+          {/* Görünmez bot tuzağı (Honeypot): İnsan kullanıcılar görmez veya doldurmaz */}
+          <div className="hidden" aria-hidden="true" style={{ display: 'none' }}>
+            <label htmlFor="hp_website">Do not fill this field</label>
+            <input
+              id="hp_website"
+              name="hp_website"
+              type="text"
+              tabIndex={-1}
+              autoComplete="off"
+            />
+          </div>
 
           <div className="flex-1 flex flex-col justify-center">
             <QuestionRenderer

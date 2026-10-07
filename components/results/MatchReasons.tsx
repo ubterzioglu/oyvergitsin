@@ -7,6 +7,7 @@ interface AxisComparison {
   partyScore: number
   impact: number
   weight: number
+  sourceUrl?: string | null
 }
 
 interface MatchReasonsProps {
@@ -86,9 +87,23 @@ function ComparisonList({
               )}
             </div>
             {/* Eksen skorları veri: mono + tabular, sütunlar arasında hizalanır. */}
-            <div className="mt-1 text-xs text-ink-secondary">
-              siz <span className="data-figure text-ink-primary">{item.userScore}</span> · parti{' '}
-              <span className="data-figure text-ink-primary">{item.partyScore}</span>
+            <div className="mt-1 flex items-center justify-between text-xs text-ink-secondary">
+              <div>
+                siz <span className="data-figure text-ink-primary">{item.userScore}</span> · parti{' '}
+                <span className="data-figure text-ink-primary">{item.partyScore}</span>
+              </div>
+              {item.sourceUrl && (
+                <a
+                  href={item.sourceUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-accent hover:text-accent-hover transition-colors"
+                  title="Bu puana nasıl ulaştık?"
+                  aria-label="Kaynağı Gör"
+                >
+                  ℹ️
+                </a>
+              )}
             </div>
           </li>
         ))}

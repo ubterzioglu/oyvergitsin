@@ -53,3 +53,19 @@ body {
   }
 }
 
+
+/* Ana sayfa: logo damgasının iniş animasyonu. Tek seferlik, sayfa yüklenirken. */
+@keyframes stamp-in {
+  0% { opacity: 0; transform: scale(1.8) rotate(-24deg); }
+  70% { opacity: 1; transform: scale(0.94) rotate(10deg); }
+  100% { opacity: 1; transform: scale(1) rotate(6deg); }
+}
+
+.stamp-in {
+  transform: rotate(6deg);
+  animation: stamp-in 0.55s 0.5s cubic-bezier(0.2, 0.8, 0.3, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stamp-in { animation: none; }
+}

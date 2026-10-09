@@ -53,12 +53,12 @@ export async function NewsRadarSlideshow() {
   }
 
   return (
-    <div className="w-full relative z-20 -mt-16 sm:-mt-24 pb-12">
+    <div className="w-full border-y-2 border-ink-primary bg-white py-10">
       <Container>
         <div className="flex items-center gap-4 mb-4 pl-2">
-          <div className="h-2 w-2 rounded-full bg-accent animate-pulse"></div>
-          <h2 className="font-heading text-lg font-semibold text-white drop-shadow-md">
-            Siyaset Radarı Son Dakika
+          <div className="h-3 w-3 rounded-full border-2 border-ink-primary bg-accent motion-safe:animate-pulse"></div>
+          <h2 className="font-heading text-xl font-extrabold text-ink-primary">
+            Siyaset radarı: son haberler
           </h2>
         </div>
         
@@ -67,7 +67,7 @@ export async function NewsRadarSlideshow() {
           {posts.map((post) => (
             <Card
               key={post.id}
-              className="flex-shrink-0 w-80 sm:w-96 snap-start flex flex-col justify-between bg-surface-card/80 backdrop-blur-lg border-border-strong transition-all duration-300 hover:border-accent hover:shadow-[0_0_20px_rgba(var(--color-accent),0.1)]"
+              className="flex-shrink-0 w-80 sm:w-96 snap-start flex flex-col justify-between !rounded-2xl border-2 !border-ink-primary !bg-surface !p-6 shadow-[4px_4px_0_0_#191C1E] transition-transform duration-200 hover:-translate-y-1 motion-reduce:transition-none"
             >
               <div className="mb-4">
                 <a

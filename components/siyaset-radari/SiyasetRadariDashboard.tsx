@@ -16,6 +16,7 @@ import {
   YAxis,
 } from 'recharts'
 import { Badge } from '@/components/ui/Badge'
+import { SeatDistributionChart } from '@/components/siyaset-radari/SeatDistributionChart'
 import type {
   DashboardElectionResult,
   DashboardJournalistEvent,
@@ -197,19 +198,7 @@ export function SiyasetRadariDashboard({ politicalEvents, journalistEvents, elec
               {currentSeatDistribution.length === 0 ? (
                 <EmptyState>Onaylı TBMM sandalye verisi yok.</EmptyState>
               ) : (
-                <div className="mt-4 h-72">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <PieChart>
-                      <Pie data={currentSeatDistribution} dataKey="value" nameKey="name" outerRadius={90}>
-                        {currentSeatDistribution.map((_, index) => (
-                          <Cell key={index} fill={COLORS[index % COLORS.length]} />
-                        ))}
-                      </Pie>
-                      <Tooltip />
-                      <Legend />
-                    </PieChart>
-                  </ResponsiveContainer>
-                </div>
+                <SeatDistributionChart rows={currentSeatDistribution} />
               )}
             </div>
           </aside>

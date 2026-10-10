@@ -36,7 +36,7 @@ export function AdminNav() {
   // 17.13. Odak halkası koyu zeminde beyaz + grafit offset.
   return (
     <nav className="border-b border-border-strong/20 bg-ink-primary shadow-elevated">
-      <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-3 sm:px-6">
+      <div className="mx-auto flex min-h-14 max-w-7xl items-center justify-between px-3 py-2 sm:px-6">
         <div className="flex min-w-0 flex-1 items-center gap-3 sm:gap-4">
           {/* Logo / Başlık */}
           <Link
@@ -49,15 +49,15 @@ export function AdminNav() {
           {/* Dikey ayraç */}
           <div className="h-5 w-[1px] shrink-0 bg-white/20" aria-hidden="true" />
 
-          {/* Menü Linkleri (Tek satır, dikey ayraçlı) */}
-          <div className="flex min-w-0 flex-1 items-center overflow-x-auto py-1.5 pr-2 scrollbar-thin scrollbar-thumb-white/20 hover:scrollbar-thumb-white/40">
-            <div className="flex items-center text-xs sm:text-sm font-medium text-border-strong">
+          {/* Menü Linkleri (dikey ayraçlı; sığmazsa alt satıra kayar, scroll yok) */}
+          <div className="flex min-w-0 flex-1 items-center pr-2">
+            <div className="flex flex-wrap items-center gap-y-1 text-xs sm:text-sm font-medium text-border-strong">
               {NAV_LINKS.map((link, idx) => {
                 const isActive = link.href === '/admin' ? pathname === '/admin' : pathname.startsWith(link.href)
                 return (
                   <div key={link.href} className="flex items-center">
                     {idx > 0 && (
-                      <span className="mx-2 text-white/20 select-none" aria-hidden="true">
+                      <span className="mx-1.5 text-white/20 select-none" aria-hidden="true">
                         |
                       </span>
                     )}
@@ -77,7 +77,7 @@ export function AdminNav() {
 
               {EXTERNAL_LINKS.map((link) => (
                 <div key={link.href} className="flex items-center">
-                  <span className="mx-2 text-white/20 select-none" aria-hidden="true">
+                  <span className="mx-1.5 text-white/20 select-none" aria-hidden="true">
                     |
                   </span>
                   <a
@@ -103,7 +103,7 @@ export function AdminNav() {
           >
             Ana Sayfa
           </Link>
-          <span className="mx-2 text-white/20 select-none" aria-hidden="true">
+          <span className="mx-1.5 text-white/20 select-none" aria-hidden="true">
             |
           </span>
           <div className="whitespace-nowrap">

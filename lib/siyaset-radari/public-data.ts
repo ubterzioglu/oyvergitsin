@@ -1,5 +1,6 @@
 import { getPublicServerClient } from '@/lib/supabase/route'
 import { isJournalistStatusStale, isParliamentSnapshotStale } from './stale'
+import { mergeFeedItems } from './feed-merge'
 
 export interface DashboardPerson {
   id: string
@@ -167,9 +168,23 @@ function feedItemFromRow(row: Record<string, unknown>): DashboardFeedItem {
   }
 }
 
+function feedItemFromNewsPost(row: Record<string, unknown>): DashboardFeedItem {
+  return {
+    id: `news-${row.id as string}`,
+    topic: 'general_politics',
+    title: row.title as string,
+    description: row.summary as string | null,
+    sourceName: row.source_name as string,
+    sourceUrl: null,
+    articleUrl: row.original_url as string,
+    publishedAt: row.published_at as string | null,
+    discoveredAt: row.created_at as string,
+  }
+}
+
 export async function fetchSiyasetRadariDashboard() {
   const supabase = getPublicServerClient()
-  const [peopleResult, politicalResult, journalistsResult, electionResult, feedResult] = await Promise.all([
+  const [peopleResult, politicalResult, journalistsResult, electionResult, feedResult, newsResult] = await Promise.all([
     supabase
       .from('public_people')
       .select('id, slug, full_name, primary_role, province, x_handle, last_verified_at')
@@ -197,6 +212,14 @@ export async function fetchSiyasetRadariDashboard() {
       .order('published_at', { ascending: false, nullsFirst: false })
       .order('discovered_at', { ascending: false })
       .limit(60),
+    // Ana sayfadaki kayan haberlerle aynı kaynak: RSS radarından admin onaylı haberler.
+    supabase
+      .from('news_posts')
+      .select('id, title, summary, source_name, original_url, published_at, created_at')
+      .eq('status', 'active')
+      .order('published_at', { ascending: false, nullsFirst: false })
+      .order('created_at', { ascending: false })
+      .limit(60),
   ])
 
   if (peopleResult.error) console.error('Siyaset radari people error:', peopleResult.error)
@@ -204,13 +227,19 @@ export async function fetchSiyasetRadariDashboard() {
   if (journalistsResult.error) console.error('Siyaset radari journalists error:', journalistsResult.error)
   if (electionResult.error) console.error('Siyaset radari election error:', electionResult.error)
   if (feedResult.error) console.error('Siyaset radari feed error:', feedResult.error)
+  if (newsResult.error) console.error('Siyaset radari news posts error:', newsResult.error)
+
+  const feedItems = mergeFeedItems(
+    ((feedResult.data ?? []) as Record<string, unknown>[]).map(feedItemFromRow),
+    ((newsResult.data ?? []) as Record<string, unknown>[]).map(feedItemFromNewsPost)
+  )
 
   return {
     people: ((peopleResult.data ?? []) as Record<string, unknown>[]).map(personFromRow),
     politicalEvents: ((politicalResult.data ?? []) as Record<string, unknown>[]).map(politicalEventFromRow),
     journalistEvents: ((journalistsResult.data ?? []) as Record<string, unknown>[]).map(journalistEventFromRow),
     electionResults: ((electionResult.data ?? []) as Record<string, unknown>[]).map(electionResultFromRow),
-    feedItems: ((feedResult.data ?? []) as Record<string, unknown>[]).map(feedItemFromRow),
+    feedItems,
   }
 }
 

@@ -147,7 +147,10 @@ export function SiyasetRadariDashboard({ politicalEvents, journalistEvents, elec
             TBMM&apos;deki güncel sandalye dağılımı ve bu dağılımı değiştiren parti geçişleri.
           </p>
 
-          <div className="mt-5 grid gap-8 lg:grid-cols-[minmax(0,1fr)_380px]">
+          {/* Parti geçişi kaydı yokken geçiş sütunu gizlenir; sandalye kartı tam genişliği kullanır. */}
+          <div
+            className={`mt-5 grid gap-8 ${politicalEvents.length > 0 ? 'lg:grid-cols-[minmax(0,1fr)_380px]' : ''}`}
+          >
             <div className="rounded-lg border border-border bg-white p-5 shadow-soft">
               <h3 className="text-base font-semibold text-ink-primary">Güncel Sandalye Dağılımı</h3>
               {currentSeatDistribution.length === 0 ? (
@@ -166,13 +169,11 @@ export function SiyasetRadariDashboard({ politicalEvents, journalistEvents, elec
               )}
             </div>
 
+            {politicalEvents.length > 0 && (
             <aside>
               <h3 className="text-base font-semibold text-ink-primary">Parti Geçişleri</h3>
               <div className="mt-4 space-y-4">
-                {politicalEvents.length === 0 ? (
-                  <EmptyState>Onaylanmış parti geçişi kaydı henüz yok.</EmptyState>
-                ) : (
-                  politicalEvents.map((event) => (
+                {politicalEvents.map((event) => (
                     <article key={event.id} className="rounded-lg border border-border bg-white p-4 shadow-soft">
                       <div className="flex flex-wrap items-start justify-between gap-3">
                         <div>
@@ -199,10 +200,10 @@ export function SiyasetRadariDashboard({ politicalEvents, journalistEvents, elec
                         </a>
                       </div>
                     </article>
-                  ))
-                )}
+                ))}
               </div>
             </aside>
+            )}
           </div>
 
           {/* Geçiş grafikleri yalnız onaylı geçiş verisi varsa gösterilir; boş grafik kutuları sayfayı kalabalıklaştırıyordu. */}

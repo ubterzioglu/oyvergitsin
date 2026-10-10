@@ -109,14 +109,14 @@ export async function PartyPositionTable({ axes, className = '' }: PartyPosition
   return (
     <Card elevated className={className}>
       <h2 className="mb-2 font-heading text-2xl font-semibold text-ink-primary">Parti konumları</h2>
-      <p className="mb-4 max-w-prose text-base leading-relaxed text-ink-secondary">
+      <p className="mb-4 text-base leading-relaxed text-ink-secondary">
         Her hücre partinin o eksendeki konumudur (−100 ile +100 arası). Konumlar yayımlanmış parti
         programları ve seçim beyannamelerine dayanır. Renk noktaları partilerin kurumsal
         renkleridir.
       </p>
 
       {derivedCount > 0 && (
-        <p className="mb-4 max-w-prose rounded-card border-l-4 border-l-accent bg-accent-tint px-4 py-3 text-sm leading-relaxed text-ink-primary">
+        <p className="mb-4 rounded-card border-l-4 border-l-accent bg-accent-tint px-4 py-3 text-sm leading-relaxed text-ink-primary">
           <span className="data-figure font-semibold">{derivedCount}</span> konum, önceki eksen
           modelindeki kodlamalardan kurallı dönüşümle türetilmiştir — doğrudan kaynak kodlaması
           değildir. Dönüşüm kuralları ve gerekçeleri

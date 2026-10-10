@@ -85,10 +85,10 @@ export default function TermsOfUsePage() {
           <p>
             Sorularınız için{' '}
             <a
-              href="mailto:supabase@oyvergitsin.org"
+              href="mailto:info@oyvergitsin.org"
               className="rounded-sm text-accent underline underline-offset-4 hover:text-accent-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
             >
-              supabase@oyvergitsin.org
+              info@oyvergitsin.org
             </a>{' '}
             adresinden bize ulaşabilirsiniz.
           </p>

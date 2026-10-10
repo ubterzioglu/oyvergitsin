@@ -30,10 +30,10 @@ export default function KvkkDisclosurePage() {
             Site, bağımsız/kişisel bir proje olarak yürütülmekte olup veri sorumlusu
             sıfatıyla Site&apos;yi işleten kişidir. İletişim için:{' '}
             <a
-              href="mailto:supabase@oyvergitsin.org"
+              href="mailto:info@oyvergitsin.org"
               className="rounded-sm text-accent underline underline-offset-4 hover:text-accent-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
             >
-              supabase@oyvergitsin.org
+              info@oyvergitsin.org
             </a>
           </p>
         </section>
@@ -106,10 +106,10 @@ export default function KvkkDisclosurePage() {
           <p className="mt-2">
             haklarına sahipsiniz. Bu haklarınızı kullanmak için{' '}
             <a
-              href="mailto:supabase@oyvergitsin.org"
+              href="mailto:info@oyvergitsin.org"
               className="rounded-sm text-accent underline underline-offset-4 hover:text-accent-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
             >
-              supabase@oyvergitsin.org
+              info@oyvergitsin.org
             </a>{' '}
             adresine başvurabilirsiniz.
           </p>

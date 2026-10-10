@@ -68,14 +68,6 @@ export function Hero() {
               className="h-auto w-full"
             />
           </div>
-          <div
-            className="stamp-in absolute -bottom-6 -right-2 flex h-24 w-24 items-center justify-center rounded-full border-2 border-ink-primary bg-accent text-center text-sm font-extrabold leading-tight text-white shadow-[3px_3px_0_0_#191C1E] sm:-right-6 sm:h-28 sm:w-28 sm:text-base"
-            aria-hidden="true"
-          >
-            birkaç
-            <br />
-            dakika
-          </div>
         </div>
       </Container>
     </section>

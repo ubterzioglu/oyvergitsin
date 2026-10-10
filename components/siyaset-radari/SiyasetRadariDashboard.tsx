@@ -83,6 +83,15 @@ export function SiyasetRadariDashboard({ politicalEvents, journalistEvents, elec
     [electionResults]
   )
 
+  // Sandalye grafiğinin altında gösterilen kaynak; en son doğrulanan satır esas alınır.
+  const seatSource = useMemo(
+    () =>
+      electionResults
+        .filter((item) => item.electionType === 'tbmm_current_seat_distribution' && item.areaLevel === 'country')
+        .sort((a, b) => (b.lastVerifiedAt ?? '').localeCompare(a.lastVerifiedAt ?? ''))[0] ?? null,
+    [electionResults]
+  )
+
   const switchDistribution = useMemo(() => {
     const counts = new Map<string, number>()
     for (const event of politicalEvents) {
@@ -131,52 +140,76 @@ export function SiyasetRadariDashboard({ politicalEvents, journalistEvents, elec
         ))}
       </div>
 
-      {activeTab === 'parti-gecisleri' && (
-        <section className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,1fr)_360px]">
-          <div>
-            <h2 className="font-heading text-2xl font-semibold text-ink-primary">Parti Geçişleri</h2>
-            <div className="mt-5 space-y-4">
-              {politicalEvents.length === 0 ? (
-                <EmptyState>Onaylanmış parti geçişi kaydı henüz yok.</EmptyState>
+      {activeTab === 'meclis' && (
+        <section className="mt-8">
+          <h2 className="font-heading text-2xl font-semibold text-ink-primary">Mecliste Sandalye Dağılımı</h2>
+          <p className="mt-2 text-sm text-ink-secondary">
+            TBMM&apos;deki güncel sandalye dağılımı ve bu dağılımı değiştiren parti geçişleri.
+          </p>
+
+          <div className="mt-5 grid gap-8 lg:grid-cols-[minmax(0,1fr)_380px]">
+            <div className="rounded-lg border border-border bg-white p-5 shadow-soft">
+              <h3 className="text-base font-semibold text-ink-primary">Güncel Sandalye Dağılımı</h3>
+              {currentSeatDistribution.length === 0 ? (
+                <EmptyState>Onaylı TBMM sandalye verisi yok.</EmptyState>
               ) : (
-                politicalEvents.map((event) => (
-                  <article key={event.id} className="rounded-lg border border-border bg-white p-5 shadow-soft">
-                    <div className="flex flex-wrap items-start justify-between gap-3">
-                      <div>
-                        <Link
-                          href={`/siyaset-radari/kisi/${event.personSlug}`}
-                          className="text-lg font-semibold text-ink-primary hover:text-accent"
-                        >
-                          {event.fullName}
-                        </Link>
-                        <p className="mt-1 text-sm text-ink-secondary">
-                          {event.fromPartyName ?? '—'} {'->'} {event.toPartyName ?? 'Bağımsız'}
-                        </p>
-                      </div>
-                      <Badge>{event.province ?? 'İl yok'}</Badge>
-                    </div>
-                    {event.summary && <p className="mt-3 text-sm text-ink-secondary">{event.summary}</p>}
-                    <div className="mt-4 flex flex-wrap items-center gap-3 text-xs text-ink-muted">
-                      <span>{formatDate(event.happenedOn)}</span>
-                      <a href={event.sourceUrl} target="_blank" rel="noopener noreferrer" className="text-accent">
-                        {event.sourceName}
-                      </a>
-                      <a href={xSearchUrl(event.fullName)} target="_blank" rel="noopener noreferrer" className="text-accent">
-                        {"X'te ara"}
-                      </a>
-                    </div>
-                  </article>
-                ))
+                <SeatDistributionChart rows={currentSeatDistribution} />
+              )}
+              {seatSource && (
+                <p className="mt-4 text-xs text-ink-muted">
+                  Kaynak:{' '}
+                  <a href={seatSource.sourceUrl} target="_blank" rel="noopener noreferrer" className="text-accent">
+                    {seatSource.sourceName}
+                  </a>
+                  {' · '}Doğrulama: {formatDate(seatSource.lastVerifiedAt)}
+                </p>
               )}
             </div>
+
+            <aside>
+              <h3 className="text-base font-semibold text-ink-primary">Parti Geçişleri</h3>
+              <div className="mt-4 space-y-4">
+                {politicalEvents.length === 0 ? (
+                  <EmptyState>Onaylanmış parti geçişi kaydı henüz yok.</EmptyState>
+                ) : (
+                  politicalEvents.map((event) => (
+                    <article key={event.id} className="rounded-lg border border-border bg-white p-4 shadow-soft">
+                      <div className="flex flex-wrap items-start justify-between gap-3">
+                        <div>
+                          <Link
+                            href={`/siyaset-radari/kisi/${event.personSlug}`}
+                            className="font-semibold text-ink-primary hover:text-accent"
+                          >
+                            {event.fullName}
+                          </Link>
+                          <p className="mt-1 text-sm text-ink-secondary">
+                            {event.fromPartyName ?? '—'} {'->'} {event.toPartyName ?? 'Bağımsız'}
+                          </p>
+                        </div>
+                        <Badge>{event.province ?? 'İl yok'}</Badge>
+                      </div>
+                      {event.summary && <p className="mt-3 text-sm text-ink-secondary">{event.summary}</p>}
+                      <div className="mt-3 flex flex-wrap items-center gap-3 text-xs text-ink-muted">
+                        <span>{formatDate(event.happenedOn)}</span>
+                        <a href={event.sourceUrl} target="_blank" rel="noopener noreferrer" className="text-accent">
+                          {event.sourceName}
+                        </a>
+                        <a href={xSearchUrl(event.fullName)} target="_blank" rel="noopener noreferrer" className="text-accent">
+                          {"X'te ara"}
+                        </a>
+                      </div>
+                    </article>
+                  ))
+                )}
+              </div>
+            </aside>
           </div>
 
-          <aside className="space-y-6">
-            <div className="rounded-lg border border-border bg-white p-5 shadow-soft">
-              <h3 className="text-base font-semibold text-ink-primary">Geçişlerin Hedef Dağılımı</h3>
-              {switchDistribution.length === 0 ? (
-                <EmptyState>Grafik için onaylı geçiş verisi yok.</EmptyState>
-              ) : (
+          {/* Geçiş grafikleri yalnız onaylı geçiş verisi varsa gösterilir; boş grafik kutuları sayfayı kalabalıklaştırıyordu. */}
+          {switchDistribution.length > 0 && (
+            <div className="mt-8 grid gap-8 lg:grid-cols-[360px_minmax(0,1fr)]">
+              <div className="rounded-lg border border-border bg-white p-5 shadow-soft">
+                <h3 className="text-base font-semibold text-ink-primary">Geçişlerin Hedef Dağılımı</h3>
                 <div className="mt-4 h-72">
                   <ResponsiveContainer width="100%" height="100%">
                     <PieChart>
@@ -190,18 +223,28 @@ export function SiyasetRadariDashboard({ politicalEvents, journalistEvents, elec
                     </PieChart>
                   </ResponsiveContainer>
                 </div>
-              )}
-            </div>
+              </div>
 
-            <div className="rounded-lg border border-border bg-white p-5 shadow-soft">
-              <h3 className="text-base font-semibold text-ink-primary">Güncel TBMM Dağılımı</h3>
-              {currentSeatDistribution.length === 0 ? (
-                <EmptyState>Onaylı TBMM sandalye verisi yok.</EmptyState>
-              ) : (
-                <SeatDistributionChart rows={currentSeatDistribution} />
+              {provinceBars.rows.length > 0 && (
+                <div className="rounded-lg border border-border bg-white p-5 shadow-soft">
+                  <h3 className="text-base font-semibold text-ink-primary">İle Göre Geçiş Yoğunluğu</h3>
+                  <div className="mt-4 h-72">
+                    <ResponsiveContainer width="100%" height="100%">
+                      <BarChart data={provinceBars.rows}>
+                        <XAxis dataKey="province" />
+                        <YAxis allowDecimals={false} />
+                        <Tooltip />
+                        <Legend />
+                        {provinceBars.parties.map((party, index) => (
+                          <Bar key={party} dataKey={party} stackId="switches" fill={COLORS[index % COLORS.length]} />
+                        ))}
+                      </BarChart>
+                    </ResponsiveContainer>
+                  </div>
+                </div>
               )}
             </div>
-          </aside>
+          )}
         </section>
       )}
 
@@ -256,54 +299,6 @@ export function SiyasetRadariDashboard({ politicalEvents, journalistEvents, elec
         </section>
       )}
 
-      {activeTab === 'il-durumu' && (
-        <section className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,1fr)_360px]">
-          <div>
-            <h2 className="font-heading text-2xl font-semibold text-ink-primary">İl Durumu</h2>
-            <div className="mt-5 rounded-lg border border-border bg-white p-5 shadow-soft">
-              <h3 className="text-base font-semibold text-ink-primary">İle Göre Geçiş Yoğunluğu</h3>
-              {provinceBars.rows.length === 0 ? (
-                <EmptyState>İl kırılımı için onaylı parti geçişi yok.</EmptyState>
-              ) : (
-                <div className="mt-4 h-96">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <BarChart data={provinceBars.rows}>
-                      <XAxis dataKey="province" />
-                      <YAxis allowDecimals={false} />
-                      <Tooltip />
-                      <Legend />
-                      {provinceBars.parties.map((party, index) => (
-                        <Bar key={party} dataKey={party} stackId="switches" fill={COLORS[index % COLORS.length]} />
-                      ))}
-                    </BarChart>
-                  </ResponsiveContainer>
-                </div>
-              )}
-            </div>
-          </div>
-          <aside className="rounded-lg border border-border bg-white p-5 shadow-soft">
-            <h3 className="text-base font-semibold text-ink-primary">Onaylı Seçim/Sandalye Verisi</h3>
-            <div className="mt-4 space-y-3">
-              {electionResults.length === 0 ? (
-                <EmptyState>İl veya sandalye verisi yok.</EmptyState>
-              ) : (
-                electionResults.slice(0, 20).map((result) => (
-                  <div key={result.id} className="border-b border-border pb-3 last:border-b-0">
-                    <div className="flex items-center justify-between gap-3">
-                      <span className="font-medium text-ink-primary">{result.partyName}</span>
-                      <span className="text-sm text-ink-secondary">{result.seatCount ?? result.voteShare ?? '—'}</span>
-                    </div>
-                    <div className="mt-1 text-xs text-ink-muted">
-                      {result.areaName} · {result.sourceName}
-                      {result.isStale && <span className="ml-2 font-semibold text-ink-secondary">Eski doğrulama</span>}
-                    </div>
-                  </div>
-                ))
-              )}
-            </div>
-          </aside>
-        </section>
-      )}
     </div>
   )
 }

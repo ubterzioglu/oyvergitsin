@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { siteConfig } from '@/lib/site'
-import { RADAR_TABS, radarTabHref } from '@/lib/siyaset-radari/tabs'
+import { RADAR_SECTION_PAGES } from '@/lib/siyaset-radari/tabs'
 
 // Linkler arasında dikey ayraç: divide-x her linkin soluna ince çizgi koyar.
 const NAV_LINK_CLASS = 'px-3 leading-4 transition-colors hover:text-ink-primary'
@@ -28,10 +28,10 @@ export function Header() {
             <Link href="/siyaset-radari" className={NAV_LINK_CLASS}>
               Siyaset Radarı
             </Link>
-            {/* Radar sekmelerine kısayollar; dar ekranda menüyü taşırmasın diye yalnız lg+ */}
-            {RADAR_TABS.map((tab) => (
-              <Link key={tab.id} href={radarTabHref(tab.id)} className={`hidden lg:inline ${NAV_LINK_CLASS}`}>
-                {tab.label}
+            {/* Radar alt sayfalarına kısayollar; dar ekranda menüyü taşırmasın diye yalnız lg+ */}
+            {RADAR_SECTION_PAGES.map((page) => (
+              <Link key={page.href} href={page.href} className={`hidden lg:inline ${NAV_LINK_CLASS}`}>
+                {page.label}
               </Link>
             ))}
           </div>

@@ -43,7 +43,13 @@ export function getSiteUrl() {
  * Özel akışlar (/consent, /survey, /results/*) ve /admin/* burada YOKTUR;
  * onlar kendi layout.tsx dosyalarında noindex taşır.
  */
-export const PUBLIC_ROUTES = ['/', '/metodoloji', '/siyaset-radari'] as const
+export const PUBLIC_ROUTES = [
+  '/',
+  '/metodoloji',
+  '/siyaset-radari',
+  '/siyaset-radari/meclis',
+  '/siyaset-radari/tutuklu-gazeteciler',
+] as const
 
 export const LEGAL_ROUTES = [
   '/legal/privacy-policy',

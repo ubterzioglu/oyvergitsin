@@ -58,6 +58,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified,
       changeFrequency: 'daily',
       priority: 0.8
+    },
+    {
+      url: `${siteUrl}/siyaset-radari/meclis`,
+      lastModified,
+      changeFrequency: 'daily',
+      priority: 0.7
+    },
+    {
+      url: `${siteUrl}/siyaset-radari/tutuklu-gazeteciler`,
+      lastModified,
+      changeFrequency: 'weekly',
+      priority: 0.7
     }
   ]
 

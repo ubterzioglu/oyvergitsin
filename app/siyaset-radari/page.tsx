@@ -1,9 +1,10 @@
 import type { Metadata } from 'next'
-import { Container } from '@/components/ui/Container'
-import { SiyasetRadariDashboard } from '@/components/siyaset-radari/SiyasetRadariDashboard'
+import { redirect } from 'next/navigation'
+import { RadarPageShell } from '@/components/siyaset-radari/RadarPageShell'
 import { SiyasetRadariFeed } from '@/components/siyaset-radari/SiyasetRadariFeed'
 import { fetchSiyasetRadariDashboard } from '@/lib/siyaset-radari/public-data'
 import { getSiteUrl, siteConfig } from '@/lib/site'
+import { legacyRadarTabPath } from '@/lib/siyaset-radari/tabs'
 
 // lib/siyaset-radari/scan.ts içindeki aynı sabitin kopyası. Orayı dışa
 // aktarmak daha temiz olurdu ama o dosya TBMM parser batch'inin sahipliğinde;
@@ -60,7 +61,16 @@ function buildRadarStructuredData(
   }
 }
 
-export default async function SiyasetRadariPage() {
+interface PageProps {
+  searchParams: Promise<{ sekme?: string | string[] }>
+}
+
+export default async function SiyasetRadariPage({ searchParams }: PageProps) {
+  const legacyPath = legacyRadarTabPath((await searchParams).sekme)
+  if (legacyPath) {
+    redirect(legacyPath)
+  }
+
   const data = await fetchSiyasetRadariDashboard()
 
   const structuredData = buildRadarStructuredData(
@@ -78,38 +88,15 @@ export default async function SiyasetRadariPage() {
   )
 
   return (
-    <main className="bg-surface">
+    <RadarPageShell
+      title="Siyaset Radarı"
+      description="Güncel siyasi içerikler, meclisteki sandalye dağılımı ve gazetecilere ilişkin özgürlük durumu kayıtları yalnız kaynaklı ve editoryal onaydan geçmiş haliyle yayınlanır."
+    >
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      <section className="border-b border-border bg-surface-muted py-12">
-        <Container>
-          <div className="max-w-3xl">
-            {/* Tek accent, tek yerde: sayfanın ne olduğunu söyleyen üst etiket. */}
-            <p className="data-figure text-xs font-semibold uppercase tracking-[0.14em] text-accent">
-              Kaynaklı · Doğrulama tarihli
-            </p>
-            <h1 className="mt-3 font-heading text-4xl font-semibold text-ink-primary">Siyaset Radarı</h1>
-            <p className="mt-4 text-base text-ink-secondary">
-              Güncel siyasi içerikler, parti değiştiren siyasetçiler, il bazlı dağılımlar ve
-              gazetecilere ilişkin özgürlük durumu kayıtları yalnız kaynaklı ve editoryal onaydan
-              geçmiş haliyle yayınlanır.
-            </p>
-          </div>
-        </Container>
-      </section>
-
-      <section className="py-10">
-        <Container>
-          <SiyasetRadariFeed items={data.feedItems} />
-          <SiyasetRadariDashboard
-            politicalEvents={data.politicalEvents}
-            journalistEvents={data.journalistEvents}
-            electionResults={data.electionResults}
-          />
-        </Container>
-      </section>
-    </main>
+      <SiyasetRadariFeed items={data.feedItems} />
+    </RadarPageShell>
   )
 }

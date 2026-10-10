@@ -8,6 +8,18 @@ import { assertSessionOwnership } from '@/lib/session-ownership'
 import { API_ERROR_CODES } from '@/lib/api/error-codes'
 import { jsonError, noStoreJson } from '@/lib/api/responses'
 import { enforceRateLimit, handleUnexpectedError, parseJsonBody } from '@/lib/api/route-helpers'
+import { getPositionsFreshness } from '@/lib/content-review/queries'
+import type { SupabaseClient } from '@supabase/supabase-js'
+
+// İzlenebilirlik bilgisidir; alınamazsa anket tamamlanmayı engellememeli.
+async function getPositionsAsOf(supabase: SupabaseClient, axisModelId: string): Promise<string | null> {
+  try {
+    return (await getPositionsFreshness(supabase, axisModelId)).updatedAt
+  } catch (error) {
+    console.error('api/complete positions_as_of alınamadı:', error)
+    return null
+  }
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -114,9 +126,11 @@ export async function POST(request: NextRequest) {
 
     // Calculate results
     const results = await calculateResults(sessionId)
+    const positionsAsOf = await getPositionsAsOf(supabase, axisModelId)
 
     // Store result snapshot. Algoritma sürümü ve kapsama bilgisi de yazılır;
-    // sonuç sayfası eski (v1) snapshot'ları bu alanla ayırt eder.
+    // sonuç sayfası eski (v1) snapshot'ları bu alanla ayırt eder. Model id ve
+    // parti konumlarının tarihi, sonucun hangi verilerle hesaplandığını izlenebilir kılar.
     const { error: snapshotError } = await supabase
       .from('result_snapshots')
       .insert({
@@ -126,6 +140,8 @@ export async function POST(request: NextRequest) {
         axis_coverage: results.axisCoverage,
         quality_flags: results.qualityFlags,
         algorithm_version: results.algorithmVersion,
+        axis_model_id: axisModelId,
+        positions_as_of: positionsAsOf,
         result_payload: results
       })
 

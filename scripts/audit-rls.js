@@ -20,6 +20,13 @@ const SENSITIVE = [
   'public_data_evidence',
   'public_data_review_logs',
   'election_results_by_area',
+  'content_change_logs',
+]
+
+// Yalnız sunucudan (service_role) çağrılması gereken yazma fonksiyonları.
+const SERVER_ONLY_FUNCTIONS = [
+  'publish_party_position(uuid,uuid,timestamptz,integer,jsonb,text,text,boolean,uuid)',
+  'verify_party_position(uuid,text,uuid)',
 ]
 
 async function main() {
@@ -33,6 +40,17 @@ async function main() {
      where schemaname = 'public' and tablename = any($1)
      order by tablename, cmd, policyname`,
     [SENSITIVE]
+  )
+
+  const { rows: functionRows } = await client.query(
+    `select fn,
+            to_regprocedure(fn) is not null as exists,
+            case when to_regprocedure(fn) is null then false
+                 else has_function_privilege('anon', to_regprocedure(fn), 'EXECUTE') end as anon_exec,
+            case when to_regprocedure(fn) is null then false
+                 else has_function_privilege('authenticated', to_regprocedure(fn), 'EXECUTE') end as auth_exec
+     from unnest($1::text[]) as fn`,
+    [SERVER_ONLY_FUNCTIONS]
   )
 
   await client.end()
@@ -59,6 +77,13 @@ async function main() {
           `       check: ${policy.with_check}`
       )
     }
+  }
+
+  console.log('\nYalnız sunucu fonksiyonları')
+  for (const fn of functionRows) {
+    const exposed = fn.anon_exec || fn.auth_exec
+    if (exposed) openPolicies += 1
+    console.log(`  ${exposed ? '!!' : '  '} ${fn.fn} — ${fn.exists ? (exposed ? 'anon/authenticated çalıştırabilir' : 'yalnız service_role') : 'yok (migration 015 uygulanmamış)'}`)
   }
 
   if (openPolicies > 0) {

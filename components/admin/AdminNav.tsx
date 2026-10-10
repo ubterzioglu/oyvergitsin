@@ -1,8 +1,11 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { LogoutButton } from '@/components/admin/LogoutButton'
+
+const REVIEW_HREF = '/admin/gozden-gecir'
 
 const NAV_LINKS = [
   { href: '/admin', label: 'Dashboard' },
@@ -10,6 +13,7 @@ const NAV_LINKS = [
   { href: '/admin/axes', label: 'Eksenler' },
   { href: '/admin/questions', label: 'Sorular' },
   { href: '/admin/parties', label: 'Partiler' },
+  { href: REVIEW_HREF, label: 'Gözden Geçir' },
   { href: '/admin/radar', label: 'Haberler' },
   { href: '/admin/siyaset-radari', label: 'Siyaset Radarı' },
   { href: '/admin/siyaset-radari/feed', label: 'Radar Akışı' },
@@ -26,6 +30,24 @@ const EXTERNAL_LINKS = [
 
 export function AdminNav() {
   const pathname = usePathname()
+  const [reviewCount, setReviewCount] = useState<number | null>(null)
+
+  // Doğrulaması eskimiş konum/parti sayısı; sayfa değiştikçe tazelenir (doğrulama sonrası düşsün).
+  useEffect(() => {
+    if (pathname === '/admin/login') return
+    let cancelled = false
+    fetch('/api/admin/content-review/count')
+      .then((response) => (response.ok ? response.json() : null))
+      .then((payload: { count?: number } | null) => {
+        if (!cancelled) setReviewCount(typeof payload?.count === 'number' ? payload.count : null)
+      })
+      .catch(() => {
+        if (!cancelled) setReviewCount(null)
+      })
+    return () => {
+      cancelled = true
+    }
+  }, [pathname])
 
   if (pathname === '/admin/login') {
     return null
@@ -70,6 +92,14 @@ export function AdminNav() {
                       }`}
                     >
                       {link.label}
+                      {link.href === REVIEW_HREF && reviewCount !== null && reviewCount > 0 && (
+                        <span
+                          className="ml-1.5 rounded-full bg-accent px-1.5 py-0.5 text-[10px] font-bold text-white no-underline"
+                          aria-label={`${reviewCount} kayıt bekliyor`}
+                        >
+                          {reviewCount}
+                        </span>
+                      )}
                     </Link>
                   </div>
                 )

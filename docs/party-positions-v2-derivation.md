@@ -1,5 +1,11 @@
 # Parti Konumlarının v2 (8 Eksen) Modeline Türetilmesi
 
+> **Güncel durum (Ekim 2026):** Bu belge v2 konumlarının **ilk** türetilmesini anlatır.
+> O tarihten sonra konumlar admin panelinden (`/admin/parties` → hücre → editör)
+> kanıtıyla birlikte yayınlanır ve her değişiklik `content_change_logs` tablosuna yazılır.
+> **Doğruluk kaynağı artık veritabanıdır;** `npm run v2:positions` panelden düzenleme
+> yapılmışsa `--force-overwrite-admin-edits` olmadan yazmayı reddeder.
+
 Tarih: 29 Temmuz 2026
 Uygulama: `scripts/derive-party-positions-v2.js` — kurallar `scripts/data/party-positions-v2.js`
 Metodoloji kaynağı: `resultdeepresearch.html` §3 (boyutlar) ve §6 (parti kodlama protokolü)

@@ -1,5 +1,8 @@
 // Parti konumlarının v1 (10 eksen) modelinden v2 (8 eksen) modeline türetilmesi.
 //
+// NOT: Bu dosya ilk türetmenin kaydıdır. Konumlar artık admin panelinden kanıtıyla
+// güncelleniyor; doğruluk kaynağı veritabanı (bkz. docs/party-positions-v2-derivation.md).
+//
 // KRİTİK: v1'in kutup konvansiyonu birkaç eksende v2'nin tam tersidir. İşaret
 // çevirmeleri atlanırsa tüm parti eşleşmesi sessizce ters döner. Aşağıdaki
 // tabloda her dönüşümün yönü açıkça yazılıdır.

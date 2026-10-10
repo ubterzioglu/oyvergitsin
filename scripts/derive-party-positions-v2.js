@@ -6,6 +6,10 @@
 // Her konum için party_position_evidence satırı da yazılır: kaynak tipi
 // "turetilmis" (v1 skorundan kurallı dönüşüm) ya da doğrudan kodlama.
 //
+// DİKKAT: Konumlar artık admin panelinden kanıtıyla yayınlanıyor; doğruluk kaynağı
+// veritabanı. Panelden yayın/doğrulama yapılmışsa bu script yazmayı reddeder
+// (scripts/lib/admin-edit-guard.js). Zorlamak için: --force-overwrite-admin-edits
+//
 //   node scripts/derive-party-positions-v2.js            # yaz
 //   node scripts/derive-party-positions-v2.js --dry-run  # yalnızca raporla
 
@@ -14,6 +18,7 @@ const { createClient } = require('@supabase/supabase-js')
 
 const { AXIS_MODEL } = require('./data/axis-model-v2')
 const { deriveAllPositions } = require('./data/party-positions-v2')
+const { assertNoAdminEdits } = require('./lib/admin-edit-guard')
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
 const supabaseKey = process.env.SUPABASE_SERVICE_KEY
@@ -101,11 +106,20 @@ async function main() {
     return
   }
 
+  const { logSeed } = await assertNoAdminEdits(supabase, { script: 'derive-party-positions-v2' })
+
   const saved = unwrap(
     await supabase
       .from('party_positions')
       .upsert(
-        writable.map((row) => ({ party_id: row.partyId, axis_id: row.axisId, score: row.score })),
+        // updated_at açıkça ilerletilir: skor aynı kalıp yalnız kanıt değişse de
+        // admin editöründeki çakışma kontrolü (expected_updated_at) bunu fark etsin.
+        writable.map((row) => ({
+          party_id: row.partyId,
+          axis_id: row.axisId,
+          score: row.score,
+          updated_at: new Date().toISOString(),
+        })),
         { onConflict: 'party_id,axis_id' }
       )
       .select('id, party_id, axis_id'),
@@ -135,6 +149,25 @@ async function main() {
 
   unwrap(await supabase.from('party_position_evidence').insert(evidence), 'kanıt satırları yazılamadı')
   console.log(`${evidence.length} kanıt satırı yazıldı.`)
+
+  if (logSeed) {
+    // Panel düzenlemeleri zorla ezildi; neyin ne zaman ezildiği günlükte görünsün.
+    const scoreByKey = new Map(writable.map((row) => [`${row.partyId}:${row.axisId}`, row.score]))
+    unwrap(
+      await supabase.from('content_change_logs').insert(
+        saved.map((row) => ({
+          subject_table: 'party_positions',
+          subject_id: row.id,
+          action: 'seed',
+          party_id: row.party_id,
+          axis_id: row.axis_id,
+          changes: { score: { to: scoreByKey.get(`${row.party_id}:${row.axis_id}`) } },
+          note: 'derive-party-positions-v2 --force-overwrite-admin-edits',
+        }))
+      ),
+      'seed günlüğü yazılamadı'
+    )
+  }
 
   reportBlockers(lowConfidence)
 }

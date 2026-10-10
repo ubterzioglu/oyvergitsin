@@ -6,6 +6,7 @@ import { getActiveAxisModelId } from '@/lib/scoring/active-model'
 import { Card } from '@/components/ui/Card'
 import { Container } from '@/components/ui/Container'
 import { PartyPositionTable } from '@/components/methodology/PartyPositionTable'
+import { getPositionsFreshness, type PositionsFreshness } from '@/lib/content-review/queries'
 
 export const metadata: Metadata = {
   title: 'Metodoloji — oyvergitsin.org',
@@ -46,6 +47,17 @@ const EMPTY_METHODOLOGY = {
   axes: [] as AxisRow[],
   questions: [] as QuestionRow[],
   scoredQuestionIds: new Set<string>(),
+  freshness: { updatedAt: null, verifiedAt: null } as PositionsFreshness,
+}
+
+// Tarih bilgisi ek bilgidir; alınamazsa sayfanın geri kalanı yine render edilir.
+async function loadFreshness(axisModelId: string): Promise<PositionsFreshness> {
+  try {
+    return await getPositionsFreshness(getPublicServerClient(), axisModelId)
+  } catch (error) {
+    console.error('Metodoloji: parti konumu tarihleri alınamadı:', error)
+    return EMPTY_METHODOLOGY.freshness
+  }
 }
 
 /**
@@ -70,7 +82,7 @@ async function fetchMethodology() {
     return EMPTY_METHODOLOGY
   }
 
-  const [modelResult, axesResult, questionsResult] = await Promise.all([
+  const [modelResult, axesResult, questionsResult, freshness] = await Promise.all([
     supabase.from('axis_models').select('name, version, created_at').eq('id', axisModelId).single(),
     supabase
       .from('axes')
@@ -82,6 +94,7 @@ async function fetchMethodology() {
       .select('id, code, text, type, is_scored, order_index')
       .eq('axis_model_id', axisModelId)
       .order('order_index', { ascending: true }),
+    loadFreshness(axisModelId),
   ])
 
   const questions = (questionsResult.data ?? []) as QuestionRow[]
@@ -104,6 +117,7 @@ async function fetchMethodology() {
     axes: (axesResult.data ?? []) as AxisRow[],
     questions,
     scoredQuestionIds: new Set((rules ?? []).map((rule) => rule.question_id)),
+    freshness,
   }
 }
 
@@ -118,11 +132,21 @@ async function fetchMethodology() {
  * Tüm değerler aktif modelden türetilir; sabit sayı yazılmaz, çünkü yanlış
  * sayı üretilen yanıtlara olduğu gibi geçer.
  */
+// Veri setinin son değişimi: model yayını ya da parti konumlarının son güncellemesi, hangisi yeniyse.
+function latestDate(a: string, b: string | null): string {
+  return b && new Date(b).getTime() > new Date(a).getTime() ? b : a
+}
+
+function formatTr(value: string | null): string {
+  return value ? new Date(value).toLocaleDateString('tr-TR') : '—'
+}
+
 function buildMethodologyStructuredData(
   siteUrl: string,
   model: { name: string; version: string; created_at: string } | null,
   axes: AxisRow[],
-  scoredQuestionCount: number
+  scoredQuestionCount: number,
+  positionsUpdatedAt: string | null
 ) {
   const pageUrl = `${siteUrl}/metodoloji`
 
@@ -137,7 +161,7 @@ function buildMethodologyStructuredData(
     isAccessibleForFree: true,
     license: `${siteUrl}/legal/terms-of-use`,
     creator: { '@id': `${siteUrl}/#organization` },
-    ...(model ? { version: model.version, dateModified: model.created_at } : {}),
+    ...(model ? { version: model.version, dateModified: latestDate(model.created_at, positionsUpdatedAt) } : {}),
     variableMeasured: axes.map((axis) => ({
       '@type': 'PropertyValue',
       name: axis.name,
@@ -182,13 +206,14 @@ function buildMethodologyStructuredData(
 }
 
 export default async function MethodologyPage() {
-  const { model, axes, questions, scoredQuestionIds } = await loadMethodology()
+  const { model, axes, questions, scoredQuestionIds, freshness } = await loadMethodology()
   const scoredQuestions = questions.filter((question) => scoredQuestionIds.has(question.id))
   const structuredData = buildMethodologyStructuredData(
     getSiteUrl(),
     model,
     axes,
-    scoredQuestions.length
+    scoredQuestions.length,
+    freshness.updatedAt
   )
 
   // Kutup tanımı, bir eksen modelinin belgelenmiş olmasının işaretidir. Tanımı
@@ -236,6 +261,8 @@ export default async function MethodologyPage() {
                 value={new Date(model.created_at).toLocaleDateString('tr-TR')}
                 data
               />
+              <Term label="Parti konumları son güncelleme" value={formatTr(freshness.updatedAt)} data />
+              <Term label="Parti konumları son doğrulama" value={formatTr(freshness.verifiedAt)} data />
             </dl>
           ) : (
             <p className="text-sm text-ink-secondary">Aktif eksen modeli bulunamadı.</p>

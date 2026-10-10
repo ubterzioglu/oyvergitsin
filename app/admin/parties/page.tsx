@@ -1,8 +1,9 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import Link from 'next/link'
 import { supabase } from '@/lib/supabase/client'
-import { ReadOnlyNotice } from '@/components/admin/ReadOnlyNotice'
+import { isPositionStale, POSITION_REVIEW_DAYS } from '@/lib/content-review/stale'
 
 interface Party {
   id: string
@@ -23,9 +24,11 @@ interface Axis {
 }
 
 interface Position {
+  id: string
   party_id: string
   axis_id: string
   score: number
+  last_verified_at: string | null
 }
 
 export default function PartiesPage() {
@@ -69,7 +72,7 @@ export default function PartiesPage() {
         if (axisList.length > 0) {
           const { data: positionData, error: positionError } = await supabase
             .from('party_positions')
-            .select('party_id, axis_id, score')
+            .select('id, party_id, axis_id, score, last_verified_at')
             .in(
               'axis_id',
               axisList.map((axis) => axis.id)
@@ -93,8 +96,9 @@ export default function PartiesPage() {
     return <div className="text-ink-secondary">Yükleniyor...</div>
   }
 
-  const scoreFor = (partyId: string, axisId: string) =>
-    positions.find((position) => position.party_id === partyId && position.axis_id === axisId)?.score
+  const positionFor = (partyId: string, axisId: string) =>
+    positions.find((position) => position.party_id === partyId && position.axis_id === axisId)
+  const editHref = (partyId: string, axisId: string) => `/admin/parties/${partyId}/positions/${axisId}`
 
   const positioned = parties.filter((party) => positions.some((p) => p.party_id === party.id))
   const unpositioned = parties.filter((party) => !positions.some((p) => p.party_id === party.id))
@@ -107,10 +111,15 @@ export default function PartiesPage() {
         girmez</strong> — sıfır puan almaz, karşılaştırma dışı kalır.
       </p>
 
-      <ReadOnlyNotice
-        source="scripts/data/party-positions-v2.js"
-        command="npm run v2:positions"
-      />
+      <div className="mb-6 rounded-card border-l-4 border-accent bg-accent-tint p-4 text-sm text-ink-primary">
+        Bir hücreye tıklayarak konumu kanıtıyla birlikte düzenleyip yayınlayabilirsiniz. Her yayın
+        değişiklik günlüğüne yazılır; önceki anket sonuçları değişmez. Altı çizili hücreler{' '}
+        {POSITION_REVIEW_DAYS} günden uzun süredir doğrulanmadı —{' '}
+        <Link href="/admin/gozden-gecir" className="font-semibold text-accent underline underline-offset-4">
+          Gözden geçir
+        </Link>
+        .
+      </div>
 
       {errorMessage && (
         <div className="mb-4 rounded-badge border border-border-strong border-l-4 border-l-ink-primary bg-surface-muted p-3 text-sm text-ink-primary">
@@ -149,13 +158,19 @@ export default function PartiesPage() {
                     </span>
                   </td>
                   {axes.map((axis) => {
-                    const score = scoreFor(party.id, axis.id)
+                    const position = positionFor(party.id, axis.id)
+                    const stale = position ? isPositionStale(position.last_verified_at) : false
                     return (
-                      <td
-                        key={axis.id}
-                        className="px-2 py-2 text-right text-sm data-figure text-ink-primary"
-                      >
-                        {score === undefined ? <span className="text-ink-muted">—</span> : score}
+                      <td key={axis.id} className="px-2 py-2 text-right text-sm data-figure text-ink-primary">
+                        <Link
+                          href={editHref(party.id, axis.id)}
+                          title={`${party.name} · ${axis.name}${stale ? ' — doğrulaması eskimiş' : ''}`}
+                          className={`rounded-sm px-1 hover:bg-accent-tint hover:text-accent ${
+                            stale ? 'underline decoration-ink-primary decoration-dotted decoration-2 underline-offset-4' : ''
+                          }`}
+                        >
+                          {position ? position.score : <span className="text-ink-muted">—</span>}
+                        </Link>
                       </td>
                     )
                   })}
@@ -178,7 +193,13 @@ export default function PartiesPage() {
                 key={party.id}
                 className="rounded-full border border-border-strong px-3 py-1 text-xs text-ink-primary"
               >
-                {party.name}
+                {axes[0] ? (
+                  <Link href={editHref(party.id, axes[0].id)} className="hover:text-accent">
+                    {party.name}
+                  </Link>
+                ) : (
+                  party.name
+                )}
                 {party.match_status && (
                   <span className="ml-2 rounded-badge bg-surface-muted px-2 py-0.5 text-[10px] uppercase tracking-wide text-ink-secondary">
                     {party.match_status}

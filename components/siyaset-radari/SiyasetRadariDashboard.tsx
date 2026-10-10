@@ -1,7 +1,8 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useMemo } from 'react'
 import Link from 'next/link'
+import { useSearchParams } from 'next/navigation'
 import {
   Bar,
   BarChart,
@@ -20,6 +21,7 @@ import type {
   DashboardJournalistEvent,
   DashboardPoliticalEvent,
 } from '@/lib/siyaset-radari/public-data'
+import { RADAR_TABS, RADAR_TABS_ANCHOR, parseRadarTab, type RadarTabId } from '@/lib/siyaset-radari/tabs'
 
 // B10 — kapsam istisnası. Bu dosya B13'ün sahipliğinde; yalnızca renk
 // DEĞERLERİ nötrleştirildi, yapı B13'e bırakıldı.
@@ -33,13 +35,6 @@ import type {
 // gelmeli. Parti verisi tek yer ki gerçek parti rengi kullanılmalı; nötr
 // rampa burada geçici bir dolgu.
 const COLORS = ['#1D616B', '#38737C', '#55868E', '#769DA2', '#9BB6B9', '#C6D2D3', '#191C1E']
-const TABS = [
-  { id: 'switches', label: 'Parti Geçişleri' },
-  { id: 'journalists', label: 'Tutuklu Gazeteciler' },
-  { id: 'provinces', label: 'İl Durumu' },
-] as const
-
-type TabId = (typeof TABS)[number]['id']
 
 interface Props {
   politicalEvents: DashboardPoliticalEvent[]
@@ -71,7 +66,12 @@ function EmptyState({ children }: { children: React.ReactNode }) {
 }
 
 export function SiyasetRadariDashboard({ politicalEvents, journalistEvents, electionResults }: Props) {
-  const [activeTab, setActiveTab] = useState<TabId>('switches')
+  // Aktif sekme URL'de (?sekme=...) tutulur; üst menüdeki kısayollar da aynı parametreyle gelir.
+  const searchParams = useSearchParams()
+  const activeTab = parseRadarTab(searchParams.get('sekme'))
+  const setActiveTab = (id: RadarTabId) => {
+    window.history.replaceState(null, '', `?sekme=${id}#${RADAR_TABS_ANCHOR}`)
+  }
 
   const currentSeatDistribution = useMemo(
     () =>
@@ -114,8 +114,8 @@ export function SiyasetRadariDashboard({ politicalEvents, journalistEvents, elec
 
   return (
     <div>
-      <div className="flex flex-wrap gap-2 border-b border-border">
-        {TABS.map((tab) => (
+      <div id={RADAR_TABS_ANCHOR} className="flex scroll-mt-24 flex-wrap gap-2 border-b border-border">
+        {RADAR_TABS.map((tab) => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
@@ -130,7 +130,7 @@ export function SiyasetRadariDashboard({ politicalEvents, journalistEvents, elec
         ))}
       </div>
 
-      {activeTab === 'switches' && (
+      {activeTab === 'parti-gecisleri' && (
         <section className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,1fr)_360px]">
           <div>
             <h2 className="font-heading text-2xl font-semibold text-ink-primary">Parti Geçişleri</h2>
@@ -216,7 +216,7 @@ export function SiyasetRadariDashboard({ politicalEvents, journalistEvents, elec
         </section>
       )}
 
-      {activeTab === 'journalists' && (
+      {activeTab === 'tutuklu-gazeteciler' && (
         <section className="mt-8">
           <h2 className="font-heading text-2xl font-semibold text-ink-primary">Tutuklu/Hükümlü Gazeteciler</h2>
           <div className="mt-5 overflow-hidden rounded-lg border border-border bg-white shadow-soft">
@@ -267,7 +267,7 @@ export function SiyasetRadariDashboard({ politicalEvents, journalistEvents, elec
         </section>
       )}
 
-      {activeTab === 'provinces' && (
+      {activeTab === 'il-durumu' && (
         <section className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,1fr)_360px]">
           <div>
             <h2 className="font-heading text-2xl font-semibold text-ink-primary">İl Durumu</h2>

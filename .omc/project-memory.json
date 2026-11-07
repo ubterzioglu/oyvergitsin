@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "lastScanned": 1791398768859,
+  "lastScanned": 1791719235069,
   "projectRoot": "c:\\temp_private\\oyvergitsin",
   "techStack": {
     "languages": [
@@ -83,7 +83,7 @@
     }
   },
   "conventions": {
-    "namingStyle": "camelCase",
+    "namingStyle": null,
     "importStyle": null,
     "testPattern": null,
     "fileOrganization": null
@@ -110,7 +110,7 @@
       "path": "app",
       "purpose": "Application code",
       "fileCount": 10,
-      "lastAccessed": 1791398768737,
+      "lastAccessed": 1791719234969,
       "keyFiles": [
         "apple-icon.png",
         "globals.css",
@@ -123,27 +123,27 @@
       "path": "components",
       "purpose": "UI components",
       "fileCount": 0,
-      "lastAccessed": 1791398768771,
+      "lastAccessed": 1791719234970,
       "keyFiles": []
     },
     "docs": {
       "path": "docs",
       "purpose": "Documentation",
-      "fileCount": 11,
-      "lastAccessed": 1791398768772,
+      "fileCount": 15,
+      "lastAccessed": 1791719234970,
       "keyFiles": [
         "COOLIFY_DEPLOYMENT.md",
-        "devam-2026-10-03.md",
-        "kalan-promptlar-2026-10-03.md",
-        "new-party-2026-research.md",
-        "party-positions-2026-update.md"
+        "design-direction-options.md",
+        "design-preview-a-kamusal-ekran.html",
+        "design-preview-b-sessiz-spektrum.html",
+        "design-preview-c-oy-pusulasi.html"
       ]
     },
     "e2e": {
       "path": "e2e",
       "purpose": null,
       "fileCount": 1,
-      "lastAccessed": 1791398768773,
+      "lastAccessed": 1791719235001,
       "keyFiles": [
         "survey-flow.spec.ts"
       ]
@@ -152,7 +152,7 @@
       "path": "lib",
       "purpose": "Library code",
       "fileCount": 5,
-      "lastAccessed": 1791398768774,
+      "lastAccessed": 1791719235002,
       "keyFiles": [
         "parties.ts",
         "rate-limit.ts",
@@ -161,255 +161,33 @@
         "site.ts"
       ]
     },
-    "oyvergitsin-admin": {
-      "path": "oyvergitsin-admin",
-      "purpose": null,
-      "fileCount": 23,
-      "lastAccessed": 1791398768775,
-      "keyFiles": [
-        "AGENTS.md",
-        "docker-compose.yml",
-        "Dockerfile",
-        "Dockerfile.kaniko",
-        "middleware.ts"
-      ]
-    },
-    "oyvergitsin-api": {
-      "path": "oyvergitsin-api",
-      "purpose": null,
-      "fileCount": 34,
-      "lastAccessed": 1791398768776,
-      "keyFiles": [
-        "AGENTS.md",
-        "check.md",
-        "deep-research-prompt.md",
-        "docker-compose.yml",
-        "Dockerfile"
-      ]
-    },
-    "oyvergitsin-design": {
-      "path": "oyvergitsin-design",
-      "purpose": null,
-      "fileCount": 33,
-      "lastAccessed": 1791398768776,
-      "keyFiles": [
-        "AGENTS.md",
-        "check.md",
-        "deep-research-prompt.md",
-        "docker-compose.yml",
-        "Dockerfile"
-      ]
-    },
-    "oyvergitsin-geo": {
-      "path": "oyvergitsin-geo",
-      "purpose": null,
-      "fileCount": 34,
-      "lastAccessed": 1791398768777,
-      "keyFiles": [
-        "AGENTS.md",
-        "check.md",
-        "deep-research-prompt.md",
-        "docker-compose.yml",
-        "Dockerfile"
-      ]
-    },
-    "oyvergitsin-home": {
-      "path": "oyvergitsin-home",
-      "purpose": null,
-      "fileCount": 23,
-      "lastAccessed": 1791398768778,
-      "keyFiles": [
-        "AGENTS.md",
-        "docker-compose.yml",
-        "Dockerfile",
-        "Dockerfile.kaniko",
-        "middleware.ts"
-      ]
-    },
-    "oyvergitsin-int": {
-      "path": "oyvergitsin-int",
-      "purpose": null,
-      "fileCount": 24,
-      "lastAccessed": 1791398768779,
-      "keyFiles": [
-        "AGENTS.md",
-        "docker-compose.yml",
-        "Dockerfile",
-        "Dockerfile.kaniko",
-        "middleware.ts"
-      ]
-    },
-    "oyvergitsin-legal": {
-      "path": "oyvergitsin-legal",
-      "purpose": null,
-      "fileCount": 23,
-      "lastAccessed": 1791398768779,
-      "keyFiles": [
-        "AGENTS.md",
-        "docker-compose.yml",
-        "Dockerfile",
-        "Dockerfile.kaniko",
-        "middleware.ts"
-      ]
-    },
-    "oyvergitsin-logo": {
-      "path": "oyvergitsin-logo",
-      "purpose": null,
-      "fileCount": 34,
-      "lastAccessed": 1791398768780,
-      "keyFiles": [
-        "AGENTS.md",
-        "check.md",
-        "deep-research-prompt.md",
-        "docker-compose.yml",
-        "Dockerfile"
-      ]
-    },
-    "oyvergitsin-method": {
-      "path": "oyvergitsin-method",
-      "purpose": null,
-      "fileCount": 23,
-      "lastAccessed": 1791398768781,
-      "keyFiles": [
-        "AGENTS.md",
-        "docker-compose.yml",
-        "Dockerfile",
-        "Dockerfile.kaniko",
-        "middleware.ts"
-      ]
-    },
-    "oyvergitsin-radar": {
-      "path": "oyvergitsin-radar",
-      "purpose": null,
-      "fileCount": 25,
-      "lastAccessed": 1791398768781,
-      "keyFiles": [
-        "AGENTS.md",
-        "docker-compose.yml",
-        "Dockerfile",
-        "Dockerfile.kaniko",
-        "middleware.ts"
-      ]
-    },
-    "oyvergitsin-radar-v2": {
-      "path": "oyvergitsin-radar-v2",
-      "purpose": null,
-      "fileCount": 22,
-      "lastAccessed": 1791398768782,
-      "keyFiles": [
-        "AGENTS.md",
-        "docker-compose.yml",
-        "Dockerfile",
-        "Dockerfile.kaniko",
-        "middleware.ts"
-      ]
-    },
-    "oyvergitsin-results": {
-      "path": "oyvergitsin-results",
-      "purpose": null,
-      "fileCount": 23,
-      "lastAccessed": 1791398768783,
-      "keyFiles": [
-        "AGENTS.md",
-        "docker-compose.yml",
-        "Dockerfile",
-        "Dockerfile.kaniko",
-        "middleware.ts"
-      ]
-    },
-    "oyvergitsin-seo": {
-      "path": "oyvergitsin-seo",
-      "purpose": null,
-      "fileCount": 33,
-      "lastAccessed": 1791398768783,
-      "keyFiles": [
-        "AGENTS.md",
-        "check.md",
-        "deep-research-prompt.md",
-        "docker-compose.yml",
-        "Dockerfile"
-      ]
-    },
-    "oyvergitsin-shell": {
-      "path": "oyvergitsin-shell",
-      "purpose": null,
-      "fileCount": 23,
-      "lastAccessed": 1791398768784,
-      "keyFiles": [
-        "AGENTS.md",
-        "docker-compose.yml",
-        "Dockerfile",
-        "Dockerfile.kaniko",
-        "middleware.ts"
-      ]
-    },
-    "oyvergitsin-survey": {
-      "path": "oyvergitsin-survey",
-      "purpose": null,
-      "fileCount": 23,
-      "lastAccessed": 1791398768785,
-      "keyFiles": [
-        "AGENTS.md",
-        "docker-compose.yml",
-        "Dockerfile",
-        "Dockerfile.kaniko",
-        "middleware.ts"
-      ]
-    },
-    "oyvergitsin-tokens": {
-      "path": "oyvergitsin-tokens",
-      "purpose": null,
-      "fileCount": 24,
-      "lastAccessed": 1791398768785,
-      "keyFiles": [
-        "AGENTS.md",
-        "docker-compose.yml",
-        "Dockerfile",
-        "Dockerfile.kaniko",
-        "middleware.ts"
-      ]
-    },
-    "oyvergitsin-ui": {
-      "path": "oyvergitsin-ui",
-      "purpose": null,
-      "fileCount": 24,
-      "lastAccessed": 1791398768786,
-      "keyFiles": [
-        "AGENTS.md",
-        "docker-compose.yml",
-        "Dockerfile",
-        "Dockerfile.kaniko",
-        "middleware.ts"
-      ]
-    },
     "public": {
       "path": "public",
       "purpose": "Public files",
-      "fileCount": 2,
-      "lastAccessed": 1791398768787,
+      "fileCount": 1,
+      "lastAccessed": 1791719235002,
       "keyFiles": [
-        "llms.txt",
-        "logo.png"
+        "llms.txt"
       ]
     },
     "scripts": {
       "path": "scripts",
       "purpose": "Build/utility scripts",
       "fileCount": 26,
-      "lastAccessed": 1791398768787,
+      "lastAccessed": 1791719235003,
       "keyFiles": [
+        "admin-edit-guard.test.ts",
         "apply-migration.js",
         "audit-questions.js",
         "audit-rls.js",
-        "build-manual-sql.js",
-        "check-admin-access.js"
+        "build-manual-sql.js"
       ]
     },
     "supabase": {
       "path": "supabase",
       "purpose": null,
       "fileCount": 2,
-      "lastAccessed": 1791398768788,
+      "lastAccessed": 1791719235003,
       "keyFiles": [
         "config.toml",
         "manual-apply.sql"
@@ -419,21 +197,21 @@
       "path": "test-results",
       "purpose": null,
       "fileCount": 1,
-      "lastAccessed": 1791398768788,
+      "lastAccessed": 1791719235004,
       "keyFiles": []
     },
     "app\\api": {
       "path": "app\\api",
       "purpose": "API routes",
       "fileCount": 0,
-      "lastAccessed": 1791398768789,
+      "lastAccessed": 1791719235005,
       "keyFiles": []
     },
     "lib\\api": {
       "path": "lib\\api",
       "purpose": "API routes",
       "fileCount": 4,
-      "lastAccessed": 1791398768792,
+      "lastAccessed": 1791719235007,
       "keyFiles": [
         "error-codes.test.ts",
         "error-codes.ts",
@@ -444,7 +222,7 @@
       "path": "scripts\\data",
       "purpose": "Data files",
       "fileCount": 2,
-      "lastAccessed": 1791398768800,
+      "lastAccessed": 1791719235008,
       "keyFiles": [
         "axis-model-v2.js",
         "party-positions-v2.js"
@@ -453,8 +231,8 @@
     "supabase\\migrations": {
       "path": "supabase\\migrations",
       "purpose": "Database migrations",
-      "fileCount": 13,
-      "lastAccessed": 1791398768800,
+      "fileCount": 15,
+      "lastAccessed": 1791719235009,
       "keyFiles": [
         "001_initial_schema.sql",
         "002_public_survey_policies.sql",
@@ -463,6 +241,120 @@
     }
   },
   "hotPaths": [
+    {
+      "path": "components/siyaset-radari/SiyasetRadariDashboard.tsx",
+      "accessCount": 22,
+      "lastAccessed": 1791649750392,
+      "type": "directory"
+    },
+    {
+      "path": "lib/siyaset-radari/public-data.ts",
+      "accessCount": 6,
+      "lastAccessed": 1791648769240,
+      "type": "file"
+    },
+    {
+      "path": "",
+      "accessCount": 6,
+      "lastAccessed": 1791651129406,
+      "type": "directory"
+    },
+    {
+      "path": "components/admin/AdminNav.tsx",
+      "accessCount": 6,
+      "lastAccessed": 1791660096027,
+      "type": "file"
+    },
+    {
+      "path": "supabase/migrations/015_content_editing.sql",
+      "accessCount": 5,
+      "lastAccessed": 1791660764558,
+      "type": "file"
+    },
+    {
+      "path": "app/page.tsx",
+      "accessCount": 4,
+      "lastAccessed": 1791539481863,
+      "type": "file"
+    },
+    {
+      "path": "components/layout/Header.tsx",
+      "accessCount": 4,
+      "lastAccessed": 1791647612332,
+      "type": "file"
+    },
+    {
+      "path": "app/metodoloji/page.tsx",
+      "accessCount": 4,
+      "lastAccessed": 1791660155719,
+      "type": "file"
+    },
+    {
+      "path": "scripts/derive-party-positions-v2.js",
+      "accessCount": 4,
+      "lastAccessed": 1791660792625,
+      "type": "file"
+    },
+    {
+      "path": "components/home/Hero.tsx",
+      "accessCount": 3,
+      "lastAccessed": 1791647608231,
+      "type": "file"
+    },
+    {
+      "path": "lib/siyaset-radari/tabs.ts",
+      "accessCount": 3,
+      "lastAccessed": 1791649806416,
+      "type": "file"
+    },
+    {
+      "path": "supabase/migrations",
+      "accessCount": 3,
+      "lastAccessed": 1791660660582,
+      "type": "directory"
+    },
+    {
+      "path": "components/home/NewsRadarSlideshow.tsx",
+      "accessCount": 2,
+      "lastAccessed": 1791628684402,
+      "type": "file"
+    },
+    {
+      "path": "lib/siyaset-radari/gnews.ts",
+      "accessCount": 2,
+      "lastAccessed": 1791646797741,
+      "type": "file"
+    },
+    {
+      "path": ".feedcheck.tmp.mjs",
+      "accessCount": 2,
+      "lastAccessed": 1791646983755,
+      "type": "file"
+    },
+    {
+      "path": "components/siyaset-radari/SeatDistributionChart.tsx",
+      "accessCount": 2,
+      "lastAccessed": 1791647543655,
+      "type": "file"
+    },
+    {
+      "path": "components/methodology/PartyPositionTable.tsx",
+      "accessCount": 2,
+      "lastAccessed": 1791651081311,
+      "type": "file"
+    },
+    {
+      "path": "app/api/admin/siyaset-radari/review/route.ts",
+      "accessCount": 2,
+      "lastAccessed": 1791651087849,
+      "type": "file"
+    },
+    {
+      "path": "tailwind.config.ts",
+      "accessCount": 2,
+      "lastAccessed": 1791659994744,
+      "type": "file"
+    },
     {
       "path": "docs\\devam-2026-10-03.md",
       "accessCount": 1,
@@ -479,6 +371,174 @@
       "path": "docs/kalan-promptlar-2026-10-03.md",
       "accessCount": 1,
       "lastAccessed": 1791213542184,
+      "type": "file"
+    },
+    {
+      "path": "components/analytics/GoogleAnalytics.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1791443516515,
+      "type": "file"
+    },
+    {
+      "path": "next.config.js",
+      "accessCount": 1,
+      "lastAccessed": 1791443516995,
+      "type": "file"
+    },
+    {
+      "path": "logo.png",
+      "accessCount": 1,
+      "lastAccessed": 1791539376680,
+      "type": "file"
+    },
+    {
+      "path": "components/home/FeatureCard.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1791539377294,
+      "type": "file"
+    },
+    {
+      "path": "components/home/StartSurveyLink.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1791539377584,
+      "type": "file"
+    },
+    {
+      "path": "app/globals.css",
+      "accessCount": 1,
+      "lastAccessed": 1791539380221,
+      "type": "directory"
+    },
+    {
+      "path": "components/ui/Card.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1791539391570,
+      "type": "file"
+    },
+    {
+      "path": "components/ui/Button.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1791539391858,
+      "type": "file"
+    },
+    {
+      "path": "components/home/PlayfulCta.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1791539446979,
+      "type": "file"
+    },
+    {
+      "path": "components/home/FaqList.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1791539449937,
+      "type": "file"
+    },
+    {
+      "path": "app/siyaset-radari/page.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1791646097315,
+      "type": "file"
+    },
+    {
+      "path": "lib/siyaset-radari/feed-merge.ts",
+      "accessCount": 1,
+      "lastAccessed": 1791648788247,
+      "type": "file"
+    },
+    {
+      "path": "lib/siyaset-radari/feed-merge.test.ts",
+      "accessCount": 1,
+      "lastAccessed": 1791648789722,
+      "type": "file"
+    },
+    {
+      "path": "components/siyaset-radari/EmptyState.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1791649803451,
+      "type": "file"
+    },
+    {
+      "path": "lib/siyaset-radari/format.ts",
+      "accessCount": 1,
+      "lastAccessed": 1791649804929,
+      "type": "file"
+    },
+    {
+      "path": "components/siyaset-radari/RadarSubnav.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1791649807936,
+      "type": "file"
+    },
+    {
+      "path": "components/siyaset-radari/RadarPageShell.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1791649809399,
+      "type": "file"
+    },
+    {
+      "path": "app/siyaset-radari/meclis/page.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1791649839834,
+      "type": "file"
+    },
+    {
+      "path": "app/siyaset-radari/tutuklu-gazeteciler/page.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1791649841335,
+      "type": "file"
+    },
+    {
+      "path": "app/sitemap.ts",
+      "accessCount": 1,
+      "lastAccessed": 1791649849720,
+      "type": "file"
+    },
+    {
+      "path": "scripts/seed-axis-model-v2.js",
+      "accessCount": 1,
+      "lastAccessed": 1791651025329,
+      "type": "file"
+    },
+    {
+      "path": "scripts/update-party-positions.js",
+      "accessCount": 1,
+      "lastAccessed": 1791651026151,
+      "type": "file"
+    },
+    {
+      "path": "app/admin/parties/page.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1791651043701,
+      "type": "file"
+    },
+    {
+      "path": "app/admin/axes/page.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1791651044083,
+      "type": "file"
+    },
+    {
+      "path": "lib/scoring/active-model.ts",
+      "accessCount": 1,
+      "lastAccessed": 1791651052779,
+      "type": "file"
+    },
+    {
+      "path": "supabase/migrations/011_siyaset_radari.sql",
+      "accessCount": 1,
+      "lastAccessed": 1791651087227,
+      "type": "file"
+    },
+    {
+      "path": "supabase/migrations/001_initial_schema.sql",
+      "accessCount": 1,
+      "lastAccessed": 1791651116467,
+      "type": "directory"
+    },
+    {
+      "path": "lib/content-review/stale.ts",
+      "accessCount": 1,
+      "lastAccessed": 1791659767500,
       "type": "file"
     }
   ],
